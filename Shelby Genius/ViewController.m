@@ -8,6 +8,9 @@
 
 #import "ViewController.h"
 #import "APIClient.h"
+#import "VideoCardCell.h"
+#import "AsynchronousFreeloader.h"
+#import "VideoPlayerViewController.h"
 
 @interface ViewController ()
 
@@ -122,14 +125,36 @@
     return (rows) ? rows : 1;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return ([self.resultsArray count]) ? 140.0f : 44.0f;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier:CellIdentifier];
+
+    if ( [self.resultsArray count] ) {
     
-    cell.textLabel.text = [[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video_id"];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"VideoCardCell" owner:self options:nil];
+        VideoCardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VideoCardCell"];
+        if ( nil == cell ) cell = (VideoCardCell*)[nib objectAtIndex:0];
+        
+        NSString *thumbnailURL = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"thumbnail_url"];
+        NSString *videoTitle = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"title"];
+        
+        [AsynchronousFreeloader loadImageFromLink:thumbnailURL forImageView:cell.thumbnailImageView withPlaceholderView:nil];
+        cell.videoTitleLabel.text = videoTitle;
+        
+        return cell;
+        
+    } else {
+        
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier: @"Cell"];
+        cell.textLabel.text = @"Search for Something";
+        cell.textLabel.textAlignment = UITextAlignmentCenter;
+        return cell;
     
-    return cell;
+    }
+
 }
 
 #pragma mark - UITableViewDelegate Methods

@@ -148,7 +148,7 @@
             
         case APIRequestType_GetQuery:{
             
-            // Parse JSON Data from YouTube
+            // Parse JSON Data
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
 
             // Clear responseData
@@ -165,24 +165,26 @@
         
         case APIRequestType_PostGenius:{
             
-            // Parse JSON Data from YouTube
+            // Parse JSON Data
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
 
             // Clear responseData
             [self.responseData setLength:0];
             
+            // Create RollFrames request with returend Genius roll id
             [self getRoll:[[responseDictionary valueForKey:@"result"] valueForKey:@"id"]];
             
         } break;
             
         case APIRequestType_GetRollFrames:{
             
-            // Parse JSON Data from YouTube
+            // Parse JSON Data
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
             
             // Clear responseData
             [self.responseData setLength:0];
  
+            // Post Notification
             [[NSNotificationCenter defaultCenter] postNotificationName:kRollFramesObserver
                                                                 object:nil
                                                               userInfo:responseDictionary];
