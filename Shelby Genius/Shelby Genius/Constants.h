@@ -16,4 +16,4 @@ typedef enum _APIRequestType
 } APIRequestType;
 
 #define kQueryAddress   @"http://gdata.youtube.com/feeds/api/videos?alt=json&v=2&cbid=1344556171863&q=%@&max-results=50&orderby=relevance"
-#define kGeniusAddress  @"http://api.gt.shelby.tv/v1/roll/genius/create?search=%@&url=%@"
+#define kGeniusAddress  @"http://api.gt.shelby.tv/v1/roll/genius?search=%@&urls=%@"

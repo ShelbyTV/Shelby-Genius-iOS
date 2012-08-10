@@ -17,6 +17,7 @@
 
 - (NSMutableArray*)arrayWithLinks:(NSDictionary*)responseDictionary;
 - (void)createGeniusQueryWithLinks:(NSMutableArray*)links;
+- (NSString *)JSONString:(NSString *)aString;
 
 @end
 
@@ -58,6 +59,7 @@
         
         // Get YouTube URL
         NSString *source = [[[entryArray objectAtIndex:i] valueForKey:@"content"] valueForKey:@"src"];
+        source = [source stringByReplacingOccurrencesOfString:@"?version=3&f=videos&app=youtube_gdata" withString:@""];
         
         // If URL exists, add it to array of links
         if ( source.length ) [links addObject:source];
@@ -69,17 +71,52 @@
 - (void)createGeniusQueryWithLinks:(NSMutableArray *)links
 {
     // Create Genius Query
-    NSString *linksJSON =  @"urls:[";
+    NSString *linksString =  @"[";
+    for ( NSUInteger i = 0; i<[links count]; i++) {
+        
+        if (i != [links count]-1) {
+            
+            linksString = [NSString stringWithFormat:@"%@\"%@\",", linksString, [links objectAtIndex:i]];
+            
+        } else {
+            
+            linksString = [NSString stringWithFormat:@"%@\"%@\"]", linksString, [links objectAtIndex:i]];
+
+        }
+        
+    }
     
-    NSLog(@"%@", links);
+    // Create JSON object from linksString
+    NSData *linksData = [linksString dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *linksStringJSON = [NSJSONSerialization JSONObjectWithData:linksData options:0 error:nil];
     
-//    for (NSUInteger i=0)
+    // Perform Genius Request
+    NSString *requestString = [NSString stringWithFormat:kGeniusAddress, self.query, linksStringJSON];
+    NSURL *requestURL = [NSURL URLWithString:[requestString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:requestURL];
+    [request setHTTPMethod:@"POST"];
+    [self performRequest:request ofType:APIRequestType_Genius withQuery:nil];
+    
+    
+}
+
+- (NSString *)JSONString:(NSString *)aString
+{
+    NSMutableString *s = [NSMutableString stringWithString:aString];
+	[s replaceOccurrencesOfString:@"\"" withString:@"\\\"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
+	[s replaceOccurrencesOfString:@"/" withString:@"\\/" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
+	[s replaceOccurrencesOfString:@"\n" withString:@"\\n" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
+	[s replaceOccurrencesOfString:@"\b" withString:@"\\b" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
+	[s replaceOccurrencesOfString:@"\f" withString:@"\\f" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
+	[s replaceOccurrencesOfString:@"\r" withString:@"\\r" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
+	[s replaceOccurrencesOfString:@"\t" withString:@"\\t" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
+	return [NSString stringWithString:s];
 }
 
 #pragma mark - NSURLConnectionDataDelegate Methods
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    self.responseData = [[NSMutableData alloc] init];
+    if ( ![self responseData] )self.responseData = [[NSMutableData alloc] init];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -110,6 +147,9 @@
             
             // Parse JSON Data from YouTube
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
+
+            // Nil the responseData
+            [self.responseData setLength:0];
             
             // Extract YouTube Links from responseDictionary
             NSMutableArray *links = [self arrayWithLinks:responseDictionary];
@@ -122,6 +162,10 @@
         
         case APIRequestType_Genius:{
             
+            // Parse JSON Data from YouTube
+            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
+
+            NSLog(@"%@", responseDictionary);
             
         } break;
             
