@@ -24,6 +24,7 @@
 - (UIActivityIndicatorView*)createActivityIndicator;
 - (void)loadYouTubePage;
 - (void)loadVimeoPage;
+- (void)loadDailyMotionPage;
 - (void)processNotification:(NSNotification*)notification;
 - (void)playVideo:(NSString *)link;
 - (void)destroy;
@@ -63,6 +64,10 @@
             [self setProvider:VideoProvider_YouTube];
             [self loadYouTubePage];
             
+        } else if ( [[video valueForKey:@"provider_name" ] isEqualToString:@"dailymotion"] ) {
+            
+            [self setProvider:VideoProvider_DailyMotion];
+            [self loadDailyMotionPage];
         }
         
     }
@@ -140,6 +145,19 @@
     [self.view addSubview:self.webView];
     [self.webView loadHTMLString:youtubeRequestString baseURL:[NSURL URLWithString:@"http://shelby.tv"]];
     
+}
+
+- (void)loadDailyMotionPage
+{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processNotification:) name:nil object:nil];
+    
+    static NSString *dailymotionExtractor = @"<html><body><div id=\"player\"></div><script>(function(){var e=document.createElement('script');e.async=true;e.src='http://api.dmcdn.net/all.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(e, s);}());window.dmAsyncInit=function(){var player=DM.player(\"player\",{video: \"%@\", width: \"480\", height: \"269\", params:{api: postMessage}});player.addEventListener(\"apiready\", function(e){e.target.play();});};</script></body></html>";
+    
+    NSString *dailymotionRequestString = [NSString stringWithFormat:dailymotionExtractor, [self.video valueForKey:@"provider_id"]];    
+    
+    [self.view addSubview:self.webView];
+    [self.webView loadHTMLString:dailymotionRequestString baseURL:[NSURL URLWithString:@"http://shelby.tv"]];
 }
 
 - (void)playVideo:(NSString *)link
