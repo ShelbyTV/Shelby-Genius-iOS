@@ -15,6 +15,9 @@
 @property (assign, nonatomic) APIRequestType type;
 @property (strong, nonatomic) NSString *query;
 
+- (NSMutableArray*)arrayWithLinks:(NSDictionary*)responseDictionary;
+- (void)createGeniusQueryWithLinks:(NSMutableArray*)links;
+
 @end
 
 @implementation APIClient
@@ -23,6 +26,7 @@
 @synthesize type = _type;
 @synthesize query = _query;
 
+#pragma mark - Public Methods
 - (void)performRequest:(NSMutableURLRequest*)request ofType:(APIRequestType)type withQuery:(NSString*)query
 {
     
@@ -44,6 +48,35 @@
     self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
+#pragma mark - Private Methods
+- (NSMutableArray*)arrayWithLinks:(NSDictionary*)responseDictionary
+{
+    NSMutableArray *links = [NSMutableArray array];
+    NSArray *entryArray = [[responseDictionary valueForKey:@"feed"] valueForKey:@"entry"];
+    
+    for ( NSUInteger i=0; i<[entryArray count]; i++) {
+        
+        // Get YouTube URL
+        NSString *source = [[[entryArray objectAtIndex:i] valueForKey:@"content"] valueForKey:@"src"];
+        
+        // If URL exists, add it to array of links
+        if ( source.length ) [links addObject:source];
+        
+    }
+    
+    return links;
+}
+- (void)createGeniusQueryWithLinks:(NSMutableArray *)links
+{
+    // Create Genius Query
+    NSString *linksJSON =  @"urls:[";
+    
+    NSLog(@"%@", links);
+    
+//    for (NSUInteger i=0)
+}
+
+#pragma mark - NSURLConnectionDataDelegate Methods
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     self.responseData = [[NSMutableData alloc] init];
@@ -75,23 +108,14 @@
             
         case APIRequestType_Query:{
             
-            NSDictionary *responseDictionary = [NSDictionary dictionary];
-            responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
+            // Parse JSON Data from YouTube
+            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
             
-            NSMutableArray *links = [NSMutableArray array];
-            NSArray *entryArray = [[responseDictionary valueForKey:@"feed"] valueForKey:@"entry"];
+            // Extract YouTube Links from responseDictionary
+            NSMutableArray *links = [self arrayWithLinks:responseDictionary];
             
-            for ( NSUInteger i=0; i<[entryArray count]; i++) {
-                
-                // Get YouTube URL
-                NSString *source = [[[entryArray objectAtIndex:i] valueForKey:@"content"] valueForKey:@"src"];
-                
-                // If URL exists, add it to array of links
-                if ( source.length ) [links addObject:source];
-                
-            }
-            
-            NSLog(@"Links: %@", links);
+            // Create Genius Query with YouTube Links
+            [self createGeniusQueryWithLinks:links];
             
             
         } break;
