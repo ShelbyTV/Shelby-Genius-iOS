@@ -17,7 +17,7 @@
 
 - (NSMutableArray*)arrayWithLinks:(NSDictionary*)responseDictionary;
 - (void)createGeniusQueryWithLinks:(NSMutableArray*)links;
-- (NSString *)JSONString:(NSString *)aString;
+- (void)getRoll:(NSString*)rollID;
 
 @end
 
@@ -33,11 +33,15 @@
     
     switch (type) {
         
-        case APIRequestType_Query:{
+        case APIRequestType_GetQuery:{
             self.query = query;
         } break;
             
-        case APIRequestType_Genius:{
+        case APIRequestType_PostGenius:{
+            // Do nothing
+        } break;
+            
+        case APIRequestType_GetRollFrames:{
             // Do nothing
         } break;
             
@@ -91,27 +95,21 @@
     NSString *linksStringJSON = [NSJSONSerialization JSONObjectWithData:linksData options:0 error:nil];
     
     // Perform Genius Request
-    NSString *requestString = [NSString stringWithFormat:kGeniusAddress, self.query, linksStringJSON];
+    NSString *requestString = [NSString stringWithFormat:kPostGenius, self.query, linksStringJSON];
     requestString = [requestString stringByReplacingOccurrencesOfString:@"(" withString:@"["];
     requestString = [requestString stringByReplacingOccurrencesOfString:@")" withString:@"]"];
     NSURL *requestURL = [NSURL URLWithString:[requestString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:requestURL];
     [request setHTTPMethod:@"POST"];
-    [self performRequest:request ofType:APIRequestType_Genius withQuery:nil];
+    [self performRequest:request ofType:APIRequestType_PostGenius withQuery:nil];
 
 }
 
-- (NSString *)JSONString:(NSString *)aString
+- (void)getRoll:(NSString *)rollID
 {
-    NSMutableString *s = [NSMutableString stringWithString:aString];
-	[s replaceOccurrencesOfString:@"\"" withString:@"\\\"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
-	[s replaceOccurrencesOfString:@"/" withString:@"\\/" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
-	[s replaceOccurrencesOfString:@"\n" withString:@"\\n" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
-	[s replaceOccurrencesOfString:@"\b" withString:@"\\b" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
-	[s replaceOccurrencesOfString:@"\f" withString:@"\\f" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
-	[s replaceOccurrencesOfString:@"\r" withString:@"\\r" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
-	[s replaceOccurrencesOfString:@"\t" withString:@"\\t" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
-	return [NSString stringWithString:s];
+    NSString *requestString = [NSString stringWithFormat:kGetRollFrames, rollID];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
+    [self performRequest:request ofType:APIRequestType_GetRollFrames withQuery:nil];
 }
 
 #pragma mark - NSURLConnectionDataDelegate Methods
@@ -128,10 +126,10 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     switch (self.type) {
-        case APIRequestType_Query:
+        case APIRequestType_GetQuery:
             NSLog(@"Error with Search Query");
             break;
-            case APIRequestType_Genius:
+            case APIRequestType_PostGenius:
             NSLog(@"Error with Genius Query");
             break;
         default:
@@ -144,7 +142,7 @@
     
     switch (self.type) {
             
-        case APIRequestType_Query:{
+        case APIRequestType_GetQuery:{
             
             // Parse JSON Data from YouTube
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
@@ -161,11 +159,26 @@
             
         } break;
         
-        case APIRequestType_Genius:{
+        case APIRequestType_PostGenius:{
             
             // Parse JSON Data from YouTube
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
 
+            // Nil the responseData
+            [self.responseData setLength:0];
+            
+            [self getRoll:[[responseDictionary valueForKey:@"result"] valueForKey:@"id"]];
+            
+        } break;
+            
+        case APIRequestType_GetRollFrames:{
+            
+            // Parse JSON Data from YouTube
+            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
+            
+            // Nil the responseData
+            [self.responseData setLength:0];
+            
             NSLog(@"%@", responseDictionary);
             
         } break;

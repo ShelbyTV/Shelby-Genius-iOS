@@ -39,10 +39,10 @@
     if ( self.textField.text.length ) {
         
         APIClient *client = [[APIClient alloc] init];
-        NSString *requestString = [NSString stringWithFormat:kQueryAddress, self.textField.text];
+        NSString *requestString = [NSString stringWithFormat:kGetQuery, self.textField.text];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
         
-        [client performRequest:request ofType:APIRequestType_Query withQuery:self.textField.text];
+        [client performRequest:request ofType:APIRequestType_GetQuery withQuery:self.textField.text];
         
     } else {
         

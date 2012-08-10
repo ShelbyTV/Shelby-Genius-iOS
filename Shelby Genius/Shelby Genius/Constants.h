@@ -10,10 +10,12 @@ typedef enum _APIRequestType
 {
     
     APIRequestType_None = 0,
-    APIRequestType_Query,
-    APIRequestType_Genius
+    APIRequestType_GetQuery,
+    APIRequestType_PostGenius,
+    APIRequestType_GetRollFrames
     
 } APIRequestType;
 
-#define kQueryAddress   @"http://gdata.youtube.com/feeds/api/videos?alt=json&v=2&cbid=1344556171863&q=%@&max-results=50&orderby=relevance"
-#define kGeniusAddress  @"http://api.gt.shelby.tv/v1/roll/genius?search=%@&urls=%@"
+#define kGetQuery           @"http://gdata.youtube.com/feeds/api/videos?alt=json&v=2&cbid=1344556171863&q=%@&max-results=50&orderby=relevance"
+#define kPostGenius         @"http://api.gt.shelby.tv/v1/roll/genius?search=%@&urls=%@"
+#define kGetRollFrames      @"http://api.gt.shelby.tv/v1/roll/%@/frames"
