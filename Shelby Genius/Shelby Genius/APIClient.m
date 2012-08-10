@@ -8,11 +8,12 @@
 
 #import "APIClient.h"
 
-@interface APIClient ()
+@interface APIClient () <NSURLConnectionDataDelegate>
 
 @property (strong, nonatomic) NSURLConnection *connection;
 @property (strong, nonatomic) NSMutableData *responseData;
 @property (assign, nonatomic) APIRequestType type;
+@property (strong, nonatomic) NSString *query;
 
 @end
 
@@ -20,9 +21,25 @@
 @synthesize connection = _connection;
 @synthesize responseData = _responseData;
 @synthesize type = _type;
+@synthesize query = _query;
 
-- (void)performRequest:(NSMutableURLRequest*)request ofType:(APIRequestType)type
+- (void)performRequest:(NSMutableURLRequest*)request ofType:(APIRequestType)type withQuery:(NSString*)query
 {
+    
+    switch (type) {
+        
+        case APIRequestType_Query:{
+            self.query = query;
+        } break;
+            
+        case APIRequestType_Genius:{
+            // Do nothing
+        } break;
+            
+        default:
+            break;
+    }
+    
     self.type = type;
     self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
@@ -39,7 +56,16 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    NSLog(@"ERROR");
+    switch (self.type) {
+        case APIRequestType_Query:
+            NSLog(@"Error with Search Query");
+            break;
+            case APIRequestType_Genius:
+            NSLog(@"Error with Genius Query");
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -67,9 +93,11 @@
             
             NSLog(@"Links: %@", links);
             
+            
         } break;
         
         case APIRequestType_Genius:{
+            
             
         } break;
             

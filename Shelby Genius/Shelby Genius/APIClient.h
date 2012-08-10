@@ -7,18 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef enum _APIRequestType
-{
-    
-    APIRequestType_None = 0,
-    APIRequestType_Query,
-    APIRequestType_Genius
-    
-} APIRequestType;
+#import "Constants.h"
 
 @interface APIClient : NSObject
 
-- (void)performRequest:(NSMutableURLRequest*)request ofType:(APIRequestType)type;
+- (void)performRequest:(NSMutableURLRequest*)request ofType:(APIRequestType)type withQuery:(NSString*)query;
 
 @end

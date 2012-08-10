@@ -34,6 +34,7 @@
 		8EDCE9AD15D4C3C000EFB1F2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
 		8EDCE9B715D4C41A00EFB1F2 /* APIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIClient.h; sourceTree = "<group>"; };
 		8EDCE9B815D4C41A00EFB1F2 /* APIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIClient.m; sourceTree = "<group>"; };
+		8EDCE9BE15D4CFBD00EFB1F2 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +83,7 @@
 			children = (
 				8EDCE9A615D4C3C000EFB1F2 /* AppDelegate.h */,
 				8EDCE9A715D4C3C000EFB1F2 /* AppDelegate.m */,
+				8EDCE9BE15D4CFBD00EFB1F2 /* Constants.h */,
 				8EDCE9B715D4C41A00EFB1F2 /* APIClient.h */,
 				8EDCE9B815D4C41A00EFB1F2 /* APIClient.m */,
 				8EDCE9A915D4C3C000EFB1F2 /* ViewController.h */,
