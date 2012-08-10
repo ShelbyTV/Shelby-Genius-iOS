@@ -92,12 +92,13 @@
     
     // Perform Genius Request
     NSString *requestString = [NSString stringWithFormat:kGeniusAddress, self.query, linksStringJSON];
+    requestString = [requestString stringByReplacingOccurrencesOfString:@"(" withString:@"["];
+    requestString = [requestString stringByReplacingOccurrencesOfString:@")" withString:@"]"];
     NSURL *requestURL = [NSURL URLWithString:[requestString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:requestURL];
     [request setHTTPMethod:@"POST"];
     [self performRequest:request ofType:APIRequestType_Genius withQuery:nil];
-    
-    
+
 }
 
 - (NSString *)JSONString:(NSString *)aString
