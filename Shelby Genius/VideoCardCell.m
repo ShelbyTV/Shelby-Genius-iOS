@@ -11,6 +11,7 @@
 @implementation VideoCardCell
 @synthesize thumbnailImageView = _thumbnailImageView;
 @synthesize videoTitleLabel = _videoTitleLabel;
+@synthesize video = _video;
 
 - (void)dealloc
 {

@@ -10,6 +10,6 @@
 
 @interface VideoPlayerViewController : UIViewController
 
-- (id)initWithVideoLink:(NSString*)link;
+- (id)initWithVideo:(NSArray*)video;
 
 @end

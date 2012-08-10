@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 
 @class ViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (strong, nonatomic) MBProgressHUD *progressHUD;
 @property (strong, nonatomic) ViewController *viewController;
+
+- (void)addHUDWithMessage:(NSString*)message;
+- (void)removeHUD;
 
 @end

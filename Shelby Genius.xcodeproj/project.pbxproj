@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8E2A243215D4F0FA00D09A8B /* AsynchronousFreeloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2A243115D4F0FA00D09A8B /* AsynchronousFreeloader.m */; };
 		8E2A243715D4F4C400D09A8B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2A243615D4F4C400D09A8B /* MediaPlayer.framework */; };
+		8E2A243B15D4F60C00D09A8B /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2A243A15D4F60C00D09A8B /* MBProgressHUD.m */; };
+		8E89F5C015D4F724004B2DFF /* VideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E89F5BF15D4F724004B2DFF /* VideoPlayerViewController.m */; };
 		8EDCE99815D4C3C000EFB1F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99715D4C3C000EFB1F2 /* UIKit.framework */; };
 		8EDCE99A15D4C3C000EFB1F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99915D4C3C000EFB1F2 /* Foundation.framework */; };
 		8EDCE99C15D4C3C000EFB1F2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99B15D4C3C000EFB1F2 /* CoreGraphics.framework */; };
@@ -25,9 +27,11 @@
 /* Begin PBXFileReference section */
 		8E2A243015D4F0FA00D09A8B /* AsynchronousFreeloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsynchronousFreeloader.h; sourceTree = "<group>"; };
 		8E2A243115D4F0FA00D09A8B /* AsynchronousFreeloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsynchronousFreeloader.m; sourceTree = "<group>"; };
-		8E2A243415D4F47300D09A8B /* VideoPlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewController.h; sourceTree = "<group>"; };
-		8E2A243515D4F47300D09A8B /* VideoPlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerViewController.m; sourceTree = "<group>"; };
 		8E2A243615D4F4C400D09A8B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		8E2A243915D4F60C00D09A8B /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		8E2A243A15D4F60C00D09A8B /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		8E89F5BE15D4F724004B2DFF /* VideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewController.h; sourceTree = "<group>"; };
+		8E89F5BF15D4F724004B2DFF /* VideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerViewController.m; sourceTree = "<group>"; };
 		8EDCE99315D4C3C000EFB1F2 /* Shelby Genius.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shelby Genius.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EDCE99715D4C3C000EFB1F2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8EDCE99915D4C3C000EFB1F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -73,6 +77,16 @@
 			name = "Asynchronous Freeloader";
 			path = "External Libraries/Asynchronous Freeloader";
 			sourceTree = SOURCE_ROOT;
+		};
+		8E2A243815D4F60C00D09A8B /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				8E2A243915D4F60C00D09A8B /* MBProgressHUD.h */,
+				8E2A243A15D4F60C00D09A8B /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			path = "../../Shelby-2.0-iOS/External Libraries/MBProgressHUD";
+			sourceTree = "<group>";
 		};
 		8EDCE98815D4C3C000EFB1F2 = {
 			isa = PBXGroup;
@@ -167,8 +181,8 @@
 		8EDCE9CE15D4EF2700EFB1F2 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				8E2A243415D4F47300D09A8B /* VideoPlayerViewController.h */,
-				8E2A243515D4F47300D09A8B /* VideoPlayerViewController.m */,
+				8E89F5BE15D4F724004B2DFF /* VideoPlayerViewController.h */,
+				8E89F5BF15D4F724004B2DFF /* VideoPlayerViewController.m */,
 				8EDCE9A915D4C3C000EFB1F2 /* ViewController.h */,
 				8EDCE9AA15D4C3C000EFB1F2 /* ViewController.m */,
 			);
@@ -178,6 +192,7 @@
 		8EDCE9D115D4F02A00EFB1F2 /* External Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				8E2A243815D4F60C00D09A8B /* MBProgressHUD */,
 				8E2A242F15D4F0FA00D09A8B /* Asynchronous Freeloader */,
 			);
 			name = "External Libraries";
@@ -253,6 +268,8 @@
 				8EDCE9B915D4C41A00EFB1F2 /* APIClient.m in Sources */,
 				8EDCE9C915D4EEEE00EFB1F2 /* VideoCardCell.m in Sources */,
 				8E2A243215D4F0FA00D09A8B /* AsynchronousFreeloader.m in Sources */,
+				8E2A243B15D4F60C00D09A8B /* MBProgressHUD.m in Sources */,
+				8E89F5C015D4F724004B2DFF /* VideoPlayerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

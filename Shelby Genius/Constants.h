@@ -17,6 +17,15 @@ typedef enum _APIRequestType
     
 } APIRequestType;
 
+typedef enum _VideoProvider
+{
+    
+    VideoProvider_None = 0,
+    VideoProvider_YouTube,
+    VideoProvider_Vimeo
+    
+} VideoProvider;
+
 // API Routes
 #define kGetQuery               @"http://gdata.youtube.com/feeds/api/videos?alt=json&v=2&cbid=1344556171863&q=%@&max-results=50&orderby=relevance"
 #define kPostGenius             @"http://api.gt.shelby.tv/v1/roll/genius?search=%@&urls=%@"

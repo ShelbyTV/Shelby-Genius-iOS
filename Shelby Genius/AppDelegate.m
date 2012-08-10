@@ -7,10 +7,18 @@
 //
 
 #import "AppDelegate.h"
-
 #import "ViewController.h"
 
+@interface AppDelegate ()
+
+@property (strong, nonatomic) UIView *progressView;
+- (void)createProgressView;
+
+@end
+
 @implementation AppDelegate
+@synthesize progressHUD = _progressHUD;
+@synthesize progressView = _progressView;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -51,6 +59,35 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)createProgressView
+{
+    self.progressView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 350.0f, 320.0f, 70.0f)];
+    [self.window addSubview:self.progressView];
+}
+
+- (void)addHUDWithMessage:(NSString *)message
+{
+    // Remove HUD (if it exists)
+    [self removeHUD];
+    
+    // Create new view to hold HUD in window
+    [self createProgressView];
+    
+    self.progressHUD = [MBProgressHUD showHUDAddedTo:self.progressView animated:YES];
+    self.progressHUD.mode = MBProgressHUDModeText;
+    self.progressHUD.labelText = message;
+    self.progressHUD.labelFont = [UIFont fontWithName:@"Ubuntu-Bold" size:12.0f];
+    
+}
+
+- (void)removeHUD
+{
+    // If an older progressHUD exists, remove it to make room for the new HUD
+    [MBProgressHUD hideAllHUDsForView:self.window animated:YES];
+    [self.progressView removeFromSuperview];
+    
 }
 
 @end

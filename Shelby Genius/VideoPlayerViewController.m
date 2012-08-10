@@ -13,7 +13,7 @@
 @interface VideoPlayerViewController ()
 
 @property (strong, nonatomic) AppDelegate *appDelegate;
-@property (strong, nonatomic) NSString *link;
+@property (strong, nonatomic) NSArray *video;
 @property (assign, nonatomic) VideoProvider provider;
 @property (strong, nonatomic) MPMoviePlayerController *moviePlayer;
 @property (strong, nonatomic) UIActivityIndicatorView *indicator;
@@ -32,7 +32,7 @@
 
 @implementation VideoPlayerViewController
 @synthesize appDelegate = _appDelegate;
-@synthesize link = _link;
+@synthesize video = _video;
 @synthesize provider = _provider;
 @synthesize moviePlayer = _moviePlayer;
 @synthesize indicator = _indicator;
@@ -40,23 +40,25 @@
 @synthesize videoWillBegin = _videoWillBegin;
 
 #pragma mark - Initialization
-- (id)initWithLink:(NSString*)link
+- (id)initWithVideo:(NSArray *)video
 {
     
     if ( self = [super init]) {
         
         self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        self.link = link;
+        self.video = video;
         self.videoWillBegin = NO;
         self.indicator = [self createActivityIndicator];
         self.webView = [self createWebView];
         
-        if ( [self.frame.video.providerName isEqualToString:@"vimeo"] ) {
+        
+        
+        if ( [[video valueForKey:@"provider_name" ] isEqualToString:@"vimeo"] ) {
             
             [self setProvider:VideoProvider_Vimeo];
             [self loadVimeoPage];
             
-        } else if ( [self.frame.video.providerName isEqualToString:@"youtube"] ) {
+        } else if ( [[video valueForKey:@"provider_name" ] isEqualToString:@"youtube"] ) {
             
             [self setProvider:VideoProvider_YouTube];
             [self loadYouTubePage];
@@ -119,7 +121,7 @@
     
     static NSString *vimeoExtractor = @"<html><body><center><iframe id=\"player_1\" src=\"http://player.vimeo.com/video/%@?api=1&amp;player_id=player_1\" webkit-playsinline ></iframe><script src=\"http://a.vimeocdn.com/js/froogaloop2.min.js?cdbdb\"></script><script>(function(){var vimeoPlayers = document.querySelectorAll('iframe');$f(vimeoPlayers[0]).addEvent('ready', ready);function ready(player_id) {$f(player_id).api('play');}})();</script></center></body></html>";
     
-    NSString *vimeoRequestString = [NSString stringWithFormat:vimeoExtractor, self.frame.video.providerID];
+    NSString *vimeoRequestString = [NSString stringWithFormat:vimeoExtractor, [self.video valueForKey:@"provider_id"]];
     
     [self.view addSubview:self.webView];
     [self.webView loadHTMLString:vimeoRequestString baseURL:[NSURL URLWithString:@"http://shelby.tv"]];
@@ -133,7 +135,7 @@
     
     static NSString *youtubeExtractor = @"<html><body><div id=\"player\"></div><script>var tag = document.createElement('script'); tag.src = \"http://www.youtube.com/player_api\"; var firstScriptTag = document.getElementsByTagName('script')[0]; firstScriptTag.parentNode.insertBefore(tag, firstScriptTag); var player; function onYouTubePlayerAPIReady() { player = new YT.Player('player', { height: '1', width: '1', videoId: '%@', events: { 'onReady': onPlayerReady, } }); } function onPlayerReady(event) { event.target.playVideo(); } </script></body></html>​";
     
-    NSString *youtubeRequestString = [NSString stringWithFormat:youtubeExtractor, self.frame.video.providerID];
+    NSString *youtubeRequestString = [NSString stringWithFormat:youtubeExtractor, [self.video valueForKey:@"provider_id"]];
     
     [self.view addSubview:self.webView];
     [self.webView loadHTMLString:youtubeRequestString baseURL:[NSURL URLWithString:@"http://shelby.tv"]];
@@ -142,7 +144,6 @@
 
 - (void)playVideo:(NSString *)link
 {
-    
     
     if ( ![self videoWillBegin]) {
 

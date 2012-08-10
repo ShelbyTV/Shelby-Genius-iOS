@@ -143,6 +143,7 @@
         
         [AsynchronousFreeloader loadImageFromLink:thumbnailURL forImageView:cell.thumbnailImageView withPlaceholderView:nil];
         cell.videoTitleLabel.text = videoTitle;
+        cell.video = [[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"];
         
         return cell;
         
@@ -160,7 +161,9 @@
 #pragma mark - UITableViewDelegate Methods
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    VideoCardCell *cell = (VideoCardCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+    VideoPlayerViewController *videoPlayerViewController = [[VideoPlayerViewController alloc] initWithVideo:cell.video];
+    [self presentModalViewController:videoPlayerViewController animated:YES];
 }
 
 
