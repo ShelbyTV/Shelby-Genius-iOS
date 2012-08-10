@@ -1,0 +1,296 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8EDCE99815D4C3C000EFB1F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99715D4C3C000EFB1F2 /* UIKit.framework */; };
+		8EDCE99A15D4C3C000EFB1F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99915D4C3C000EFB1F2 /* Foundation.framework */; };
+		8EDCE99C15D4C3C000EFB1F2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99B15D4C3C000EFB1F2 /* CoreGraphics.framework */; };
+		8EDCE9A215D4C3C000EFB1F2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EDCE9A015D4C3C000EFB1F2 /* InfoPlist.strings */; };
+		8EDCE9A415D4C3C000EFB1F2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE9A315D4C3C000EFB1F2 /* main.m */; };
+		8EDCE9A815D4C3C000EFB1F2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE9A715D4C3C000EFB1F2 /* AppDelegate.m */; };
+		8EDCE9AB15D4C3C000EFB1F2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE9AA15D4C3C000EFB1F2 /* ViewController.m */; };
+		8EDCE9AE15D4C3C000EFB1F2 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDCE9AC15D4C3C000EFB1F2 /* ViewController_iPhone.xib */; };
+		8EDCE9B915D4C41A00EFB1F2 /* APIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE9B815D4C41A00EFB1F2 /* APIClient.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8EDCE99315D4C3C000EFB1F2 /* Shelby Genius.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shelby Genius.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EDCE99715D4C3C000EFB1F2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8EDCE99915D4C3C000EFB1F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8EDCE99B15D4C3C000EFB1F2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8EDCE99F15D4C3C000EFB1F2 /* Shelby Genius-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Shelby Genius-Info.plist"; sourceTree = "<group>"; };
+		8EDCE9A115D4C3C000EFB1F2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8EDCE9A315D4C3C000EFB1F2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8EDCE9A515D4C3C000EFB1F2 /* Shelby Genius-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shelby Genius-Prefix.pch"; sourceTree = "<group>"; };
+		8EDCE9A615D4C3C000EFB1F2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		8EDCE9A715D4C3C000EFB1F2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8EDCE9A915D4C3C000EFB1F2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		8EDCE9AA15D4C3C000EFB1F2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8EDCE9AD15D4C3C000EFB1F2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
+		8EDCE9B715D4C41A00EFB1F2 /* APIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIClient.h; sourceTree = "<group>"; };
+		8EDCE9B815D4C41A00EFB1F2 /* APIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIClient.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8EDCE99015D4C3C000EFB1F2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8EDCE99815D4C3C000EFB1F2 /* UIKit.framework in Frameworks */,
+				8EDCE99A15D4C3C000EFB1F2 /* Foundation.framework in Frameworks */,
+				8EDCE99C15D4C3C000EFB1F2 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8EDCE98815D4C3C000EFB1F2 = {
+			isa = PBXGroup;
+			children = (
+				8EDCE99D15D4C3C000EFB1F2 /* Shelby Genius */,
+				8EDCE99615D4C3C000EFB1F2 /* Frameworks */,
+				8EDCE99415D4C3C000EFB1F2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8EDCE99415D4C3C000EFB1F2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8EDCE99315D4C3C000EFB1F2 /* Shelby Genius.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8EDCE99615D4C3C000EFB1F2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8EDCE99715D4C3C000EFB1F2 /* UIKit.framework */,
+				8EDCE99915D4C3C000EFB1F2 /* Foundation.framework */,
+				8EDCE99B15D4C3C000EFB1F2 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8EDCE99D15D4C3C000EFB1F2 /* Shelby Genius */ = {
+			isa = PBXGroup;
+			children = (
+				8EDCE9A615D4C3C000EFB1F2 /* AppDelegate.h */,
+				8EDCE9A715D4C3C000EFB1F2 /* AppDelegate.m */,
+				8EDCE9B715D4C41A00EFB1F2 /* APIClient.h */,
+				8EDCE9B815D4C41A00EFB1F2 /* APIClient.m */,
+				8EDCE9A915D4C3C000EFB1F2 /* ViewController.h */,
+				8EDCE9AA15D4C3C000EFB1F2 /* ViewController.m */,
+				8EDCE9AC15D4C3C000EFB1F2 /* ViewController_iPhone.xib */,
+				8EDCE99E15D4C3C000EFB1F2 /* Supporting Files */,
+			);
+			path = "Shelby Genius";
+			sourceTree = "<group>";
+		};
+		8EDCE99E15D4C3C000EFB1F2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8EDCE99F15D4C3C000EFB1F2 /* Shelby Genius-Info.plist */,
+				8EDCE9A015D4C3C000EFB1F2 /* InfoPlist.strings */,
+				8EDCE9A315D4C3C000EFB1F2 /* main.m */,
+				8EDCE9A515D4C3C000EFB1F2 /* Shelby Genius-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8EDCE99215D4C3C000EFB1F2 /* Shelby Genius */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8EDCE9B415D4C3C000EFB1F2 /* Build configuration list for PBXNativeTarget "Shelby Genius" */;
+			buildPhases = (
+				8EDCE98F15D4C3C000EFB1F2 /* Sources */,
+				8EDCE99015D4C3C000EFB1F2 /* Frameworks */,
+				8EDCE99115D4C3C000EFB1F2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Shelby Genius";
+			productName = "Shelby Genius";
+			productReference = 8EDCE99315D4C3C000EFB1F2 /* Shelby Genius.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8EDCE98A15D4C3C000EFB1F2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Arthur Ariel Sabintsev";
+			};
+			buildConfigurationList = 8EDCE98D15D4C3C000EFB1F2 /* Build configuration list for PBXProject "Shelby Genius" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8EDCE98815D4C3C000EFB1F2;
+			productRefGroup = 8EDCE99415D4C3C000EFB1F2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8EDCE99215D4C3C000EFB1F2 /* Shelby Genius */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8EDCE99115D4C3C000EFB1F2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8EDCE9A215D4C3C000EFB1F2 /* InfoPlist.strings in Resources */,
+				8EDCE9AE15D4C3C000EFB1F2 /* ViewController_iPhone.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8EDCE98F15D4C3C000EFB1F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8EDCE9A415D4C3C000EFB1F2 /* main.m in Sources */,
+				8EDCE9A815D4C3C000EFB1F2 /* AppDelegate.m in Sources */,
+				8EDCE9AB15D4C3C000EFB1F2 /* ViewController.m in Sources */,
+				8EDCE9B915D4C41A00EFB1F2 /* APIClient.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8EDCE9A015D4C3C000EFB1F2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8EDCE9A115D4C3C000EFB1F2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		8EDCE9AC15D4C3C000EFB1F2 /* ViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8EDCE9AD15D4C3C000EFB1F2 /* en */,
+			);
+			name = ViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8EDCE9B215D4C3C000EFB1F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8EDCE9B315D4C3C000EFB1F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8EDCE9B515D4C3C000EFB1F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Shelby Genius/Shelby Genius-Prefix.pch";
+				INFOPLIST_FILE = "Shelby Genius/Shelby Genius-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		8EDCE9B615D4C3C000EFB1F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Shelby Genius/Shelby Genius-Prefix.pch";
+				INFOPLIST_FILE = "Shelby Genius/Shelby Genius-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8EDCE98D15D4C3C000EFB1F2 /* Build configuration list for PBXProject "Shelby Genius" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8EDCE9B215D4C3C000EFB1F2 /* Debug */,
+				8EDCE9B315D4C3C000EFB1F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8EDCE9B415D4C3C000EFB1F2 /* Build configuration list for PBXNativeTarget "Shelby Genius" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8EDCE9B515D4C3C000EFB1F2 /* Debug */,
+				8EDCE9B615D4C3C000EFB1F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8EDCE98A15D4C3C000EFB1F2 /* Project object */;
+}
