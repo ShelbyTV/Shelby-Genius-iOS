@@ -51,7 +51,15 @@
 {
 
     // Hide keyboard
-    if ( [self.textField isFirstResponder] ) [self.textField resignFirstResponder];
+    if ( [self.textField isFirstResponder] ) {
+        [self.textField resignFirstResponder];
+    }
+    
+    if ( self.resultsArray ) {
+        
+        [self.resultsArray removeAllObjects];
+        [self.tableView reloadData];
+    }
     
     if ( self.textField.text.length ) {
         
@@ -84,7 +92,7 @@
     if ( ![self resultsArray] ) {
         
         self.resultsArray = [NSMutableArray array];
-        self.resultsArray = [[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"];
+        [self.resultsArray addObjectsFromArray:[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"]];
         
     } else {
      
@@ -147,8 +155,8 @@
         NSString *thumbnailURL = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"thumbnail_url"];
         NSString *videoTitle = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"title"];
         
-        [AsynchronousFreeloader loadImageFromLink:thumbnailURL forImageView:cell.thumbnailImageView withPlaceholderView:nil];
-        cell.videoTitleLabel.text = videoTitle;
+        if (thumbnailURL != (id)[NSNull null]) [AsynchronousFreeloader loadImageFromLink:thumbnailURL forImageView:cell.thumbnailImageView withPlaceholderView:nil];
+        if (videoTitle != (id)[NSNull null]) cell.videoTitleLabel.text = videoTitle;
         cell.video = [[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"];
         
         return cell;
@@ -156,7 +164,8 @@
     } else {
         
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier: @"Cell"];
-        cell.textLabel.text = @"Type something sexy in the search bar above";
+        cell.textLabel.text = @"Type something sexy in the field above";
+        cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
         cell.textLabel.textAlignment = UITextAlignmentCenter;
         return cell;
     
@@ -172,6 +181,21 @@
     [self presentModalViewController:videoPlayerViewController animated:YES];
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self.resultsArray count] > 19 && indexPath.row == [self.resultsArray count]-2) {
+        
+        NSString *rollID = [[NSUserDefaults standardUserDefaults] objectForKey:kRollID];
+        NSString *requestString = [NSString stringWithFormat:kGetRollFramesAgain, rollID, [self.resultsArray count]];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
+        APIClient *client = [[APIClient alloc] init];
+        [client performRequest:request ofType:APIRequestType_GetRollFrames withQuery:nil];
+        
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        [appDelegate addHUDWithMessage:@"Getting more 'Genius' Videos"];
+        
+    }
+}
 
 #pragma mark - Interface Orientation Methods
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

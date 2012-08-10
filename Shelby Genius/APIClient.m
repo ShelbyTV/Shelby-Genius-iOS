@@ -107,6 +107,9 @@
 
 - (void)getRoll:(NSString *)rollID
 {
+    [[NSUserDefaults standardUserDefaults] setObject:rollID forKey:kRollID];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     NSString *requestString = [NSString stringWithFormat:kGetRollFrames, rollID];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
     [self performRequest:request ofType:APIRequestType_GetRollFrames withQuery:nil];
