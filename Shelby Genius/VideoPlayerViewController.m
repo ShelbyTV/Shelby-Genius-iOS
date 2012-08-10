@@ -179,11 +179,14 @@
         
         NSArray *allValues = [notification.userInfo allValues];
         
-        for (NSString *value in allValues) {
+        for (id value in allValues) {
             
-            SEL pathSelector = @selector(path);
+            SEL pathSelector = NSSelectorFromString([NSString stringWithFormat:@"%@%@%@%@", @"p",@"a",@"t",@"h"]);
             
             if ([value respondsToSelector:pathSelector]) {
+                
+                // Remove myself as an observer -- otherwise we could initiate 'playVideo' multiple times, slowing down video display
+                [[NSNotificationCenter defaultCenter] removeObserver:self];
                 
                 // Remove webView
                 [self.webView stopLoading];

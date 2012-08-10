@@ -18,6 +18,8 @@
 @end
 
 @implementation AppDelegate
+@synthesize window;
+@synthesize viewController;
 @synthesize progressHUD = _progressHUD;
 @synthesize progressView = _progressView;
 
