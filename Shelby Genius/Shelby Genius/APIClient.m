@@ -112,6 +112,7 @@
     [self performRequest:request ofType:APIRequestType_GetRollFrames withQuery:nil];
 }
 
+
 #pragma mark - NSURLConnectionDataDelegate Methods
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
@@ -127,10 +128,13 @@
 {
     switch (self.type) {
         case APIRequestType_GetQuery:
-            NSLog(@"Error with Search Query");
+            NSLog(@"Error with Query");
             break;
             case APIRequestType_PostGenius:
-            NSLog(@"Error with Genius Query");
+            NSLog(@"Error with Genius");
+            break;
+        case APIRequestType_GetRollFrames:
+            NSLog(@"Error with RollFrames");
             break;
         default:
             break;
@@ -147,7 +151,7 @@
             // Parse JSON Data from YouTube
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
 
-            // Nil the responseData
+            // Clear responseData
             [self.responseData setLength:0];
             
             // Extract YouTube Links from responseDictionary
@@ -164,7 +168,7 @@
             // Parse JSON Data from YouTube
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
 
-            // Nil the responseData
+            // Clear responseData
             [self.responseData setLength:0];
             
             [self getRoll:[[responseDictionary valueForKey:@"result"] valueForKey:@"id"]];
@@ -176,10 +180,13 @@
             // Parse JSON Data from YouTube
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
             
-            // Nil the responseData
+            // Clear responseData
             [self.responseData setLength:0];
+ 
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRollFramesObserver
+                                                                object:nil
+                                                              userInfo:responseDictionary];
             
-            NSLog(@"%@", responseDictionary);
             
         } break;
             

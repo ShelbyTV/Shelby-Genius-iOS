@@ -11,22 +11,35 @@
 
 @interface ViewController ()
 
+@property (strong, nonatomic) NSMutableArray *resultsArray;
+
+- (void)makeResultsArray:(NSNotification*)notification;
+
 @end
 
 @implementation ViewController
 @synthesize tableView = _tableView;
 @synthesize textField = _textField;
 @synthesize button = _button;
+@synthesize resultsArray = _resultsArray;
 
 #pragma mark - View Lifecycle Methods
+- (void)viewDidUnload
+{
+    self.tableView = nil;
+    self.textField = nil;
+    self.button = nil;
+    [super viewDidUnload];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(makeResultsArray:)
+                                                 name:kRollFramesObserver
+                                               object:nil];
 }
 
 #pragma mark - Action Methods
@@ -58,6 +71,24 @@
     
 }
 
+#pragma mark - Observer Methods
+- (void)makeResultsArray:(NSNotification *)notification
+{
+    if ( ![self resultsArray] ) {
+        
+        self.resultsArray = [NSMutableArray array];
+        self.resultsArray = [[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"];
+        
+    } else {
+     
+        [self.resultsArray addObjectsFromArray:[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"]];
+        
+    }
+    
+    [self.tableView reloadData];
+
+}
+
 #pragma mark - UITextFieldDelegate Methods
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
@@ -87,7 +118,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    NSUInteger rows = [self.resultsArray count];
+    return (rows) ? rows : 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -95,7 +127,7 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier:CellIdentifier];
     
-    // Configure the cell...
+    cell.textLabel.text = [[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video_id"];
     
     return cell;
 }
