@@ -62,12 +62,14 @@
     }
     
     if ( self.textField.text.length ) {
+
+        NSString *query = [self.textField.text stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
         
         APIClient *client = [[APIClient alloc] init];
-        NSString *requestString = [NSString stringWithFormat:kGetQuery, self.textField.text];
+        NSString *requestString = [NSString stringWithFormat:kGetQuery, query];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
         
-        [client performRequest:request ofType:APIRequestType_GetQuery withQuery:self.textField.text];
+        [client performRequest:request ofType:APIRequestType_GetQuery withQuery:query];
         
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         [appDelegate addHUDWithMessage:@"Fetching 'Genius' Videos"];
