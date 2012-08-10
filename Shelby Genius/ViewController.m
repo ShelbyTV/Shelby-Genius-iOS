@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "AppDelegate.h"
 #import "APIClient.h"
 #import "VideoCardCell.h"
 #import "AsynchronousFreeloader.h"
@@ -60,6 +61,9 @@
         
         [client performRequest:request ofType:APIRequestType_GetQuery withQuery:self.textField.text];
         
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        [appDelegate addHUDWithMessage:@"Fetching 'Genius' Videos"];
+        
     } else {
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -88,6 +92,8 @@
         
     }
     
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    [appDelegate removeHUD];
     [self.tableView reloadData];
 
 }
@@ -150,7 +156,7 @@
     } else {
         
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier: @"Cell"];
-        cell.textLabel.text = @"Search for Something";
+        cell.textLabel.text = @"Type something sexy in the search bar above";
         cell.textLabel.textAlignment = UITextAlignmentCenter;
         return cell;
     
