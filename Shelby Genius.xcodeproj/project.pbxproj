@@ -10,6 +10,7 @@
 		8E2A243215D4F0FA00D09A8B /* AsynchronousFreeloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2A243115D4F0FA00D09A8B /* AsynchronousFreeloader.m */; };
 		8E2A243715D4F4C400D09A8B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2A243615D4F4C400D09A8B /* MediaPlayer.framework */; };
 		8E2A243B15D4F60C00D09A8B /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2A243A15D4F60C00D09A8B /* MBProgressHUD.m */; };
+		8E2E974215D565F900178DA0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2E974115D565F900178DA0 /* AVFoundation.framework */; };
 		8E89F5C015D4F724004B2DFF /* VideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E89F5BF15D4F724004B2DFF /* VideoPlayerViewController.m */; };
 		8E89F5C915D4FEC4004B2DFF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E89F5C115D4FEC4004B2DFF /* Default.png */; };
 		8E89F5CA15D4FEC4004B2DFF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E89F5C215D4FEC4004B2DFF /* Default@2x.png */; };
@@ -38,6 +39,7 @@
 		8E2A243615D4F4C400D09A8B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		8E2A243915D4F60C00D09A8B /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		8E2A243A15D4F60C00D09A8B /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		8E2E974115D565F900178DA0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8E89F5BE15D4F724004B2DFF /* VideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewController.h; sourceTree = "<group>"; };
 		8E89F5BF15D4F724004B2DFF /* VideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerViewController.m; sourceTree = "<group>"; };
 		8E89F5C115D4FEC4004B2DFF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
@@ -74,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E2E974215D565F900178DA0 /* AVFoundation.framework in Frameworks */,
 				8E2A243715D4F4C400D09A8B /* MediaPlayer.framework in Frameworks */,
 				8EDCE99815D4C3C000EFB1F2 /* UIKit.framework in Frameworks */,
 				8EDCE99A15D4C3C000EFB1F2 /* Foundation.framework in Frameworks */,
@@ -122,6 +125,7 @@
 		8EDCE98815D4C3C000EFB1F2 = {
 			isa = PBXGroup;
 			children = (
+				8E2E974115D565F900178DA0 /* AVFoundation.framework */,
 				8EDCE99D15D4C3C000EFB1F2 /* Shelby Genius */,
 				8EDCE99615D4C3C000EFB1F2 /* Frameworks */,
 				8EDCE99415D4C3C000EFB1F2 /* Products */,
