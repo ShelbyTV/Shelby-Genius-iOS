@@ -153,8 +153,8 @@
                                                                -2.0f + tableSectionHeaderFrame.size.height)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"Ubuntu-Bold" size:11];
-    NSString *viewableQuery = [self.query stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-    label.text = [NSString stringWithFormat:@"Genius results for '%@'", viewableQuery];
+    label.text = [NSString stringWithFormat:@"Genius results for '%@'", self.query];
+    label.text = [label.text stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
     label.textAlignment = UITextAlignmentLeft;
     label.textColor = [UIColor blackColor];
     [view addSubview:label];
