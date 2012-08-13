@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
 
-@class ViewController;
+@class SearchViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) MBProgressHUD *progressHUD;
-@property (strong, nonatomic) ViewController *viewController;
+@property (strong, nonatomic) SearchViewController *searchViewController;
+@property (strong, nonatomic) UINavigationController *searchNavigationController;
 
 - (void)addHUDWithMessage:(NSString*)message;
 - (void)removeHUD;

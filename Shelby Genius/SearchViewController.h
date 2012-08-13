@@ -8,17 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface SearchViewController : UIViewController
 <
 UITableViewDataSource,
 UITableViewDelegate,
-UITextFieldDelegate
+UISearchBarDelegate
 >
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UITextField *textField;
-@property (strong, nonatomic) IBOutlet UIButton *button;
-
-- (IBAction)search:(id)sender;
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end

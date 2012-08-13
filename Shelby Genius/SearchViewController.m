@@ -6,39 +6,42 @@
 //  Copyright (c) 2012 Arthur Ariel Sabintsev. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "SearchViewController.h"
 #import "AppDelegate.h"
 #import "APIClient.h"
 #import "VideoCardCell.h"
 #import "AsynchronousFreeloader.h"
 #import "VideoPlayerViewController.h"
 
-@interface ViewController ()
+@interface SearchViewController ()
 
 @property (strong, nonatomic) NSMutableArray *resultsArray;
 
 - (void)makeResultsArray:(NSNotification*)notification;
+- (void)search;
 
 @end
 
-@implementation ViewController
+@implementation SearchViewController
 @synthesize tableView = _tableView;
-@synthesize textField = _textField;
-@synthesize button = _button;
+@synthesize searchBar = _searchBar;
 @synthesize resultsArray = _resultsArray;
 
 #pragma mark - View Lifecycle Methods
 - (void)viewDidUnload
 {
     self.tableView = nil;
-    self.textField = nil;
-    self.button = nil;
+    self.searchBar = nil;
     [super viewDidUnload];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor colorWithRed:226.0f green:226.0f blue:226.0f alpha:1.0f];
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.searchBar.delegate = self;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(makeResultsArray:)
@@ -47,12 +50,12 @@
 }
 
 #pragma mark - Action Methods
-- (IBAction)search:(id)sender
+- (void)search
 {
 
     // Hide keyboard
-    if ( [self.textField isFirstResponder] ) {
-        [self.textField resignFirstResponder];
+    if ( [self.searchBar isFirstResponder] ) {
+        [self.searchBar resignFirstResponder];
     }
     
     if ( self.resultsArray ) {
@@ -61,9 +64,9 @@
         [self.tableView reloadData];
     }
     
-    if ( self.textField.text.length ) {
+    if ( self.searchBar.text.length ) {
 
-        NSString *query = [self.textField.text stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+        NSString *query = [self.searchBar.text stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
         
         APIClient *client = [[APIClient alloc] init];
         NSString *requestString = [NSString stringWithFormat:kGetQuery, query];
@@ -108,31 +111,62 @@
 
 }
 
-#pragma mark - UITextFieldDelegate Methods
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+#pragma mark - UISearchBarDelegate Methods
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    // Hide keyboard when DONE button is pressed
-    if( [string isEqualToString:@"\n"] ) {
-        
-        [textField resignFirstResponder];
-        
-    }
-    
-    return YES;
+    [self search];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    
-    [self search:textField];
-    
-    return YES;
-}
+
 
 #pragma mark - UITableViewDataSource Methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 22.0f;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    
+    NSString *title = @"";
+
+    if (0 == section) {
+        
+        self.title = @"Previous Shelby Searches";
+        
+    }
+    
+    return title;
+
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    CGRect tableSectionHeaderFrame = CGRectMake(0.0f, 0.0f, 320.0f, tableView.sectionHeaderHeight);
+    UIView *view = [[UIView alloc] initWithFrame:tableSectionHeaderFrame];
+    view.backgroundColor = [UIColor colorWithRed:238.0f green:238.0f blue:238.0f alpha:1.0f];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.0f + tableSectionHeaderFrame.origin.x,
+                                                               2.0f + tableSectionHeaderFrame.origin.y,
+                                                               -10.0f + tableSectionHeaderFrame.size.width,
+                                                               -2.0f + tableSectionHeaderFrame.size.height)];
+    
+    NSLog(@"%@", NSStringFromCGRect(tableSectionHeaderFrame));
+    
+    label.text = @"Previous Shelby Searches";
+    label.textAlignment = UITextAlignmentLeft;
+    label.textColor = [UIColor blackColor];
+    label.font = [UIFont fontWithName:@"Ubuntu-Bold" size:13];
+    
+    [view addSubview:label];
+    
+    return view;
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -154,6 +188,8 @@
         VideoCardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VideoCardCell"];
         if ( nil == cell ) cell = (VideoCardCell*)[nib objectAtIndex:0];
         
+        NSLog(@"%@", [self.resultsArray objectAtIndex:indexPath.row]);
+        
         NSString *thumbnailURL = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"thumbnail_url"];
         NSString *videoTitle = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"title"];
         
@@ -169,6 +205,7 @@
         cell.textLabel.text = @"Type something sexy in the field above";
         cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
         cell.textLabel.textAlignment = UITextAlignmentCenter;
+        cell.backgroundColor = [UIColor clearColor];
         return cell;
     
     }

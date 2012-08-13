@@ -26,11 +26,22 @@
 		8EDCE9A215D4C3C000EFB1F2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EDCE9A015D4C3C000EFB1F2 /* InfoPlist.strings */; };
 		8EDCE9A415D4C3C000EFB1F2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE9A315D4C3C000EFB1F2 /* main.m */; };
 		8EDCE9A815D4C3C000EFB1F2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE9A715D4C3C000EFB1F2 /* AppDelegate.m */; };
-		8EDCE9AB15D4C3C000EFB1F2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE9AA15D4C3C000EFB1F2 /* ViewController.m */; };
-		8EDCE9AE15D4C3C000EFB1F2 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDCE9AC15D4C3C000EFB1F2 /* ViewController_iPhone.xib */; };
+		8EDCE9AB15D4C3C000EFB1F2 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE9AA15D4C3C000EFB1F2 /* SearchViewController.m */; };
+		8EDCE9AE15D4C3C000EFB1F2 /* SearchViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDCE9AC15D4C3C000EFB1F2 /* SearchViewController_iPhone.xib */; };
 		8EDCE9B915D4C41A00EFB1F2 /* APIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE9B815D4C41A00EFB1F2 /* APIClient.m */; };
 		8EDCE9C915D4EEEE00EFB1F2 /* VideoCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE9C815D4EEEE00EFB1F2 /* VideoCardCell.m */; };
 		8EDCE9D015D4EF4400EFB1F2 /* VideoCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDCE9CF15D4EF4400EFB1F2 /* VideoCardCell.xib */; };
+		8EDDFB2F15D88B1A00BCD710 /* Ubuntu-B.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2315D88B1A00BCD710 /* Ubuntu-B.ttf */; };
+		8EDDFB3015D88B1A00BCD710 /* Ubuntu-M.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2415D88B1A00BCD710 /* Ubuntu-M.ttf */; };
+		8EDDFB3115D88B1A00BCD710 /* Ubuntu-R.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2515D88B1A00BCD710 /* Ubuntu-R.ttf */; };
+		8EDDFB3215D88B1A00BCD710 /* navigationLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2715D88B1A00BCD710 /* navigationLogo.png */; };
+		8EDDFB3315D88B1A00BCD710 /* navigationLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2815D88B1A00BCD710 /* navigationLogo@2x.png */; };
+		8EDDFB3415D88B1A00BCD710 /* navigationBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2915D88B1A00BCD710 /* navigationBar.png */; };
+		8EDDFB3515D88B1A00BCD710 /* navigationBarar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2A15D88B1A00BCD710 /* navigationBarar@2x.png */; };
+		8EDDFB3615D88B1A00BCD710 /* searchbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2B15D88B1A00BCD710 /* searchbar@2x.png */; };
+		8EDDFB3715D88B1A00BCD710 /* searchBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2C15D88B1A00BCD710 /* searchBarBackground.png */; };
+		8EDDFB3815D88B1A00BCD710 /* stroke.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2D15D88B1A00BCD710 /* stroke.png */; };
+		8EDDFB3915D88B1A00BCD710 /* stroke@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2E15D88B1A00BCD710 /* stroke@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,15 +71,26 @@
 		8EDCE9A515D4C3C000EFB1F2 /* Shelby Genius-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shelby Genius-Prefix.pch"; sourceTree = "<group>"; };
 		8EDCE9A615D4C3C000EFB1F2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8EDCE9A715D4C3C000EFB1F2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8EDCE9A915D4C3C000EFB1F2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		8EDCE9AA15D4C3C000EFB1F2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		8EDCE9AD15D4C3C000EFB1F2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
+		8EDCE9A915D4C3C000EFB1F2 /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		8EDCE9AA15D4C3C000EFB1F2 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		8EDCE9AD15D4C3C000EFB1F2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SearchViewController_iPhone.xib; sourceTree = "<group>"; };
 		8EDCE9B715D4C41A00EFB1F2 /* APIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIClient.h; sourceTree = "<group>"; };
 		8EDCE9B815D4C41A00EFB1F2 /* APIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIClient.m; sourceTree = "<group>"; };
 		8EDCE9BE15D4CFBD00EFB1F2 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		8EDCE9C715D4EEEE00EFB1F2 /* VideoCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCardCell.h; sourceTree = "<group>"; };
 		8EDCE9C815D4EEEE00EFB1F2 /* VideoCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCardCell.m; sourceTree = "<group>"; };
 		8EDCE9CF15D4EF4400EFB1F2 /* VideoCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCardCell.xib; sourceTree = "<group>"; };
+		8EDDFB2315D88B1A00BCD710 /* Ubuntu-B.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-B.ttf"; sourceTree = "<group>"; };
+		8EDDFB2415D88B1A00BCD710 /* Ubuntu-M.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-M.ttf"; sourceTree = "<group>"; };
+		8EDDFB2515D88B1A00BCD710 /* Ubuntu-R.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-R.ttf"; sourceTree = "<group>"; };
+		8EDDFB2715D88B1A00BCD710 /* navigationLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationLogo.png; sourceTree = "<group>"; };
+		8EDDFB2815D88B1A00BCD710 /* navigationLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationLogo@2x.png"; sourceTree = "<group>"; };
+		8EDDFB2915D88B1A00BCD710 /* navigationBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationBar.png; sourceTree = "<group>"; };
+		8EDDFB2A15D88B1A00BCD710 /* navigationBarar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationBarar@2x.png"; sourceTree = "<group>"; };
+		8EDDFB2B15D88B1A00BCD710 /* searchbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar@2x.png"; sourceTree = "<group>"; };
+		8EDDFB2C15D88B1A00BCD710 /* searchBarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchBarBackground.png; sourceTree = "<group>"; };
+		8EDDFB2D15D88B1A00BCD710 /* stroke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stroke.png; sourceTree = "<group>"; };
+		8EDDFB2E15D88B1A00BCD710 /* stroke@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stroke@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +132,8 @@
 		8E89F5D115D4FECB004B2DFF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8EDDFB2215D88B1A00BCD710 /* Fonts */,
+				8EDDFB2615D88B1A00BCD710 /* Images */,
 				8E89F5C115D4FEC4004B2DFF /* Default.png */,
 				8E89F5C215D4FEC4004B2DFF /* Default@2x.png */,
 				8E89F5C315D4FEC4004B2DFF /* Icon-72.png */,
@@ -125,7 +149,6 @@
 		8EDCE98815D4C3C000EFB1F2 = {
 			isa = PBXGroup;
 			children = (
-				8E2E974115D565F900178DA0 /* AVFoundation.framework */,
 				8EDCE99D15D4C3C000EFB1F2 /* Shelby Genius */,
 				8EDCE99615D4C3C000EFB1F2 /* Frameworks */,
 				8EDCE99415D4C3C000EFB1F2 /* Products */,
@@ -143,6 +166,7 @@
 		8EDCE99615D4C3C000EFB1F2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E2E974115D565F900178DA0 /* AVFoundation.framework */,
 				8E2A243615D4F4C400D09A8B /* MediaPlayer.framework */,
 				8EDCE99715D4C3C000EFB1F2 /* UIKit.framework */,
 				8EDCE99915D4C3C000EFB1F2 /* Foundation.framework */,
@@ -208,7 +232,7 @@
 		8EDCE9CD15D4EF1D00EFB1F2 /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
-				8EDCE9AC15D4C3C000EFB1F2 /* ViewController_iPhone.xib */,
+				8EDCE9AC15D4C3C000EFB1F2 /* SearchViewController_iPhone.xib */,
 				8EDCE9CF15D4EF4400EFB1F2 /* VideoCardCell.xib */,
 			);
 			name = Xibs;
@@ -219,8 +243,8 @@
 			children = (
 				8E89F5BE15D4F724004B2DFF /* VideoPlayerViewController.h */,
 				8E89F5BF15D4F724004B2DFF /* VideoPlayerViewController.m */,
-				8EDCE9A915D4C3C000EFB1F2 /* ViewController.h */,
-				8EDCE9AA15D4C3C000EFB1F2 /* ViewController.m */,
+				8EDCE9A915D4C3C000EFB1F2 /* SearchViewController.h */,
+				8EDCE9AA15D4C3C000EFB1F2 /* SearchViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -233,6 +257,33 @@
 			);
 			name = "External Libraries";
 			sourceTree = "<group>";
+		};
+		8EDDFB2215D88B1A00BCD710 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8EDDFB2315D88B1A00BCD710 /* Ubuntu-B.ttf */,
+				8EDDFB2415D88B1A00BCD710 /* Ubuntu-M.ttf */,
+				8EDDFB2515D88B1A00BCD710 /* Ubuntu-R.ttf */,
+			);
+			name = Fonts;
+			path = Resources/Fonts;
+			sourceTree = SOURCE_ROOT;
+		};
+		8EDDFB2615D88B1A00BCD710 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				8EDDFB2715D88B1A00BCD710 /* navigationLogo.png */,
+				8EDDFB2815D88B1A00BCD710 /* navigationLogo@2x.png */,
+				8EDDFB2915D88B1A00BCD710 /* navigationBar.png */,
+				8EDDFB2A15D88B1A00BCD710 /* navigationBarar@2x.png */,
+				8EDDFB2B15D88B1A00BCD710 /* searchbar@2x.png */,
+				8EDDFB2C15D88B1A00BCD710 /* searchBarBackground.png */,
+				8EDDFB2D15D88B1A00BCD710 /* stroke.png */,
+				8EDDFB2E15D88B1A00BCD710 /* stroke@2x.png */,
+			);
+			name = Images;
+			path = Resources/Images;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -286,7 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EDCE9A215D4C3C000EFB1F2 /* InfoPlist.strings in Resources */,
-				8EDCE9AE15D4C3C000EFB1F2 /* ViewController_iPhone.xib in Resources */,
+				8EDCE9AE15D4C3C000EFB1F2 /* SearchViewController_iPhone.xib in Resources */,
 				8EDCE9D015D4EF4400EFB1F2 /* VideoCardCell.xib in Resources */,
 				8E89F5C915D4FEC4004B2DFF /* Default.png in Resources */,
 				8E89F5CA15D4FEC4004B2DFF /* Default@2x.png in Resources */,
@@ -296,6 +347,17 @@
 				8E89F5CE15D4FEC4004B2DFF /* Icon-Small@2x.png in Resources */,
 				8E89F5CF15D4FEC4004B2DFF /* Icon.png in Resources */,
 				8E89F5D015D4FEC4004B2DFF /* Icon@2x.png in Resources */,
+				8EDDFB2F15D88B1A00BCD710 /* Ubuntu-B.ttf in Resources */,
+				8EDDFB3015D88B1A00BCD710 /* Ubuntu-M.ttf in Resources */,
+				8EDDFB3115D88B1A00BCD710 /* Ubuntu-R.ttf in Resources */,
+				8EDDFB3215D88B1A00BCD710 /* navigationLogo.png in Resources */,
+				8EDDFB3315D88B1A00BCD710 /* navigationLogo@2x.png in Resources */,
+				8EDDFB3415D88B1A00BCD710 /* navigationBar.png in Resources */,
+				8EDDFB3515D88B1A00BCD710 /* navigationBarar@2x.png in Resources */,
+				8EDDFB3615D88B1A00BCD710 /* searchbar@2x.png in Resources */,
+				8EDDFB3715D88B1A00BCD710 /* searchBarBackground.png in Resources */,
+				8EDDFB3815D88B1A00BCD710 /* stroke.png in Resources */,
+				8EDDFB3915D88B1A00BCD710 /* stroke@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,7 +370,7 @@
 			files = (
 				8EDCE9A415D4C3C000EFB1F2 /* main.m in Sources */,
 				8EDCE9A815D4C3C000EFB1F2 /* AppDelegate.m in Sources */,
-				8EDCE9AB15D4C3C000EFB1F2 /* ViewController.m in Sources */,
+				8EDCE9AB15D4C3C000EFB1F2 /* SearchViewController.m in Sources */,
 				8EDCE9B915D4C41A00EFB1F2 /* APIClient.m in Sources */,
 				8EDCE9C915D4EEEE00EFB1F2 /* VideoCardCell.m in Sources */,
 				8E2A243215D4F0FA00D09A8B /* AsynchronousFreeloader.m in Sources */,
@@ -328,12 +390,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		8EDCE9AC15D4C3C000EFB1F2 /* ViewController_iPhone.xib */ = {
+		8EDCE9AC15D4C3C000EFB1F2 /* SearchViewController_iPhone.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				8EDCE9AD15D4C3C000EFB1F2 /* en */,
 			);
-			name = ViewController_iPhone.xib;
+			name = SearchViewController_iPhone.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -398,6 +460,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Shelby Genius/Shelby Genius-Prefix.pch";
 				INFOPLIST_FILE = "Shelby Genius/Shelby Genius-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "A6CC5FE3-9170-47F2-A539-3EDB4028F3C0";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A6CC5FE3-9170-47F2-A539-3EDB4028F3C0";
@@ -414,6 +477,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Shelby Genius/Shelby Genius-Prefix.pch";
 				INFOPLIST_FILE = "Shelby Genius/Shelby Genius-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "A6CC5FE3-9170-47F2-A539-3EDB4028F3C0";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A94CD3C6-916F-493E-B434-6B5F5573376E";

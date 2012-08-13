@@ -7,34 +7,41 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "SearchViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
 @interface AppDelegate ()
 
 @property (strong, nonatomic) UIView *progressView;
+
+- (void)customization;
 - (void)createProgressView;
 
 @end
 
 @implementation AppDelegate
 @synthesize window;
-@synthesize viewController;
+@synthesize searchViewController;
+@synthesize searchNavigationController;
 @synthesize progressHUD = _progressHUD;
 @synthesize progressView = _progressView;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    // Initialize UIWindow's rootViewController
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil];
-    } else {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
-    }
-    self.window.rootViewController = self.viewController;
+    self.searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController_iPhone" bundle:nil];
+    self.searchNavigationController = [[UINavigationController alloc] initWithRootViewController:self.searchViewController];
+    self.window.rootViewController = searchNavigationController;
+    
+    // Appearance Proxies and General Customization
+    [self customization];
+    
     [self.window makeKeyAndVisible];
+
     return YES;
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -72,6 +79,22 @@
     [self.window addSubview:self.progressView];
 }
 
+#pragma mark - Private Methods
+- (void)customization
+{
+    // UIStatusBar
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    
+    // UINavigationBar
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
+    
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navigationLogo"]];
+    self.searchNavigationController.visibleViewController.navigationItem.titleView = logoView;
+    
+}
+
+
+#pragma mark - MBProgressHUD Methods
 - (void)addHUDWithMessage:(NSString *)message
 {
     // Remove HUD (if it exists)
@@ -84,7 +107,6 @@
     self.progressHUD.mode = MBProgressHUDModeText;
     self.progressHUD.labelText = message;
     self.progressHUD.labelFont = [UIFont fontWithName:@"Ubuntu-Bold" size:12.0f];
-    
 }
 
 - (void)removeHUD
@@ -92,7 +114,6 @@
     // If an older progressHUD exists, remove it to make room for the new HUD
     [MBProgressHUD hideAllHUDsForView:self.window animated:YES];
     [self.progressView removeFromSuperview];
-    
 }
 
 @end
