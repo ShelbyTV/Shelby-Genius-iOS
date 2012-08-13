@@ -23,6 +23,8 @@
 @property (strong, nonatomic) NSMutableArray *previousQueriesArray;
 
 - (void)customize;
+- (void)initialize;
+- (void)modifyPreviousQueriesArray;
 - (void)search;
 
 @end
@@ -44,6 +46,7 @@
 {
     [super viewDidLoad];
     [self customize];
+    [self initialize];
 
 }
 
@@ -55,18 +58,41 @@
     self.tableView.separatorColor = [UIColor blackColor];
 }
 
+- (void)initialize
+{
+    self.previousQueriesArray = [NSMutableArray array];
+}
+
+- (void)modifyPreviousQueriesArray
+{
+    
+    if (self.searchBar.text.length) {
+            
+        NSArray *reversedArray = [[self.previousQueriesArray reverseObjectEnumerator] allObjects];
+        [self.previousQueriesArray removeAllObjects];
+        [self.previousQueriesArray addObjectsFromArray:reversedArray];
+        [self.previousQueriesArray addObject:self.searchBar.text];
+        NSArray *secondReversedArray = [[self.previousQueriesArray reverseObjectEnumerator] allObjects];
+        [self.previousQueriesArray removeAllObjects];
+        [self.previousQueriesArray addObjectsFromArray:secondReversedArray];
+        
+        if ( [self.previousQueriesArray count] > 3) [self.previousQueriesArray removeLastObject];
+        
+        [self.tableView reloadData];
+  
+    }
+    
+}
+
 - (void)search
 {
 
-    // Hide keyboard
-    if ( [self.searchBar isFirstResponder] ) {
-        [self.searchBar resignFirstResponder];
-    }
-    
     if ( self.searchBar.text.length ) {
 
         NSString *query = [self.searchBar.text stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
         
+        self.searchBar.text = @"";
+    
         APIClient *client = [[APIClient alloc] init];
         NSString *requestString = [NSString stringWithFormat:kGetQuery, query];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
@@ -93,6 +119,13 @@
 #pragma mark - UISearchBarDelegate Methods
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    
+    // Hide keyboard
+    if ( [self.searchBar isFirstResponder] ) {
+        [self.searchBar resignFirstResponder];
+    }
+        
+    [self modifyPreviousQueriesArray];
     [self search];
 }
 
@@ -100,6 +133,11 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return ([self.previousQueriesArray count]) ? 22.0f : 0.0f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -143,20 +181,33 @@
     return (rows) ? rows : 1;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 44.0f;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"QueryCell" owner:self options:nil];
-    QueryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QueryCell"];
-    if ( nil == cell ) cell = (QueryCell*)[nib objectAtIndex:0];
-    
-    cell.label.text = @"Test Search";
+    if ( [self.previousQueriesArray count] ) {
+        
+        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"QueryCell" owner:self options:nil];
+        QueryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QueryCell"];
+        if ( nil == cell ) cell = (QueryCell*)[nib objectAtIndex:0];
+        
+        cell.label.text = [self.previousQueriesArray objectAtIndex:indexPath.row];
+        
+        return cell;
+        
+    } else {
+        
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        cell.alpha = 0.0f;
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        return cell;
+    }
 
-    return cell;
+    
 
 }
 
