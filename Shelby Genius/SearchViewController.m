@@ -92,7 +92,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:self.previousQueriesArray forKey:kPreviousQueries];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        [self.tableView reloadData];
+        NSLog(@"%@", self.view.subviews);
   
     }
     

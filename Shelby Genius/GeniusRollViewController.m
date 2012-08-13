@@ -45,6 +45,7 @@
         
         self.query = query;
         [self search];
+        self.title = query;
         
     }
     
@@ -124,26 +125,41 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-
-    CGRect tableSectionHeaderFrame = CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, tableView.sectionHeaderHeight);
-    UIView *view = [[UIView alloc] initWithFrame:tableSectionHeaderFrame];
-    view.backgroundColor = [UIColor colorWithRed:238.0f green:238.0f blue:238.0f alpha:1.0f];
+    // Create frame of UITableView Section Header
+    CGRect tableSectionHeaderFrame = CGRectMake(0.0f,
+                                                0.0f,
+                                                tableView.bounds.size.width,
+                                                tableView.sectionHeaderHeight);
     
+    // Create view for UITableView Section Header
+    UIView *view = [[UIView alloc] initWithFrame:tableSectionHeaderFrame];
+    
+    // Background (issue with RGB-UIColor)
+    UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tableSectionHeaderBackground"]];
+    [view addSubview:backgroundView];
+    
+    // 1px border on the bottom of the cell
+    UIView *strokeView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,
+                                                                  -1.0f + tableView.sectionFooterHeight,
+                                                                  tableView.bounds.size.width,
+                                                                  1.0f)];
+    strokeView.backgroundColor = [UIColor blackColor];
+    [view addSubview:strokeView];
+    
+    // Section Header Label
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.0f + tableSectionHeaderFrame.origin.x,
-                                                               1.0f + tableSectionHeaderFrame.origin.y,
+                                                               2.0f + tableSectionHeaderFrame.origin.y,
                                                                -10.0f + tableSectionHeaderFrame.size.width,
-                                                               -1.0f + tableSectionHeaderFrame.size.height)];
+                                                               -2.0f + tableSectionHeaderFrame.size.height)];
     label.backgroundColor = [UIColor clearColor];
-    label.text = [NSString stringWithFormat:@"Results for '%@'",self.query];
+    label.font = [UIFont fontWithName:@"Ubuntu-Bold" size:11];
+    NSString *viewableQuery = [self.query stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+    label.text = [NSString stringWithFormat:@"Genius results for '%@'", viewableQuery];
     label.textAlignment = UITextAlignmentLeft;
     label.textColor = [UIColor blackColor];
-    label.font = [UIFont fontWithName:@"Ubuntu-Bold" size:13];
-    
     [view addSubview:label];
     
-    
     return view;
-    
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
