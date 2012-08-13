@@ -52,8 +52,6 @@
         self.indicator = [self createActivityIndicator];
         self.webView = [self createWebView];
         
-        
-        
         if ( [[video valueForKey:@"provider_name" ] isEqualToString:@"vimeo"] ) {
             
             [self setProvider:VideoProvider_Vimeo];

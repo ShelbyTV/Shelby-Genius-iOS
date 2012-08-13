@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *thumbnailImageView;
 @property (strong, nonatomic) IBOutlet UILabel *videoTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *videoProviderLabel;
+
 @property (strong, nonatomic) NSArray *video;
 
 @end

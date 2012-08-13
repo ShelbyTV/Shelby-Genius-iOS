@@ -158,7 +158,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return ([self.resultsArray count]) ? 140.0f : 44.0f;
+    return ([self.resultsArray count]) ? 94.0f : 44.0f;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -172,9 +172,12 @@
         
         NSString *thumbnailURL = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"thumbnail_url"];
         NSString *videoTitle = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"title"];
+        NSString *providerName = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"provider_name"];
+
         
         if (thumbnailURL != (id)[NSNull null]) [AsynchronousFreeloader loadImageFromLink:thumbnailURL forImageView:cell.thumbnailImageView withPlaceholderView:nil];
         if (videoTitle != (id)[NSNull null]) cell.videoTitleLabel.text = videoTitle;
+        if (videoTitle != (id)[NSNull null]) cell.videoProviderLabel.text = providerName;
         cell.video = [[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"];
         
         return cell;
