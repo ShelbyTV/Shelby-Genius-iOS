@@ -34,6 +34,7 @@
 @end
 
 @implementation GeniusRollViewController
+@synthesize tableView = _tableView;
 @synthesize resultsArray = _resultsArray;
 @synthesize query = _query;
 
@@ -54,6 +55,9 @@
 - (void)viewDidUnload
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRollFramesObserver object:nil];
+   
+    self.tableView = nil;
+    
     [super viewDidUnload];
 }
 
@@ -68,6 +72,8 @@
 - (void)customize
 {
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableSectionHeaderBackground"]];
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableSectionHeaderBackground"]];
+    self.tableView.separatorColor = [UIColor blackColor];
 }
 
 - (void)initalizeObservers
@@ -87,6 +93,7 @@
     
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     [appDelegate addHUDWithMessage:@"Fetching 'Genius' Videos"];
+    
 }
 
 - (void)makeResultsArray:(NSNotification *)notification
@@ -116,8 +123,6 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableSectionHeaderBackground"]];
-    tableView.separatorColor = [UIColor blackColor];
 
     CGRect tableSectionHeaderFrame = CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, tableView.sectionHeaderHeight);
     UIView *view = [[UIView alloc] initWithFrame:tableSectionHeaderFrame];
@@ -138,6 +143,11 @@
     
     return view;
     
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return [[UIView alloc] init];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

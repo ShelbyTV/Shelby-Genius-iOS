@@ -27,6 +27,7 @@
 		8E8C683515D95778004290A6 /* QueryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C683415D95778004290A6 /* QueryCell.xib */; };
 		8E8C683815D958A4004290A6 /* queryCellBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C683615D958A4004290A6 /* queryCellBackground.png */; };
 		8E8C683915D958A4004290A6 /* queryCellBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C683715D958A4004290A6 /* queryCellBackground@2x.png */; };
+		8E8C684715D99DCE004290A6 /* GeniusRollViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C684615D99DCE004290A6 /* GeniusRollViewController.xib */; };
 		8EDCE99815D4C3C000EFB1F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99715D4C3C000EFB1F2 /* UIKit.framework */; };
 		8EDCE99A15D4C3C000EFB1F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99915D4C3C000EFB1F2 /* Foundation.framework */; };
 		8EDCE99C15D4C3C000EFB1F2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99B15D4C3C000EFB1F2 /* CoreGraphics.framework */; };
@@ -75,6 +76,7 @@
 		8E8C683715D958A4004290A6 /* queryCellBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "queryCellBackground@2x.png"; sourceTree = "<group>"; };
 		8E8C683A15D95CEC004290A6 /* Structures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Structures.h; sourceTree = "<group>"; };
 		8E8C683C15D95D0B004290A6 /* APIRoutes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = APIRoutes.h; path = ../APIRoutes.h; sourceTree = "<group>"; };
+		8E8C684615D99DCE004290A6 /* GeniusRollViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeniusRollViewController.xib; sourceTree = "<group>"; };
 		8EDCE99315D4C3C000EFB1F2 /* Shelby Genius.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shelby Genius.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EDCE99715D4C3C000EFB1F2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8EDCE99915D4C3C000EFB1F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -254,6 +256,7 @@
 		8EDCE9CD15D4EF1D00EFB1F2 /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
+				8E8C684615D99DCE004290A6 /* GeniusRollViewController.xib */,
 				8EDCE9AC15D4C3C000EFB1F2 /* SearchViewController_iPhone.xib */,
 				8E8C683415D95778004290A6 /* QueryCell.xib */,
 				8EDCE9CF15D4EF4400EFB1F2 /* VideoCardCell.xib */,
@@ -384,6 +387,7 @@
 				8E8C683515D95778004290A6 /* QueryCell.xib in Resources */,
 				8E8C683815D958A4004290A6 /* queryCellBackground.png in Resources */,
 				8E8C683915D958A4004290A6 /* queryCellBackground@2x.png in Resources */,
+				8E8C684715D99DCE004290A6 /* GeniusRollViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
