@@ -60,21 +60,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self customize];
     [self initalizeObservers];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [self customize];
-}
 #pragma mark - Private Methods
 - (void)customize
 {
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableHeaderSectionBackground"]];
-    UIBarButtonItem *backButtonItem = self.navigationItem.backBarButtonItem;
-    backButtonItem.tintColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableSectionHeaderBackground"]];
 }
 
 - (void)initalizeObservers

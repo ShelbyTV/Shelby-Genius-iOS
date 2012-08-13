@@ -57,7 +57,10 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     
     // UINavigationBar
+    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
+    
     
     UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navigationLogo"]];
     self.searchNavigationController.visibleViewController.navigationItem.titleView = logoView;
