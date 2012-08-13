@@ -28,11 +28,12 @@ typedef enum _VideoProvider
 } VideoProvider;
 
 // API Routes
-#define kGetQuery               @"http://gdata.youtube.com/feeds/api/videos?alt=json&v=2&cbid=1344556171863&q=%@&max-results=50&orderby=relevance"
-#define kPostGenius             @"http://api.gt.shelby.tv/v1/roll/genius?search=%@&urls=%@"
-#define kGetRollFrames          @"http://api.gt.shelby.tv/v1/roll/%@/frames"
-#define kGetRollFramesAgain     @"http://api.gt.shelby.tv/v1/roll/%@/frames?skip=%d"
+#define kGetQuery                       @"http://gdata.youtube.com/feeds/api/videos?alt=json&v=2&cbid=1344556171863&q=%@&max-results=50&orderby=relevance"
+#define kPostGenius                     @"http://api.gt.shelby.tv/v1/roll/genius?search=%@&urls=%@"
+#define kGetRollFrames                  @"http://api.gt.shelby.tv/v1/roll/%@/frames"
+#define kGetRollFramesAgain             @"http://api.gt.shelby.tv/v1/roll/%@/frames?skip=%d"
 
 // Other Constants
-#define kRollFramesObserver     @"RollFrames Observer"
-#define kRollID                 @"Roll ID"
+#define kMinimumVideoCountBeforeFetch   19
+#define kRollFramesObserver             @"RollFrames Observer"
+#define kRollID                         @"Roll ID"
