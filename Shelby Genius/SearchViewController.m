@@ -23,7 +23,7 @@
 @property (strong, nonatomic) NSMutableArray *previousQueriesArray;
 
 - (void)customize;
-- (void)initialize;
+- (void)initializePreviousQueriesArray;
 - (void)modifyPreviousQueriesArray;
 - (void)search;
 
@@ -46,7 +46,7 @@
 {
     [super viewDidLoad];
     [self customize];
-    [self initialize];
+    [self initializePreviousQueriesArray];
 
 }
 
@@ -58,9 +58,20 @@
     self.tableView.separatorColor = [UIColor blackColor];
 }
 
-- (void)initialize
+- (void)initializePreviousQueriesArray
 {
-    self.previousQueriesArray = [NSMutableArray array];
+    
+    NSMutableArray *testArray = [[NSUserDefaults standardUserDefaults] objectForKey:kPreviousQueries];
+    if ( [testArray count] ) {
+        
+        self.previousQueriesArray = [NSMutableArray arrayWithArray:testArray];
+        
+    } else {
+    
+        self.previousQueriesArray = [NSMutableArray array];
+        
+    }
+    
 }
 
 - (void)modifyPreviousQueriesArray
@@ -76,7 +87,10 @@
         [self.previousQueriesArray removeAllObjects];
         [self.previousQueriesArray addObjectsFromArray:secondReversedArray];
         
-        if ( [self.previousQueriesArray count] > 3) [self.previousQueriesArray removeLastObject];
+        if ( [self.previousQueriesArray count] > 10) [self.previousQueriesArray removeLastObject];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:self.previousQueriesArray forKey:kPreviousQueries];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
         [self.tableView reloadData];
   
