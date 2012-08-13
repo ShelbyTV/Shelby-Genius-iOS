@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GeniusRollViewController : UITableViewController
+@interface GeniusRollViewController : UIViewController
+<
+UITableViewDataSource,
+UITableViewDelegate
+>
+
+@property (strong, nonatomic) UITableView *tableView;
 
 - (id)initWithQuery:(NSString*)query;
 

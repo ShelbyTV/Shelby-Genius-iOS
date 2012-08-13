@@ -18,8 +18,6 @@
 
 - (void)awakeFromNib
 {
-    self.selectionStyle = UITableViewCellSelectionStyleGray;
-    
     self.label.font = [UIFont fontWithName:@"Ubuntu" size:self.label.font.pointSize];
     
 }
