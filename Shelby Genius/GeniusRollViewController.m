@@ -86,6 +86,7 @@
 
 - (void)search
 {
+    self.query = [self.query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     APIClient *client = [[APIClient alloc] init];
     NSString *requestString = [NSString stringWithFormat:kGetQuery, self.query];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];

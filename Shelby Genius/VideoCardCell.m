@@ -31,7 +31,6 @@
     self.thumbnailImageView.layer.masksToBounds = YES;
     self.thumbnailImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.thumbnailImageView.layer.borderWidth = 1;
-    
 }
 
 @end
