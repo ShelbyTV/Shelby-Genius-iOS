@@ -25,7 +25,7 @@
 - (void)customize;
 - (void)initializePreviousQueriesArray;
 - (void)modifyPreviousQueriesArray;
-- (void)search;
+- (void)createGeniusRoll;
 
 @end
 
@@ -53,7 +53,7 @@
 #pragma mark - Private Methods
 - (void)customize
 {
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableSectionHeaderBackground"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"queryCellBackground"]];
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableSectionHeaderBackground"]];
     self.tableView.separatorColor = [UIColor blackColor];
 }
@@ -98,49 +98,22 @@
     
 }
 
-- (void)search
+- (void)createGeniusRoll
 {
-
-    if ( self.searchBar.text.length ) {
-
-        NSString *query = [self.searchBar.text stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-        
-        self.searchBar.text = @"";
-    
-        APIClient *client = [[APIClient alloc] init];
-        NSString *requestString = [NSString stringWithFormat:kGetQuery, query];
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
-        
-        [client performRequest:request ofType:APIRequestType_GetQuery withQuery:query];
-        
-        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        [appDelegate addHUDWithMessage:@"Fetching 'Genius' Videos"];
-        
-    } else {
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                        message:@"You must type in a query"
-                                                       delegate:self
-                                              cancelButtonTitle:@"Dismiss"
-                                              otherButtonTitles:nil, nil];
-        
-        [alert show];
-        
-    }
-    
+    GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithQuery:self.searchBar.text];
+    [self.navigationController pushViewController:geniusRollViewController animated:YES];
 }
 
 #pragma mark - UISearchBarDelegate Methods
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    
     // Hide keyboard
     if ( [self.searchBar isFirstResponder] ) {
         [self.searchBar resignFirstResponder];
     }
         
     [self modifyPreviousQueriesArray];
-    [self search];
+    [self createGeniusRoll];
 }
 
 #pragma mark - UITableViewDataSource Methods
@@ -156,16 +129,28 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    // Create frame of UITableView Section Header
     CGRect tableSectionHeaderFrame = CGRectMake(0.0f,
                                                 0.0f,
                                                 tableView.bounds.size.width,
                                                 tableView.sectionHeaderHeight);
     
+    // Create view for UITableView Section Header
     UIView *view = [[UIView alloc] initWithFrame:tableSectionHeaderFrame];
     
+    // Background (issue with RGB-UIColor)
     UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tableSectionHeaderBackground"]];
     [view addSubview:backgroundView];
     
+    // 1px border on the bottom of the cell
+    UIView *strokeView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,
+                                                                  -1.0f + tableView.sectionFooterHeight,
+                                                                  tableView.bounds.size.width,
+                                                                  1.0f)];
+    strokeView.backgroundColor = [UIColor blackColor];
+    [view addSubview:strokeView];
+    
+    // Section Header Label
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.0f + tableSectionHeaderFrame.origin.x,
                                                                2.0f + tableSectionHeaderFrame.origin.y,
                                                                -10.0f + tableSectionHeaderFrame.size.width,
@@ -175,11 +160,9 @@
     label.text = @"Previous Shelby Searches";
     label.textAlignment = UITextAlignmentLeft;
     label.textColor = [UIColor blackColor];
-
     [view addSubview:label];
     
     return view;
-    
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -204,7 +187,7 @@
 {
     if ( [self.previousQueriesArray count] ) {
         
-        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        tableView.alpha = 1.0f;
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"QueryCell" owner:self options:nil];
         QueryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QueryCell"];
         if ( nil == cell ) cell = (QueryCell*)[nib objectAtIndex:0];
@@ -214,21 +197,20 @@
         return cell;
         
     } else {
-        
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-        cell.alpha = 0.0f;
-        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        return cell;
-    }
 
-    
+        tableView.alpha = 0.0f;
+        
+        return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];;
+    }
 
 }
 
 #pragma mark - UITableViewDelegate Methods
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Push instance of GeniusRollViewController
+    QueryCell *cell = (QueryCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+    GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithQuery:cell.label.text];
+    [self.navigationController pushViewController:geniusRollViewController animated:YES];
 }
 
 #pragma mark - Interface Orientation Methods

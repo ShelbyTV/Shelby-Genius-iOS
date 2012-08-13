@@ -21,7 +21,6 @@
 		8E89F5CF15D4FEC4004B2DFF /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E89F5C715D4FEC4004B2DFF /* Icon.png */; };
 		8E89F5D015D4FEC4004B2DFF /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E89F5C815D4FEC4004B2DFF /* Icon@2x.png */; };
 		8E8C682A15D94CE6004290A6 /* GeniusRollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C682815D94CE5004290A6 /* GeniusRollViewController.m */; };
-		8E8C682B15D94CE6004290A6 /* GeniusRollViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C682915D94CE5004290A6 /* GeniusRollViewController.xib */; };
 		8E8C682F15D9568B004290A6 /* tableSectionHeaderBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C682D15D9568B004290A6 /* tableSectionHeaderBackground.png */; };
 		8E8C683015D9568B004290A6 /* tableSectionHeaderBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C682E15D9568B004290A6 /* tableSectionHeaderBackground@2x.png */; };
 		8E8C683315D9572A004290A6 /* QueryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C683215D9572A004290A6 /* QueryCell.m */; };
@@ -67,7 +66,6 @@
 		8E89F5C815D4FEC4004B2DFF /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = SOURCE_ROOT; };
 		8E8C682715D94CE5004290A6 /* GeniusRollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeniusRollViewController.h; sourceTree = "<group>"; };
 		8E8C682815D94CE5004290A6 /* GeniusRollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeniusRollViewController.m; sourceTree = "<group>"; };
-		8E8C682915D94CE5004290A6 /* GeniusRollViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeniusRollViewController.xib; sourceTree = "<group>"; };
 		8E8C682D15D9568B004290A6 /* tableSectionHeaderBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tableSectionHeaderBackground.png; sourceTree = "<group>"; };
 		8E8C682E15D9568B004290A6 /* tableSectionHeaderBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tableSectionHeaderBackground@2x.png"; sourceTree = "<group>"; };
 		8E8C683115D9572A004290A6 /* QueryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryCell.h; sourceTree = "<group>"; };
@@ -256,7 +254,6 @@
 		8EDCE9CD15D4EF1D00EFB1F2 /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
-				8E8C682915D94CE5004290A6 /* GeniusRollViewController.xib */,
 				8EDCE9AC15D4C3C000EFB1F2 /* SearchViewController_iPhone.xib */,
 				8E8C683415D95778004290A6 /* QueryCell.xib */,
 				8EDCE9CF15D4EF4400EFB1F2 /* VideoCardCell.xib */,
@@ -382,7 +379,6 @@
 				8EDDFB3315D88B1A00BCD710 /* navigationLogo@2x.png in Resources */,
 				8EDDFB3415D88B1A00BCD710 /* navigationBar.png in Resources */,
 				8EDDFB3515D88B1A00BCD710 /* navigationBarar@2x.png in Resources */,
-				8E8C682B15D94CE6004290A6 /* GeniusRollViewController.xib in Resources */,
 				8E8C682F15D9568B004290A6 /* tableSectionHeaderBackground.png in Resources */,
 				8E8C683015D9568B004290A6 /* tableSectionHeaderBackground@2x.png in Resources */,
 				8E8C683515D95778004290A6 /* QueryCell.xib in Resources */,
