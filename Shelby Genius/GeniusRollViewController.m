@@ -135,6 +135,49 @@
     return 1;
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if ( [self.resultsArray count] ) {
+        
+        tableView.alpha = 1.0f;
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"VideoCardCell" owner:self options:nil];
+        VideoCardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VideoCardCell"];
+        if ( nil == cell ) cell = (VideoCardCell*)[nib objectAtIndex:0];
+        
+        NSString *thumbnailURL = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"thumbnail_url"];
+        NSString *videoTitle = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"title"];
+        NSString *providerName = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"provider_name"];
+
+        
+        if (thumbnailURL != (id)[NSNull null]) [AsynchronousFreeloader loadImageFromLink:thumbnailURL forImageView:cell.thumbnailImageView withPlaceholderView:nil];
+        if (videoTitle != (id)[NSNull null]) cell.videoTitleLabel.text = videoTitle;
+        if (videoTitle != (id)[NSNull null]) cell.videoProviderLabel.text = providerName;
+        cell.video = [[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"];
+        
+        return cell;
+        
+    } else {
+        
+        tableView.alpha = 0.0f;
+        return [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier: @"Cell"];;
+        
+    }
+    
+}
+
+#pragma mark - UITableViewDelegate Methods
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSUInteger rows = [self.resultsArray count];
+    return (rows) ? rows : 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return ([self.resultsArray count]) ? 94.0f : 44.0f;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     // Create frame of UITableView Section Header
@@ -179,48 +222,6 @@
     return [[UIView alloc] init];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    NSUInteger rows = [self.resultsArray count];
-    return (rows) ? rows : 1;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return ([self.resultsArray count]) ? 94.0f : 44.0f;
-}
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    if ( [self.resultsArray count] ) {
-        
-        tableView.alpha = 1.0f;
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"VideoCardCell" owner:self options:nil];
-        VideoCardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VideoCardCell"];
-        if ( nil == cell ) cell = (VideoCardCell*)[nib objectAtIndex:0];
-        
-        NSString *thumbnailURL = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"thumbnail_url"];
-        NSString *videoTitle = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"title"];
-        NSString *providerName = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"provider_name"];
-
-        
-        if (thumbnailURL != (id)[NSNull null]) [AsynchronousFreeloader loadImageFromLink:thumbnailURL forImageView:cell.thumbnailImageView withPlaceholderView:nil];
-        if (videoTitle != (id)[NSNull null]) cell.videoTitleLabel.text = videoTitle;
-        if (videoTitle != (id)[NSNull null]) cell.videoProviderLabel.text = providerName;
-        cell.video = [[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"];
-        
-        return cell;
-        
-    } else {
-        
-        tableView.alpha = 0.0f;
-        return [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier: @"Cell"];;
-        
-    }
-    
-}
-
-#pragma mark - UITableViewDelegate Methods
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     VideoCardCell *cell = (VideoCardCell*)[self.tableView cellForRowAtIndexPath:indexPath];

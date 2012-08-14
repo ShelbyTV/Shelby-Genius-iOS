@@ -99,10 +99,13 @@
     
     if (self.searchBar.text.length) {
             
+        NSString *query = self.searchBar.text;
+        self.searchBar.text = @"";
+        
         NSArray *reversedArray = [[self.previousQueriesArray reverseObjectEnumerator] allObjects];
         [self.previousQueriesArray removeAllObjects];
         [self.previousQueriesArray addObjectsFromArray:reversedArray];
-        [self.previousQueriesArray addObject:self.searchBar.text];
+        [self.previousQueriesArray addObject:query];
         NSArray *secondReversedArray = [[self.previousQueriesArray reverseObjectEnumerator] allObjects];
         [self.previousQueriesArray removeAllObjects];
         [self.previousQueriesArray addObjectsFromArray:secondReversedArray];
@@ -159,7 +162,41 @@
     return 1;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSUInteger rows = [self.previousQueriesArray count];
+    return (rows) ? rows : 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ( [self.previousQueriesArray count] ) {
+        
+        tableView.alpha = 1.0f;
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"QueryCell" owner:self options:nil];
+        QueryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QueryCell"];
+        if ( nil == cell ) cell = (QueryCell*)[nib objectAtIndex:0];
+        
+        cell.label.text = [self.previousQueriesArray objectAtIndex:indexPath.row];
+        
+        return cell;
+        
+    } else {
+
+        tableView.alpha = 0.0f;
+        
+        return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];;
+    }
+
+}
+
+#pragma mark - UITableViewDelegate Methods
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return ([self.previousQueriesArray count]) ? 22.0f : 0.0f;
 }
@@ -207,40 +244,6 @@
     return [[UIView alloc] init];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    NSUInteger rows = [self.previousQueriesArray count];
-    return (rows) ? rows : 1;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 44.0f;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ( [self.previousQueriesArray count] ) {
-        
-        tableView.alpha = 1.0f;
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"QueryCell" owner:self options:nil];
-        QueryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QueryCell"];
-        if ( nil == cell ) cell = (QueryCell*)[nib objectAtIndex:0];
-        
-        cell.label.text = [self.previousQueriesArray objectAtIndex:indexPath.row];
-        
-        return cell;
-        
-    } else {
-
-        tableView.alpha = 0.0f;
-        
-        return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];;
-    }
-
-}
-
-#pragma mark - UITableViewDelegate Methods
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     QueryCell *cell = (QueryCell*)[self.tableView cellForRowAtIndexPath:indexPath];
