@@ -22,13 +22,14 @@
 
 @property (strong, nonatomic) NSMutableArray *previousQueriesArray;
 @property (strong, nonatomic) UIView *transparentTouchableView;
+@property (strong, nonatomic) UIView *transparentTouchableNavigationView;
 
 - (void)customize;
-- (void)createTransparentTouchableView;
+- (void)createTransparentTouchableViews;
 - (void)initializePreviousQueriesArray;
 - (void)modifyPreviousQueriesArray;
 - (void)createGeniusRoll;
-- (void)dismissKeyboard;
+- (void)removeTransparentViews;
 
 @end
 
@@ -37,6 +38,7 @@
 @synthesize searchBar = _searchBar;
 @synthesize previousQueriesArray = _previousQueriesArray;
 @synthesize transparentTouchableView = _transparentTouchableView;
+@synthesize transparentTouchableNavigationView = _transparentTouchableNavigationView;
 
 #pragma mark - View Lifecycle Methods
 - (void)viewDidUnload
@@ -53,6 +55,12 @@
     [self initializePreviousQueriesArray];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self removeTransparentViews];
+}
+
 #pragma mark - Private Methods
 - (void)customize
 {
@@ -66,16 +74,26 @@
     
 }
 
-- (void)createTransparentTouchableView
+- (void)createTransparentTouchableViews
 {
-    // Transparent, Touchable View
     self.transparentTouchableView = [[UIView alloc] initWithFrame:self.tableView.frame];
     self.transparentTouchableView.backgroundColor = [UIColor clearColor];
     self.transparentTouchableView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-    tapGesture.numberOfTapsRequired = 1;
-    [self.transparentTouchableView addGestureRecognizer:tapGesture];
+    UITapGestureRecognizer *tableTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeTransparentViews)];
+    tableTapGesture.numberOfTapsRequired = 1;
+    [self.transparentTouchableView addGestureRecognizer:tableTapGesture];
     [self.tableView addSubview:self.transparentTouchableView];
+    
+    self.transparentTouchableNavigationView = [[UIView alloc] initWithFrame:self.navigationController.navigationBar.frame];
+    self.transparentTouchableNavigationView.backgroundColor = [UIColor clearColor];
+    self.transparentTouchableNavigationView.userInteractionEnabled = YES;
+    [self.navigationController.navigationBar addSubview:self.transparentTouchableNavigationView];
+    UITapGestureRecognizer *navigationTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeTransparentViews)];
+    navigationTapGesture.numberOfTapsRequired = 1;
+    [self.transparentTouchableNavigationView addGestureRecognizer:navigationTapGesture];
+    [self.navigationController.navigationBar addSubview:self.transparentTouchableNavigationView];
+    
+    
 }
 
 - (void)initializePreviousQueriesArray
@@ -121,16 +139,19 @@
     
 }
 
-- (void)dismissKeyboard
+- (void)removeTransparentViews
 {
+    
     // Resign Keyboard if any view element is touched that isn't currently a firstResponder UISearchBar object
     if ( [self.searchBar isFirstResponder] ) {
-        
-        [self.transparentTouchableView removeFromSuperview];
+
         [self.searchBar setText:@""];
         [self.searchBar resignFirstResponder];
         
     }
+
+    [self.transparentTouchableView removeFromSuperview];
+    [self.transparentTouchableNavigationView removeFromSuperview];
 }
 
 - (void)createGeniusRoll
@@ -142,7 +163,7 @@
 #pragma mark - UISearchBarDelegate Methods
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    [self createTransparentTouchableView];
+    [self createTransparentTouchableViews];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -254,7 +275,7 @@
 #pragma mark - UIResponder Methods
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self dismissKeyboard];
+    if ( [self.searchBar isFirstResponder] ) [self removeTransparentViews];
 }
 
 #pragma mark - Interface Orientation Methods
