@@ -21,11 +21,14 @@
 @interface SearchViewController ()
 
 @property (strong, nonatomic) NSMutableArray *previousQueriesArray;
+@property (strong, nonatomic) UIView *transparentTouchableView;
 
 - (void)customize;
+- (void)createTransparentTouchableView;
 - (void)initializePreviousQueriesArray;
 - (void)modifyPreviousQueriesArray;
 - (void)createGeniusRoll;
+- (void)dismissKeyboard;
 
 @end
 
@@ -33,6 +36,7 @@
 @synthesize tableView = _tableView;
 @synthesize searchBar = _searchBar;
 @synthesize previousQueriesArray = _previousQueriesArray;
+@synthesize transparentTouchableView = _transparentTouchableView;
 
 #pragma mark - View Lifecycle Methods
 - (void)viewDidUnload
@@ -52,10 +56,26 @@
 #pragma mark - Private Methods
 - (void)customize
 {
+    // Root View
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"queryCellBackground"]];
+    
+    // Table View
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableSectionHeaderBackground"]];
     self.tableView.separatorColor = [UIColor blackColor];
     self.tableView.scrollEnabled = NO;
+    
+}
+
+- (void)createTransparentTouchableView
+{
+    // Transparent, Touchable View
+    self.transparentTouchableView = [[UIView alloc] initWithFrame:self.tableView.frame];
+    self.transparentTouchableView.backgroundColor = [UIColor clearColor];
+    self.transparentTouchableView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    tapGesture.numberOfTapsRequired = 1;
+    [self.transparentTouchableView addGestureRecognizer:tapGesture];
+    [self.tableView addSubview:self.transparentTouchableView];
 }
 
 - (void)initializePreviousQueriesArray
@@ -98,6 +118,18 @@
     
 }
 
+- (void)dismissKeyboard
+{
+    // Resign Keyboard if any view element is touched that isn't currently a firstResponder UISearchBar object
+    if ( [self.searchBar isFirstResponder] ) {
+        
+        [self.transparentTouchableView removeFromSuperview];
+        [self.searchBar setText:@""];
+        [self.searchBar resignFirstResponder];
+        
+    }
+}
+
 - (void)createGeniusRoll
 {
     GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithQuery:self.searchBar.text];
@@ -105,6 +137,11 @@
 }
 
 #pragma mark - UISearchBarDelegate Methods
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    [self createTransparentTouchableView];
+}
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     // Hide keyboard
@@ -214,14 +251,13 @@
 #pragma mark - UIResponder Methods
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    // Resign Keyboard if any view element is touched that isn't currently a firstResponder UISearchBar object
-    if ( [self.searchBar isFirstResponder] ) [self.searchBar resignFirstResponder];
+    [self dismissKeyboard];
 }
 
 #pragma mark - Interface Orientation Methods
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return interfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
 @end

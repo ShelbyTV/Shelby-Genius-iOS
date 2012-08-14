@@ -174,7 +174,6 @@
 		8EDCE98815D4C3C000EFB1F2 = {
 			isa = PBXGroup;
 			children = (
-				8E8C684815D9A0A0004290A6 /* QuartzCore.framework */,
 				8EDCE99D15D4C3C000EFB1F2 /* Shelby Genius */,
 				8EDCE99615D4C3C000EFB1F2 /* Frameworks */,
 				8EDCE99415D4C3C000EFB1F2 /* Products */,
@@ -194,6 +193,7 @@
 			children = (
 				8E2E974115D565F900178DA0 /* AVFoundation.framework */,
 				8E2A243615D4F4C400D09A8B /* MediaPlayer.framework */,
+				8E8C684815D9A0A0004290A6 /* QuartzCore.framework */,
 				8EDCE99715D4C3C000EFB1F2 /* UIKit.framework */,
 				8EDCE99915D4C3C000EFB1F2 /* Foundation.framework */,
 				8EDCE99B15D4C3C000EFB1F2 /* CoreGraphics.framework */,

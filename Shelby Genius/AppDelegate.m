@@ -67,7 +67,6 @@
 
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
     
-    
     UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navigationLogo"]];
     self.searchNavigationController.visibleViewController.navigationItem.titleView = logoView;
     
