@@ -25,6 +25,7 @@
 
 @property (strong, nonatomic) NSMutableArray *resultsArray;
 @property (strong, nonatomic) NSString *query;
+@property (assign, nonatomic) BOOL isFetchingMoreVideos;
 
 - (void)customize;
 - (void)initalizeObservers;
@@ -37,6 +38,7 @@
 @synthesize tableView = _tableView;
 @synthesize resultsArray = _resultsArray;
 @synthesize query = _query;
+@synthesize isFetchingMoreVideos = _isFetchingMoreVideos;
 
 #pragma mark - Initialization
 - (id)initWithQuery:(NSString *)query
@@ -69,6 +71,14 @@
     [self initalizeObservers];
 }
 
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    [appDelegate removeHUD];
+}
+
 #pragma mark - Private Methods
 - (void)customize
 {
@@ -94,7 +104,7 @@
     [client performRequest:request ofType:APIRequestType_GetQuery withQuery:self.query];
     
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    [appDelegate addHUDWithMessage:@"Fetching 'Genius' Videos"];
+    [appDelegate addHUDWithMessage:@"Fetching Genius Videos"];
     
 }
 
@@ -110,6 +120,8 @@
         [self.resultsArray addObjectsFromArray:[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"]];
         
     }
+    
+    [self setIsFetchingMoreVideos:NO];
     
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     [appDelegate removeHUD];
@@ -153,7 +165,7 @@
                                                                -2.0f + tableSectionHeaderFrame.size.height)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"Ubuntu-Bold" size:11];
-    label.text = [NSString stringWithFormat:@"Genius results for '%@'", self.query];
+    label.text = [NSString stringWithFormat:@"Genius results for %@", self.query];
     label.text = [label.text stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
     label.textAlignment = UITextAlignmentLeft;
     label.textColor = [UIColor blackColor];
@@ -219,7 +231,8 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self.resultsArray count] > kMinimumVideoCountBeforeFetch && indexPath.row == [self.resultsArray count]-2) {
+    
+    if ( ([self.resultsArray count] > kMinimumVideoCountBeforeFetch) && (indexPath.row == [self.resultsArray count]-2) && (NO == self.isFetchingMoreVideos) ) {
         
         NSString *rollID = [[NSUserDefaults standardUserDefaults] objectForKey:kRollID];
         NSString *requestString = [NSString stringWithFormat:kGetRollFramesAgain, rollID, [self.resultsArray count]];
@@ -229,6 +242,8 @@
         
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         [appDelegate addHUDWithMessage:@"Getting more 'Genius' Videos"];
+        
+        [self setIsFetchingMoreVideos:YES];
         
     }
 }

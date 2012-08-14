@@ -26,6 +26,7 @@
 @synthesize progressHUD = _progressHUD;
 @synthesize progressView = _progressView;
 
+#pragma mark - UIApplicationDelegate Methods
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
@@ -42,6 +43,11 @@
 
     return YES;
 
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
 }
 
 - (void)createProgressView

@@ -47,7 +47,6 @@
     [super viewDidLoad];
     [self customize];
     [self initializePreviousQueriesArray];
-
 }
 
 #pragma mark - Private Methods
@@ -56,6 +55,7 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"queryCellBackground"]];
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableSectionHeaderBackground"]];
     self.tableView.separatorColor = [UIColor blackColor];
+    self.tableView.scrollEnabled = NO;
 }
 
 - (void)initializePreviousQueriesArray
@@ -87,12 +87,12 @@
         [self.previousQueriesArray removeAllObjects];
         [self.previousQueriesArray addObjectsFromArray:secondReversedArray];
         
-        if ( [self.previousQueriesArray count] > 10) [self.previousQueriesArray removeLastObject];
+        if ( [self.previousQueriesArray count] > 7) [self.previousQueriesArray removeLastObject];
         
         [[NSUserDefaults standardUserDefaults] setObject:self.previousQueriesArray forKey:kPreviousQueries];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        NSLog(@"%@", self.view.subviews);
+
+        [self.tableView reloadData];
   
     }
     
@@ -157,7 +157,7 @@
                                                                -2.0f + tableSectionHeaderFrame.size.height)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"Ubuntu-Bold" size:13];
-    label.text = @"Previous Shelby Searches";
+    label.text = @"Previous Genius Searches";
     label.textAlignment = UITextAlignmentLeft;
     label.textColor = [UIColor blackColor];
     [view addSubview:label];
@@ -209,6 +209,13 @@
     QueryCell *cell = (QueryCell*)[self.tableView cellForRowAtIndexPath:indexPath];
     GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithQuery:cell.label.text];
     [self.navigationController pushViewController:geniusRollViewController animated:YES];
+}
+
+#pragma mark - UIResponder Methods
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    // Resign Keyboard if any view element is touched that isn't currently a firstResponder UISearchBar object
+    if ( [self.searchBar isFirstResponder] ) [self.searchBar resignFirstResponder];
 }
 
 #pragma mark - Interface Orientation Methods
