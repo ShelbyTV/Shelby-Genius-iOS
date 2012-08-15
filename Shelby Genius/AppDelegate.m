@@ -7,13 +7,19 @@
 //
 
 #import "AppDelegate.h"
-#import "SearchViewController.h"
+
+// Frameworks
 #import <AVFoundation/AVFoundation.h>
+#import <Crashlytics/Crashlytics.h>
+
+// Controllers
+#import "SearchViewController.h"
 
 @interface AppDelegate ()
 
 @property (strong, nonatomic) UIView *progressView;
 
+- (void)analytics;
 - (void)customization;
 - (void)createProgressView;
 
@@ -36,6 +42,9 @@
     self.searchNavigationController = [[UINavigationController alloc] initWithRootViewController:self.searchViewController];
     self.window.rootViewController = searchNavigationController;
     
+    // Add analytics
+    [self analytics];
+    
     // Appearance Proxies and General Customization
     [self customization];
     
@@ -57,6 +66,11 @@
 }
 
 #pragma mark - Private Methods
+- (void)analytics
+{
+    [Crashlytics startWithAPIKey:@"84a79b7ee6f2eca13877cd17b9b9a290790f99aa"];
+}
+
 - (void)customization
 {
     // UIStatusBar

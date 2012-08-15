@@ -48,6 +48,7 @@
 		8EDDFB3315D88B1A00BCD710 /* navigationLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2815D88B1A00BCD710 /* navigationLogo@2x.png */; };
 		8EDDFB3415D88B1A00BCD710 /* navigationBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2915D88B1A00BCD710 /* navigationBar.png */; };
 		8EDDFB3515D88B1A00BCD710 /* navigationBarar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2A15D88B1A00BCD710 /* navigationBarar@2x.png */; };
+		8EF8211315DB5D3F00F18572 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF8211215DB5D3F00F18572 /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +109,7 @@
 		8EDDFB2815D88B1A00BCD710 /* navigationLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationLogo@2x.png"; sourceTree = "<group>"; };
 		8EDDFB2915D88B1A00BCD710 /* navigationBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationBar.png; sourceTree = "<group>"; };
 		8EDDFB2A15D88B1A00BCD710 /* navigationBarar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationBarar@2x.png"; sourceTree = "<group>"; };
+		8EF8211215DB5D3F00F18572 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				8EDCE99815D4C3C000EFB1F2 /* UIKit.framework in Frameworks */,
 				8EDCE99A15D4C3C000EFB1F2 /* Foundation.framework in Frameworks */,
 				8EDCE99C15D4C3C000EFB1F2 /* CoreGraphics.framework in Frameworks */,
+				8EF8211315DB5D3F00F18572 /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				8E2E974115D565F900178DA0 /* AVFoundation.framework */,
+				8EF8211215DB5D3F00F18572 /* Crashlytics.framework */,
 				8E2A243615D4F4C400D09A8B /* MediaPlayer.framework */,
 				8E8C684815D9A0A0004290A6 /* QuartzCore.framework */,
 				8EDCE99715D4C3C000EFB1F2 /* UIKit.framework */,
@@ -341,6 +345,7 @@
 				8EDCE98F15D4C3C000EFB1F2 /* Sources */,
 				8EDCE99015D4C3C000EFB1F2 /* Frameworks */,
 				8EDCE99115D4C3C000EFB1F2 /* Resources */,
+				8EF8211115DB5D2000F18572 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -410,6 +415,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8EF8211115DB5D2000F18572 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 84a79b7ee6f2eca13877cd17b9b9a290790f99aa";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8EDCE98F15D4C3C000EFB1F2 /* Sources */ = {
@@ -508,6 +529,10 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Arthur Sabintsev (Z4E762QSUZ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Arthur Sabintsev (Z4E762QSUZ)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Shelby Genius/Shelby Genius-Prefix.pch";
 				INFOPLIST_FILE = "Shelby Genius/Shelby Genius-Info.plist";
@@ -525,6 +550,10 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Arthur Sabintsev (Z4E762QSUZ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Arthur Sabintsev (Z4E762QSUZ)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Shelby Genius/Shelby Genius-Prefix.pch";
 				INFOPLIST_FILE = "Shelby Genius/Shelby Genius-Info.plist";

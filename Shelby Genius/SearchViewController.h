@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  SearchViewController.h
 //  Shelby Genius
 //
 //  Created by Arthur Ariel Sabintsev on 8/10/12.
