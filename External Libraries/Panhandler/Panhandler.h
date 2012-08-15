@@ -43,15 +43,15 @@
 
 /* Required Configuration */
 #define PanhandlerAppleID       @"467849037"        // Apple ID for your app
-#define PanhandlerTrigger       15                 // Number (integer) of events needed for ratings reminder alert
-#define PanhandlerRetrigger     15                 // Number (integer) of events needed to retrigger ratings reminder alert
+#define PanhandlerTrigger       15                  // Number (integer) of events needed for ratings reminder alert
+#define PanhandlerRetrigger     15                  // Number (integer) of events needed to retrigger ratings reminder alert
 #define PanhandlerDebugMode     NO                  // Set YES to show the alert every time. Set NO when shipping to App Store.
 
 /* Optional Customization */
 #define PanhandlerAlertTitle                    @"Shelby needs love!"
-#define PanhandlerAlertMessage                  [NSString stringWithFormat:@"Tell us why you enjoy %@, and take a second to rate it.\n We value your feedback!", PanhandlerAppName]
+#define PanhandlerAlertMessage                  @"Tell us why you enjoy Shelby Genius, and take a second to rate it.\n We value your feedback!"
 #define PanhandlerNoMessage                     @"No, thanks"
-#define PanhandlerYesMessage                    [NSString stringWithFormat:@"Rate %@", PanhandlerAppName]
+#define PanhandlerYesMessage                    @"Rate Shelby Genius"
 #define PanhandlerRemindMeLaterMessage          @"I'll do it later"
 
 @interface Panhandler : NSObject
