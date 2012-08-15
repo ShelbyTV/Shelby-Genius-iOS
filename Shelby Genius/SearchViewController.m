@@ -115,40 +115,52 @@
 - (void)modifyPreviousQueriesArray
 {
     
-    if (self.searchBar.text.length) {
+    // Remove whitespace if it exists in strings final position
+    NSString *whiteSpaceChecker = [self.searchBar.text substringFromIndex:[self.searchBar.text length] - 1];
+    if ( [whiteSpaceChecker isEqualToString:@" "] ) self.searchBar.text = [self.searchBar.text substringToIndex:[self.searchBar.text length]-1];
+    
+    // Convert to current and previous strings to lowerCase for comparison
+    NSString *lowerCaseQuery = [self.searchBar.text lowercaseString];
+    NSMutableArray *lowerCaseArray = [self.previousQueriesArray copy];
+    for ( NSString *previousQuery in [[lowerCaseArray objectEnumerator] allObjects] ) [previousQuery lowercaseString];
+        
+    if ( [lowerCaseArray count] ) {
+        
+        if ( ![lowerCaseArray containsObject:lowerCaseQuery] ) {
+                
+                NSArray *reversedArray = [[self.previousQueriesArray reverseObjectEnumerator] allObjects];
+                [self.previousQueriesArray removeAllObjects];
+                [self.previousQueriesArray addObjectsFromArray:reversedArray];
+                [self.previousQueriesArray addObject:self.searchBar.text];
+                NSArray *secondReversedArray = [[self.previousQueriesArray reverseObjectEnumerator] allObjects];
+                [self.previousQueriesArray removeAllObjects];
+                [self.previousQueriesArray addObjectsFromArray:secondReversedArray];
+                
+                if ( [self.previousQueriesArray count] > 7) [self.previousQueriesArray removeLastObject];
+                
+                [[NSUserDefaults standardUserDefaults] setObject:self.previousQueriesArray forKey:kPreviousQueries];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                [self.tableView reloadData];
+                
             
-        NSString *query = self.searchBar.text;
-        self.searchBar.text = @"";
+        }
         
-        NSArray *reversedArray = [[self.previousQueriesArray reverseObjectEnumerator] allObjects];
-        [self.previousQueriesArray removeAllObjects];
-        [self.previousQueriesArray addObjectsFromArray:reversedArray];
-        [self.previousQueriesArray addObject:query];
-        NSArray *secondReversedArray = [[self.previousQueriesArray reverseObjectEnumerator] allObjects];
-        [self.previousQueriesArray removeAllObjects];
-        [self.previousQueriesArray addObjectsFromArray:secondReversedArray];
-        
-        if ( [self.previousQueriesArray count] > 7) [self.previousQueriesArray removeLastObject];
-        
+    } else {
+
+        [self.previousQueriesArray addObject:self.searchBar.text];
         [[NSUserDefaults standardUserDefaults] setObject:self.previousQueriesArray forKey:kPreviousQueries];
         [[NSUserDefaults standardUserDefaults] synchronize];
-
         [self.tableView reloadData];
-  
+
     }
     
 }
 
 - (void)removeTransparentViews
 {
-    
     // Resign Keyboard if any view element is touched that isn't currently a firstResponder UISearchBar object
-    if ( [self.searchBar isFirstResponder] ) {
-
-        [self.searchBar setText:@""];
-        [self.searchBar resignFirstResponder];
-        
-    }
+    if ( [self.searchBar isFirstResponder] ) [self.searchBar resignFirstResponder];
 
     [self.transparentTouchableView removeFromSuperview];
     [self.transparentTouchableNavigationView removeFromSuperview];
@@ -158,6 +170,7 @@
 {
     GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithQuery:self.searchBar.text];
     [self.navigationController pushViewController:geniusRollViewController animated:YES];
+    self.searchBar.text = @"";
 }
 
 #pragma mark - UISearchBarDelegate Methods

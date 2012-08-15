@@ -44,7 +44,7 @@
 - (id)initWithQuery:(NSString *)query
 {
     if ( self = [super init] ) {
-        
+
         self.query = query;
         [self search];
         self.title = query;
@@ -242,7 +242,7 @@
         [client performRequest:request ofType:APIRequestType_GetRollFrames withQuery:nil];
         
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        [appDelegate addHUDWithMessage:@"Getting more 'Genius' Videos"];
+        [appDelegate addHUDWithMessage:@"Getting more Genius videos"];
         
         [self setIsFetchingMoreVideos:YES];
         
