@@ -28,6 +28,7 @@
 - (void)createTransparentTouchableViews;
 - (void)initializePreviousQueriesArray;
 - (void)modifyPreviousQueriesArray;
+- (void)savePreviousQueriesArray;
 - (void)createGeniusRoll;
 - (void)removeTransparentViews;
 
@@ -126,33 +127,36 @@
     if ( [lowerCaseArray count] ) { // If this IS NOT the first search query
         
         if ( ![lowerCaseArray containsObject:lowerCaseQuery] ) {
-                
-                NSArray *reversedArray = [[self.previousQueriesArray reverseObjectEnumerator] allObjects];
-                [self.previousQueriesArray removeAllObjects];
-                [self.previousQueriesArray addObjectsFromArray:reversedArray];
-                [self.previousQueriesArray addObject:self.searchBar.text];
-                NSArray *secondReversedArray = [[self.previousQueriesArray reverseObjectEnumerator] allObjects];
-                [self.previousQueriesArray removeAllObjects];
-                [self.previousQueriesArray addObjectsFromArray:secondReversedArray];
-                
-                if ( [self.previousQueriesArray count] > 7) [self.previousQueriesArray removeLastObject];
-                
-                [[NSUserDefaults standardUserDefaults] setObject:self.previousQueriesArray forKey:kPreviousQueries];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                
-                [self.tableView reloadData];
+
+            NSArray *reversedArray = [[self.previousQueriesArray reverseObjectEnumerator] allObjects];
+            [self.previousQueriesArray removeAllObjects];
+            [self.previousQueriesArray addObjectsFromArray:reversedArray];
+            [self.previousQueriesArray addObject:self.searchBar.text];
+            NSArray *secondReversedArray = [[self.previousQueriesArray reverseObjectEnumerator] allObjects];
+            [self.previousQueriesArray removeAllObjects];
+            [self.previousQueriesArray addObjectsFromArray:secondReversedArray];
+            
+        
+            if ( [self.previousQueriesArray count] > kMaximumNumberOfQueries) [self.previousQueriesArray removeLastObject];
+            [self savePreviousQueriesArray];
+            [self.tableView reloadData];
             
         }
         
     } else { // If this IS the first search query
 
         [self.previousQueriesArray addObject:self.searchBar.text];
-        [[NSUserDefaults standardUserDefaults] setObject:self.previousQueriesArray forKey:kPreviousQueries];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self savePreviousQueriesArray];
         [self.tableView reloadData];
 
     }
     
+}
+
+- (void)savePreviousQueriesArray
+{
+    [[NSUserDefaults standardUserDefaults] setObject:self.previousQueriesArray forKey:kPreviousQueries];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)removeTransparentViews
@@ -198,6 +202,24 @@
 {
     NSUInteger rows = [self.previousQueriesArray count];
     return (rows) ? rows : 1;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ( editingStyle == UITableViewCellEditingStyleDelete ) {
+
+        [self.previousQueriesArray removeObjectAtIndex:indexPath.row];
+        [self savePreviousQueriesArray];
+        [self.tableView reloadData];
+        
+    }
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -10,6 +10,7 @@
 #import "APIRoutes.h"
 
 #define kMinimumVideoCountBeforeFetch   19
+#define kMaximumNumberOfQueries         7
 #define kPreviousQueries                @"Previous Queries"
 #define kRollFramesObserver             @"RollFrames Observer"
 #define kRollID                         @"Roll ID"
