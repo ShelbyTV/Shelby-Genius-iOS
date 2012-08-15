@@ -15,7 +15,8 @@
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) NSArray *video;
 @property (assign, nonatomic) VideoProvider provider;
-@property (strong, nonatomic) MPMoviePlayerController *moviePlayer;
+//@property (strong, nonatomic) MPMoviePlayerController *moviePlayer;
+@property (strong, nonatomic) MPMoviePlayerViewController *moviePlayer;
 @property (strong, nonatomic) UIActivityIndicatorView *indicator;
 @property (strong, nonatomic) UIWebView *webView;
 @property (assign, nonatomic) BOOL videoWillBegin;
@@ -112,7 +113,8 @@
 
 - (void)destroy
 {
-    [self.moviePlayer.view removeFromSuperview];
+    [self.moviePlayer.navigationController setNavigationBarHidden:NO];
+    [self.moviePlayer.navigationController popViewControllerAnimated:NO];
     [self.navigationController popViewControllerAnimated:YES];
 }
                       
@@ -173,16 +175,20 @@
         
         [self.indicator stopAnimating];
         [self.indicator removeFromSuperview];
-        
-        self.moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL URLWithString:link]];
+
+        self.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:link]];
+//        self.moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL URLWithString:link]];
         [self.moviePlayer.view setFrame:self.appDelegate.window.frame];
-        [self.moviePlayer setFullscreen:YES animated:NO];
-        [self.moviePlayer setFullscreen:YES];
-        [self.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
-        [self.moviePlayer setShouldAutoplay:YES];
-        [self.moviePlayer prepareToPlay];
-        [self.appDelegate.window addSubview:self.moviePlayer.view];
-        [self.moviePlayer play];
+//        [self.moviePlayer setFullscreen:YES animated:NO];
+//        [self.moviePlayer setFullscreen:YES];
+//        [self.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
+//        [self.moviePlayer setShouldAutoplay:YES];
+//        [self.moviePlayer prepareToPlay];
+//        [self.appDelegate.window addSubview:self.moviePlayer.view];
+//        [self.moviePlayer play];
+        
+        [self.navigationController pushViewController:self.moviePlayer animated:NO];
+        [self.moviePlayer.navigationController setNavigationBarHidden:YES];
         
         [[Panhandler sharedInstance] recordEvent];
 
