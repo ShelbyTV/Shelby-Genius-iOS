@@ -112,8 +112,7 @@
 - (void)destroy
 {
     [self.moviePlayer.view removeFromSuperview];
-    [self dismissModalViewControllerAnimated:YES];
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
                       
 #pragma mark - Video Playback Methods
@@ -227,7 +226,7 @@
 #pragma mark - Interface Orientation Method
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
 @end

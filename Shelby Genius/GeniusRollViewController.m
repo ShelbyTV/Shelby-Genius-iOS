@@ -26,6 +26,7 @@
 @property (strong, nonatomic) NSMutableArray *resultsArray;
 @property (strong, nonatomic) NSString *query;
 @property (assign, nonatomic) BOOL isFetchingMoreVideos;
+@property (assign, nonatomic) BOOL isPlayingVideo;
 
 - (void)customize;
 - (void)initalizeObservers;
@@ -39,6 +40,7 @@
 @synthesize resultsArray = _resultsArray;
 @synthesize query = _query;
 @synthesize isFetchingMoreVideos = _isFetchingMoreVideos;
+@synthesize isPlayingVideo = _isPlayingVideo;
 
 #pragma mark - Initialization
 - (id)initWithQuery:(NSString *)query
@@ -72,6 +74,21 @@
     [self initalizeObservers];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if ( [self isPlayingVideo] ) {
+        
+        [self setIsPlayingVideo:NO];
+        CGRect frame = self.view.frame;
+        self.view.frame = CGRectMake(frame.origin.x,
+                                     20.0f + frame.origin.y,
+                                     frame.size.width,
+                                     frame.size.height);
+        
+    }
+}
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -229,8 +246,9 @@
 {
     VideoCardCell *cell = (VideoCardCell*)[self.tableView cellForRowAtIndexPath:indexPath];
     VideoPlayerViewController *videoPlayerViewController = [[VideoPlayerViewController alloc] initWithVideo:cell.video];
-    [videoPlayerViewController shouldAutorotateToInterfaceOrientation: UIInterfaceOrientationLandscapeRight];
-    [self presentModalViewController:videoPlayerViewController animated:YES];
+    [self.navigationController pushViewController:videoPlayerViewController animated:YES];
+    
+    [self setIsPlayingVideo:YES];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
