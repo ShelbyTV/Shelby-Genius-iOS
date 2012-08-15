@@ -30,25 +30,7 @@
 #pragma mark - Public Methods
 - (void)performRequest:(NSMutableURLRequest*)request ofType:(APIRequestType)type withQuery:(NSString*)query
 {
-    
-    switch (type) {
-        
-        case APIRequestType_GetQuery:{
-            self.query = query;
-        } break;
-            
-        case APIRequestType_PostGenius:{
-            // Do nothing
-        } break;
-            
-        case APIRequestType_GetRollFrames:{
-            // Do nothing
-        } break;
-            
-        default:
-            break;
-    }
-    
+    self.query = query;    
     self.type = type;
     self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
@@ -101,7 +83,7 @@
     NSURL *requestURL = [NSURL URLWithString:[requestString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:requestURL];
     [request setHTTPMethod:@"POST"];
-    [self performRequest:request ofType:APIRequestType_PostGenius withQuery:nil];
+    [self performRequest:request ofType:APIRequestType_PostGenius withQuery:self.query];
 
 }
 
@@ -112,7 +94,7 @@
     
     NSString *requestString = [NSString stringWithFormat:kGetRollFrames, rollID];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
-    [self performRequest:request ofType:APIRequestType_GetRollFrames withQuery:nil];
+    [self performRequest:request ofType:APIRequestType_GetRollFrames withQuery:self.query];
 }
 
 

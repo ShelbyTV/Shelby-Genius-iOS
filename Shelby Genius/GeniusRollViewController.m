@@ -260,7 +260,7 @@
         NSString *requestString = [NSString stringWithFormat:kGetRollFramesAgain, rollID, [self.resultsArray count]];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
         APIClient *client = [[APIClient alloc] init];
-        [client performRequest:request ofType:APIRequestType_GetRollFrames withQuery:nil];
+        [client performRequest:request ofType:APIRequestType_GetRollFrames withQuery:self.query];
         
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         [appDelegate addHUDWithMessage:@"Getting more Genius videos"];
