@@ -57,7 +57,8 @@
 #pragma mark - View Lifecycle Methods
 - (void)viewDidUnload
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRollFramesObserver object:nil];
+    NSString *querySpecificObserver = [NSString stringWithFormat:@"%@_%@", kRollFramesObserver, self.query];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:querySpecificObserver object:nil];
    
     self.tableView = nil;
     
@@ -88,9 +89,10 @@
 
 - (void)initalizeObservers
 {
+    NSString *querySpecificObserver = [NSString stringWithFormat:@"%@_%@", kRollFramesObserver, self.query];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(makeResultsArray:)
-                                                 name:kRollFramesObserver
+                                                 name:querySpecificObserver
                                                object:nil];
 }
 

@@ -188,7 +188,8 @@
             [self.responseData setLength:0];
             
             // Post Notification
-            [[NSNotificationCenter defaultCenter] postNotificationName:kRollFramesObserver
+            NSString *querySpecificObserver = [NSString stringWithFormat:@"%@_%@", kRollFramesObserver, self.query];
+            [[NSNotificationCenter defaultCenter] postNotificationName:querySpecificObserver
                                                                 object:nil
                                                               userInfo:responseDictionary];
             
