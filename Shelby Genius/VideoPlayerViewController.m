@@ -48,6 +48,7 @@
         
         self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         self.video = video;
+        self.title = [video valueForKey:@"title"];
         self.videoWillBegin = NO;
         self.indicator = [self createActivityIndicator];
         self.webView = [self createWebView];
@@ -226,7 +227,7 @@
 #pragma mark - Interface Orientation Method
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return interfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
 @end

@@ -77,6 +77,9 @@
 - (void)createTransparentTouchableViews
 {
     
+    // Disable clicakble 'delete' buttons on tableViewCell while transparent views are visible
+    self.tableView.userInteractionEnabled = NO;
+    
     self.transparentTouchableView = [[UIView alloc] initWithFrame:self.tableView.frame];
     self.transparentTouchableView.backgroundColor = [UIColor clearColor];
     self.transparentTouchableView.userInteractionEnabled = YES;
@@ -93,9 +96,6 @@
     navigationTapGesture.numberOfTapsRequired = 1;
     [self.transparentTouchableNavigationView addGestureRecognizer:navigationTapGesture];
     [self.navigationController.navigationBar addSubview:self.transparentTouchableNavigationView];
-    
-    // Removes any/all 'delete' buttons on tableViewCell while transparent views are visible
-    [self.tableView reloadData];
     
 }
 
@@ -166,10 +166,11 @@
     // Resign Keyboard if any view element is touched that isn't currently a firstResponder UISearchBar object
     if ( [self.searchBar isFirstResponder] ) [self.searchBar resignFirstResponder];
     
-    [UIView animateWithDuration:0.25f animations:^{ self.tableView.alpha = 1.0f; }];
     [self.transparentTouchableView removeFromSuperview];
     [self.transparentTouchableNavigationView removeFromSuperview];
-
+    self.tableView.userInteractionEnabled = YES;
+    [UIView animateWithDuration:0.25f animations:^{ self.tableView.alpha = 1.0f; }];
+    
 }
 
 - (void)createGeniusRoll
@@ -182,8 +183,8 @@
 #pragma mark - UISearchBarDelegate Methods
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    [UIView animateWithDuration:0.25f animations:^{ self.tableView.alpha = 0.25f; }];
     [self createTransparentTouchableViews];
+    [UIView animateWithDuration:0.25f animations:^{ self.tableView.alpha = 0.25f; }];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
