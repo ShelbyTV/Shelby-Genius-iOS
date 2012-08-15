@@ -115,6 +115,8 @@
         self.resultsArray = [NSMutableArray array];
         [self.resultsArray addObjectsFromArray:[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"]];
         
+        [[Panhandler sharedInstance] recordEvent];
+        
     } else {
         
         [self.resultsArray addObjectsFromArray:[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"]];

@@ -29,6 +29,7 @@
 		8E8C683915D958A4004290A6 /* queryCellBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C683715D958A4004290A6 /* queryCellBackground@2x.png */; };
 		8E8C684715D99DCE004290A6 /* GeniusRollViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C684615D99DCE004290A6 /* GeniusRollViewController.xib */; };
 		8E8C684915D9A0A0004290A6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8C684815D9A0A0004290A6 /* QuartzCore.framework */; };
+		8EB3D2A815DB55DB00709586 /* Panhandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3D2A715DB55DB00709586 /* Panhandler.m */; };
 		8EDCE99815D4C3C000EFB1F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99715D4C3C000EFB1F2 /* UIKit.framework */; };
 		8EDCE99A15D4C3C000EFB1F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99915D4C3C000EFB1F2 /* Foundation.framework */; };
 		8EDCE99C15D4C3C000EFB1F2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99B15D4C3C000EFB1F2 /* CoreGraphics.framework */; };
@@ -79,6 +80,8 @@
 		8E8C683C15D95D0B004290A6 /* APIRoutes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = APIRoutes.h; path = ../APIRoutes.h; sourceTree = "<group>"; };
 		8E8C684615D99DCE004290A6 /* GeniusRollViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeniusRollViewController.xib; sourceTree = "<group>"; };
 		8E8C684815D9A0A0004290A6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8EB3D2A615DB55DB00709586 /* Panhandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Panhandler.h; sourceTree = "<group>"; };
+		8EB3D2A715DB55DB00709586 /* Panhandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Panhandler.m; sourceTree = "<group>"; };
 		8EDCE99315D4C3C000EFB1F2 /* Shelby Genius.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shelby Genius.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EDCE99715D4C3C000EFB1F2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8EDCE99915D4C3C000EFB1F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -170,6 +173,16 @@
 			);
 			name = Constants;
 			sourceTree = "<group>";
+		};
+		8EB3D2A515DB55DB00709586 /* Panhandler */ = {
+			isa = PBXGroup;
+			children = (
+				8EB3D2A615DB55DB00709586 /* Panhandler.h */,
+				8EB3D2A715DB55DB00709586 /* Panhandler.m */,
+			);
+			name = Panhandler;
+			path = "External Libraries/Panhandler";
+			sourceTree = SOURCE_ROOT;
 		};
 		8EDCE98815D4C3C000EFB1F2 = {
 			isa = PBXGroup;
@@ -286,6 +299,7 @@
 			children = (
 				8E2E974315D56A2700178DA0 /* MBProgressHUD */,
 				8E2A242F15D4F0FA00D09A8B /* Asynchronous Freeloader */,
+				8EB3D2A515DB55DB00709586 /* Panhandler */,
 			);
 			name = "External Libraries";
 			sourceTree = "<group>";
@@ -412,6 +426,7 @@
 				8E2E974615D56A2700178DA0 /* MBProgressHUD.m in Sources */,
 				8E8C682A15D94CE6004290A6 /* GeniusRollViewController.m in Sources */,
 				8E8C683315D9572A004290A6 /* QueryCell.m in Sources */,
+				8EB3D2A815DB55DB00709586 /* Panhandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

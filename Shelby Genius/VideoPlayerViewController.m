@@ -183,6 +183,8 @@
         [self.moviePlayer prepareToPlay];
         [self.appDelegate.window addSubview:self.moviePlayer.view];
         [self.moviePlayer play];
+        
+        [[Panhandler sharedInstance] recordEvent];
 
     }
 }
