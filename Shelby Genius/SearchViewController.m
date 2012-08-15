@@ -76,6 +76,7 @@
 
 - (void)createTransparentTouchableViews
 {
+    
     self.transparentTouchableView = [[UIView alloc] initWithFrame:self.tableView.frame];
     self.transparentTouchableView.backgroundColor = [UIColor clearColor];
     self.transparentTouchableView.userInteractionEnabled = YES;
@@ -92,7 +93,6 @@
     navigationTapGesture.numberOfTapsRequired = 1;
     [self.transparentTouchableNavigationView addGestureRecognizer:navigationTapGesture];
     [self.navigationController.navigationBar addSubview:self.transparentTouchableNavigationView];
-    
     
 }
 
@@ -115,10 +115,9 @@
 - (void)modifyPreviousQueriesArray
 {
     
-    // Remove whitespace if it exists in strings final position
-    NSString *whiteSpaceChecker = [self.searchBar.text substringFromIndex:[self.searchBar.text length] - 1];
-    if ( [whiteSpaceChecker isEqualToString:@" "] ) self.searchBar.text = [self.searchBar.text substringToIndex:[self.searchBar.text length]-1];
-    
+    // Remove leading and trailing whitespaces (words separated by multiple white-spaces in between words, not affected.
+    self.searchBar.text = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
     // Convert to current and previous strings to lowerCase for comparison
     NSString *lowerCaseQuery = [self.searchBar.text lowercaseString];
     NSMutableArray *lowerCaseArray = [self.previousQueriesArray copy];
