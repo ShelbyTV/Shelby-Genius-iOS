@@ -30,6 +30,8 @@
 		8E8C684715D99DCE004290A6 /* GeniusRollViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C684615D99DCE004290A6 /* GeniusRollViewController.xib */; };
 		8E8C684915D9A0A0004290A6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8C684815D9A0A0004290A6 /* QuartzCore.framework */; };
 		8EB3D2A815DB55DB00709586 /* Panhandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3D2A715DB55DB00709586 /* Panhandler.m */; };
+		8ED93B0915DC1B3900339BF1 /* LoadingVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED93B0815DC1B3900339BF1 /* LoadingVideoView.m */; };
+		8ED93B0C15DC1B4700339BF1 /* LoadingVideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED93B0B15DC1B4700339BF1 /* LoadingVideoView.xib */; };
 		8EDCE99815D4C3C000EFB1F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99715D4C3C000EFB1F2 /* UIKit.framework */; };
 		8EDCE99A15D4C3C000EFB1F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99915D4C3C000EFB1F2 /* Foundation.framework */; };
 		8EDCE99C15D4C3C000EFB1F2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99B15D4C3C000EFB1F2 /* CoreGraphics.framework */; };
@@ -85,6 +87,9 @@
 		8E8C684815D9A0A0004290A6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8EB3D2A615DB55DB00709586 /* Panhandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Panhandler.h; sourceTree = "<group>"; };
 		8EB3D2A715DB55DB00709586 /* Panhandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Panhandler.m; sourceTree = "<group>"; };
+		8ED93B0715DC1B3900339BF1 /* LoadingVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingVideoView.h; sourceTree = "<group>"; };
+		8ED93B0815DC1B3900339BF1 /* LoadingVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingVideoView.m; sourceTree = "<group>"; };
+		8ED93B0B15DC1B4700339BF1 /* LoadingVideoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingVideoView.xib; sourceTree = "<group>"; };
 		8EDCE99315D4C3C000EFB1F2 /* Shelby Genius.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shelby Genius.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EDCE99715D4C3C000EFB1F2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8EDCE99915D4C3C000EFB1F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -270,6 +275,8 @@
 			isa = PBXGroup;
 			children = (
 				8EDCE9CD15D4EF1D00EFB1F2 /* Xibs */,
+				8ED93B0715DC1B3900339BF1 /* LoadingVideoView.h */,
+				8ED93B0815DC1B3900339BF1 /* LoadingVideoView.m */,
 				8E8C683115D9572A004290A6 /* QueryCell.h */,
 				8E8C683215D9572A004290A6 /* QueryCell.m */,
 				8EDCE9C715D4EEEE00EFB1F2 /* VideoCardCell.h */,
@@ -282,8 +289,9 @@
 			isa = PBXGroup;
 			children = (
 				8E8C684615D99DCE004290A6 /* GeniusRollViewController.xib */,
-				8EDCE9AC15D4C3C000EFB1F2 /* SearchViewController_iPhone.xib */,
+				8ED93B0B15DC1B4700339BF1 /* LoadingVideoView.xib */,
 				8E8C683415D95778004290A6 /* QueryCell.xib */,
+				8EDCE9AC15D4C3C000EFB1F2 /* SearchViewController_iPhone.xib */,
 				8EDCE9CF15D4EF4400EFB1F2 /* VideoCardCell.xib */,
 			);
 			name = Xibs;
@@ -419,6 +427,7 @@
 				8E8C684715D99DCE004290A6 /* GeniusRollViewController.xib in Resources */,
 				8EF8211615DB60C100F18572 /* tableViewBorder.png in Resources */,
 				8EF8211715DB60C100F18572 /* tableViewBorder@2x.png in Resources */,
+				8ED93B0C15DC1B4700339BF1 /* LoadingVideoView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +465,7 @@
 				8E8C682A15D94CE6004290A6 /* GeniusRollViewController.m in Sources */,
 				8E8C683315D9572A004290A6 /* QueryCell.m in Sources */,
 				8EB3D2A815DB55DB00709586 /* Panhandler.m in Sources */,
+				8ED93B0915DC1B3900339BF1 /* LoadingVideoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

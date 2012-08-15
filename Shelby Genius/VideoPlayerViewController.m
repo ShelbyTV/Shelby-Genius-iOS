@@ -7,22 +7,33 @@
 //
 
 #import "VideoPlayerViewController.h"
-#import "AppDelegate.h"
+
+// Frameworks
 #import <MediaPlayer/MediaPlayer.h>
+
+// External Libraries
+#import "AsynchronousFreeloader.h"
+
+// Models
+#import "AppDelegate.h"
+
+// Views
+#import "LoadingVideoView.h"
 
 @interface VideoPlayerViewController ()
 
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) NSArray *video;
 @property (assign, nonatomic) VideoProvider provider;
-//@property (strong, nonatomic) MPMoviePlayerController *moviePlayer;
 @property (strong, nonatomic) MPMoviePlayerViewController *moviePlayer;
+@property (strong, nonatomic) LoadingVideoView *loadingVideoView;
 @property (strong, nonatomic) UIActivityIndicatorView *indicator;
 @property (strong, nonatomic) UIWebView *webView;
 @property (assign, nonatomic) BOOL videoWillBegin;
 
-- (UIWebView*)createWebView;
+- (LoadingVideoView*)createLoadingVideoView;
 - (UIActivityIndicatorView*)createActivityIndicator;
+- (UIWebView*)createWebView;
 - (void)loadYouTubePage;
 - (void)loadVimeoPage;
 - (void)loadDailyMotionPage;
@@ -37,6 +48,7 @@
 @synthesize video = _video;
 @synthesize provider = _provider;
 @synthesize moviePlayer = _moviePlayer;
+@synthesize loadingVideoView = _loadingVideoView;
 @synthesize indicator = _indicator;
 @synthesize webView = _webView;
 @synthesize videoWillBegin = _videoWillBegin;
@@ -49,8 +61,9 @@
         
         self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         self.video = video;
-        self.title = [video valueForKey:@"title"];
         self.videoWillBegin = NO;
+        
+        self.loadingVideoView = [self createLoadingVideoView];
         self.indicator = [self createActivityIndicator];
         self.webView = [self createWebView];
         
@@ -85,6 +98,32 @@
 }
 
 #pragma mark - View and Subview Creation Methods
+- (LoadingVideoView*)createLoadingVideoView
+{
+
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed: @"LoadingVideoView" owner:self options:NULL];
+    LoadingVideoView *view = [nib objectAtIndex:0];
+    view.frame = CGRectMake(0.0f, 60.0f, 320.0f, 200.0f);
+    view.videoTitleLabel.text = [NSString stringWithFormat:@"Loading\n%@", [self.video valueForKey:@"title"]];
+    [AsynchronousFreeloader loadImageFromLink:[self.video valueForKey:@"thumbnail_url"] forImageView:view.thumbnailImageView  withPlaceholderView:nil];
+    [self.view addSubview:view];
+    
+    return view;
+}
+
+- (UIActivityIndicatorView *)createActivityIndicator
+{
+    CGRect frame = CGRectMake(0.0f, 280.0f, 320.0f, 200.0f);
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithFrame:frame];
+    indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    indicator.center = CGPointMake(indicator.frame.size.width/2.0f,320.0f);
+    [self.view addSubview:indicator];
+    [indicator startAnimating];
+    
+    
+    return indicator;
+}
+
 - (UIWebView*)createWebView
 {
     
@@ -98,17 +137,6 @@
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
     
     return webView;
-}
-
-- (UIActivityIndicatorView *)createActivityIndicator
-{
-    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithFrame:self.view.frame];
-    indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-    indicator.center = CGPointMake(self.appDelegate.window.frame.size.width/2.0f, self.appDelegate.window.frame.size.height/2.0f);
-    [self.view addSubview:indicator];
-    [indicator startAnimating];
-    
-    return indicator;
 }
 
 - (void)destroy
@@ -172,21 +200,12 @@
                                                      name:MPMoviePlayerPlaybackDidFinishNotification
                                                    object:nil];
         
-        
         [self.indicator stopAnimating];
         [self.indicator removeFromSuperview];
-
-        self.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:link]];
-//        self.moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL URLWithString:link]];
-        [self.moviePlayer.view setFrame:self.appDelegate.window.frame];
-//        [self.moviePlayer setFullscreen:YES animated:NO];
-//        [self.moviePlayer setFullscreen:YES];
-//        [self.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
-//        [self.moviePlayer setShouldAutoplay:YES];
-//        [self.moviePlayer prepareToPlay];
-//        [self.appDelegate.window addSubview:self.moviePlayer.view];
-//        [self.moviePlayer play];
+        [self.loadingVideoView removeFromSuperview];
         
+        self.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:link]];
+        [self.moviePlayer.view setFrame:self.appDelegate.window.frame];
         [self.navigationController pushViewController:self.moviePlayer animated:NO];
         [self.moviePlayer.navigationController setNavigationBarHidden:YES];
         
