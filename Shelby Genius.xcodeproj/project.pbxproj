@@ -49,6 +49,8 @@
 		8EDDFB3415D88B1A00BCD710 /* navigationBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2915D88B1A00BCD710 /* navigationBar.png */; };
 		8EDDFB3515D88B1A00BCD710 /* navigationBarar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2A15D88B1A00BCD710 /* navigationBarar@2x.png */; };
 		8EF8211315DB5D3F00F18572 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF8211215DB5D3F00F18572 /* Crashlytics.framework */; };
+		8EF8211615DB60C100F18572 /* tableViewBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EF8211415DB60C100F18572 /* tableViewBorder.png */; };
+		8EF8211715DB60C100F18572 /* tableViewBorder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EF8211515DB60C100F18572 /* tableViewBorder@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +112,8 @@
 		8EDDFB2915D88B1A00BCD710 /* navigationBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationBar.png; sourceTree = "<group>"; };
 		8EDDFB2A15D88B1A00BCD710 /* navigationBarar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationBarar@2x.png"; sourceTree = "<group>"; };
 		8EF8211215DB5D3F00F18572 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		8EF8211415DB60C100F18572 /* tableViewBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tableViewBorder.png; sourceTree = "<group>"; };
+		8EF8211515DB60C100F18572 /* tableViewBorder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tableViewBorder@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,6 +326,8 @@
 		8EDDFB2615D88B1A00BCD710 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8EF8211415DB60C100F18572 /* tableViewBorder.png */,
+				8EF8211515DB60C100F18572 /* tableViewBorder@2x.png */,
 				8E8C683615D958A4004290A6 /* queryCellBackground.png */,
 				8E8C683715D958A4004290A6 /* queryCellBackground@2x.png */,
 				8EDDFB2715D88B1A00BCD710 /* navigationLogo.png */,
@@ -411,6 +417,8 @@
 				8E8C683815D958A4004290A6 /* queryCellBackground.png in Resources */,
 				8E8C683915D958A4004290A6 /* queryCellBackground@2x.png in Resources */,
 				8E8C684715D99DCE004290A6 /* GeniusRollViewController.xib in Resources */,
+				8EF8211615DB60C100F18572 /* tableViewBorder.png in Resources */,
+				8EF8211715DB60C100F18572 /* tableViewBorder@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

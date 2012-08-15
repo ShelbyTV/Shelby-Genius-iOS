@@ -84,7 +84,6 @@
 {
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableSectionHeaderBackground"]];
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableSectionHeaderBackground"]];
-    self.tableView.separatorColor = [UIColor blackColor];
 }
 
 - (void)initalizeObservers
@@ -188,22 +187,22 @@
                                                 tableView.bounds.size.width,
                                                 tableView.sectionHeaderHeight);
     
-    // Create view for UITableView Section Header
+    // Create view for UITableView section header
     UIView *view = [[UIView alloc] initWithFrame:tableSectionHeaderFrame];
     
     // Background (issue with RGB-UIColor)
     UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tableSectionHeaderBackground"]];
     [view addSubview:backgroundView];
     
-    // 1px border on the bottom of the cell
-    UIView *strokeView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,
-                                                                  -1.0f + tableView.sectionFooterHeight,
-                                                                  tableView.bounds.size.width,
-                                                                  1.0f)];
-    strokeView.backgroundColor = [UIColor blackColor];
-    [view addSubview:strokeView];
+    // 1px border on the bottom of the section header
+    UIImageView *borderView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f,
+                                                                            -1.0f + tableView.sectionFooterHeight,
+                                                                            tableView.bounds.size.width,
+                                                                            1.0f)];
+    borderView.image = [UIImage imageNamed:@"tableViewBorder"];
+    [view addSubview:borderView];
     
-    // Section Header Label
+    // Section header label
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.0f + tableSectionHeaderFrame.origin.x,
                                                                2.0f + tableSectionHeaderFrame.origin.y,
                                                                -10.0f + tableSectionHeaderFrame.size.width,
