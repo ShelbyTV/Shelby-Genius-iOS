@@ -163,9 +163,11 @@
 {
     // Resign Keyboard if any view element is touched that isn't currently a firstResponder UISearchBar object
     if ( [self.searchBar isFirstResponder] ) [self.searchBar resignFirstResponder];
-
+    
+    [UIView animateWithDuration:1.5f animations:^{ self.tableView.alpha = 1.0f; }];
     [self.transparentTouchableView removeFromSuperview];
     [self.transparentTouchableNavigationView removeFromSuperview];
+
 }
 
 - (void)createGeniusRoll
@@ -178,6 +180,7 @@
 #pragma mark - UISearchBarDelegate Methods
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
+    [UIView animateWithDuration:0.5f animations:^{ self.tableView.alpha = 0.25f; }];
     [self createTransparentTouchableViews];
 }
 
