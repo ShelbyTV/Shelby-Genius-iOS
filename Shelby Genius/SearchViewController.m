@@ -94,6 +94,9 @@
     [self.transparentTouchableNavigationView addGestureRecognizer:navigationTapGesture];
     [self.navigationController.navigationBar addSubview:self.transparentTouchableNavigationView];
     
+    // Removes any/all 'delete' buttons on tableViewCell while transparent views are visible
+    [self.tableView reloadData];
+    
 }
 
 - (void)initializePreviousQueriesArray
