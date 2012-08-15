@@ -115,15 +115,15 @@
 - (void)modifyPreviousQueriesArray
 {
     
-    // Remove leading and trailing whitespaces (words separated by multiple white-spaces in between words, not affected.
+    // Remove leading and trailing whitespaces (queries separated by multiple white-spaces in between words are not affected).
     self.searchBar.text = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 
     // Convert to current and previous strings to lowerCase for comparison
     NSString *lowerCaseQuery = [self.searchBar.text lowercaseString];
-    NSMutableArray *lowerCaseArray = [self.previousQueriesArray copy];
-    for ( NSString *previousQuery in [[lowerCaseArray objectEnumerator] allObjects] ) [previousQuery lowercaseString];
-        
-    if ( [lowerCaseArray count] ) {
+    NSMutableArray *lowerCaseArray = [self.previousQueriesArray mutableCopy];
+    for ( NSString *previousQuery in self.previousQueriesArray ) [lowerCaseArray addObject:[previousQuery lowercaseString]];
+
+    if ( [lowerCaseArray count] ) { // If this IS NOT the first search query
         
         if ( ![lowerCaseArray containsObject:lowerCaseQuery] ) {
                 
@@ -141,11 +141,10 @@
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
                 [self.tableView reloadData];
-                
             
         }
         
-    } else {
+    } else { // If this IS the first search query
 
         [self.previousQueriesArray addObject:self.searchBar.text];
         [[NSUserDefaults standardUserDefaults] setObject:self.previousQueriesArray forKey:kPreviousQueries];
