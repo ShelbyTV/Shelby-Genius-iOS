@@ -21,8 +21,6 @@
 		8E89F5CF15D4FEC4004B2DFF /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E89F5C715D4FEC4004B2DFF /* Icon.png */; };
 		8E89F5D015D4FEC4004B2DFF /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E89F5C815D4FEC4004B2DFF /* Icon@2x.png */; };
 		8E8C682A15D94CE6004290A6 /* GeniusRollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C682815D94CE5004290A6 /* GeniusRollViewController.m */; };
-		8E8C682F15D9568B004290A6 /* tableSectionHeaderBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C682D15D9568B004290A6 /* tableSectionHeaderBackground.png */; };
-		8E8C683015D9568B004290A6 /* tableSectionHeaderBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C682E15D9568B004290A6 /* tableSectionHeaderBackground@2x.png */; };
 		8E8C683315D9572A004290A6 /* QueryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C683215D9572A004290A6 /* QueryCell.m */; };
 		8E8C683515D95778004290A6 /* QueryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C683415D95778004290A6 /* QueryCell.xib */; };
 		8E8C683815D958A4004290A6 /* queryCellBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C683615D958A4004290A6 /* queryCellBackground.png */; };
@@ -51,8 +49,6 @@
 		8EDDFB3415D88B1A00BCD710 /* navigationBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2915D88B1A00BCD710 /* navigationBar.png */; };
 		8EDDFB3515D88B1A00BCD710 /* navigationBarar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2A15D88B1A00BCD710 /* navigationBarar@2x.png */; };
 		8EF8211315DB5D3F00F18572 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF8211215DB5D3F00F18572 /* Crashlytics.framework */; };
-		8EF8211615DB60C100F18572 /* tableViewBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EF8211415DB60C100F18572 /* tableViewBorder.png */; };
-		8EF8211715DB60C100F18572 /* tableViewBorder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EF8211515DB60C100F18572 /* tableViewBorder@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,8 +70,6 @@
 		8E89F5C815D4FEC4004B2DFF /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = SOURCE_ROOT; };
 		8E8C682715D94CE5004290A6 /* GeniusRollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeniusRollViewController.h; sourceTree = "<group>"; };
 		8E8C682815D94CE5004290A6 /* GeniusRollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeniusRollViewController.m; sourceTree = "<group>"; };
-		8E8C682D15D9568B004290A6 /* tableSectionHeaderBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tableSectionHeaderBackground.png; sourceTree = "<group>"; };
-		8E8C682E15D9568B004290A6 /* tableSectionHeaderBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tableSectionHeaderBackground@2x.png"; sourceTree = "<group>"; };
 		8E8C683115D9572A004290A6 /* QueryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryCell.h; sourceTree = "<group>"; };
 		8E8C683215D9572A004290A6 /* QueryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryCell.m; sourceTree = "<group>"; };
 		8E8C683415D95778004290A6 /* QueryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QueryCell.xib; sourceTree = "<group>"; };
@@ -117,8 +111,6 @@
 		8EDDFB2915D88B1A00BCD710 /* navigationBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationBar.png; sourceTree = "<group>"; };
 		8EDDFB2A15D88B1A00BCD710 /* navigationBarar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationBarar@2x.png"; sourceTree = "<group>"; };
 		8EF8211215DB5D3F00F18572 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		8EF8211415DB60C100F18572 /* tableViewBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tableViewBorder.png; sourceTree = "<group>"; };
-		8EF8211515DB60C100F18572 /* tableViewBorder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tableViewBorder@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,16 +326,12 @@
 		8EDDFB2615D88B1A00BCD710 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				8EF8211415DB60C100F18572 /* tableViewBorder.png */,
-				8EF8211515DB60C100F18572 /* tableViewBorder@2x.png */,
 				8E8C683615D958A4004290A6 /* queryCellBackground.png */,
 				8E8C683715D958A4004290A6 /* queryCellBackground@2x.png */,
 				8EDDFB2715D88B1A00BCD710 /* navigationLogo.png */,
 				8EDDFB2815D88B1A00BCD710 /* navigationLogo@2x.png */,
 				8EDDFB2915D88B1A00BCD710 /* navigationBar.png */,
 				8EDDFB2A15D88B1A00BCD710 /* navigationBarar@2x.png */,
-				8E8C682D15D9568B004290A6 /* tableSectionHeaderBackground.png */,
-				8E8C682E15D9568B004290A6 /* tableSectionHeaderBackground@2x.png */,
 			);
 			name = Images;
 			path = Resources/Images;
@@ -419,14 +407,10 @@
 				8EDDFB3315D88B1A00BCD710 /* navigationLogo@2x.png in Resources */,
 				8EDDFB3415D88B1A00BCD710 /* navigationBar.png in Resources */,
 				8EDDFB3515D88B1A00BCD710 /* navigationBarar@2x.png in Resources */,
-				8E8C682F15D9568B004290A6 /* tableSectionHeaderBackground.png in Resources */,
-				8E8C683015D9568B004290A6 /* tableSectionHeaderBackground@2x.png in Resources */,
 				8E8C683515D95778004290A6 /* QueryCell.xib in Resources */,
 				8E8C683815D958A4004290A6 /* queryCellBackground.png in Resources */,
 				8E8C683915D958A4004290A6 /* queryCellBackground@2x.png in Resources */,
 				8E8C684715D99DCE004290A6 /* GeniusRollViewController.xib in Resources */,
-				8EF8211615DB60C100F18572 /* tableViewBorder.png in Resources */,
-				8EF8211715DB60C100F18572 /* tableViewBorder@2x.png in Resources */,
 				8ED93B0C15DC1B4700339BF1 /* LoadingVideoView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -66,10 +66,10 @@
 - (void)customize
 {
     // Root View
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"queryCellBackground"]];
+    self.view.backgroundColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
     
     // Table View
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableSectionHeaderBackground"]];
+    self.tableView.backgroundColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
     self.tableView.scrollEnabled = NO;
     
 }
@@ -253,12 +253,12 @@
 #pragma mark - UITableViewDelegate Methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44.0f;
+    return 43.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return ([self.previousQueriesArray count]) ? 22.0f : 0.0f;
+    return ([self.previousQueriesArray count]) ? 27.0f : 0.0f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -271,30 +271,27 @@
     
     // Create view for UITableView section header
     UIView *view = [[UIView alloc] initWithFrame:tableSectionHeaderFrame];
+    view.backgroundColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
     
-    // Background (issue with RGB-UIColor)
-    UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tableSectionHeaderBackground"]];
-    [view addSubview:backgroundView];
-    
-    // 1px border on the bottom of the section header
-    UIImageView *borderView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f,
-                                                                            -1.0f + tableView.sectionFooterHeight,
-                                                                            tableView.bounds.size.width,
-                                                                            1.0f)];
-    borderView.image = [UIImage imageNamed:@"tableViewBorder"];
+    // Border on the bottom of the section header
+    UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,
+                                                                  3.0f+tableView.sectionHeaderHeight,
+                                                                  tableView.bounds.size.width,
+                                                                  1.0f)];
+    borderView.backgroundColor = [UIColor colorWithRed:173.0f/255.0f green:173.0f/255.0f blue:173.0f/255.0f alpha:1.0f];
     [view addSubview:borderView];
     
     
     // Section header label
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.0f + tableSectionHeaderFrame.origin.x,
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20.0f + tableSectionHeaderFrame.origin.x,
                                                                2.0f + tableSectionHeaderFrame.origin.y,
-                                                               -10.0f + tableSectionHeaderFrame.size.width,
+                                                               -20.0f + tableSectionHeaderFrame.size.width,
                                                                -2.0f + tableSectionHeaderFrame.size.height)];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"Ubuntu-Bold" size:13];
+    label.font = [UIFont fontWithName:@"Ubuntu-Medium" size:14];
     label.text = @"Previous Genius Searches";
     label.textAlignment = UITextAlignmentLeft;
-    label.textColor = [UIColor blackColor];
+    label.textColor = [UIColor colorWithRed:68.0f/255.0f green:68.0f/255.0f  blue:68.0f/255.0f  alpha:1.0f];
     [view addSubview:label];
     
     return view;

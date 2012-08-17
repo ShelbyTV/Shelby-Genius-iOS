@@ -100,8 +100,8 @@
 #pragma mark - Private Methods
 - (void)customize
 {
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableSectionHeaderBackground"]];
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableSectionHeaderBackground"]];
+    self.view.backgroundColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
+    self.tableView.backgroundColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
 }
 
 - (void)initalizeObservers
@@ -208,17 +208,14 @@
     
     // Create view for UITableView section header
     UIView *view = [[UIView alloc] initWithFrame:tableSectionHeaderFrame];
+    view.backgroundColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
     
-    // Background (issue with RGB-UIColor)
-    UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tableSectionHeaderBackground"]];
-    [view addSubview:backgroundView];
-    
-    // 1px border on the bottom of the section header
-    UIImageView *borderView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f,
-                                                                            -1.0f + tableView.sectionFooterHeight,
-                                                                            tableView.bounds.size.width,
-                                                                            1.0f)];
-    borderView.image = [UIImage imageNamed:@"tableViewBorder"];
+    // Border on the bottom of the section header
+    UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,
+                                                                  3.0f+tableView.sectionHeaderHeight,
+                                                                  tableView.bounds.size.width,
+                                                                  1.0f)];
+    borderView.backgroundColor = [UIColor colorWithRed:173.0f/255.0f green:173.0f/255.0f blue:173.0f/255.0f alpha:1.0f];
     [view addSubview:borderView];
     
     // Section header label

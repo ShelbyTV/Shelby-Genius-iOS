@@ -19,7 +19,9 @@
 - (void)awakeFromNib
 {
     [self setSelectionStyle:UITableViewCellEditingStyleNone];
-    self.label.font = [UIFont fontWithName:@"Ubuntu" size:self.label.font.pointSize];
+    [self setBackgroundColor:[UIColor colorWithRed:226.0f/255.0f green:226.0f/255.0f blue:226.0f/255.0f alpha:1.0f]];
+    [self.label setFont:[UIFont fontWithName:@"Ubuntu-Bold" size:self.label.font.pointSize]];
+    [self.label setTextColor:[UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:1.0f]];
 }
 
 @end
