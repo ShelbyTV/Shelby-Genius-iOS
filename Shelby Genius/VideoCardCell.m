@@ -28,9 +28,9 @@
  
     self.videoTitleLabel.font = [UIFont fontWithName:@"Ubuntu-Bold" size:self.videoTitleLabel.font.pointSize];
     
-    self.thumbnailImageView.layer.masksToBounds = YES;
-    self.thumbnailImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.thumbnailImageView.layer.borderWidth = 1;
+//    self.thumbnailImageView.layer.masksToBounds = YES;
+//    self.thumbnailImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//    self.thumbnailImageView.layer.borderWidth = 1;
 }
 
 @end

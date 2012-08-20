@@ -65,12 +65,15 @@
 #pragma mark - Private Methods
 - (void)customize
 {
-    // Root View
+    // view
     self.view.backgroundColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
     
-    // Table View
+    // tableView
     self.tableView.backgroundColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
     self.tableView.scrollEnabled = NO;
+    
+    // searchBar
+    [(UITextField*)[self.searchBar.subviews objectAtIndex:1] setFont:[UIFont fontWithName:@"Ubuntu" size:12]];
     
 }
 
@@ -275,7 +278,7 @@
     
     // Border on the bottom of the section header
     UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,
-                                                                  3.0f+tableView.sectionHeaderHeight,
+                                                                  4.0f+tableView.sectionHeaderHeight,
                                                                   tableView.bounds.size.width,
                                                                   1.0f)];
     borderView.backgroundColor = [UIColor colorWithRed:173.0f/255.0f green:173.0f/255.0f blue:173.0f/255.0f alpha:1.0f];
@@ -284,7 +287,7 @@
     
     // Section header label
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20.0f + tableSectionHeaderFrame.origin.x,
-                                                               2.0f + tableSectionHeaderFrame.origin.y,
+                                                               5.0f + tableSectionHeaderFrame.origin.y,
                                                                -20.0f + tableSectionHeaderFrame.size.width,
                                                                -2.0f + tableSectionHeaderFrame.size.height)];
     label.backgroundColor = [UIColor clearColor];

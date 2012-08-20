@@ -49,7 +49,6 @@
 
         self.query = query;
         [self search];
-        self.title = query;
         
     }
     
@@ -100,6 +99,7 @@
 #pragma mark - Private Methods
 - (void)customize
 {
+    self.title = @"Genius Results";
     self.view.backgroundColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
     self.tableView.backgroundColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
 }
@@ -166,8 +166,8 @@
         if ( nil == cell ) cell = (VideoCardCell*)[nib objectAtIndex:0];
         
         NSString *thumbnailURL = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"thumbnail_url"];
-        NSString *videoTitle = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"title"];
-        NSString *providerName = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"provider_name"];
+        NSString *videoTitle = [[[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"title"] capitalizedString];
+        NSString *providerName = [[[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"provider_name"] capitalizedString];
 
         
         if (thumbnailURL != (id)[NSNull null]) [AsynchronousFreeloader loadImageFromLink:thumbnailURL forImageView:cell.thumbnailImageView withPlaceholderView:nil];
@@ -195,7 +195,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return ([self.resultsArray count]) ? 94.0f : 44.0f;
+    return ([self.resultsArray count]) ? 72.0f : 44.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return ([self.resultsArray count]) ? 27.0f : 0.0f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -212,7 +217,7 @@
     
     // Border on the bottom of the section header
     UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,
-                                                                  3.0f+tableView.sectionHeaderHeight,
+                                                                  4.0f+tableView.sectionHeaderHeight,
                                                                   tableView.bounds.size.width,
                                                                   1.0f)];
     borderView.backgroundColor = [UIColor colorWithRed:173.0f/255.0f green:173.0f/255.0f blue:173.0f/255.0f alpha:1.0f];
@@ -220,12 +225,12 @@
     
     // Section header label
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.0f + tableSectionHeaderFrame.origin.x,
-                                                               2.0f + tableSectionHeaderFrame.origin.y,
+                                                               4.0f + tableSectionHeaderFrame.origin.y,
                                                                -10.0f + tableSectionHeaderFrame.size.width,
                                                                -2.0f + tableSectionHeaderFrame.size.height)];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"Ubuntu-Bold" size:11];
-    label.text = [NSString stringWithFormat:@"Genius results for %@", self.query];
+    label.font = [UIFont fontWithName:@"Ubuntu-Medium" size:14];
+    label.text = [NSString stringWithFormat:@"\"%@\"", [self.query stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     label.text = [label.text stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
     label.textAlignment = UITextAlignmentLeft;
     label.textColor = [UIColor blackColor];
@@ -251,7 +256,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if ( ([self.resultsArray count] > kMinimumVideoCountBeforeFetch) && (indexPath.row == [self.resultsArray count]-2) && (NO == self.isFetchingMoreVideos) ) {
+    if ( ([self.resultsArray count] > kMinimumVideoCountBeforeFetch) && (indexPath.row == [self.resultsArray count]-3) && (NO == self.isFetchingMoreVideos) ) {
         
         NSString *rollID = [[NSUserDefaults standardUserDefaults] objectForKey:kRollID];
         NSString *requestString = [NSString stringWithFormat:kGetRollFramesAgain, rollID, [self.resultsArray count]];
