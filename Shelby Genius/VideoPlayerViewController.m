@@ -41,6 +41,10 @@
 - (void)playVideo:(NSString *)link;
 - (void)destroy;
 
+- (void)modifyVideoPlayerButtons;
+- (void)previousVideoButtonAction;
+- (void)nextVideoButtonAction;
+
 @end
 
 @implementation VideoPlayerViewController
@@ -92,12 +96,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     [self.view setBackgroundColor:[UIColor blackColor]];
-    
 }
 
-#pragma mark - View and Subview Creation Methods
+
+#pragma mark - View and Subview Creation/Destruction Methods
 - (LoadingVideoView*)createLoadingVideoView
 {
 
@@ -144,6 +147,28 @@
     [self.moviePlayer.navigationController setNavigationBarHidden:NO];
     [self.moviePlayer.navigationController popViewControllerAnimated:NO];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - Video Action Methods
+- (void)modifyVideoPlayerButtons
+{
+//    NSLog(@"%@", [[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews]);
+    
+    UIButton *previousVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:1];
+    [previousVideoButton addTarget:self action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *nextVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
+    [nextVideoButton addTarget:self action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)previousVideoButtonAction
+{
+    NSLog(@"PREVIOUS");
+}
+
+- (void)nextVideoButtonAction
+{
+    NSLog(@"NEXT");
 }
                       
 #pragma mark - Video Playback Methods
@@ -194,7 +219,7 @@
     if ( ![self videoWillBegin]) {
 
         self.videoWillBegin = YES;
-
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(destroy)
                                                      name:MPMoviePlayerPlaybackDidFinishNotification
@@ -208,6 +233,8 @@
         [self.moviePlayer.view setFrame:self.appDelegate.window.frame];
         [self.navigationController pushViewController:self.moviePlayer animated:NO];
         [self.moviePlayer.navigationController setNavigationBarHidden:YES];
+        
+        [self modifyVideoPlayerButtons];
         
         [[Panhandler sharedInstance] recordEvent];
 
