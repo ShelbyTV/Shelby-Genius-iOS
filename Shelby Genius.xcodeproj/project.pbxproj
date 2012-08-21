@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E1A7EB515E3EACF00FC7086 /* searchBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1A7EB115E3EACF00FC7086 /* searchBar.png */; };
+		8E1A7EB615E3EACF00FC7086 /* searchBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1A7EB215E3EACF00FC7086 /* searchBar@2x.png */; };
+		8E1A7EB715E3EACF00FC7086 /* searchButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1A7EB315E3EACF00FC7086 /* searchButton.png */; };
+		8E1A7EB815E3EACF00FC7086 /* searchButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1A7EB415E3EACF00FC7086 /* searchButton@2x.png */; };
+		8E1A7EBC15E405A500FC7086 /* tableViewBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1A7EBA15E405A500FC7086 /* tableViewBorder.png */; };
+		8E1A7EBD15E405A500FC7086 /* tableViewBorder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1A7EBB15E405A500FC7086 /* tableViewBorder@2x.png */; };
 		8E2A243215D4F0FA00D09A8B /* AsynchronousFreeloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2A243115D4F0FA00D09A8B /* AsynchronousFreeloader.m */; };
 		8E2A243715D4F4C400D09A8B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2A243615D4F4C400D09A8B /* MediaPlayer.framework */; };
 		8E2E974215D565F900178DA0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2E974115D565F900178DA0 /* AVFoundation.framework */; };
@@ -52,6 +58,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8E1A7EB115E3EACF00FC7086 /* searchBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchBar.png; sourceTree = "<group>"; };
+		8E1A7EB215E3EACF00FC7086 /* searchBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchBar@2x.png"; sourceTree = "<group>"; };
+		8E1A7EB315E3EACF00FC7086 /* searchButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchButton.png; sourceTree = "<group>"; };
+		8E1A7EB415E3EACF00FC7086 /* searchButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchButton@2x.png"; sourceTree = "<group>"; };
+		8E1A7EBA15E405A500FC7086 /* tableViewBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tableViewBorder.png; sourceTree = "<group>"; };
+		8E1A7EBB15E405A500FC7086 /* tableViewBorder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tableViewBorder@2x.png"; sourceTree = "<group>"; };
 		8E2A243015D4F0FA00D09A8B /* AsynchronousFreeloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsynchronousFreeloader.h; sourceTree = "<group>"; };
 		8E2A243115D4F0FA00D09A8B /* AsynchronousFreeloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsynchronousFreeloader.m; sourceTree = "<group>"; };
 		8E2A243615D4F4C400D09A8B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -326,6 +338,12 @@
 		8EDDFB2615D88B1A00BCD710 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8E1A7EBA15E405A500FC7086 /* tableViewBorder.png */,
+				8E1A7EBB15E405A500FC7086 /* tableViewBorder@2x.png */,
+				8E1A7EB115E3EACF00FC7086 /* searchBar.png */,
+				8E1A7EB215E3EACF00FC7086 /* searchBar@2x.png */,
+				8E1A7EB315E3EACF00FC7086 /* searchButton.png */,
+				8E1A7EB415E3EACF00FC7086 /* searchButton@2x.png */,
 				8E8C683615D958A4004290A6 /* queryCellBackground.png */,
 				8E8C683715D958A4004290A6 /* queryCellBackground@2x.png */,
 				8EDDFB2715D88B1A00BCD710 /* navigationLogo.png */,
@@ -412,6 +430,12 @@
 				8E8C683915D958A4004290A6 /* queryCellBackground@2x.png in Resources */,
 				8E8C684715D99DCE004290A6 /* GeniusRollViewController.xib in Resources */,
 				8ED93B0C15DC1B4700339BF1 /* LoadingVideoView.xib in Resources */,
+				8E1A7EB515E3EACF00FC7086 /* searchBar.png in Resources */,
+				8E1A7EB615E3EACF00FC7086 /* searchBar@2x.png in Resources */,
+				8E1A7EB715E3EACF00FC7086 /* searchButton.png in Resources */,
+				8E1A7EB815E3EACF00FC7086 /* searchButton@2x.png in Resources */,
+				8E1A7EBC15E405A500FC7086 /* tableViewBorder.png in Resources */,
+				8E1A7EBD15E405A500FC7086 /* tableViewBorder@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

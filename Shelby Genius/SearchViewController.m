@@ -37,6 +37,7 @@
 @implementation SearchViewController
 @synthesize tableView = _tableView;
 @synthesize searchBar = _searchBar;
+@synthesize searchButton = _searchButton;
 @synthesize previousQueriesArray = _previousQueriesArray;
 @synthesize transparentTouchableView = _transparentTouchableView;
 @synthesize transparentTouchableNavigationView = _transparentTouchableNavigationView;
@@ -46,6 +47,7 @@
 {
     self.tableView = nil;
     self.searchBar = nil;
+    self.searchButton = nil;
     [super viewDidUnload];
 }
 
@@ -56,10 +58,28 @@
     [self initializePreviousQueriesArray];
 }
 
+ - (void)viewDidAppear:(BOOL)animated
+{
+    // searchButton
+    [self.searchButton setEnabled:NO];
+}
+
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     [self removeTransparentViews];
+}
+
+#pragma mark - Public Methods
+- (void)searchButtonAction:(id)sender
+{
+    // Hide keyboard
+    if ( [self.searchBar isFirstResponder] ) {
+        [self.searchBar resignFirstResponder];
+    }
+    
+    [self modifyPreviousQueriesArray];
+    [self createGeniusRoll];
 }
 
 #pragma mark - Private Methods
@@ -74,7 +94,7 @@
     
     // searchBar
     [(UITextField*)[self.searchBar.subviews objectAtIndex:1] setFont:[UIFont fontWithName:@"Ubuntu" size:12]];
-    
+    self.searchBar.backgroundImage = [UIImage imageNamed:@"searchBar"];
 }
 
 - (void)createTransparentTouchableViews
@@ -184,6 +204,20 @@
 }
 
 #pragma mark - UISearchBarDelegate Methods
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    
+    if (searchBar.text.length>0) {
+        
+        [self.searchButton setEnabled:YES];
+        
+    } else {
+        
+        [self.searchButton setEnabled:NO];
+    }
+    
+}
+
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     [self createTransparentTouchableViews];

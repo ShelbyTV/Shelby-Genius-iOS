@@ -15,7 +15,10 @@ UITableViewDelegate,
 UISearchBarDelegate
 >
 
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIButton *searchButton;
+
+- (IBAction)searchButtonAction:(id)sender;
 
 @end

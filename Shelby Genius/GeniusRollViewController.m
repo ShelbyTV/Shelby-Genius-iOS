@@ -230,7 +230,7 @@
                                                                -2.0f + tableSectionHeaderFrame.size.height)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"Ubuntu-Medium" size:14];
-    label.text = [NSString stringWithFormat:@"\"%@\"", [self.query stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    label.text = [NSString stringWithFormat:@"“%@”", [self.query stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     label.text = [label.text stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
     label.textAlignment = UITextAlignmentLeft;
     label.textColor = [UIColor blackColor];
