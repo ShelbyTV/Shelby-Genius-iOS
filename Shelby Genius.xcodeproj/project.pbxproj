@@ -17,7 +17,7 @@
 		8E2A243715D4F4C400D09A8B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2A243615D4F4C400D09A8B /* MediaPlayer.framework */; };
 		8E2E974215D565F900178DA0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2E974115D565F900178DA0 /* AVFoundation.framework */; };
 		8E2E974615D56A2700178DA0 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E974515D56A2700178DA0 /* MBProgressHUD.m */; };
-		8E89F5C015D4F724004B2DFF /* VideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E89F5BF15D4F724004B2DFF /* VideoPlayerViewController.m */; };
+		8E89F5C015D4F724004B2DFF /* VideoPlayerContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E89F5BF15D4F724004B2DFF /* VideoPlayerContainerViewController.m */; };
 		8E89F5C915D4FEC4004B2DFF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E89F5C115D4FEC4004B2DFF /* Default.png */; };
 		8E89F5CA15D4FEC4004B2DFF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E89F5C215D4FEC4004B2DFF /* Default@2x.png */; };
 		8E89F5CB15D4FEC4004B2DFF /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E89F5C315D4FEC4004B2DFF /* Icon-72.png */; };
@@ -70,8 +70,8 @@
 		8E2E974115D565F900178DA0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8E2E974415D56A2700178DA0 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		8E2E974515D56A2700178DA0 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		8E89F5BE15D4F724004B2DFF /* VideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewController.h; sourceTree = "<group>"; };
-		8E89F5BF15D4F724004B2DFF /* VideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerViewController.m; sourceTree = "<group>"; };
+		8E89F5BE15D4F724004B2DFF /* VideoPlayerContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerContainerViewController.h; sourceTree = "<group>"; };
+		8E89F5BF15D4F724004B2DFF /* VideoPlayerContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerContainerViewController.m; sourceTree = "<group>"; };
 		8E89F5C115D4FEC4004B2DFF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
 		8E89F5C215D4FEC4004B2DFF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = SOURCE_ROOT; };
 		8E89F5C315D4FEC4004B2DFF /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = SOURCE_ROOT; };
@@ -308,8 +308,8 @@
 				8E8C682815D94CE5004290A6 /* GeniusRollViewController.m */,
 				8EDCE9A915D4C3C000EFB1F2 /* SearchViewController.h */,
 				8EDCE9AA15D4C3C000EFB1F2 /* SearchViewController.m */,
-				8E89F5BE15D4F724004B2DFF /* VideoPlayerViewController.h */,
-				8E89F5BF15D4F724004B2DFF /* VideoPlayerViewController.m */,
+				8E89F5BE15D4F724004B2DFF /* VideoPlayerContainerViewController.h */,
+				8E89F5BF15D4F724004B2DFF /* VideoPlayerContainerViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -468,7 +468,7 @@
 				8EDCE9B915D4C41A00EFB1F2 /* APIClient.m in Sources */,
 				8EDCE9C915D4EEEE00EFB1F2 /* VideoCardCell.m in Sources */,
 				8E2A243215D4F0FA00D09A8B /* AsynchronousFreeloader.m in Sources */,
-				8E89F5C015D4F724004B2DFF /* VideoPlayerViewController.m in Sources */,
+				8E89F5C015D4F724004B2DFF /* VideoPlayerContainerViewController.m in Sources */,
 				8E2E974615D56A2700178DA0 /* MBProgressHUD.m in Sources */,
 				8E8C682A15D94CE6004290A6 /* GeniusRollViewController.m in Sources */,
 				8E8C683315D9572A004290A6 /* QueryCell.m in Sources */,

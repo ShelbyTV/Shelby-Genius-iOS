@@ -1,12 +1,12 @@
 //
-//  VideoPlayerViewController.m
+//  VideoPlayerContainerViewController.m
 //  Shelby-tv
 //
 //  Created by Arthur Ariel Sabintsev on 7/26/12.
 //  Copyright (c) 2012 Shelby.tv. All rights reserved.
 //
 
-#import "VideoPlayerViewController.h"
+#import "VideoPlayerContainerViewController.h"
 
 // Frameworks
 #import <MediaPlayer/MediaPlayer.h>
@@ -20,7 +20,7 @@
 // Views
 #import "LoadingVideoView.h"
 
-@interface VideoPlayerViewController ()
+@interface VideoPlayerContainerViewController ()
 
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) NSArray *video;
@@ -30,8 +30,8 @@
 @property (strong, nonatomic) UIWebView *webView;
 @property (assign, nonatomic) BOOL videoWillBegin;
 
-- (LoadingVideoView*)createLoadingVideoView;
-- (UIWebView*)createWebView;
+- (void)createMoviePlayer;
+- (void)createWebView;
 - (void)loadYouTubePage;
 - (void)loadVimeoPage;
 - (void)loadDailyMotionPage;
@@ -44,7 +44,7 @@
 
 @end
 
-@implementation VideoPlayerViewController
+@implementation VideoPlayerContainerViewController
 @synthesize appDelegate = _appDelegate;
 @synthesize video = _video;
 @synthesize provider = _provider;
@@ -59,13 +59,16 @@
     
     if ( self = [super init]) {
         
+        // Setup
         self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         self.video = video;
         self.videoWillBegin = NO;
         
-        self.loadingVideoView = [self createLoadingVideoView];
-        self.webView = [self createWebView];
+        // Create views
+        [self createWebView];
         
+        
+        // Get direct link to video based on video provider
         if ( [[video valueForKey:@"provider_name" ] isEqualToString:@"vimeo"] ) {
             
             [self setProvider:VideoProvider_Vimeo];
@@ -92,40 +95,49 @@
 {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor blackColor]];
+    
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self createMoviePlayer];
+}
 
 #pragma mark - View and Subview Creation/Destruction Methods
-- (LoadingVideoView*)createLoadingVideoView
+- (void)createMoviePlayer
 {
-
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingVideoView" owner:self options:NULL];
-    LoadingVideoView *view = [nib objectAtIndex:0];
-    view.frame = CGRectMake(0.0f, 60.0f, 320.0f, 200.0f);
-    view.videoTitleLabel.text = [NSString stringWithFormat:@"%@", [self.video valueForKey:@"title"]];
-    [AsynchronousFreeloader loadImageFromLink:[self.video valueForKey:@"thumbnail_url"] forImageView:view.thumbnailImageView  withPlaceholderView:nil];
-    [self.view addSubview:view];
+    self.moviePlayer = [[MPMoviePlayerViewController alloc] init];
+    [self.moviePlayer.view setFrame:self.appDelegate.window.frame];
+    [self.navigationController pushViewController:self.moviePlayer animated:NO];
+    [self.moviePlayer.navigationController setNavigationBarHidden:YES];
+    [self.moviePlayer.view setAutoresizesSubviews:YES];
+    [self modifyVideoPlayerButtons];
     
-    return view;
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingVideoView" owner:self options:NULL];
+    self.loadingVideoView = [nib objectAtIndex:0];
+    self.loadingVideoView.videoTitleLabel.text = [NSString stringWithFormat:@"%@", [self.video valueForKey:@"title"]];
+    [AsynchronousFreeloader loadImageFromLink:[self.video valueForKey:@"thumbnail_url"] forImageView:self.loadingVideoView.thumbnailImageView withPlaceholderView:nil];
+    [self.moviePlayer.view addSubview:self.loadingVideoView];
+    
+    CGRect frame = self.moviePlayer.view.bounds;
+    [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
 }
 
-- (UIWebView*)createWebView
+- (void)createWebView
 {
-    
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(159.0f, 239.0f, 2.0f, 2.0f)];
-    webView.allowsInlineMediaPlayback = YES;
-    webView.mediaPlaybackRequiresUserAction = NO;
-    webView.mediaPlaybackAllowsAirPlay = NO;
-    webView.hidden = YES;
-    webView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-
+    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(159.0f, 239.0f, 2.0f, 2.0f)];
+    self.webView.allowsInlineMediaPlayback = YES;
+    self.webView.mediaPlaybackRequiresUserAction = NO;
+    self.webView.mediaPlaybackAllowsAirPlay = NO;
+    self.webView.hidden = YES;
+    self.webView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
-    
-    return webView;
 }
 
 - (void)destroy
 {
+    [self.moviePlayer.view setHidden:YES];
     [self.moviePlayer.navigationController setNavigationBarHidden:NO];
     [self.moviePlayer.navigationController popViewControllerAnimated:NO];
     [self.navigationController popViewControllerAnimated:YES];
@@ -207,13 +219,8 @@
                                                      name:MPMoviePlayerPlaybackDidFinishNotification
                                                    object:nil];
         
-        self.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:link]];
-        [self.moviePlayer.view setFrame:self.appDelegate.window.frame];
-        [self.navigationController pushViewController:self.moviePlayer animated:NO];
-        [self.moviePlayer.navigationController setNavigationBarHidden:YES];
-        [self modifyVideoPlayerButtons];
-        
         [self.loadingVideoView removeFromSuperview];
+        [self.moviePlayer.moviePlayer setContentURL:[NSURL URLWithString:link]];
         
         [[Panhandler sharedInstance] recordEvent];
 

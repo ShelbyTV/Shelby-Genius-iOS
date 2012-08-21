@@ -19,7 +19,7 @@
 
 // Controllers
 #import "APIClient.h"
-#import "VideoPlayerViewController.h"
+#import "VideoPlayerContainerViewController.h"
 
 @interface GeniusRollViewController ()
 
@@ -168,7 +168,6 @@
         NSString *thumbnailURL = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"thumbnail_url"];
         NSString *videoTitle = [[[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"title"] capitalizedString];
         NSString *providerName = [[[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"provider_name"] capitalizedString];
-
         
         if (thumbnailURL != (id)[NSNull null]) [AsynchronousFreeloader loadImageFromLink:thumbnailURL forImageView:cell.thumbnailImageView withPlaceholderView:nil];
         if (videoTitle != (id)[NSNull null]) cell.videoTitleLabel.text = videoTitle;
@@ -247,8 +246,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     VideoCardCell *cell = (VideoCardCell*)[self.tableView cellForRowAtIndexPath:indexPath];
-    VideoPlayerViewController *videoPlayerViewController = [[VideoPlayerViewController alloc] initWithVideo:cell.video];
-    [self.navigationController pushViewController:videoPlayerViewController animated:YES];
+    VideoPlayerContainerViewController *videoPlayerContainerViewController = [[VideoPlayerContainerViewController alloc] initWithVideo:cell.video];
+    [self.navigationController pushViewController:videoPlayerContainerViewController animated:YES];
     
     [self setIsPlayingVideo:YES];
 }

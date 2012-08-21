@@ -1,5 +1,5 @@
 //
-//  VideoPlayerViewController.h
+//  VideoPlayerContainerViewController.h
 //  Shelby-tv
 //
 //  Created by Arthur Ariel Sabintsev on 7/26/12.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VideoPlayerViewController : UIViewController
+@interface VideoPlayerContainerViewController : UIViewController
 
 - (id)initWithVideo:(NSArray*)video;
 
