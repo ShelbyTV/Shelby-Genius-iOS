@@ -27,12 +27,10 @@
 @property (assign, nonatomic) VideoProvider provider;
 @property (strong, nonatomic) MPMoviePlayerViewController *moviePlayer;
 @property (strong, nonatomic) LoadingVideoView *loadingVideoView;
-@property (strong, nonatomic) UIActivityIndicatorView *indicator;
 @property (strong, nonatomic) UIWebView *webView;
 @property (assign, nonatomic) BOOL videoWillBegin;
 
 - (LoadingVideoView*)createLoadingVideoView;
-- (UIActivityIndicatorView*)createActivityIndicator;
 - (UIWebView*)createWebView;
 - (void)loadYouTubePage;
 - (void)loadVimeoPage;
@@ -40,7 +38,6 @@
 - (void)processNotification:(NSNotification*)notification;
 - (void)playVideo:(NSString *)link;
 - (void)destroy;
-
 - (void)modifyVideoPlayerButtons;
 - (void)previousVideoButtonAction;
 - (void)nextVideoButtonAction;
@@ -53,7 +50,6 @@
 @synthesize provider = _provider;
 @synthesize moviePlayer = _moviePlayer;
 @synthesize loadingVideoView = _loadingVideoView;
-@synthesize indicator = _indicator;
 @synthesize webView = _webView;
 @synthesize videoWillBegin = _videoWillBegin;
 
@@ -68,7 +64,6 @@
         self.videoWillBegin = NO;
         
         self.loadingVideoView = [self createLoadingVideoView];
-        self.indicator = [self createActivityIndicator];
         self.webView = [self createWebView];
         
         if ( [[video valueForKey:@"provider_name" ] isEqualToString:@"vimeo"] ) {
@@ -104,27 +99,14 @@
 - (LoadingVideoView*)createLoadingVideoView
 {
 
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed: @"LoadingVideoView" owner:self options:NULL];
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingVideoView" owner:self options:NULL];
     LoadingVideoView *view = [nib objectAtIndex:0];
     view.frame = CGRectMake(0.0f, 60.0f, 320.0f, 200.0f);
-    view.videoTitleLabel.text = [NSString stringWithFormat:@"Loading\n%@", [self.video valueForKey:@"title"]];
+    view.videoTitleLabel.text = [NSString stringWithFormat:@"%@", [self.video valueForKey:@"title"]];
     [AsynchronousFreeloader loadImageFromLink:[self.video valueForKey:@"thumbnail_url"] forImageView:view.thumbnailImageView  withPlaceholderView:nil];
     [self.view addSubview:view];
     
     return view;
-}
-
-- (UIActivityIndicatorView *)createActivityIndicator
-{
-    CGRect frame = CGRectMake(0.0f, 280.0f, 320.0f, 200.0f);
-    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithFrame:frame];
-    indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-    indicator.center = CGPointMake(indicator.frame.size.width/2.0f,320.0f);
-    [self.view addSubview:indicator];
-    [indicator startAnimating];
-    
-    
-    return indicator;
 }
 
 - (UIWebView*)createWebView
@@ -149,7 +131,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - Video Action Methods
+#pragma mark - Video Button Action Methods
 - (void)modifyVideoPlayerButtons
 {
 //    NSLog(@"%@", [[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews]);
@@ -225,16 +207,13 @@
                                                      name:MPMoviePlayerPlaybackDidFinishNotification
                                                    object:nil];
         
-        [self.indicator stopAnimating];
-        [self.indicator removeFromSuperview];
-        [self.loadingVideoView removeFromSuperview];
-        
         self.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:link]];
         [self.moviePlayer.view setFrame:self.appDelegate.window.frame];
         [self.navigationController pushViewController:self.moviePlayer animated:NO];
         [self.moviePlayer.navigationController setNavigationBarHidden:YES];
-        
         [self modifyVideoPlayerButtons];
+        
+        [self.loadingVideoView removeFromSuperview];
         
         [[Panhandler sharedInstance] recordEvent];
 

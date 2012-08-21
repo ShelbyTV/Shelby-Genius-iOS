@@ -10,7 +10,8 @@
 
 @interface LoadingVideoView : UIView
 
-@property (strong, nonatomic) IBOutlet UIImageView *thumbnailImageView;
-@property (strong, nonatomic) IBOutlet UILabel *videoTitleLabel;
-
+@property (weak, nonatomic) IBOutlet UIImageView *thumbnailImageView;
+@property (weak, nonatomic) IBOutlet UILabel *videoTitleLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
+@property (weak, nonatomic) IBOutlet UILabel *loadingLabel;
 @end
