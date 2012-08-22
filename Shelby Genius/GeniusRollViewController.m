@@ -27,6 +27,7 @@
 @property (strong, nonatomic) NSString *query;
 @property (assign, nonatomic) BOOL isFetchingMoreVideos;
 @property (assign, nonatomic) BOOL isPlayingVideo;
+@property (assign, nonatomic) NSUInteger numberOfFetchedResults;
 
 - (void)customize;
 - (void)initalizeObservers;
@@ -41,6 +42,7 @@
 @synthesize query = _query;
 @synthesize isFetchingMoreVideos = _isFetchingMoreVideos;
 @synthesize isPlayingVideo = _isPlayingVideo;
+@synthesize numberOfFetchedResults = _numberOfFetchedResults;
 
 #pragma mark - Initialization
 - (id)initWithQuery:(NSString *)query
@@ -132,17 +134,33 @@
         
         self.resultsArray = [NSMutableArray array];
         [self.resultsArray addObjectsFromArray:[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"]];
+        self.numberOfFetchedResults = [self.resultsArray count];
         
         [[Panhandler sharedInstance] recordEvent];
         
     } else {
         
         [self.resultsArray addObjectsFromArray:[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"]];
+        self.numberOfFetchedResults += [[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"] count];
+        
+    }
+
+    // Check for videos with Null values, and remove them from the results
+    for (int i = 0; i < [self.resultsArray count]; i++ ) {
+        
+        NSString *thumbnailURL = [[[self.resultsArray objectAtIndex:i] valueForKey:@"video"] valueForKey:@"thumbnail_url"];
+        NSString *videoTitle = [[[self.resultsArray objectAtIndex:i] valueForKey:@"video"] valueForKey:@"title"];
+        NSString *providerName = [[[self.resultsArray objectAtIndex:i] valueForKey:@"video"] valueForKey:@"provider_name"];
+        
+        if ( thumbnailURL == (id)[NSNull null] || videoTitle == (id)[NSNull null] || providerName == (id)[NSNull null] ) {
+            
+            [self.resultsArray removeObjectAtIndex:i];
+            
+        }
         
     }
     
     [self setIsFetchingMoreVideos:NO];
-    
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     [appDelegate removeHUD];
     [self.tableView reloadData];
@@ -160,30 +178,20 @@
     
     if ( [self.resultsArray count] ) {
         
-        NSLog(@"%@", [self.resultsArray objectAtIndex:indexPath.row]);
-        
         tableView.alpha = 1.0f;
+        
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"VideoCardCell" owner:self options:nil];
         VideoCardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VideoCardCell"];
+        
         if ( nil == cell ) cell = (VideoCardCell*)[nib objectAtIndex:0];
-        
-        
+
         NSString *thumbnailURL = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"thumbnail_url"];
-        NSString *videoTitle = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"title"];
-        NSString *providerName = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"provider_name"];
-        
-        if (thumbnailURL != (id)[NSNull null]) [AsynchronousFreeloader loadImageFromLink:thumbnailURL forImageView:cell.thumbnailImageView withPlaceholderView:nil];
-      
-        if (videoTitle != (id)[NSNull null]) {
-            [videoTitle capitalizedString];
-            cell.videoTitleLabel.text = videoTitle;            
-        }
-        
-        if (videoTitle != (id)[NSNull null]) {
-            [providerName capitalizedString];
-            cell.videoProviderLabel.text = providerName;
-        }
-        
+        NSString *videoTitle = [[[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"title"] capitalizedString];
+        NSString *providerName = [[[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"provider_name"] capitalizedString];
+
+        [AsynchronousFreeloader loadImageFromLink:thumbnailURL forImageView:cell.thumbnailImageView withPlaceholderView:nil];
+        cell.videoTitleLabel.text = videoTitle;            
+        cell.videoProviderLabel.text = providerName;
         cell.video = [[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"];
         
         return cell;
@@ -267,10 +275,10 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if ( ([self.resultsArray count] > kMinimumVideoCountBeforeFetch) && (indexPath.row == [self.resultsArray count]-3) && (NO == self.isFetchingMoreVideos) ) {
+    if ( (self.numberOfFetchedResults > kMinimumVideoCountBeforeFetch) && (indexPath.row == [self.resultsArray count]-3) && (NO == self.isFetchingMoreVideos) ) {
         
         NSString *rollID = [[NSUserDefaults standardUserDefaults] objectForKey:kRollID];
-        NSString *requestString = [NSString stringWithFormat:kGetRollFramesAgain, rollID, [self.resultsArray count]];
+        NSString *requestString = [NSString stringWithFormat:kGetRollFramesAgain, rollID, self.numberOfFetchedResults];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
         APIClient *client = [[APIClient alloc] init];
         [client performRequest:request ofType:APIRequestType_GetRollFrames withQuery:self.query];
