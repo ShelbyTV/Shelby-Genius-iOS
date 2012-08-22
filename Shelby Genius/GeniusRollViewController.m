@@ -33,6 +33,7 @@
 - (void)initalizeObservers;
 - (void)search;
 - (void)makeResultsArray:(NSNotification *)notification;
+- (void)shareVideo:(NSArray*)video;
 
 @end
 
@@ -276,7 +277,7 @@
 {
     
     if ( (self.numberOfFetchedResults > kMinimumVideoCountBeforeFetch) && (indexPath.row == [self.resultsArray count]-3) && (NO == self.isFetchingMoreVideos) ) {
-        
+            
         NSString *rollID = [[NSUserDefaults standardUserDefaults] objectForKey:kRollID];
         NSString *requestString = [NSString stringWithFormat:kGetRollFramesAgain, rollID, self.numberOfFetchedResults];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
