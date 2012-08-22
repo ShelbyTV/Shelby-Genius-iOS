@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 Shelby.tv. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @interface VideoPlayerContainerViewController : UIViewController
 
 - (id)initWithVideo:(NSArray*)video;

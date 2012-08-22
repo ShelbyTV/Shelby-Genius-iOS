@@ -11,6 +11,8 @@
 @implementation LoadingVideoView
 @synthesize thumbnailImageView = _thumbnailImageView;
 @synthesize videoTitleLabel = _videoTitleLabel;
+@synthesize indicatorView = _indicatorView;
+@synthesize loadingLabel = _loadingLabel;
 
 - (void)dealloc
 {
@@ -23,6 +25,9 @@
 {
     self.backgroundColor = [UIColor clearColor];
     self.videoTitleLabel.font = [UIFont fontWithName:@"Ubuntu-Bold" size:self.videoTitleLabel.font.pointSize];
+    self.loadingLabel.font = [UIFont fontWithName:@"Ubuntu-Bold" size:self.loadingLabel.font.pointSize];
+    
+    [self.indicatorView startAnimating];
 }
 
 @end

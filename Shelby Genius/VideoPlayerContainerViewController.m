@@ -17,16 +17,15 @@
 // Models
 #import "AppDelegate.h"
 
-// Views
-#import "LoadingVideoView.h"
+// View Controllers
+#import "VideoPlayerViewController.h"
 
 @interface VideoPlayerContainerViewController ()
 
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) NSArray *video;
 @property (assign, nonatomic) VideoProvider provider;
-@property (strong, nonatomic) MPMoviePlayerViewController *moviePlayer;
-@property (strong, nonatomic) LoadingVideoView *loadingVideoView;
+@property (strong, nonatomic) VideoPlayerViewController *moviePlayer;
 @property (strong, nonatomic) UIWebView *webView;
 @property (assign, nonatomic) BOOL videoWillBegin;
 
@@ -38,9 +37,6 @@
 - (void)processNotification:(NSNotification*)notification;
 - (void)playVideo:(NSString *)link;
 - (void)destroy;
-- (void)modifyVideoPlayerButtons;
-- (void)previousVideoButtonAction;
-- (void)nextVideoButtonAction;
 
 @end
 
@@ -49,7 +45,6 @@
 @synthesize video = _video;
 @synthesize provider = _provider;
 @synthesize moviePlayer = _moviePlayer;
-@synthesize loadingVideoView = _loadingVideoView;
 @synthesize webView = _webView;
 @synthesize videoWillBegin = _videoWillBegin;
 
@@ -107,21 +102,12 @@
 #pragma mark - View and Subview Creation/Destruction Methods
 - (void)createMoviePlayer
 {
-    self.moviePlayer = [[MPMoviePlayerViewController alloc] init];
-    [self.moviePlayer.view setFrame:self.appDelegate.window.frame];
+    self.moviePlayer = [[VideoPlayerViewController alloc] initWithVideo:self.video];
+    [self.moviePlayer.view setFrame:self.appDelegate.window.bounds];
     [self.navigationController pushViewController:self.moviePlayer animated:NO];
     [self.moviePlayer.navigationController setNavigationBarHidden:YES];
     [self.moviePlayer.view setAutoresizesSubviews:YES];
-    [self modifyVideoPlayerButtons];
-    
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingVideoView" owner:self options:NULL];
-    self.loadingVideoView = [nib objectAtIndex:0];
-    self.loadingVideoView.videoTitleLabel.text = [NSString stringWithFormat:@"%@", [self.video valueForKey:@"title"]];
-    [AsynchronousFreeloader loadImageFromLink:[self.video valueForKey:@"thumbnail_url"] forImageView:self.loadingVideoView.thumbnailImageView withPlaceholderView:nil];
-    [self.moviePlayer.view addSubview:self.loadingVideoView];
-    
-    CGRect frame = self.moviePlayer.view.bounds;
-    [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
+    [self.moviePlayer modifyVideoPlayerButtons];
 }
 
 - (void)createWebView
@@ -143,27 +129,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - Video Button Action Methods
-- (void)modifyVideoPlayerButtons
-{
-//    NSLog(@"%@", [[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews]);
-    
-    UIButton *previousVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:1];
-    [previousVideoButton addTarget:self action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIButton *nextVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
-    [nextVideoButton addTarget:self action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchUpInside];
-}
-
-- (void)previousVideoButtonAction
-{
-    NSLog(@"PREVIOUS");
-}
-
-- (void)nextVideoButtonAction
-{
-    NSLog(@"NEXT");
-}
                       
 #pragma mark - Video Playback Methods
 - (void)loadVimeoPage
@@ -219,8 +184,10 @@
                                                      name:MPMoviePlayerPlaybackDidFinishNotification
                                                    object:nil];
         
-        [self.loadingVideoView removeFromSuperview];
+        [self.moviePlayer.loadingVideoView removeFromSuperview];
         [self.moviePlayer.moviePlayer setContentURL:[NSURL URLWithString:link]];
+        [self.moviePlayer.moviePlayer setShouldAutoplay:YES];
+        self.moviePlayer.moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
         
         [[Panhandler sharedInstance] recordEvent];
 
@@ -251,7 +218,7 @@
                 // Get URL
                 NSString *path = [value performSelector:pathSelector];
                 
-                // Launch MPMoviePlayer
+                // Launch moviePlayer
                 [self playVideo:path];
                 
               
