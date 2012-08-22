@@ -24,7 +24,7 @@
     if (self = [super init] ) {
         
         self.video = video;
-        
+            self.moviePlayer.controlStyle = MPMovieControlStyleNone;
     }
     
     return self;
@@ -34,8 +34,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    self.moviePlayer.controlStyle = MPMovieControlStyleNone;
     
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingVideoView" owner:self options:NULL];
     self.loadingVideoView = [nib objectAtIndex:0];
