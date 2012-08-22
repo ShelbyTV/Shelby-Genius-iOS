@@ -8,11 +8,16 @@
 
 #import "Structures.h"
 #import "APIRoutes.h"
-#
 
+// Query
 #define kMinimumVideoCountBeforeFetch   19
 #define kMaximumNumberOfQueries         7
-#define kMoviePlayerDidRotate           @"Movie Player Did Rotate"
 #define kPreviousQueries                @"Previous Queries"
+
+// Rolls
 #define kRollFramesObserver             @"RollFrames Observer"
 #define kRollID                         @"Roll ID"
+
+// Video 
+#define kMoviePlayerDidRotate           @"Movie Player Did Rotate"
+#define kVideoDidBeginToPlay            @"Video Did Begin To Play"

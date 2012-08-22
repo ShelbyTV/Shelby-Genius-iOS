@@ -34,8 +34,10 @@
 - (void)loadYouTubePage;
 - (void)loadVimeoPage;
 - (void)loadDailyMotionPage;
-- (void)processNotification:(NSNotification*)notification;
 - (void)playVideo:(NSString *)link;
+
+- (void)processNotification:(NSNotification*)notification;
+- (void)videoDidBeginToPlay:(NSNotification*)notification;
 - (void)destroy;
 
 @end
@@ -99,14 +101,14 @@
     [self createMoviePlayer];
 }
 
+
 #pragma mark - View and Subview Creation/Destruction Methods
 - (void)createMoviePlayer
 {
     self.moviePlayer = [[VideoPlayerViewController alloc] initWithVideo:self.video];
-    [self.moviePlayer.view setFrame:self.appDelegate.window.bounds];
+    [self.moviePlayer.view setFrame:self.appDelegate.window.frame];
     [self.navigationController pushViewController:self.moviePlayer animated:NO];
     [self.moviePlayer.navigationController setNavigationBarHidden:YES];
-    [self.moviePlayer.view setAutoresizesSubviews:YES];
     [self.moviePlayer modifyVideoPlayerButtons];
 }
 
@@ -119,14 +121,6 @@
     self.webView.hidden = YES;
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
-}
-
-- (void)destroy
-{
-    [self.moviePlayer.view setHidden:YES];
-    [self.moviePlayer.navigationController setNavigationBarHidden:NO];
-    [self.moviePlayer.navigationController popViewControllerAnimated:NO];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
                       
@@ -180,15 +174,17 @@
         self.videoWillBegin = YES;
         
         [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(videoDidBeginToPlay:)
+                                                     name:MPMoviePlayerPlaybackStateDidChangeNotification
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(destroy)
                                                      name:MPMoviePlayerPlaybackDidFinishNotification
                                                    object:nil];
         
-        [self.moviePlayer.loadingVideoView removeFromSuperview];
         [self.moviePlayer.moviePlayer setContentURL:[NSURL URLWithString:link]];
-        [self.moviePlayer.moviePlayer setShouldAutoplay:YES];
-        self.moviePlayer.moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
-        
+        [self.moviePlayer.moviePlayer play];
         [[Panhandler sharedInstance] recordEvent];
 
     }
@@ -227,6 +223,22 @@
         
     }
 
+}
+
+- (void)videoDidBeginToPlay:(NSNotification*)notification
+{
+    
+    MPMoviePlayerController *movieController = notification.object;
+    if (movieController.playbackState == MPMoviePlaybackStatePlaying) [self.moviePlayer.loadingVideoView removeFromSuperview];
+
+}
+
+- (void)destroy
+{
+    [self.moviePlayer.view setHidden:YES];
+    [self.moviePlayer.navigationController setNavigationBarHidden:NO];
+    [self.moviePlayer.navigationController popViewControllerAnimated:NO];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Interface Orientation Method

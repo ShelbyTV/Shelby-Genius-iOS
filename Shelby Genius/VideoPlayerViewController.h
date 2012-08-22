@@ -15,7 +15,5 @@
 
 - (id)initWithVideo:(NSArray*)video;
 - (void)modifyVideoPlayerButtons;
-- (void)previousVideoButtonAction;
-- (void)nextVideoButtonAction;
 
 @end

@@ -115,7 +115,7 @@
         
     }
     
-    
+
     NSUInteger randomNumber = arc4random_uniform([self.searchTerms count]);
     self.searchBar.placeholder = [NSString stringWithFormat:@"How about ‘%@’?",[self.searchTerms objectAtIndex:randomNumber]];
     
@@ -255,11 +255,7 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    // Hide keyboard
-    if ( [self.searchBar isFirstResponder] ) {
-        [self.searchBar resignFirstResponder];
-    }
-        
+    [self removeTransparentViews];
     [self modifyPreviousQueriesArray];
     [self createGeniusRoll];
 }

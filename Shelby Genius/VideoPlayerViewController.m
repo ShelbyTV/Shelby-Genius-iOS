@@ -13,6 +13,9 @@
 
 @property (strong, nonatomic) NSArray *video;
 
+- (void)previousVideoButtonAction;
+- (void)nextVideoButtonAction;
+
 @end
 
 @implementation VideoPlayerViewController
@@ -24,11 +27,12 @@
     if (self = [super init] ) {
         
         self.video = video;
-            self.moviePlayer.controlStyle = MPMovieControlStyleNone;
+
     }
     
     return self;
 }
+
 
 #pragma mark - View Lifecycle Methods
 - (void)viewDidAppear:(BOOL)animated
@@ -46,7 +50,7 @@
     
 }
 
-#pragma mark - Video Button Action Methods
+#pragma mark - Public Methods
 - (void)modifyVideoPlayerButtons
 {
     //    NSLog(@"%@", [[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews]);
@@ -58,6 +62,7 @@
     [nextVideoButton addTarget:self action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchUpInside];
 }
 
+#pragma mark - Private Methods
 - (void)previousVideoButtonAction
 {
     NSLog(@"PREVIOUS");
@@ -68,6 +73,7 @@
     NSLog(@"NEXT");
 }
 
+#pragma mark - Interface Orientation Methods
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     
@@ -81,7 +87,7 @@
             
         } else {
             
-            if (self.loadingVideoView) [self.loadingVideoView setFrame:CGRectMake(100.0f, 30.0f, frame.size.height, frame.size.width)];
+            if (self.loadingVideoView) [self.loadingVideoView setFrame:CGRectMake(100.0f, 0.0f, frame.size.height, frame.size.width)];
             
         }
         
