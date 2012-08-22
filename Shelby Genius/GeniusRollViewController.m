@@ -160,18 +160,30 @@
     
     if ( [self.resultsArray count] ) {
         
+        NSLog(@"%@", [self.resultsArray objectAtIndex:indexPath.row]);
+        
         tableView.alpha = 1.0f;
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"VideoCardCell" owner:self options:nil];
         VideoCardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VideoCardCell"];
         if ( nil == cell ) cell = (VideoCardCell*)[nib objectAtIndex:0];
         
+        
         NSString *thumbnailURL = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"thumbnail_url"];
-        NSString *videoTitle = [[[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"title"] capitalizedString];
-        NSString *providerName = [[[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"provider_name"] capitalizedString];
+        NSString *videoTitle = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"title"];
+        NSString *providerName = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"provider_name"];
         
         if (thumbnailURL != (id)[NSNull null]) [AsynchronousFreeloader loadImageFromLink:thumbnailURL forImageView:cell.thumbnailImageView withPlaceholderView:nil];
-        if (videoTitle != (id)[NSNull null]) cell.videoTitleLabel.text = videoTitle;
-        if (videoTitle != (id)[NSNull null]) cell.videoProviderLabel.text = providerName;
+      
+        if (videoTitle != (id)[NSNull null]) {
+            [videoTitle capitalizedString];
+            cell.videoTitleLabel.text = videoTitle;            
+        }
+        
+        if (videoTitle != (id)[NSNull null]) {
+            [providerName capitalizedString];
+            cell.videoProviderLabel.text = providerName;
+        }
+        
         cell.video = [[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"];
         
         return cell;

@@ -33,7 +33,6 @@
     return self;
 }
 
-
 #pragma mark - View Lifecycle Methods
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -59,13 +58,14 @@
     // Done Button Action
 //    NSLog(@"%@", [doneButton actionsForTarget:[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] forControlEvent:UIControlEventTouchUpInside]);
     
-    
     // Controls
 //    NSLog(@"%@", [[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews]);
     UIButton *previousVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:1];
+    [previousVideoButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
     [previousVideoButton addTarget:self action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *nextVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
+    [nextVideoButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
     [nextVideoButton addTarget:self action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchUpInside];
 }
 

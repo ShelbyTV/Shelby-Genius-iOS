@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E0005B115E53CD300712B4D /* SocialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0005B015E53CD300712B4D /* SocialController.m */; };
+		8E0005B415E53CEB00712B4D /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0005B315E53CEB00712B4D /* Twitter.framework */; };
+		8E0005B615E53CF900712B4D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0005B515E53CF900712B4D /* Accounts.framework */; };
+		8E0005B815E53D0200712B4D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0005B715E53D0200712B4D /* MessageUI.framework */; };
 		8E1A7EB515E3EACF00FC7086 /* searchBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1A7EB115E3EACF00FC7086 /* searchBar.png */; };
 		8E1A7EB615E3EACF00FC7086 /* searchBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1A7EB215E3EACF00FC7086 /* searchBar@2x.png */; };
 		8E1A7EB715E3EACF00FC7086 /* searchButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1A7EB315E3EACF00FC7086 /* searchButton.png */; };
@@ -60,6 +64,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8E0005AF15E53CD300712B4D /* SocialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialController.h; sourceTree = "<group>"; };
+		8E0005B015E53CD300712B4D /* SocialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialController.m; sourceTree = "<group>"; };
+		8E0005B315E53CEB00712B4D /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		8E0005B515E53CF900712B4D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		8E0005B715E53D0200712B4D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		8E1A7EB115E3EACF00FC7086 /* searchBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchBar.png; sourceTree = "<group>"; };
 		8E1A7EB215E3EACF00FC7086 /* searchBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchBar@2x.png"; sourceTree = "<group>"; };
 		8E1A7EB315E3EACF00FC7086 /* searchButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchButton.png; sourceTree = "<group>"; };
@@ -135,6 +144,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E0005B815E53D0200712B4D /* MessageUI.framework in Frameworks */,
+				8E0005B615E53CF900712B4D /* Accounts.framework in Frameworks */,
+				8E0005B415E53CEB00712B4D /* Twitter.framework in Frameworks */,
 				8E8C684915D9A0A0004290A6 /* QuartzCore.framework in Frameworks */,
 				8E2E974215D565F900178DA0 /* AVFoundation.framework in Frameworks */,
 				8E2A243715D4F4C400D09A8B /* MediaPlayer.framework in Frameworks */,
@@ -226,6 +238,9 @@
 		8EDCE99615D4C3C000EFB1F2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E0005B715E53D0200712B4D /* MessageUI.framework */,
+				8E0005B515E53CF900712B4D /* Accounts.framework */,
+				8E0005B315E53CEB00712B4D /* Twitter.framework */,
 				8E2E974115D565F900178DA0 /* AVFoundation.framework */,
 				8EF8211215DB5D3F00F18572 /* Crashlytics.framework */,
 				8E2A243615D4F4C400D09A8B /* MediaPlayer.framework */,
@@ -268,6 +283,8 @@
 			children = (
 				8EDCE9B715D4C41A00EFB1F2 /* APIClient.h */,
 				8EDCE9B815D4C41A00EFB1F2 /* APIClient.m */,
+				8E0005AF15E53CD300712B4D /* SocialController.h */,
+				8E0005B015E53CD300712B4D /* SocialController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -484,6 +501,7 @@
 				8EB3D2A815DB55DB00709586 /* Panhandler.m in Sources */,
 				8ED93B0915DC1B3900339BF1 /* LoadingVideoView.m in Sources */,
 				8E99EF6E15E44FDC00877068 /* VideoPlayerViewController.m in Sources */,
+				8E0005B115E53CD300712B4D /* SocialController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

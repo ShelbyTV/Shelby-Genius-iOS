@@ -108,7 +108,7 @@
     self.moviePlayer = [[VideoPlayerViewController alloc] initWithVideo:self.video];
     [self.moviePlayer.view setFrame:self.appDelegate.window.frame];
     [self.navigationController pushViewController:self.moviePlayer animated:NO];
-    [self.moviePlayer.navigationController setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:YES];
     [self.moviePlayer modifyVideoPlayerButtons];
 }
 
