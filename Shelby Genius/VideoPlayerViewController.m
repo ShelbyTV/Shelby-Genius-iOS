@@ -53,8 +53,15 @@
 #pragma mark - Public Methods
 - (void)modifyVideoPlayerButtons
 {
-    //    NSLog(@"%@", [[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews]);
+    // Done Button
+//    UIButton *doneButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:2] subviews] objectAtIndex:3];
     
+    // Done Button Action
+//    NSLog(@"%@", [doneButton actionsForTarget:[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] forControlEvent:UIControlEventTouchUpInside]);
+    
+    
+    // Controls
+//    NSLog(@"%@", [[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews]);
     UIButton *previousVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:1];
     [previousVideoButton addTarget:self action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchUpInside];
     
@@ -84,11 +91,12 @@
         if ( interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown ) {
             
             [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
+            [self.loadingVideoView.videoTitleLabel setHidden:NO];
             
         } else {
             
-            if (self.loadingVideoView) [self.loadingVideoView setFrame:CGRectMake(100.0f, 0.0f, frame.size.height, frame.size.width)];
-            
+            [self.loadingVideoView setFrame:CGRectMake(80.0f, 60.0f, frame.size.height, frame.size.width)];
+            [self.loadingVideoView.videoTitleLabel setHidden:YES];
         }
         
     }
