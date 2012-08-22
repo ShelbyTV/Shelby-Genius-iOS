@@ -198,10 +198,13 @@
         case 1: // Facebook
             break;
         case 2: // Twitter
+            [SocialController postToTwitterForVideo:self.selectedVideoToShare inViewController:self];
             break;
         default:
             break;
     }
+    
+    self.selectedVideoToShare = nil;
     
 }
 

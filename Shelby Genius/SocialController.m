@@ -72,12 +72,32 @@ static SocialController *sharedInstance = nil;
     [viewController presentModalViewController:mailViewController animated:YES];
 }
 
-+ (void)postToTwitterForVideo:(NSArray *)array inViewController:(UIViewController *)viewController
++ (void)postToTwitterForVideo:(NSArray *)video inViewController:(UIViewController *)viewController
 {
+    
+    // Title
+    NSString *videoTitle = [video valueForKey:@"title"];
+    
+    // Image
+    NSString *thumnbnailURL = [video valueForKey:@"thumbnail_url"];
+    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:thumnbnailURL]];
+    
+    // URL
+    NSString *providerName = [video valueForKey:@"provider_name"];
+    NSString *providerID = [video valueForKey:@"provider_id"];
+    NSString *videoURL = [NSString stringWithFormat:@"http://shelby.tv/video/%@/%@", providerName, providerID];
+
+    if ([TWTweetComposeViewController canSendTweet]) {
+        TWTweetComposeViewController *tweetSheet = [[TWTweetComposeViewController alloc] init];
+        [tweetSheet setInitialText:[NSString stringWithFormat:@"%@ - found via @Shelby Genius.", videoTitle]];
+        [tweetSheet addImage:[UIImage imageWithData:imageData]];
+        [tweetSheet addURL:[NSURL URLWithString:videoURL]];
+        [viewController presentModalViewController:tweetSheet animated:YES];
+    }
     
 }
 
-+ (void)postToFacebookForVideo:(NSArray *)array inViewController:(UIViewController *)viewController
++ (void)postToFacebookForVideo:(NSArray *)video inViewController:(UIViewController *)viewController
 {
     
 }
