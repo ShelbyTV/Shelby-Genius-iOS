@@ -18,13 +18,18 @@
 #import "APIClient.h"
 #import "GeniusRollViewController.h"
 
+// C Libraries
+#include <stdlib.h>
+
 @interface SearchViewController ()
 
 @property (strong, nonatomic) NSMutableArray *previousQueriesArray;
+@property (strong, nonatomic) NSArray *searchTerms;
 @property (strong, nonatomic) UIView *transparentTouchableView;
 @property (strong, nonatomic) UIView *transparentTouchableNavigationView;
 
 - (void)customize;
+- (void)changePlaceholder;
 - (void)createTransparentTouchableViews;
 - (void)initializePreviousQueriesArray;
 - (void)modifyPreviousQueriesArray;
@@ -39,6 +44,7 @@
 @synthesize searchBar = _searchBar;
 @synthesize searchButton = _searchButton;
 @synthesize previousQueriesArray = _previousQueriesArray;
+@synthesize searchTerms = searchTerms;
 @synthesize transparentTouchableView = _transparentTouchableView;
 @synthesize transparentTouchableNavigationView = _transparentTouchableNavigationView;
 
@@ -73,11 +79,7 @@
 #pragma mark - Public Methods
 - (void)searchButtonAction:(id)sender
 {
-    // Hide keyboard
-    if ( [self.searchBar isFirstResponder] ) {
-        [self.searchBar resignFirstResponder];
-    }
-    
+    [self removeTransparentViews];
     [self modifyPreviousQueriesArray];
     [self createGeniusRoll];
 }
@@ -95,6 +97,28 @@
     // searchBar
     [(UITextField*)[self.searchBar.subviews objectAtIndex:1] setFont:[UIFont fontWithName:@"Ubuntu" size:12]];
     self.searchBar.backgroundImage = [UIImage imageNamed:@"searchBar"];
+}
+
+- (void)changePlaceholder
+{
+    
+    if ( ![self searchTerms] ) {
+        
+        // Path to Property Lists that store watch components information
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"SearchTerms" ofType:@"plist"];
+        
+        // Read dictionary data from each watchPath
+        NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:path];
+        
+        // Populate watchArray with objects from watchDictionary
+        self.searchTerms = [[NSArray alloc] initWithArray:(NSArray*)[dictionary objectForKey:@"searchTerms"]];
+        
+    }
+    
+    
+    NSUInteger randomNumber = arc4random_uniform([self.searchTerms count]);
+    self.searchBar.placeholder = [NSString stringWithFormat:@"How about ‘%@’?",[self.searchTerms objectAtIndex:randomNumber]];
+    
 }
 
 - (void)createTransparentTouchableViews
@@ -187,7 +211,11 @@
 - (void)removeTransparentViews
 {
     // Resign Keyboard if any view element is touched that isn't currently a firstResponder UISearchBar object
-    if ( [self.searchBar isFirstResponder] ) [self.searchBar resignFirstResponder];
+    if ( [self.searchBar isFirstResponder] ) {
+    
+        [self.searchBar resignFirstResponder];
+        [self.searchBar setPlaceholder:@"Genius Search"];
+    }
     
     [self.transparentTouchableView removeFromSuperview];
     [self.transparentTouchableNavigationView removeFromSuperview];
@@ -221,6 +249,7 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     [self createTransparentTouchableViews];
+    [self changePlaceholder];
     [UIView animateWithDuration:0.25f animations:^{ self.tableView.alpha = 0.25f; }];
 }
 

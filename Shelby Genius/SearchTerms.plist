@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>searchTerms</key>
+	<array>
+		<string>Surfing</string>
+		<string>Dubstep</string>
+		<string>Michael Jordan</string>
+		<string>Steve Jobs</string>
+		<string>Susan Boyle</string>
+		<string>Cirque de Soleil</string>
+		<string>Carl Sagan</string>
+		<string>Carbon Nanotubes</string>
+		<string>Memes</string>
+		<string>Oprah Winfrey</string>
+	</array>
+</dict>
+</plist>
