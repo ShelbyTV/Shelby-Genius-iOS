@@ -19,21 +19,25 @@
 
 // Controllers
 #import "APIClient.h"
+#import "SocialController.h"
+
+// View Controllers
 #import "VideoPlayerContainerViewController.h"
 
-@interface GeniusRollViewController ()
+@interface GeniusRollViewController () <UIActionSheetDelegate>
 
 @property (strong, nonatomic) NSMutableArray *resultsArray;
 @property (strong, nonatomic) NSString *query;
 @property (assign, nonatomic) BOOL isFetchingMoreVideos;
 @property (assign, nonatomic) BOOL isPlayingVideo;
 @property (assign, nonatomic) NSUInteger numberOfFetchedResults;
+@property (strong, nonatomic) NSArray *selectedVideoToShare;
 
 - (void)customize;
 - (void)initalizeObservers;
 - (void)search;
 - (void)makeResultsArray:(NSNotification *)notification;
-- (void)shareVideo:(NSArray*)video;
+- (void)shareVideoAction:(UIButton*)button;
 
 @end
 
@@ -44,6 +48,7 @@
 @synthesize isFetchingMoreVideos = _isFetchingMoreVideos;
 @synthesize isPlayingVideo = _isPlayingVideo;
 @synthesize numberOfFetchedResults = _numberOfFetchedResults;
+@synthesize selectedVideoToShare = _selectedVideoToShare;
 
 #pragma mark - Initialization
 - (id)initWithQuery:(NSString *)query
@@ -168,6 +173,38 @@
     
 }
 
+- (void)shareVideoAction:(UIButton *)button
+{
+    VideoCardCell *cell = (VideoCardCell*)[button superview];
+    self.selectedVideoToShare = cell.video;
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Share this video?"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Email", @"Facebook", @"Twitter", nil];
+    
+    [actionSheet showInView:self.tableView];
+}
+
+#pragma mark - UIActionSheetDelegate Method
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    switch (buttonIndex) {
+        case 0: // Email
+            [SocialController sendEmailForVideo:self.selectedVideoToShare inViewController:self];
+            break;
+        case 1: // Facebook
+            break;
+        case 2: // Twitter
+            break;
+        default:
+            break;
+    }
+    
+}
+
 #pragma mark - UITableViewDataSource Methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -194,6 +231,7 @@
         cell.videoTitleLabel.text = videoTitle;            
         cell.videoProviderLabel.text = providerName;
         cell.video = [[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"];
+        [cell.shareButton addTarget:self action:@selector(shareVideoAction:) forControlEvents:UIControlEventTouchUpInside];
         
         return cell;
         

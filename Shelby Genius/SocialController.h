@@ -12,4 +12,6 @@
 + (void)postToTwitterForVideo:(NSArray*)video inViewController:(UIViewController*)viewController;
 + (void)postToFacebookForVideo:(NSArray*)video inViewController:(UIViewController*)viewController;
 
++ (SocialController*)sharedInstance;
+
 @end
