@@ -15,9 +15,6 @@
 @property (strong, nonatomic) NSArray *video;
 @property (strong, nonatomic) VideoPlayerContainerViewController *videoPlayerContainerViewController;
 
-- (void)previousVideoButtonAction;
-- (void)nextVideoButtonAction;
-
 @end
 
 @implementation VideoPlayerViewController
@@ -41,9 +38,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    NSLog(@"%@", self.video);
-    
+
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingVideoView" owner:self options:NULL];
     self.loadingVideoView = [nib objectAtIndex:0];
     self.loadingVideoView.videoTitleLabel.text = [NSString stringWithFormat:@"%@", [self.video valueForKey:@"title"]];
@@ -74,12 +69,12 @@
 #pragma mark - Private Methods
 - (void)previousVideoButtonAction
 {
-    NSLog(@"PREVIOUS");
+    [self.videoPlayerContainerViewController previousVideoButtonAction];
 }
 
 - (void)nextVideoButtonAction
 {
-    NSLog(@"NEXT");
+    [self.videoPlayerContainerViewController nextVideoButtonAction];
 }
 
 #pragma mark - Interface Orientation Methods

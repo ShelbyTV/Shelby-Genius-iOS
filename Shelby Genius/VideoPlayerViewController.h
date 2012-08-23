@@ -11,7 +11,12 @@
 
 @class VideoPlayerContainerViewController;
 
-@interface VideoPlayerViewController : MPMoviePlayerViewController
+@protocol VideoPlayerDelegate <NSObject>
+- (void)previousVideoButtonAction;
+- (void)nextVideoButtonAction;
+@end
+
+@interface VideoPlayerViewController : MPMoviePlayerViewController <VideoPlayerDelegate>
 
 @property (strong, nonatomic) LoadingVideoView *loadingVideoView;
 

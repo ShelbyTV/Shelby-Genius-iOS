@@ -25,13 +25,13 @@
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (assign, nonatomic) VideoProvider provider;
 @property (strong, nonatomic) VideoPlayerViewController *moviePlayer;
-@property (strong, nonatomic) NSMutableArray *videos;
 @property (strong, nonatomic) NSArray *video;
 @property (strong, nonatomic) UIWebView *webView;
 @property (assign, nonatomic) BOOL videoWillBegin;
 
 - (void)createMoviePlayer;
 - (void)createWebView;
+- (void)videoDirectLinkFromProvider:(NSString*)providerName;
 - (void)loadYouTubePage;
 - (void)loadVimeoPage;
 - (void)loadDailyMotionPage;
@@ -44,8 +44,9 @@
 @end
 
 @implementation VideoPlayerContainerViewController
-@synthesize appDelegate = _appDelegate;
 @synthesize videos = _videos;
+@synthesize selectedVideo = _selectedVideo;
+@synthesize appDelegate = _appDelegate;
 @synthesize video = _video;
 @synthesize provider = _provider;
 @synthesize moviePlayer = _moviePlayer;
@@ -61,29 +62,14 @@
         // Setup
         self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         self.videos = videos;
-        self.video = [[self.videos objectAtIndex:selectedVideo] valueForKey:@"video"];
+        self.selectedVideo = selectedVideo;
+        self.video = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
         self.videoWillBegin = NO;
         
-        // Create views
-        [self createWebView];
-        
-        
         // Get direct link to video based on video provider
-        if ( [[self.video valueForKey:@"provider_name" ] isEqualToString:@"vimeo"] ) {
-            
-            [self setProvider:VideoProvider_Vimeo];
-            [self loadVimeoPage];
-            
-        } else if ( [[self.video valueForKey:@"provider_name" ] isEqualToString:@"youtube"] ) {
-            
-            [self setProvider:VideoProvider_YouTube];
-            [self loadYouTubePage];
-            
-        } else if ( [[self.video valueForKey:@"provider_name" ] isEqualToString:@"dailymotion"] ) {
-            
-            [self setProvider:VideoProvider_DailyMotion];
-            [self loadDailyMotionPage];
-        }
+        [self createWebView];
+        NSString *providerName = [self.video valueForKey:@"provider_name"];
+        [self videoDirectLinkFromProvider:providerName];
         
     }
     
@@ -126,8 +112,28 @@
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
 }
 
-                      
-#pragma mark - Video Playback Methods
+#pragma mark - Video Loading Methods
+- (void)videoDirectLinkFromProvider:(NSString *)providerName
+{
+
+    if ( [providerName isEqualToString:@"vimeo"] ) {
+        
+        [self setProvider:VideoProvider_Vimeo];
+        [self loadVimeoPage];
+        
+    } else if ( [providerName isEqualToString:@"youtube"] ) {
+        
+        [self setProvider:VideoProvider_YouTube];
+        [self loadYouTubePage];
+        
+    } else if ( [providerName isEqualToString:@"dailymotion"] ) {
+        
+        [self setProvider:VideoProvider_DailyMotion];
+        [self loadDailyMotionPage];
+    }
+    
+}
+
 - (void)loadVimeoPage
 {
     
@@ -173,7 +179,7 @@
 {
     
     if ( ![self videoWillBegin]) {
-
+        
         self.videoWillBegin = YES;
         
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -188,8 +194,9 @@
         
         [self.moviePlayer.moviePlayer setContentURL:[NSURL URLWithString:link]];
         [self.moviePlayer.moviePlayer play];
+        
         [[Panhandler sharedInstance] recordEvent];
-
+        
     }
 }
 
@@ -238,10 +245,49 @@
 
 - (void)destroy
 {
-    [self.moviePlayer.view setHidden:YES];
-    [self.moviePlayer.navigationController setNavigationBarHidden:NO];
-    [self.moviePlayer.navigationController popViewControllerAnimated:NO];
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.moviePlayer.view setHidden:YES];
+//    [self.moviePlayer.navigationController setNavigationBarHidden:NO];
+//    [self.moviePlayer.navigationController popViewControllerAnimated:NO];
+//    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - VideoPlayerDelegate Methods
+- (void)previousVideoButtonAction
+{
+    if ( self.selectedVideo > 0 ) {
+        
+        self.videoWillBegin = NO;
+        [self.moviePlayer.moviePlayer stop];
+        self.selectedVideo -= 1;
+        self.video = nil;
+        self.video = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+       
+        // Get direct link to video based on video provider
+        [self createWebView];
+        NSString *providerName = [self.video valueForKey:@"provider_name"];
+        [self videoDirectLinkFromProvider:providerName];
+        
+    }
+
+}
+
+- (void)nextVideoButtonAction
+{
+    if ( self.selectedVideo < [self.videos count] ) {
+       
+        self.videoWillBegin = NO;
+        [self.moviePlayer.moviePlayer stop];
+        [self.moviePlayer.moviePlayer setContentURL:nil];
+        self.selectedVideo += 1;
+        self.video = nil;
+        self.video = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+        
+        // Get direct link to video based on video provider
+        [self createWebView];
+        NSString *providerName = [self.video valueForKey:@"provider_name"];
+        [self videoDirectLinkFromProvider:providerName];
+        
+    }
 }
 
 #pragma mark - Interface Orientation Method

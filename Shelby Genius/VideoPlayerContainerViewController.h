@@ -6,7 +6,12 @@
 //  Copyright (c) 2012 Shelby.tv. All rights reserved.
 //
 
-@interface VideoPlayerContainerViewController : UIViewController
+#import "VideoPlayerViewController.h"
+
+@interface VideoPlayerContainerViewController : UIViewController <VideoPlayerDelegate>
+
+@property (strong, nonatomic) NSMutableArray *videos;
+@property (assign, nonatomic) NSUInteger selectedVideo;
 
 - (id)initWithVideos:(NSMutableArray*)videos andSelectedVideo:(NSUInteger)selectedVideo;
 
