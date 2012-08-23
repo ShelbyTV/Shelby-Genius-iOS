@@ -205,7 +205,6 @@
     }
     
     self.selectedVideoToShare = nil;
-    
 }
 
 #pragma mark - UITableViewDataSource Methods
@@ -307,8 +306,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    VideoCardCell *cell = (VideoCardCell*)[self.tableView cellForRowAtIndexPath:indexPath];
-    VideoPlayerContainerViewController *videoPlayerContainerViewController = [[VideoPlayerContainerViewController alloc] initWithVideo:cell.video];
+    VideoPlayerContainerViewController *videoPlayerContainerViewController = [[VideoPlayerContainerViewController alloc] initWithVideos:self.resultsArray andSelectedVideo:indexPath.row];
     [self.navigationController pushViewController:videoPlayerContainerViewController animated:YES];
     
     [self setIsPlayingVideo:YES];

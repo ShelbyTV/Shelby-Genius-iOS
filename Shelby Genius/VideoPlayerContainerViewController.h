@@ -8,6 +8,6 @@
 
 @interface VideoPlayerContainerViewController : UIViewController
 
-- (id)initWithVideo:(NSArray*)video;
+- (id)initWithVideos:(NSMutableArray*)videos andSelectedVideo:(NSUInteger)selectedVideo;
 
 @end

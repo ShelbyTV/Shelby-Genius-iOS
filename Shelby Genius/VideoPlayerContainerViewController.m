@@ -23,9 +23,10 @@
 @interface VideoPlayerContainerViewController ()
 
 @property (strong, nonatomic) AppDelegate *appDelegate;
-@property (strong, nonatomic) NSArray *video;
 @property (assign, nonatomic) VideoProvider provider;
 @property (strong, nonatomic) VideoPlayerViewController *moviePlayer;
+@property (strong, nonatomic) NSMutableArray *videos;
+@property (strong, nonatomic) NSArray *video;
 @property (strong, nonatomic) UIWebView *webView;
 @property (assign, nonatomic) BOOL videoWillBegin;
 
@@ -44,6 +45,7 @@
 
 @implementation VideoPlayerContainerViewController
 @synthesize appDelegate = _appDelegate;
+@synthesize videos = _videos;
 @synthesize video = _video;
 @synthesize provider = _provider;
 @synthesize moviePlayer = _moviePlayer;
@@ -51,14 +53,15 @@
 @synthesize videoWillBegin = _videoWillBegin;
 
 #pragma mark - Initialization
-- (id)initWithVideo:(NSArray *)video
+- (id)initWithVideos:(NSMutableArray *)videos andSelectedVideo:(NSUInteger)selectedVideo
 {
     
     if ( self = [super init]) {
         
         // Setup
         self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        self.video = video;
+        self.videos = videos;
+        self.video = [[self.videos objectAtIndex:selectedVideo] valueForKey:@"video"];
         self.videoWillBegin = NO;
         
         // Create views
@@ -66,17 +69,17 @@
         
         
         // Get direct link to video based on video provider
-        if ( [[video valueForKey:@"provider_name" ] isEqualToString:@"vimeo"] ) {
+        if ( [[self.video valueForKey:@"provider_name" ] isEqualToString:@"vimeo"] ) {
             
             [self setProvider:VideoProvider_Vimeo];
             [self loadVimeoPage];
             
-        } else if ( [[video valueForKey:@"provider_name" ] isEqualToString:@"youtube"] ) {
+        } else if ( [[self.video valueForKey:@"provider_name" ] isEqualToString:@"youtube"] ) {
             
             [self setProvider:VideoProvider_YouTube];
             [self loadYouTubePage];
             
-        } else if ( [[video valueForKey:@"provider_name" ] isEqualToString:@"dailymotion"] ) {
+        } else if ( [[self.video valueForKey:@"provider_name" ] isEqualToString:@"dailymotion"] ) {
             
             [self setProvider:VideoProvider_DailyMotion];
             [self loadDailyMotionPage];
@@ -105,7 +108,7 @@
 #pragma mark - View and Subview Creation/Destruction Methods
 - (void)createMoviePlayer
 {
-    self.moviePlayer = [[VideoPlayerViewController alloc] initWithVideo:self.video];
+    self.moviePlayer = [[VideoPlayerViewController alloc] initWithVideo:self.video andVideoPlayerContainerViewController:self];
     [self.moviePlayer.view setFrame:self.appDelegate.window.frame];
     [self.navigationController pushViewController:self.moviePlayer animated:NO];
     [self.navigationController setNavigationBarHidden:YES];

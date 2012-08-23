@@ -9,11 +9,13 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "LoadingVideoView.h"
 
+@class VideoPlayerContainerViewController;
+
 @interface VideoPlayerViewController : MPMoviePlayerViewController
 
 @property (strong, nonatomic) LoadingVideoView *loadingVideoView;
 
-- (id)initWithVideo:(NSArray*)video;
+- (id)initWithVideo:(NSArray*)video andVideoPlayerContainerViewController:(VideoPlayerContainerViewController*)videoPlayerContainerViewController;
 - (void)modifyVideoPlayerButtons;
 
 @end

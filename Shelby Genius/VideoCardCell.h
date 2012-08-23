@@ -14,7 +14,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *videoTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *videoProviderLabel;
 @property (strong, nonatomic) IBOutlet UIButton *shareButton;
-
-@property (strong, nonatomic) NSArray *video;
+@property (strong, nonatomic) NSArray *video;                       
 
 @end

@@ -7,11 +7,13 @@
 //
 
 #import "VideoPlayerViewController.h"
+#import "VideoPlayerContainerViewController.h"
 #import "AsynchronousFreeloader.h"
 
 @interface VideoPlayerViewController ()
 
 @property (strong, nonatomic) NSArray *video;
+@property (strong, nonatomic) VideoPlayerContainerViewController *videoPlayerContainerViewController;
 
 - (void)previousVideoButtonAction;
 - (void)nextVideoButtonAction;
@@ -20,12 +22,14 @@
 
 @implementation VideoPlayerViewController
 @synthesize video = _video;
+@synthesize videoPlayerContainerViewController = _videoPlayerContainerViewController;
 @synthesize loadingVideoView = _loadingVideoView;
 
-- (id)initWithVideo:(NSArray*)video
+- (id)initWithVideo:(NSArray *)video andVideoPlayerContainerViewController:(VideoPlayerContainerViewController *)videoPlayerContainerViewController
 {
     if (self = [super init] ) {
         
+        self.videoPlayerContainerViewController = videoPlayerContainerViewController;
         self.video = video;
 
     }
@@ -37,6 +41,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    NSLog(@"%@", self.video);
     
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingVideoView" owner:self options:NULL];
     self.loadingVideoView = [nib objectAtIndex:0];
@@ -55,11 +61,7 @@
     // Done Button
 //    UIButton *doneButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:2] subviews] objectAtIndex:3];
     
-    // Done Button Action
-//    NSLog(@"%@", [doneButton actionsForTarget:[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] forControlEvent:UIControlEventTouchUpInside]);
-    
-    // Controls
-//    NSLog(@"%@", [[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews]);
+    // Video Player Controls
     UIButton *previousVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:1];
     [previousVideoButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
     [previousVideoButton addTarget:self action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchUpInside];
