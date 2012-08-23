@@ -35,6 +35,7 @@
 - (void)loadYouTubePage;
 - (void)loadVimeoPage;
 - (void)loadDailyMotionPage;
+- (void)loadNewlySelectedVideo;
 - (void)playVideo:(NSString *)link;
 
 - (void)processNotification:(NSNotification*)notification;
@@ -251,10 +252,11 @@
     // If !2, then Previous/Next buttons were clicked.
     
     if ( [notificaitonNumber intValue] == 2 ) { 
-    
+
         [self.moviePlayer.view setHidden:YES];
         [self.moviePlayer.navigationController setNavigationBarHidden:NO];
         [self.moviePlayer.navigationController popViewControllerAnimated:NO];
+        [self setMoviePlayer:nil];
         [self.navigationController popViewControllerAnimated:YES];
 
     }
@@ -264,40 +266,44 @@
 #pragma mark - VideoPlayerDelegate Methods
 - (void)previousVideoButtonAction
 {
+
     if ( self.selectedVideo > 0 ) {
         
-        self.videoWillBegin = NO;
         [self.moviePlayer.moviePlayer stop];
+        self.videoWillBegin = NO;
         self.selectedVideo -= 1;
-        self.video = nil;
-        self.video = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
-       
-        // Get direct link to video based on video provider
-        [self createWebView];
-        NSString *providerName = [self.video valueForKey:@"provider_name"];
-        [self videoDirectLinkFromProvider:providerName];
-        
+        [self loadNewlySelectedVideo];
+
     }
 
 }
 
 - (void)nextVideoButtonAction
 {
+   
     if ( self.selectedVideo < [self.videos count] ) {
        
-        self.videoWillBegin = NO;
         [self.moviePlayer.moviePlayer stop];
-        [self.moviePlayer.moviePlayer setContentURL:nil];
+        self.videoWillBegin = NO;
         self.selectedVideo += 1;
-        self.video = nil;
-        self.video = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
-        
-        // Get direct link to video based on video provider
-        [self createWebView];
-        NSString *providerName = [self.video valueForKey:@"provider_name"];
-        [self videoDirectLinkFromProvider:providerName];
-        
+        [self loadNewlySelectedVideo];
+    
     }
+    
+}
+
+- (void)loadNewlySelectedVideo
+{
+    self.video = nil;
+    self.video = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+    
+    // Create loadingVideoView for new video
+    [self.moviePlayer createLoadingVideoViewForVideo:self.video];
+    
+    // Get direct link to video based on video provider
+    [self createWebView];
+    NSString *providerName = [self.video valueForKey:@"provider_name"];
+    [self videoDirectLinkFromProvider:providerName];
 }
 
 #pragma mark - Interface Orientation Method

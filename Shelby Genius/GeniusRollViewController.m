@@ -151,17 +151,22 @@
         
     }
 
-    // Check for videos with Null values, and remove them from the results
-    for (int i = 0; i < [self.resultsArray count]; i++ ) {
+    // Check for videos with <null> values, and remove them from the results
+    
+    // Create duplicate of resultsArray
+    NSArray *duplicateResultsArray = [NSArray arrayWithArray:self.resultsArray];
+    
+    for (NSArray *frameArray in duplicateResultsArray) {
         
-        NSString *thumbnailURL = [[[self.resultsArray objectAtIndex:i] valueForKey:@"video"] valueForKey:@"thumbnail_url"];
-        NSString *videoTitle = [[[self.resultsArray objectAtIndex:i] valueForKey:@"video"] valueForKey:@"title"];
-        NSString *providerName = [[[self.resultsArray objectAtIndex:i] valueForKey:@"video"] valueForKey:@"provider_name"];
+        NSString *thumbnailURL = [[frameArray valueForKey:@"video"] valueForKey:@"thumbnail_url"];
+        NSString *videoTitle = [[frameArray valueForKey:@"video"] valueForKey:@"title"];
+        NSString *providerName = [[frameArray valueForKey:@"video"] valueForKey:@"provider_name"];
+
         
         if ( thumbnailURL == (id)[NSNull null] || videoTitle == (id)[NSNull null] || providerName == (id)[NSNull null] ) {
             
-            [self.resultsArray removeObjectAtIndex:i];
-            
+            // Remove frameArray object found in duplicateResultsArray from resultsArray
+            [self.resultsArray removeObject:frameArray];
         }
         
     }

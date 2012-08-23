@@ -39,16 +39,10 @@
 {
     [super viewDidAppear:animated];
 
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingVideoView" owner:self options:NULL];
-    self.loadingVideoView = [nib objectAtIndex:0];
-    self.loadingVideoView.videoTitleLabel.text = [NSString stringWithFormat:@"%@", [self.video valueForKey:@"title"]];
-    [AsynchronousFreeloader loadImageFromLink:[self.video valueForKey:@"thumbnail_url"] forImageView:self.loadingVideoView.thumbnailImageView withPlaceholderView:nil];
-    [self.view addSubview:self.loadingVideoView];
-    
-    CGRect frame = self.view.bounds;
-    [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
+    [self createLoadingVideoViewForVideo:self.video];
     
 }
+
 
 #pragma mark - Public Methods
 - (void)modifyVideoPlayerButtons
@@ -66,6 +60,18 @@
     UIButton *nextVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
     [nextVideoButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
     [nextVideoButton addTarget:self action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)createLoadingVideoViewForVideo:(NSArray*)video;
+{
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingVideoView" owner:self options:NULL];
+    self.loadingVideoView = [nib objectAtIndex:0];
+    self.loadingVideoView.videoTitleLabel.text = [NSString stringWithFormat:@"%@", [video valueForKey:@"title"]];
+    [AsynchronousFreeloader loadImageFromLink:[video valueForKey:@"thumbnail_url"] forImageView:self.loadingVideoView.thumbnailImageView withPlaceholderView:nil];
+    [self.view addSubview:self.loadingVideoView];
+    
+    CGRect frame = self.view.bounds;
+    [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
 }
 
 #pragma mark - Private Methods

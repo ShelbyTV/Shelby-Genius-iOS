@@ -22,5 +22,6 @@
 
 - (id)initWithVideo:(NSArray*)video andVideoPlayerContainerViewController:(VideoPlayerContainerViewController*)videoPlayerContainerViewController;
 - (void)modifyVideoPlayerButtons;
+- (void)createLoadingVideoViewForVideo:(NSArray*)video;
 
 @end
