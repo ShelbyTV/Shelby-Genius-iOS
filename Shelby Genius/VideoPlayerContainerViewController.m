@@ -39,7 +39,6 @@
 
 - (void)processNotification:(NSNotification*)notification;
 - (void)videoDidBeginToPlay:(NSNotification*)notification;
-- (void)destroy;
 
 @end
 
@@ -188,7 +187,7 @@
                                                    object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(destroy)
+                                                 selector:@selector(destroy:)
                                                      name:MPMoviePlayerPlaybackDidFinishNotification
                                                    object:nil];
         
@@ -243,12 +242,23 @@
 
 }
 
-- (void)destroy
+- (void)destroy:(NSNotification*)notification
 {
-//    [self.moviePlayer.view setHidden:YES];
-//    [self.moviePlayer.navigationController setNavigationBarHidden:NO];
-//    [self.moviePlayer.navigationController popViewControllerAnimated:NO];
-//    [self.navigationController popViewControllerAnimated:YES];
+    
+    NSNumber *notificaitonNumber = [notification.userInfo valueForKey:@"MPMoviePlayerPlaybackDidFinishReasonUserInfoKey"];
+
+    // If 2, 'Done' button was clicked.
+    // If !2, then Previous/Next buttons were clicked.
+    
+    if ( [notificaitonNumber intValue] == 2 ) { 
+    
+        [self.moviePlayer.view setHidden:YES];
+        [self.moviePlayer.navigationController setNavigationBarHidden:NO];
+        [self.moviePlayer.navigationController popViewControllerAnimated:NO];
+        [self.navigationController popViewControllerAnimated:YES];
+
+    }
+
 }
 
 #pragma mark - VideoPlayerDelegate Methods

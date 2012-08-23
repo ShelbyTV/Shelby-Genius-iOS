@@ -14,5 +14,6 @@
 @property (assign, nonatomic) NSUInteger selectedVideo;
 
 - (id)initWithVideos:(NSMutableArray*)videos andSelectedVideo:(NSUInteger)selectedVideo;
+- (void)destroy:(NSNotification*)notification;
 
 @end
