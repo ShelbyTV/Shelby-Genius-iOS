@@ -59,6 +59,12 @@
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
 }
 
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kRollID];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (void)createProgressView
 {
     self.progressView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 350.0f, 320.0f, 70.0f)];
