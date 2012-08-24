@@ -15,5 +15,6 @@
 #define kPreviousQueries                @"Previous Queries"
 
 // Rolls
-#define kRollFramesObserver             @"RollFrames Observer"
+#define kRollFramesObserver             @"Roll Frames Observer"
+#define kRollFramesScrollingObserver       @"Roll Frames Scroll Observer"
 #define kRollID                         @"Roll ID"

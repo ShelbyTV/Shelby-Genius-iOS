@@ -40,6 +40,7 @@
 - (void)search;
 - (void)makeResultsArray:(NSNotification *)notification;
 - (void)shareVideoAction:(UIButton*)button;
+- (void)scrollToLastCell;
 
 @end
 
@@ -75,7 +76,9 @@
 {
     NSString *querySpecificObserver = [NSString stringWithFormat:@"%@_%@", kRollFramesObserver, self.query];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:querySpecificObserver object:nil];
-   
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRollFramesScrollingObserver object:nil];
+    
     self.tableView = nil;
     
     [super viewDidUnload];
@@ -125,6 +128,12 @@
                                              selector:@selector(makeResultsArray:)
                                                  name:querySpecificObserver
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(scrollToLastCell)
+                                                 name:kRollFramesScrollingObserver
+                                               object:nil];
+    
 }
 
 - (void)search
@@ -216,6 +225,13 @@
                                                     otherButtonTitles:@"Email", @"Facebook", @"Twitter", nil];
     
     [actionSheet showInView:self.tableView];
+}
+
+- (void)scrollToLastCell
+{
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.resultsArray count]-1 inSection:0]
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:YES];
 }
 
 #pragma mark - UIActionSheetDelegate Method

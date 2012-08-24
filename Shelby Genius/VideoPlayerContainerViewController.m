@@ -30,6 +30,7 @@
 @property (assign, nonatomic) BOOL videoWillBegin;
 
 - (void)createMoviePlayer;
+- (void)destroyMoviePlayer;
 - (void)createWebView;
 - (void)videoDirectLinkFromProvider:(NSString*)providerName;
 - (void)loadYouTubePage;
@@ -102,6 +103,15 @@
     
     [self.appDelegate setVideoPlayerViewController:self.moviePlayer];
     
+}
+
+- (void)destroyMoviePlayer
+{
+    [self.moviePlayer.view setHidden:YES];
+    [self.moviePlayer.navigationController setNavigationBarHidden:NO];
+    [self.moviePlayer.navigationController popViewControllerAnimated:NO];
+    [self setMoviePlayer:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)createWebView
@@ -256,11 +266,7 @@
     
     if ( 2 == [notificaitonNumber intValue] && (2 == self.moviePlayer.moviePlayer.playbackState || 0 == self.moviePlayer.moviePlayer.playbackState) ) { // Done button clicked
 
-        [self.moviePlayer.view setHidden:YES];
-        [self.moviePlayer.navigationController setNavigationBarHidden:NO];
-        [self.moviePlayer.navigationController popViewControllerAnimated:NO];
-        [self setMoviePlayer:nil];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self destroyMoviePlayer];
 
     }
     
@@ -284,20 +290,37 @@
         self.selectedVideo -= 1;
         [self loadNewlySelectedVideo];
 
+    } else {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                            message:@"You are currently watching the first video recommended by Genius"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Thanks!"
+                                                  otherButtonTitles:nil, nil];
+        
+        [alertView show];
+        
     }
 
 }
 
 - (void)nextVideoButtonAction
 {
-   
-    if ( self.selectedVideo < [self.videos count] ) {
+    NSLog(@"%d", self.selectedVideo);
+    if ( self.selectedVideo < [self.videos count]-1 ) {
        
         [self.moviePlayer.moviePlayer stop];
         self.videoWillBegin = NO;
         self.selectedVideo += 1;
         [self loadNewlySelectedVideo];
     
+    } else {
+        
+        [self destroyMoviePlayer];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRollFramesScrollingObserver
+                                                            object:nil
+                                                          userInfo:nil];
+        
     }
     
 }
