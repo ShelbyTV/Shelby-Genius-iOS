@@ -17,7 +17,3 @@
 // Rolls
 #define kRollFramesObserver             @"RollFrames Observer"
 #define kRollID                         @"Roll ID"
-
-// Video 
-#define kMoviePlayerDidRotate           @"Movie Player Did Rotate"
-#define kVideoDidBeginToPlay            @"Video Did Begin To Play"

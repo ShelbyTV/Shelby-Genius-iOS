@@ -49,8 +49,6 @@
 {
     // Done Button
 //    UIButton *doneButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:2] subviews] objectAtIndex:3];
-//    [doneButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
-//    [doneButton addTarget:self.videoPlayerContainerViewController action:@selector(destroy:) forControlEvents:UIControlEventTouchUpInside];
     
     // Video Player Controls
     UIButton *previousVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:1];

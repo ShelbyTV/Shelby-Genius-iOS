@@ -39,7 +39,7 @@
 - (void)playVideo:(NSString *)link;
 
 - (void)processNotification:(NSNotification*)notification;
-- (void)videoDidBeginToPlay:(NSNotification*)notification;
+- (void)videoDidBeginPlaying:(NSNotification*)notification;
 
 @end
 
@@ -183,12 +183,12 @@
         self.videoWillBegin = YES;
         
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(videoDidBeginToPlay:)
+                                                 selector:@selector(videoDidBeginPlaying:)
                                                      name:MPMoviePlayerPlaybackStateDidChangeNotification
                                                    object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(destroy:)
+                                                 selector:@selector(videoDidEndPlaying:)
                                                      name:MPMoviePlayerPlaybackDidFinishNotification
                                                    object:nil];
         
@@ -235,7 +235,7 @@
 
 }
 
-- (void)videoDidBeginToPlay:(NSNotification*)notification
+- (void)videoDidBeginPlaying:(NSNotification*)notification
 {
     
     MPMoviePlayerController *movieController = notification.object;
@@ -243,15 +243,15 @@
 
 }
 
-- (void)destroy:(NSNotification*)notification
+- (void)videoDidEndPlaying:(NSNotification*)notification
 {
     
     NSNumber *notificaitonNumber = [notification.userInfo valueForKey:@"MPMoviePlayerPlaybackDidFinishReasonUserInfoKey"];
 
-    // If 2, 'Done' button was clicked.
-    // If !2, then Previous/Next buttons were clicked.
+    NSLog(@"%d", self.moviePlayer.moviePlayer.playbackState);
+    NSLog(@"%d", [notificaitonNumber intValue]);
     
-    if ( [notificaitonNumber intValue] == 2 ) { 
+    if ( 2 == [notificaitonNumber intValue] && 2 == self.moviePlayer.moviePlayer.playbackState ) { // Done button clicked
 
         [self.moviePlayer.view setHidden:YES];
         [self.moviePlayer.navigationController setNavigationBarHidden:NO];
@@ -260,7 +260,14 @@
         [self.navigationController popViewControllerAnimated:YES];
 
     }
-
+    
+    if ( 0 == [notificaitonNumber intValue] && 2 == self.moviePlayer.moviePlayer.playbackState ) { // Movie ended without interruption
+        [self nextVideoButtonAction];
+    }
+    
+    // 0 == [notificaitonNumber intValue] && 0 == self.moviePlayer.moviePlayer.playbackState (Right or Left moviePlayer button tapped)
+    
+    
 }
 
 #pragma mark - VideoPlayerDelegate Methods
