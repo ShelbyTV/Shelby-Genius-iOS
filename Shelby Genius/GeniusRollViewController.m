@@ -26,12 +26,14 @@
 
 @interface GeniusRollViewController () <UIActionSheetDelegate>
 
+@property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) NSMutableArray *resultsArray;
 @property (strong, nonatomic) NSString *query;
+@property (strong, nonatomic) NSArray *selectedVideoToShare;
+@property (assign, nonatomic) NSUInteger numberOfFetchedResults;
 @property (assign, nonatomic) BOOL isFetchingMoreVideos;
 @property (assign, nonatomic) BOOL isPlayingVideo;
-@property (assign, nonatomic) NSUInteger numberOfFetchedResults;
-@property (strong, nonatomic) NSArray *selectedVideoToShare;
+@property (assign, nonatomic) BOOL noMoreVideosToFetch;
 
 - (void)customize;
 - (void)initalizeObservers;
@@ -43,19 +45,24 @@
 
 @implementation GeniusRollViewController
 @synthesize tableView = _tableView;
+@synthesize appDelegate = _appDelegate;
 @synthesize resultsArray = _resultsArray;
 @synthesize query = _query;
+@synthesize selectedVideoToShare = _selectedVideoToShare;
+@synthesize numberOfFetchedResults = _numberOfFetchedResults;
 @synthesize isFetchingMoreVideos = _isFetchingMoreVideos;
 @synthesize isPlayingVideo = _isPlayingVideo;
-@synthesize numberOfFetchedResults = _numberOfFetchedResults;
-@synthesize selectedVideoToShare = _selectedVideoToShare;
+@synthesize noMoreVideosToFetch = _noMoreVideosToFetch;
 
 #pragma mark - Initialization
 - (id)initWithQuery:(NSString *)query
 {
     if ( self = [super init] ) {
 
+        self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
         self.query = query;
+        
         [self search];
         
     }
@@ -100,8 +107,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    [appDelegate removeHUD];
+    [self.appDelegate removeHUD];
 }
 
 #pragma mark - Private Methods
@@ -129,40 +135,52 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
     [client performRequest:request ofType:APIRequestType_GetQuery withQuery:self.query];
     
-    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    [appDelegate addHUDWithMessage:@"Fetching Genius Videos"];
+    [self.appDelegate addHUDWithMessage:@"Fetching Genius Videos"];
     
 }
 
 - (void)makeResultsArray:(NSNotification *)notification
 {
+    
     if ( ![self resultsArray] ) {
         
         self.resultsArray = [NSMutableArray array];
         [self.resultsArray addObjectsFromArray:[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"]];
         self.numberOfFetchedResults = [self.resultsArray count];
+        self.noMoreVideosToFetch = NO;
         
         [[Panhandler sharedInstance] recordEvent];
         
     } else {
         
         [self.resultsArray addObjectsFromArray:[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"]];
-        self.numberOfFetchedResults += [[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"] count];
         
+        if ( [self.resultsArray count] == self.numberOfFetchedResults) {
+            
+            self.noMoreVideosToFetch = YES;
+                
+        } else {
+        
+            self.noMoreVideosToFetch = NO;
+            self.numberOfFetchedResults = self.numberOfFetchedResults + [[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"] count];
+    
+        }
+   
     }
 
-    // Check for videos with <null> values, and remove them from the results
-    
-    // Create duplicate of resultsArray
+
+    /// Check for videos with <null> values, and remove them from the resultsArray
+    // 1. Create duplicate of resultsArray
     NSArray *duplicateResultsArray = [NSArray arrayWithArray:self.resultsArray];
     
+    // 2. Search duplicateResultsArray for frames
     for (NSArray *frameArray in duplicateResultsArray) {
         
         NSString *thumbnailURL = [[frameArray valueForKey:@"video"] valueForKey:@"thumbnail_url"];
         NSString *videoTitle = [[frameArray valueForKey:@"video"] valueForKey:@"title"];
         NSString *providerName = [[frameArray valueForKey:@"video"] valueForKey:@"provider_name"];
 
-        
+        // 3. Check for <null>-values frames
         if ( thumbnailURL == (id)[NSNull null] || videoTitle == (id)[NSNull null] || providerName == (id)[NSNull null] ) {
             
             // Remove frameArray object found in duplicateResultsArray from resultsArray
@@ -171,9 +189,9 @@
         
     }
     
+    // Reset values and reload tableView
     [self setIsFetchingMoreVideos:NO];
-    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    [appDelegate removeHUD];
+    [self.appDelegate removeHUD];
     [self.tableView reloadData];
     
 }
@@ -320,7 +338,26 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if ( (self.numberOfFetchedResults > kMinimumVideoCountBeforeFetch) && (indexPath.row == [self.resultsArray count]-3) && (NO == self.isFetchingMoreVideos) ) {
+    
+    /*
+
+     Crazy Conditions Explained
+     
+     1: self.numberOfFetchedResults > kMinimumVideoCountBeforeFetch
+        There must be at least 20 results before trying to fetch more results (20 is the minimum 1 API call returns - why make subsequent API calls if less than 20 are returned the first time?)
+     
+     2. indexPath.row == [self.resultsArray count]-3
+        Will begin to fetch videos when the third-to-last video has displayed to the screen, so that when the user gets to the last video, the other ones will have loaded or are about to be loaded.
+     
+     3. NO == self.isFetchingMoreVideos
+        Avoid subsquent re-fetches when a fetch is in progress
+     
+     4. NO == self.noMoreVideosToFetch
+        Avoid fetching movies if the previous fetch didn't return any new movies.
+     
+     */
+    
+    if ( (self.numberOfFetchedResults >= kMinimumVideoCountBeforeFetch) && (indexPath.row == [self.resultsArray count]-3) && (NO == self.isFetchingMoreVideos) && (NO == self.noMoreVideosToFetch) ) {
             
         NSString *rollID = [[NSUserDefaults standardUserDefaults] objectForKey:kRollID];
         NSString *requestString = [NSString stringWithFormat:kGetRollFramesAgain, rollID, self.numberOfFetchedResults];
@@ -328,9 +365,7 @@
         APIClient *client = [[APIClient alloc] init];
         [client performRequest:request ofType:APIRequestType_GetRollFrames withQuery:self.query];
         
-        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        [appDelegate addHUDWithMessage:@"Getting more Genius videos"];
-        
+        [self.appDelegate addHUDWithMessage:@"Getting more Genius videos"];
         [self setIsFetchingMoreVideos:YES];
         
     }

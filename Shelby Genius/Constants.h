@@ -10,7 +10,7 @@
 #import "APIRoutes.h"
 
 // Query
-#define kMinimumVideoCountBeforeFetch   19
+#define kMinimumVideoCountBeforeFetch   20
 #define kMaximumNumberOfQueries         7
 #define kPreviousQueries                @"Previous Queries"
 
