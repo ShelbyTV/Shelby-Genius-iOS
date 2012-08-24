@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
 
-@class SearchViewController;
+@class SearchViewController, VideoPlayerViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -17,6 +17,7 @@
 @property (strong, nonatomic) MBProgressHUD *progressHUD;
 @property (strong, nonatomic) SearchViewController *searchViewController;
 @property (strong, nonatomic) UINavigationController *searchNavigationController;
+@property (strong ,nonatomic) VideoPlayerViewController *videoPlayerViewController;
 
 - (void)addHUDWithMessage:(NSString*)message;
 - (void)removeHUD;

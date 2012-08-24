@@ -12,12 +12,14 @@
 #import <AVFoundation/AVFoundation.h>
 #import <Crashlytics/Crashlytics.h>
 
-// Controllers
+// View Controllers
 #import "SearchViewController.h"
+#import "VideoPlayerViewController.h"
 
 @interface AppDelegate ()
 
 @property (strong, nonatomic) UIView *progressView;
+@property (assign, nonatomic) NSTimeInterval videoPlaybackTimeInterval;
 
 - (void)analytics;
 - (void)customization;
@@ -31,6 +33,8 @@
 @synthesize searchNavigationController;
 @synthesize progressHUD = _progressHUD;
 @synthesize progressView = _progressView;
+@synthesize videoPlayerViewController = _videoPlayerViewController;
+@synthesize videoPlaybackTimeInterval = _videoPlaybackTimeInterval;
 
 #pragma mark - UIApplicationDelegate Methods
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -54,13 +58,29 @@
 
 }
 
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    if ( self.videoPlayerViewController ) {
+     
+        self.videoPlayerViewController.moviePlayer.initialPlaybackTime = self.videoPlaybackTimeInterval;
+        [self.videoPlayerViewController.moviePlayer play];
+    }
+}
+
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
 }
 
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    if ( self.videoPlayerViewController ) self.videoPlaybackTimeInterval = self.videoPlayerViewController.moviePlayer.currentPlaybackTime;
+}
+
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    
+    // Reset RollID (just to be on the safe side)
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kRollID];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }

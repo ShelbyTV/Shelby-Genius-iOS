@@ -99,6 +99,9 @@
     [self.navigationController pushViewController:self.moviePlayer animated:NO];
     [self.navigationController setNavigationBarHidden:YES];
     [self.moviePlayer modifyVideoPlayerButtons];
+    
+    [self.appDelegate setVideoPlayerViewController:self.moviePlayer];
+    
 }
 
 - (void)createWebView
@@ -248,10 +251,10 @@
     
     NSNumber *notificaitonNumber = [notification.userInfo valueForKey:@"MPMoviePlayerPlaybackDidFinishReasonUserInfoKey"];
 
-    NSLog(@"%d", self.moviePlayer.moviePlayer.playbackState);
-    NSLog(@"%d", [notificaitonNumber intValue]);
+    NSLog(@"notification: %d", [notificaitonNumber intValue]);
+    NSLog(@"playback: %d", self.moviePlayer.moviePlayer.playbackState);
     
-    if ( 2 == [notificaitonNumber intValue] && 2 == self.moviePlayer.moviePlayer.playbackState ) { // Done button clicked
+    if ( 2 == [notificaitonNumber intValue] && (2 == self.moviePlayer.moviePlayer.playbackState || 0 == self.moviePlayer.moviePlayer.playbackState) ) { // Done button clicked
 
         [self.moviePlayer.view setHidden:YES];
         [self.moviePlayer.navigationController setNavigationBarHidden:NO];
