@@ -104,9 +104,9 @@
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
+    [super viewDidDisappear:animated];
     [self.appDelegate removeHUD];
 }
 
@@ -149,50 +149,58 @@
         self.numberOfFetchedResults = [self.resultsArray count];
         self.noMoreVideosToFetch = NO;
         
+        // Reset values and reload tableView
+        [self setIsFetchingMoreVideos:NO];
+        [self setNoMoreVideosToFetch:NO];
+        [self.appDelegate removeHUD];
+        [self.tableView reloadData];
+        
         [[Panhandler sharedInstance] recordEvent];
         
     } else {
         
         [self.resultsArray addObjectsFromArray:[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"]];
         
-        if ( [self.resultsArray count] == self.numberOfFetchedResults) {
+        if ( [self.resultsArray count] <= self.numberOfFetchedResults) {
             
-            self.noMoreVideosToFetch = YES;
+            // Reset values
+            [self setIsFetchingMoreVideos:NO];
+            [self setNoMoreVideosToFetch:YES];
+            [self.appDelegate removeHUD];
                 
         } else {
         
-            self.noMoreVideosToFetch = NO;
             self.numberOfFetchedResults = self.numberOfFetchedResults + [[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"] count];
-    
+           
+            /// Check for videos with <null> values, and remove them from the resultsArray
+            // 1. Create duplicate of resultsArray
+            NSArray *duplicateResultsArray = [NSArray arrayWithArray:self.resultsArray];
+            
+            // 2. Search duplicateResultsArray for frames
+            for (NSArray *frameArray in duplicateResultsArray) {
+                
+                NSString *thumbnailURL = [[frameArray valueForKey:@"video"] valueForKey:@"thumbnail_url"];
+                NSString *videoTitle = [[frameArray valueForKey:@"video"] valueForKey:@"title"];
+                NSString *providerName = [[frameArray valueForKey:@"video"] valueForKey:@"provider_name"];
+                
+                // 3. Check for <null>-values frames
+                if ( thumbnailURL == (id)[NSNull null] || videoTitle == (id)[NSNull null] || providerName == (id)[NSNull null] ) {
+                    
+                    // Remove frameArray object found in duplicateResultsArray from resultsArray
+                    [self.resultsArray removeObject:frameArray];
+                }
+                
+            }
+            
+            // Reset values and reload tableView
+            [self setIsFetchingMoreVideos:NO];
+            [self setNoMoreVideosToFetch:NO];
+            [self.appDelegate removeHUD];
+            [self.tableView reloadData];
+
         }
    
     }
-
-
-    /// Check for videos with <null> values, and remove them from the resultsArray
-    // 1. Create duplicate of resultsArray
-    NSArray *duplicateResultsArray = [NSArray arrayWithArray:self.resultsArray];
-    
-    // 2. Search duplicateResultsArray for frames
-    for (NSArray *frameArray in duplicateResultsArray) {
-        
-        NSString *thumbnailURL = [[frameArray valueForKey:@"video"] valueForKey:@"thumbnail_url"];
-        NSString *videoTitle = [[frameArray valueForKey:@"video"] valueForKey:@"title"];
-        NSString *providerName = [[frameArray valueForKey:@"video"] valueForKey:@"provider_name"];
-
-        // 3. Check for <null>-values frames
-        if ( thumbnailURL == (id)[NSNull null] || videoTitle == (id)[NSNull null] || providerName == (id)[NSNull null] ) {
-            
-            // Remove frameArray object found in duplicateResultsArray from resultsArray
-            [self.resultsArray removeObject:frameArray];
-        }
-        
-    }
-    
-    // Reset values and reload tableView
-    [self setIsFetchingMoreVideos:NO];
-    [self.appDelegate removeHUD];
-    [self.tableView reloadData];
     
 }
 
@@ -338,7 +346,6 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
     /*
 
      Crazy Conditions Explained
@@ -367,8 +374,10 @@
         
         [self.appDelegate addHUDWithMessage:@"Getting more Genius videos"];
         [self setIsFetchingMoreVideos:YES];
+        [self setNoMoreVideosToFetch:YES];
         
     }
+    
 }
 
 #pragma mark - Memory Warning
