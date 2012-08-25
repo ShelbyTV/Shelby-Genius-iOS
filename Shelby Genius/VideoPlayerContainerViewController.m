@@ -110,6 +110,9 @@
     [self.moviePlayer.view setHidden:YES];
     [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+    [self setMoviePlayer:nil];
+    [self.appDelegate setVideoPlayerViewController:nil];
+    
 }
 
 - (void)createWebView
