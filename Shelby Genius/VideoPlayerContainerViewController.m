@@ -108,10 +108,8 @@
 - (void)destroyMoviePlayer
 {
     [self.moviePlayer.view setHidden:YES];
-    [self.moviePlayer.navigationController setNavigationBarHidden:NO];
-    [self.moviePlayer.navigationController popViewControllerAnimated:NO];
-    [self.moviePlayer.navigationController popViewControllerAnimated:NO];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
 }
 
 - (void)createWebView
@@ -260,9 +258,6 @@
 {
     
     NSNumber *notificaitonNumber = [notification.userInfo valueForKey:@"MPMoviePlayerPlaybackDidFinishReasonUserInfoKey"];
-
-    NSLog(@"notification: %d", [notificaitonNumber intValue]);
-    NSLog(@"playback: %d", self.moviePlayer.moviePlayer.playbackState);
     
     if ( 2 == [notificaitonNumber intValue] && (2 == self.moviePlayer.moviePlayer.playbackState || 0 == self.moviePlayer.moviePlayer.playbackState) ) { // Done button clicked in portrait mode
         
@@ -276,10 +271,6 @@
     
     }
 
-    
-    // 0 == [notificaitonNumber intValue] && 0 == self.moviePlayer.moviePlayer.playbackState (Right or Left moviePlayer button tapped)
-    
-    
 }
 
 #pragma mark - VideoPlayerDelegate Methods
