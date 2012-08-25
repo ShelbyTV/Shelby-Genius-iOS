@@ -110,7 +110,7 @@
     [self.moviePlayer.view setHidden:YES];
     [self.moviePlayer.navigationController setNavigationBarHidden:NO];
     [self.moviePlayer.navigationController popViewControllerAnimated:NO];
-    [self setMoviePlayer:nil];
+    [self.moviePlayer.navigationController popViewControllerAnimated:NO];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -264,15 +264,18 @@
     NSLog(@"notification: %d", [notificaitonNumber intValue]);
     NSLog(@"playback: %d", self.moviePlayer.moviePlayer.playbackState);
     
-    if ( 2 == [notificaitonNumber intValue] && (2 == self.moviePlayer.moviePlayer.playbackState || 0 == self.moviePlayer.moviePlayer.playbackState) ) { // Done button clicked
-
+    if ( 2 == [notificaitonNumber intValue] && (2 == self.moviePlayer.moviePlayer.playbackState || 0 == self.moviePlayer.moviePlayer.playbackState) ) { // Done button clicked in portrait mode
+        
         [self destroyMoviePlayer];
 
     }
     
     if ( 0 == [notificaitonNumber intValue] && 2 == self.moviePlayer.moviePlayer.playbackState ) { // Movie ended without interruption
+    
         [self nextVideoButtonAction];
+    
     }
+
     
     // 0 == [notificaitonNumber intValue] && 0 == self.moviePlayer.moviePlayer.playbackState (Right or Left moviePlayer button tapped)
     
@@ -331,6 +334,7 @@
     self.video = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
     
     // Create loadingVideoView for new video
+    [self.moviePlayer.moviePlayer setContentURL:nil];
     [self.moviePlayer createLoadingVideoViewForVideo:self.video];
     
     // Get direct link to video based on video provider
