@@ -145,12 +145,13 @@
     dispatch_async(dispatch_get_main_queue(), ^{
    
         if ( nil == placeholderView ) {     // Add UIActivityIndicatorView placeholder
-                
-                UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-                [activityIndicator setFrame:imageView.frame];
-                [activityIndicator setCenter:CGPointMake(imageView.frame.size.width/2.0f, imageView.frame.size.height/2.0f)];
-                [imageView addSubview:activityIndicator]; 
-                [activityIndicator startAnimating];
+            
+            UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActionSheetStyleDefault];
+            [activityIndicator setColor:[UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:1.0f]];
+            [activityIndicator setFrame:imageView.frame];
+            [activityIndicator setCenter:CGPointMake(imageView.frame.size.width/2.0f, imageView.frame.size.height/2.0f)];
+            [imageView addSubview:activityIndicator];
+            [activityIndicator startAnimating];
                 
             
         } else {                            // Add user-defined placeholder

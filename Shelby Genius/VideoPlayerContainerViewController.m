@@ -253,8 +253,16 @@
 {
     
     MPMoviePlayerController *movieController = notification.object;
-    if (movieController.playbackState == MPMoviePlaybackStatePlaying) [self.moviePlayer.loadingVideoView removeFromSuperview];
-
+    if (movieController.playbackState == MPMoviePlaybackStatePlaying) {
+     
+        [UIView animateWithDuration:0.67 animations:^{
+            [self.moviePlayer.loadingVideoView setAlpha:0.0f];
+        } completion:^(BOOL finished) {
+            [self.moviePlayer.loadingVideoView removeFromSuperview];
+        }];
+        
+        
+    }
 }
 
 - (void)videoDidEndPlaying:(NSNotification*)notification
