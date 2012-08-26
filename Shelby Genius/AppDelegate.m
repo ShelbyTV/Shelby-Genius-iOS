@@ -90,6 +90,10 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    // In case a HUD exists, remove it when app is backgrounded
+    [self removeHUD];
+    
+    // If a movie is playing, get current playback interval
     if ( self.videoPlayerViewController ) self.videoPlaybackTimeInterval = self.videoPlayerViewController.moviePlayer.currentPlaybackTime;
 }
 
