@@ -167,6 +167,28 @@
         self.numberOfFetchedResults = [self.resultsArray count];
         self.noMoreVideosToFetch = NO;
         
+        /// Check for videos with <null> values, and remove them from the resultsArray
+        // 1. Create duplicate of resultsArray
+        NSArray *duplicateResultsArray = [NSArray arrayWithArray:self.resultsArray];
+        
+        // 2. Search duplicateResultsArray for frames
+        for (NSArray *frameArray in duplicateResultsArray) {
+            
+            NSString *thumbnailURL = [[frameArray valueForKey:@"video"] valueForKey:@"thumbnail_url"];
+            NSString *videoTitle = [[frameArray valueForKey:@"video"] valueForKey:@"title"];
+            NSString *providerName = [[frameArray valueForKey:@"video"] valueForKey:@"provider_name"];
+            
+            NSLog(@"%@ | %@ | %@", thumbnailURL, videoTitle, providerName);
+            
+            // 3. Check for <null>-values frames
+            if ( thumbnailURL == (id)[NSNull null] || videoTitle == (id)[NSNull null] || providerName == (id)[NSNull null] ) {
+                
+                // Remove frameArray object found in duplicateResultsArray from resultsArray
+                [self.resultsArray removeObject:frameArray];
+            }
+            
+        }
+
         // Reset values and reload tableView
         [self setIsFetchingMoreVideos:NO];
         [self setNoMoreVideosToFetch:NO];
@@ -200,6 +222,8 @@
                 NSString *thumbnailURL = [[frameArray valueForKey:@"video"] valueForKey:@"thumbnail_url"];
                 NSString *videoTitle = [[frameArray valueForKey:@"video"] valueForKey:@"title"];
                 NSString *providerName = [[frameArray valueForKey:@"video"] valueForKey:@"provider_name"];
+                
+                NSLog(@"%@ | %@ | %@", thumbnailURL, videoTitle, providerName);
                 
                 // 3. Check for <null>-values frames
                 if ( thumbnailURL == (id)[NSNull null] || videoTitle == (id)[NSNull null] || providerName == (id)[NSNull null] ) {
