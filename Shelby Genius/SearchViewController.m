@@ -97,6 +97,13 @@
     // searchBar
     [(UITextField*)[self.searchBar.subviews objectAtIndex:1] setFont:[UIFont fontWithName:@"Ubuntu" size:12]];
     self.searchBar.backgroundImage = [UIImage imageNamed:@"searchBar"];
+    
+    // Hide backbarButtonItem if GeniusOnboardingViewController was displayed    
+    if ( self != [self.navigationController.viewControllers objectAtIndex:0] ) {
+        [self.navigationItem setHidesBackButton:YES];
+        UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navigationLogo"]];
+        self.navigationItem.titleView = logoView;
+    }
 }
 
 - (void)changePlaceholder

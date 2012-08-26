@@ -45,6 +45,8 @@
 		8EA44F7115E999EC00BB0A08 /* onboarding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F6F15E999EC00BB0A08 /* onboarding@2x.png */; };
 		8EA44F7415E99C2B00BB0A08 /* onboardingStartButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F7215E99C2B00BB0A08 /* onboardingStartButton.png */; };
 		8EA44F7515E99C2B00BB0A08 /* onboardingStartButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F7315E99C2B00BB0A08 /* onboardingStartButton@2x.png */; };
+		8EA44F7815E9A15A00BB0A08 /* navigationBackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F7615E9A15A00BB0A08 /* navigationBackButton.png */; };
+		8EA44F7915E9A15A00BB0A08 /* navigationBackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F7715E9A15A00BB0A08 /* navigationBackButton@2x.png */; };
 		8EB3D2A815DB55DB00709586 /* Panhandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3D2A715DB55DB00709586 /* Panhandler.m */; };
 		8ED93B0915DC1B3900339BF1 /* LoadingVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED93B0815DC1B3900339BF1 /* LoadingVideoView.m */; };
 		8ED93B0C15DC1B4700339BF1 /* LoadingVideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED93B0B15DC1B4700339BF1 /* LoadingVideoView.xib */; };
@@ -118,6 +120,8 @@
 		8EA44F6F15E999EC00BB0A08 /* onboarding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onboarding@2x.png"; sourceTree = "<group>"; };
 		8EA44F7215E99C2B00BB0A08 /* onboardingStartButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onboardingStartButton.png; sourceTree = "<group>"; };
 		8EA44F7315E99C2B00BB0A08 /* onboardingStartButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onboardingStartButton@2x.png"; sourceTree = "<group>"; };
+		8EA44F7615E9A15A00BB0A08 /* navigationBackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationBackButton.png; sourceTree = "<group>"; };
+		8EA44F7715E9A15A00BB0A08 /* navigationBackButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationBackButton@2x.png"; sourceTree = "<group>"; };
 		8EB3D2A615DB55DB00709586 /* Panhandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Panhandler.h; sourceTree = "<group>"; };
 		8EB3D2A715DB55DB00709586 /* Panhandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Panhandler.m; sourceTree = "<group>"; };
 		8ED93B0715DC1B3900339BF1 /* LoadingVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingVideoView.h; sourceTree = "<group>"; };
@@ -379,6 +383,8 @@
 		8EDDFB2615D88B1A00BCD710 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8EA44F7615E9A15A00BB0A08 /* navigationBackButton.png */,
+				8EA44F7715E9A15A00BB0A08 /* navigationBackButton@2x.png */,
 				8EA44F6E15E999EC00BB0A08 /* onboarding.png */,
 				8EA44F6F15E999EC00BB0A08 /* onboarding@2x.png */,
 				8EA44F7215E99C2B00BB0A08 /* onboardingStartButton.png */,
@@ -487,6 +493,8 @@
 				8EA44F7115E999EC00BB0A08 /* onboarding@2x.png in Resources */,
 				8EA44F7415E99C2B00BB0A08 /* onboardingStartButton.png in Resources */,
 				8EA44F7515E99C2B00BB0A08 /* onboardingStartButton@2x.png in Resources */,
+				8EA44F7815E9A15A00BB0A08 /* navigationBackButton.png in Resources */,
+				8EA44F7915E9A15A00BB0A08 /* navigationBackButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
