@@ -63,6 +63,8 @@
 - (void)createLoadingVideoViewForVideo:(NSArray*)video;
 {
     
+    self.moviePlayer.controlStyle = MPMovieControlStyleNone;
+    
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingVideoView" owner:self options:NULL];
     self.loadingVideoView = [nib objectAtIndex:0];
     self.loadingVideoView.videoTitleLabel.text = [NSString stringWithFormat:@"%@", [video valueForKey:@"title"]];
@@ -74,12 +76,10 @@
     if ( UIDeviceOrientationIsPortrait(self.interfaceOrientation) ) {
     
         [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
-        [self.loadingVideoView.videoTitleLabel setHidden:NO];
         
     } else {
         
-        [self.loadingVideoView setFrame:CGRectMake(80.0f, 60.0f, frame.size.height, frame.size.width)];
-        [self.loadingVideoView.videoTitleLabel setHidden:YES];
+        [self.loadingVideoView setFrame:CGRectMake(80.0f, 40.0f, frame.size.height, frame.size.width)];
         
     }
     
@@ -108,12 +108,10 @@
         if ( UIDeviceOrientationIsPortrait(self.interfaceOrientation) ) {
             
             [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
-            [self.loadingVideoView.videoTitleLabel setHidden:NO];
             
         } else {
             
-            [self.loadingVideoView setFrame:CGRectMake(80.0f, 60.0f, frame.size.height, frame.size.width)];
-            [self.loadingVideoView.videoTitleLabel setHidden:YES];
+            [self.loadingVideoView setFrame:CGRectMake(80.0f, 40.0f, frame.size.height, frame.size.width)];
         }
         
     }

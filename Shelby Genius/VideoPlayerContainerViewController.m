@@ -97,6 +97,7 @@
 {
     self.moviePlayer = [[VideoPlayerViewController alloc] initWithVideo:self.video andVideoPlayerContainerViewController:self];
     [self.moviePlayer.view setFrame:self.appDelegate.window.frame];
+    self.moviePlayer.moviePlayer.controlStyle = MPMovieControlStyleNone;
     [self.navigationController pushViewController:self.moviePlayer animated:NO];
     [self.navigationController setNavigationBarHidden:YES];
     [self.moviePlayer modifyVideoPlayerButtons];
@@ -210,6 +211,8 @@
         [self.moviePlayer.moviePlayer setContentURL:[NSURL URLWithString:link]];
         [self.moviePlayer.moviePlayer play];
 
+        self.moviePlayer.moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
+        
         [[Panhandler sharedInstance] recordEvent];
         
     }
@@ -256,8 +259,8 @@
     
     MPMoviePlayerController *movieController = notification.object;
     if (movieController.playbackState == MPMoviePlaybackStatePlaying) {
-     
-        [UIView animateWithDuration:0.67 animations:^{
+        [self.moviePlayer.loadingVideoView.indicator stopAnimating];
+        [UIView animateWithDuration:0.50 animations:^{
             [self.moviePlayer.loadingVideoView setAlpha:0.0f];
         } completion:^(BOOL finished) {
             [self.moviePlayer.loadingVideoView removeFromSuperview];
