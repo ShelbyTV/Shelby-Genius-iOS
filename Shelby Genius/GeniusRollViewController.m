@@ -39,8 +39,9 @@
 - (void)initalizeObservers;
 - (void)search;
 - (void)makeResultsArray:(NSNotification *)notification;
-- (void)shareVideoAction:(UIButton*)button;
-- (void)scrollToLastCell;
+- (void)refreshDataSource;
+- (void)scrollToCurrentVideo:(NSNotification*)notification;
+- (void)shareVideoAction:(UIButton *)button;
 
 @end
 
@@ -77,7 +78,7 @@
     NSString *querySpecificObserver = [NSString stringWithFormat:@"%@_%@", kRollFramesObserver, self.query];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:querySpecificObserver object:nil];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRollFramesScrollingObserver object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kIndexOfCurrentVideoObserver object:nil];
     
     self.tableView = nil;
     
@@ -137,10 +138,10 @@
                                              selector:@selector(makeResultsArray:)
                                                  name:querySpecificObserver
                                                object:nil];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(scrollToLastCell)
-                                                 name:kRollFramesScrollingObserver
+                                             selector:@selector(scrollToCurrentVideo:)
+                                                 name:kIndexOfCurrentVideoObserver
                                                object:nil];
     
 }
@@ -177,9 +178,7 @@
             NSString *thumbnailURL = [[frameArray valueForKey:@"video"] valueForKey:@"thumbnail_url"];
             NSString *videoTitle = [[frameArray valueForKey:@"video"] valueForKey:@"title"];
             NSString *providerName = [[frameArray valueForKey:@"video"] valueForKey:@"provider_name"];
-            
-            NSLog(@"%@ | %@ | %@", thumbnailURL, videoTitle, providerName);
-            
+
             // 3. Check for <null>-values frames
             if ( thumbnailURL == (id)[NSNull null] || videoTitle == (id)[NSNull null] || providerName == (id)[NSNull null] ) {
                 
@@ -223,8 +222,6 @@
                 NSString *videoTitle = [[frameArray valueForKey:@"video"] valueForKey:@"title"];
                 NSString *providerName = [[frameArray valueForKey:@"video"] valueForKey:@"provider_name"];
                 
-                NSLog(@"%@ | %@ | %@", thumbnailURL, videoTitle, providerName);
-                
                 // 3. Check for <null>-values frames
                 if ( thumbnailURL == (id)[NSNull null] || videoTitle == (id)[NSNull null] || providerName == (id)[NSNull null] ) {
                     
@@ -246,6 +243,45 @@
     
 }
 
+- (void)refreshDataSource
+{
+    /*
+     
+     Conditions Explained
+     
+     1: self.numberOfFetchedResults > kMinimumVideoCountBeforeFetch
+     There must be at least 20 results before trying to fetch more results (20 is the minimum 1 API 
+     call returns - why make subsequent API calls if less than 20 are returned the first time?)
+
+     2. NO == self.isFetchingMoreVideos
+     Avoid subsquent re-fetches when a fetch is in progress
+     
+     3. NO == self.noMoreVideosToFetch
+     Avoid fetching movies if the previous fetch didn't return any new movies.
+     
+     --- 
+     
+     NOTE: Call this method to fetch videos when ONLY the third-to-last video has displayed to the screen, 
+     so that when the user gets to the last video, the other ones will have loaded or are about to be loaded.
+     
+     
+     */
+    
+    if ( (self.numberOfFetchedResults >= kMinimumVideoCountBeforeFetch) && (NO == self.isFetchingMoreVideos) && (NO == self.noMoreVideosToFetch) ) {
+        
+        NSString *rollID = [[NSUserDefaults standardUserDefaults] objectForKey:kRollID];
+        NSString *requestString = [NSString stringWithFormat:kGetRollFramesAgain, rollID, self.numberOfFetchedResults];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
+        APIClient *client = [[APIClient alloc] init];
+        [client performRequest:request ofType:APIRequestType_GetRollFrames withQuery:self.query];
+        
+        if ( self == self.navigationController.visibleViewController ) [self.appDelegate addHUDWithMessage:@"Getting more Genius videos"];
+        [self setIsFetchingMoreVideos:YES];
+        [self setNoMoreVideosToFetch:YES];
+        
+    }
+}
+
 - (void)shareVideoAction:(UIButton *)button
 {
     VideoCardCell *cell = (VideoCardCell*)[button superview];
@@ -258,6 +294,18 @@
                                                     otherButtonTitles:@"Email", @"Facebook", @"Twitter", nil];
     
     [actionSheet showInView:self.tableView];
+}
+
+- (void)scrollToCurrentVideo:(NSNotification*)notification
+{
+    NSNumber *row = [notification.userInfo objectForKey:kIndexOfCurrentVideo];
+    NSLog(@"%d", [row intValue]);
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[row intValue] inSection:0]
+                          atScrollPosition:UITableViewScrollPositionTop
+                                  animated:YES];
+    
+    if ( [row intValue] >= [self.resultsArray count]-3 ) [self refreshDataSource];
+    
 }
 
 - (void)scrollToLastCell
@@ -394,39 +442,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    /*
-
-     Crazy Conditions Explained
-     
-     1: self.numberOfFetchedResults > kMinimumVideoCountBeforeFetch
-        There must be at least 20 results before trying to fetch more results (20 is the minimum 1 API call returns - why make subsequent API calls if less than 20 are returned the first time?)
-     
-     2. indexPath.row == [self.resultsArray count]-3
-        Will begin to fetch videos when the third-to-last video has displayed to the screen, so that when the user gets to the last video, the other ones will have loaded or are about to be loaded.
-     
-     3. NO == self.isFetchingMoreVideos
-        Avoid subsquent re-fetches when a fetch is in progress
-     
-     4. NO == self.noMoreVideosToFetch
-        Avoid fetching movies if the previous fetch didn't return any new movies.
-     
-     */
-    
-    if ( (self.numberOfFetchedResults >= kMinimumVideoCountBeforeFetch) && (indexPath.row == [self.resultsArray count]-3) && (NO == self.isFetchingMoreVideos) && (NO == self.noMoreVideosToFetch) ) {
-            
-        NSString *rollID = [[NSUserDefaults standardUserDefaults] objectForKey:kRollID];
-        NSString *requestString = [NSString stringWithFormat:kGetRollFramesAgain, rollID, self.numberOfFetchedResults];
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
-        APIClient *client = [[APIClient alloc] init];
-        [client performRequest:request ofType:APIRequestType_GetRollFrames withQuery:self.query];
-        
-        [self.appDelegate addHUDWithMessage:@"Getting more Genius videos"];
-        [self setIsFetchingMoreVideos:YES];
-        [self setNoMoreVideosToFetch:YES];
-        
-    }
-    
+    if ( indexPath.row == [self.resultsArray count]-3 ) [self refreshDataSource];
 }
 
 #pragma mark - Memory Warning

@@ -48,6 +48,7 @@
 		8EA44F7815E9A15A00BB0A08 /* navigationBackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F7615E9A15A00BB0A08 /* navigationBackButton.png */; };
 		8EA44F7915E9A15A00BB0A08 /* navigationBackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F7715E9A15A00BB0A08 /* navigationBackButton@2x.png */; };
 		8EB3D2A815DB55DB00709586 /* Panhandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3D2A715DB55DB00709586 /* Panhandler.m */; };
+		8ECA62BD15EA88FA00056231 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 8ECA62BC15EA88FA00056231 /* iTunesArtwork */; };
 		8ED93B0915DC1B3900339BF1 /* LoadingVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED93B0815DC1B3900339BF1 /* LoadingVideoView.m */; };
 		8ED93B0C15DC1B4700339BF1 /* LoadingVideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED93B0B15DC1B4700339BF1 /* LoadingVideoView.xib */; };
 		8EDCE99815D4C3C000EFB1F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99715D4C3C000EFB1F2 /* UIKit.framework */; };
@@ -124,6 +125,7 @@
 		8EA44F7715E9A15A00BB0A08 /* navigationBackButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationBackButton@2x.png"; sourceTree = "<group>"; };
 		8EB3D2A615DB55DB00709586 /* Panhandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Panhandler.h; sourceTree = "<group>"; };
 		8EB3D2A715DB55DB00709586 /* Panhandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Panhandler.m; sourceTree = "<group>"; };
+		8ECA62BC15EA88FA00056231 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = SOURCE_ROOT; };
 		8ED93B0715DC1B3900339BF1 /* LoadingVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingVideoView.h; sourceTree = "<group>"; };
 		8ED93B0815DC1B3900339BF1 /* LoadingVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingVideoView.m; sourceTree = "<group>"; };
 		8ED93B0B15DC1B4700339BF1 /* LoadingVideoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingVideoView.xib; sourceTree = "<group>"; };
@@ -200,16 +202,9 @@
 		8E89F5D115D4FECB004B2DFF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8ECA62BF15EA890500056231 /* Default Artwork */,
 				8EDDFB2215D88B1A00BCD710 /* Fonts */,
 				8EDDFB2615D88B1A00BCD710 /* Images */,
-				8E89F5C115D4FEC4004B2DFF /* Default.png */,
-				8E89F5C215D4FEC4004B2DFF /* Default@2x.png */,
-				8E89F5C315D4FEC4004B2DFF /* Icon-72.png */,
-				8E89F5C415D4FEC4004B2DFF /* Icon-Small-50.png */,
-				8E89F5C515D4FEC4004B2DFF /* Icon-Small.png */,
-				8E89F5C615D4FEC4004B2DFF /* Icon-Small@2x.png */,
-				8E89F5C715D4FEC4004B2DFF /* Icon.png */,
-				8E89F5C815D4FEC4004B2DFF /* Icon@2x.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -234,6 +229,22 @@
 			name = Panhandler;
 			path = "External Libraries/Panhandler";
 			sourceTree = SOURCE_ROOT;
+		};
+		8ECA62BF15EA890500056231 /* Default Artwork */ = {
+			isa = PBXGroup;
+			children = (
+				8E89F5C115D4FEC4004B2DFF /* Default.png */,
+				8E89F5C215D4FEC4004B2DFF /* Default@2x.png */,
+				8E89F5C315D4FEC4004B2DFF /* Icon-72.png */,
+				8E89F5C415D4FEC4004B2DFF /* Icon-Small-50.png */,
+				8E89F5C515D4FEC4004B2DFF /* Icon-Small.png */,
+				8E89F5C615D4FEC4004B2DFF /* Icon-Small@2x.png */,
+				8E89F5C715D4FEC4004B2DFF /* Icon.png */,
+				8E89F5C815D4FEC4004B2DFF /* Icon@2x.png */,
+				8ECA62BC15EA88FA00056231 /* iTunesArtwork */,
+			);
+			name = "Default Artwork";
+			sourceTree = "<group>";
 		};
 		8EDCE98815D4C3C000EFB1F2 = {
 			isa = PBXGroup;
@@ -495,6 +506,7 @@
 				8EA44F7515E99C2B00BB0A08 /* onboardingStartButton@2x.png in Resources */,
 				8EA44F7815E9A15A00BB0A08 /* navigationBackButton.png in Resources */,
 				8EA44F7915E9A15A00BB0A08 /* navigationBackButton@2x.png in Resources */,
+				8ECA62BD15EA88FA00056231 /* iTunesArtwork in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

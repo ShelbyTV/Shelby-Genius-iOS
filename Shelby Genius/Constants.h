@@ -10,7 +10,7 @@
 #import "APIRoutes.h"
 
 // NSUserDefaults
-#define kPreviouslyLaunched              @"Previously Launched"
+#define kPreviouslyLaunched             @"Previously Launched"
 #define kRollID                         @"Roll ID"  
 
 // Query
@@ -18,6 +18,7 @@
 #define kMaximumNumberOfQueries         7
 #define kPreviousQueries                @"Previous Queries"
 
-// Rolls
+// Observer
 #define kRollFramesObserver             @"Roll Frames Observer"
-#define kRollFramesScrollingObserver    @"Roll Frames Scroll Observer"
+#define kIndexOfCurrentVideoObserver    @"Index of Current Video Observer"
+#define kIndexOfCurrentVideo            @"Index of Current Video"

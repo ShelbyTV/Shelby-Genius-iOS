@@ -209,11 +209,12 @@
         
         [self.moviePlayer.moviePlayer setContentURL:[NSURL URLWithString:link]];
         [self.moviePlayer.moviePlayer play];
-        
+
         [[Panhandler sharedInstance] recordEvent];
         
     }
 }
+
 
 #pragma mark - Observer Methods
 - (void)processNotification:(NSNotification *)notification
@@ -291,17 +292,27 @@
 
     if ( self.selectedVideo > 0 ) {
         
+        // Unload current video
         [self.moviePlayer.moviePlayer stop];
         self.videoWillBegin = NO;
+        
+        // Load previous video
         self.selectedVideo -= 1;
         [self loadNewlySelectedVideo];
 
+        // Scroll GeniusRollViewController to row of video that will be loaded
+        NSNumber *rowNumber = [NSNumber numberWithInt:self.selectedVideo];
+        NSDictionary *dictionary = [NSDictionary dictionaryWithObject:rowNumber forKey:kIndexOfCurrentVideo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kIndexOfCurrentVideoObserver
+                                                            object:nil
+                                                          userInfo:dictionary];
+        
     } else {
         
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
-                                                            message:@"You are currently watching the first video recommended by Genius"
+                                                            message:@"You are currently watching the first video recommended by Genius."
                                                            delegate:nil
-                                                  cancelButtonTitle:@"Thanks!"
+                                                  cancelButtonTitle:@"Dismiss"
                                                   otherButtonTitles:nil, nil];
         
         [alertView show];
@@ -312,20 +323,32 @@
 
 - (void)nextVideoButtonAction
 {
-    NSLog(@"%d", self.selectedVideo);
     if ( self.selectedVideo < [self.videos count]-1 ) {
        
+        // Unload current video
         [self.moviePlayer.moviePlayer stop];
         self.videoWillBegin = NO;
+        
+        // Load next video
         self.selectedVideo += 1;
         [self loadNewlySelectedVideo];
     
+        // Scroll GeniusRollViewController to row of video that will be loaded
+        NSNumber *rowNumber = [NSNumber numberWithInt:self.selectedVideo];
+        NSDictionary *dictionary = [NSDictionary dictionaryWithObject:rowNumber forKey:kIndexOfCurrentVideo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kIndexOfCurrentVideoObserver
+                                                            object:nil
+                                                          userInfo:dictionary];
+        
     } else {
         
-        [self destroyMoviePlayer];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kRollFramesScrollingObserver
-                                                            object:nil
-                                                          userInfo:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                            message:@"You are currently watching the last video recommended by Shelby Genius."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Dismiss"
+                                                  otherButtonTitles:nil, nil];
+        
+        [alertView show];
         
     }
     
