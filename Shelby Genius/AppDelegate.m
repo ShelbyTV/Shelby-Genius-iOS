@@ -20,6 +20,7 @@
 @interface AppDelegate ()
 
 @property (strong, nonatomic) UIView *progressView;
+@property (strong, nonatomic) UINavigationController *rootNavigationController;
 @property (assign, nonatomic) NSTimeInterval videoPlaybackTimeInterval;
 
 - (void)analytics;
@@ -30,9 +31,9 @@
 
 @implementation AppDelegate
 @synthesize window;
-@synthesize rootNavigationController;
 @synthesize progressHUD = _progressHUD;
 @synthesize progressView = _progressView;
+@synthesize rootNavigationController;
 @synthesize videoPlayerViewController = _videoPlayerViewController;
 @synthesize videoPlaybackTimeInterval = _videoPlaybackTimeInterval;
 
@@ -43,7 +44,7 @@
     // Initialize UIWindow's rootViewController
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    // Check if app launched before
+    // Check if app/onboarding was previously launched before
     BOOL previouslyLaunched = [[NSUserDefaults standardUserDefaults] boolForKey:kPreviouslyLaunched];
     
     if ( previouslyLaunched ) {
@@ -94,7 +95,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    
     // Reset RollID (just to be on the safe side)
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kRollID];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -124,7 +124,7 @@
     
     UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navigationLogo"]];
     self.rootNavigationController.visibleViewController.navigationItem.titleView = logoView;
-    
+
 }
 
 

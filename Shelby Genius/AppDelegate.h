@@ -15,7 +15,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) MBProgressHUD *progressHUD;
-@property (strong, nonatomic) UINavigationController *rootNavigationController;
 @property (strong ,nonatomic) VideoPlayerViewController *videoPlayerViewController;
 
 - (void)addHUDWithMessage:(NSString*)message;

@@ -116,9 +116,18 @@
 #pragma mark - Private Methods
 - (void)customize
 {
+    // General Customization
     self.title = @"Genius Results";
     self.view.backgroundColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
     self.tableView.backgroundColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
+    
+    // Custom Back-UIBarButtonItem
+    UIButton *backBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 52, 32)];
+    [backBarButton setImage:[UIImage imageNamed:@"navigationBackButton"] forState:UIControlStateNormal];
+    [backBarButton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBarButton];
+    [self.navigationItem setHidesBackButton:YES];
+    [self.navigationItem setLeftBarButtonItem:backBarButtonItem];
 }
 
 - (void)initalizeObservers
