@@ -39,6 +39,12 @@
 		8E8C684715D99DCE004290A6 /* GeniusRollViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C684615D99DCE004290A6 /* GeniusRollViewController.xib */; };
 		8E8C684915D9A0A0004290A6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8C684815D9A0A0004290A6 /* QuartzCore.framework */; };
 		8E99EF6E15E44FDC00877068 /* VideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E99EF6D15E44FDB00877068 /* VideoPlayerViewController.m */; };
+		8EA44F6B15E9982600BB0A08 /* GeniusOnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EA44F6915E9982600BB0A08 /* GeniusOnboardingViewController.m */; };
+		8EA44F6C15E9982600BB0A08 /* GeniusOnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F6A15E9982600BB0A08 /* GeniusOnboardingViewController.xib */; };
+		8EA44F7015E999EC00BB0A08 /* onboarding.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F6E15E999EC00BB0A08 /* onboarding.png */; };
+		8EA44F7115E999EC00BB0A08 /* onboarding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F6F15E999EC00BB0A08 /* onboarding@2x.png */; };
+		8EA44F7415E99C2B00BB0A08 /* onboardingStartButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F7215E99C2B00BB0A08 /* onboardingStartButton.png */; };
+		8EA44F7515E99C2B00BB0A08 /* onboardingStartButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F7315E99C2B00BB0A08 /* onboardingStartButton@2x.png */; };
 		8EB3D2A815DB55DB00709586 /* Panhandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3D2A715DB55DB00709586 /* Panhandler.m */; };
 		8ED93B0915DC1B3900339BF1 /* LoadingVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED93B0815DC1B3900339BF1 /* LoadingVideoView.m */; };
 		8ED93B0C15DC1B4700339BF1 /* LoadingVideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED93B0B15DC1B4700339BF1 /* LoadingVideoView.xib */; };
@@ -105,6 +111,13 @@
 		8E8C684815D9A0A0004290A6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8E99EF6C15E44FDB00877068 /* VideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewController.h; sourceTree = "<group>"; };
 		8E99EF6D15E44FDB00877068 /* VideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerViewController.m; sourceTree = "<group>"; };
+		8EA44F6815E9982600BB0A08 /* GeniusOnboardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeniusOnboardingViewController.h; sourceTree = "<group>"; };
+		8EA44F6915E9982600BB0A08 /* GeniusOnboardingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeniusOnboardingViewController.m; sourceTree = "<group>"; };
+		8EA44F6A15E9982600BB0A08 /* GeniusOnboardingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeniusOnboardingViewController.xib; sourceTree = "<group>"; };
+		8EA44F6E15E999EC00BB0A08 /* onboarding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onboarding.png; sourceTree = "<group>"; };
+		8EA44F6F15E999EC00BB0A08 /* onboarding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onboarding@2x.png"; sourceTree = "<group>"; };
+		8EA44F7215E99C2B00BB0A08 /* onboardingStartButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onboardingStartButton.png; sourceTree = "<group>"; };
+		8EA44F7315E99C2B00BB0A08 /* onboardingStartButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onboardingStartButton@2x.png"; sourceTree = "<group>"; };
 		8EB3D2A615DB55DB00709586 /* Panhandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Panhandler.h; sourceTree = "<group>"; };
 		8EB3D2A715DB55DB00709586 /* Panhandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Panhandler.m; sourceTree = "<group>"; };
 		8ED93B0715DC1B3900339BF1 /* LoadingVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingVideoView.h; sourceTree = "<group>"; };
@@ -315,6 +328,7 @@
 		8EDCE9CD15D4EF1D00EFB1F2 /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
+				8EA44F6A15E9982600BB0A08 /* GeniusOnboardingViewController.xib */,
 				8E8C684615D99DCE004290A6 /* GeniusRollViewController.xib */,
 				8ED93B0B15DC1B4700339BF1 /* LoadingVideoView.xib */,
 				8E8C683415D95778004290A6 /* QueryCell.xib */,
@@ -327,6 +341,8 @@
 		8EDCE9CE15D4EF2700EFB1F2 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8EA44F6815E9982600BB0A08 /* GeniusOnboardingViewController.h */,
+				8EA44F6915E9982600BB0A08 /* GeniusOnboardingViewController.m */,
 				8E8C682715D94CE5004290A6 /* GeniusRollViewController.h */,
 				8E8C682815D94CE5004290A6 /* GeniusRollViewController.m */,
 				8EDCE9A915D4C3C000EFB1F2 /* SearchViewController.h */,
@@ -363,6 +379,10 @@
 		8EDDFB2615D88B1A00BCD710 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8EA44F6E15E999EC00BB0A08 /* onboarding.png */,
+				8EA44F6F15E999EC00BB0A08 /* onboarding@2x.png */,
+				8EA44F7215E99C2B00BB0A08 /* onboardingStartButton.png */,
+				8EA44F7315E99C2B00BB0A08 /* onboardingStartButton@2x.png */,
 				8E1A7EBA15E405A500FC7086 /* tableViewBorder.png */,
 				8E1A7EBB15E405A500FC7086 /* tableViewBorder@2x.png */,
 				8E1A7EB115E3EACF00FC7086 /* searchBar.png */,
@@ -462,6 +482,11 @@
 				8E1A7EBC15E405A500FC7086 /* tableViewBorder.png in Resources */,
 				8E1A7EBD15E405A500FC7086 /* tableViewBorder@2x.png in Resources */,
 				8E649A9415E491BA00B4D407 /* SearchTerms.plist in Resources */,
+				8EA44F6C15E9982600BB0A08 /* GeniusOnboardingViewController.xib in Resources */,
+				8EA44F7015E999EC00BB0A08 /* onboarding.png in Resources */,
+				8EA44F7115E999EC00BB0A08 /* onboarding@2x.png in Resources */,
+				8EA44F7415E99C2B00BB0A08 /* onboardingStartButton.png in Resources */,
+				8EA44F7515E99C2B00BB0A08 /* onboardingStartButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,6 +527,7 @@
 				8ED93B0915DC1B3900339BF1 /* LoadingVideoView.m in Sources */,
 				8E99EF6E15E44FDC00877068 /* VideoPlayerViewController.m in Sources */,
 				8E0005B115E53CD300712B4D /* SocialController.m in Sources */,
+				8EA44F6B15E9982600BB0A08 /* GeniusOnboardingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

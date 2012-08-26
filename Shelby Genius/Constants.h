@@ -9,6 +9,10 @@
 #import "Structures.h"
 #import "APIRoutes.h"
 
+// NSUserDefaults
+#define kPreviouslyLaunched              @"Previously Launched"
+#define kRollID                         @"Roll ID"  
+
 // Query
 #define kMinimumVideoCountBeforeFetch   20
 #define kMaximumNumberOfQueries         7
@@ -16,5 +20,4 @@
 
 // Rolls
 #define kRollFramesObserver             @"Roll Frames Observer"
-#define kRollFramesScrollingObserver       @"Roll Frames Scroll Observer"
-#define kRollID                         @"Roll ID"
+#define kRollFramesScrollingObserver    @"Roll Frames Scroll Observer"

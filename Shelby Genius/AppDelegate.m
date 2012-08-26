@@ -14,6 +14,7 @@
 
 // View Controllers
 #import "SearchViewController.h"
+#import "GeniusOnboardingViewController.h"
 #import "VideoPlayerViewController.h"
 
 @interface AppDelegate ()
@@ -29,8 +30,7 @@
 
 @implementation AppDelegate
 @synthesize window;
-@synthesize searchViewController;
-@synthesize searchNavigationController;
+@synthesize rootNavigationController;
 @synthesize progressHUD = _progressHUD;
 @synthesize progressView = _progressView;
 @synthesize videoPlayerViewController = _videoPlayerViewController;
@@ -42,9 +42,24 @@
     
     // Initialize UIWindow's rootViewController
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController_iPhone" bundle:nil];
-    self.searchNavigationController = [[UINavigationController alloc] initWithRootViewController:self.searchViewController];
-    self.window.rootViewController = searchNavigationController;
+    
+    // Check if app launched before
+    BOOL previouslyLaunched = [[NSUserDefaults standardUserDefaults] boolForKey:kPreviouslyLaunched];
+    
+    if ( previouslyLaunched ) {
+    
+        SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController_iPhone" bundle:nil];
+        self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:searchViewController];
+        self.window.rootViewController = rootNavigationController;
+        
+    } else {
+        
+        GeniusOnboardingViewController *geniusOnboardingViewController = [[GeniusOnboardingViewController alloc] initWithNibName:@"GeniusOnboardingViewController" bundle:nil];
+        self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:geniusOnboardingViewController];
+        self.window.rootViewController = rootNavigationController;
+        
+    }
+    
     
     // Add analytics
     [self analytics];
@@ -108,7 +123,7 @@
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
     
     UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navigationLogo"]];
-    self.searchNavigationController.visibleViewController.navigationItem.titleView = logoView;
+    self.rootNavigationController.visibleViewController.navigationItem.titleView = logoView;
     
 }
 
