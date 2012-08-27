@@ -302,6 +302,7 @@
     if ( [self.previousQueriesArray count] ) {
         
         tableView.alpha = 1.0f;
+        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"QueryCell" owner:self options:nil];
         QueryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QueryCell"];
         if ( nil == cell ) cell = (QueryCell*)[nib objectAtIndex:0];
@@ -313,8 +314,11 @@
     } else {
 
         tableView.alpha = 0.0f;
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];;
+        return cell;
     }
 
 }
