@@ -48,8 +48,8 @@
 #define PanhandlerDebugMode     NO                  // Set YES to show the alert every time. Set NO when shipping to App Store.
 
 /* Optional Customization */
-#define PanhandlerAlertTitle                    @"Shelby needs love!"
-#define PanhandlerAlertMessage                  @"Tell us why you enjoy Shelby Genius, and take a second to rate it.\n We value your feedback!"
+#define PanhandlerAlertTitle                    @"Thoughts to share?"
+#define PanhandlerAlertMessage                  @"Please take a second to\nrate this app and tell us why\nyou enjoy Shelby Genius.\nYour feedback helps us improve. "
 #define PanhandlerNoMessage                     @"No, thanks"
 #define PanhandlerYesMessage                    @"Rate Shelby Genius"
 #define PanhandlerRemindMeLaterMessage          @"I'll do it later"

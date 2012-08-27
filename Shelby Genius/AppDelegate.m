@@ -123,12 +123,14 @@
     
     // UINavigationBar
     [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
-
+    NSDictionary *titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIFont fontWithName:@"Ubuntu-Bold" size:20.0f], UITextAttributeFont, nil];
+    [[UINavigationBar appearance] setTitleTextAttributes:titleTextAttributes];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
     
     UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navigationLogo"]];
     self.rootNavigationController.visibleViewController.navigationItem.titleView = logoView;
     
+    // UITableView
     [[UITableView appearance] setSeparatorColor:[UIColor colorWithRed:173.0f/255.0f green:173.0f/255.0f blue:173.0f/255.0f alpha:1.0f]];
 
 }

@@ -295,7 +295,7 @@
                                                              delegate:self
                                                     cancelButtonTitle:@"Cancel"
                                                destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"Email", @"Facebook", @"Twitter", nil];
+                                                    otherButtonTitles:@"Email", @"Twitter", nil];
     
     [actionSheet showInView:self.tableView];
 }
@@ -326,9 +326,7 @@
         case 0: // Email
             [SocialController sendEmailForVideo:self.selectedVideoToShare inViewController:self];
             break;
-        case 1: // Facebook
-            break;
-        case 2: // Twitter
+        case 1: // Twitter
             [SocialController postToTwitterForVideo:self.selectedVideoToShare inViewController:self];
             break;
         default:
