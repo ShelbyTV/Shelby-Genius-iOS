@@ -167,6 +167,8 @@
     
     if ( ![self resultsArray] ) {
         
+        [[Panhandler sharedInstance] recordEvent];
+        
         self.resultsArray = [NSMutableArray array];
         [self.resultsArray addObjectsFromArray:[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"]];
         self.numberOfFetchedResults = [self.resultsArray count];
@@ -198,8 +200,6 @@
         [self.appDelegate removeHUD];
         [self.tableView reloadData];
         
-        [[Panhandler sharedInstance] recordEvent];
-        
     } else {
         
         [self.resultsArray addObjectsFromArray:[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"]];
@@ -213,6 +213,8 @@
                 
         } else {
         
+            [[Panhandler sharedInstance] recordEvent];
+            
             self.numberOfFetchedResults = self.numberOfFetchedResults + [[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"] count];
            
             /// Check for videos with <null> values, and remove them from the resultsArray

@@ -30,7 +30,6 @@
 @property (assign, nonatomic) BOOL videoWillBegin;
 
 - (void)createMoviePlayer;
-- (void)destroyMoviePlayer;
 - (void)createWebView;
 - (void)videoDirectLinkFromProvider:(NSString*)providerName;
 - (void)loadYouTubePage;
@@ -212,8 +211,6 @@
         [self.moviePlayer.moviePlayer play];
 
         self.moviePlayer.moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
-        
-        [[Panhandler sharedInstance] recordEvent];
         
     }
 }

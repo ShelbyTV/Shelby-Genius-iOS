@@ -15,6 +15,8 @@
 		8E1A7EB615E3EACF00FC7086 /* searchBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1A7EB215E3EACF00FC7086 /* searchBar@2x.png */; };
 		8E1A7EB715E3EACF00FC7086 /* searchButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1A7EB315E3EACF00FC7086 /* searchButton.png */; };
 		8E1A7EB815E3EACF00FC7086 /* searchButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1A7EB415E3EACF00FC7086 /* searchButton@2x.png */; };
+		8E25615315EBDEE300200BC2 /* loadingCancelButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E25615115EBDEE300200BC2 /* loadingCancelButton.png */; };
+		8E25615415EBDEE300200BC2 /* loadingCancelButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E25615215EBDEE300200BC2 /* loadingCancelButton@2x.png */; };
 		8E2A243215D4F0FA00D09A8B /* AsynchronousFreeloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2A243115D4F0FA00D09A8B /* AsynchronousFreeloader.m */; };
 		8E2A243715D4F4C400D09A8B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2A243615D4F4C400D09A8B /* MediaPlayer.framework */; };
 		8E2E974215D565F900178DA0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2E974115D565F900178DA0 /* AVFoundation.framework */; };
@@ -83,6 +85,8 @@
 		8E1A7EB215E3EACF00FC7086 /* searchBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchBar@2x.png"; sourceTree = "<group>"; };
 		8E1A7EB315E3EACF00FC7086 /* searchButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchButton.png; sourceTree = "<group>"; };
 		8E1A7EB415E3EACF00FC7086 /* searchButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchButton@2x.png"; sourceTree = "<group>"; };
+		8E25615115EBDEE300200BC2 /* loadingCancelButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loadingCancelButton.png; sourceTree = "<group>"; };
+		8E25615215EBDEE300200BC2 /* loadingCancelButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loadingCancelButton@2x.png"; sourceTree = "<group>"; };
 		8E2A243015D4F0FA00D09A8B /* AsynchronousFreeloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsynchronousFreeloader.h; sourceTree = "<group>"; };
 		8E2A243115D4F0FA00D09A8B /* AsynchronousFreeloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsynchronousFreeloader.m; sourceTree = "<group>"; };
 		8E2A243615D4F4C400D09A8B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -399,6 +403,8 @@
 		8EDDFB2615D88B1A00BCD710 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8E25615115EBDEE300200BC2 /* loadingCancelButton.png */,
+				8E25615215EBDEE300200BC2 /* loadingCancelButton@2x.png */,
 				8ECA62C015EA989700056231 /* shareChevron.png */,
 				8ECA62C115EA989700056231 /* shareChevron@2x.png */,
 				8EA44F7615E9A15A00BB0A08 /* navigationBackButton.png */,
@@ -512,6 +518,8 @@
 				8ECA62C215EA989700056231 /* shareChevron.png in Resources */,
 				8ECA62C315EA989700056231 /* shareChevron@2x.png in Resources */,
 				8ECA62C515EB215400056231 /* navigationBar@2x.png in Resources */,
+				8E25615315EBDEE300200BC2 /* loadingCancelButton.png in Resources */,
+				8E25615415EBDEE300200BC2 /* loadingCancelButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

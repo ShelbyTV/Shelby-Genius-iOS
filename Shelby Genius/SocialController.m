@@ -47,6 +47,8 @@ static SocialController *sharedInstance = nil;
 + (void)sendEmailForVideo:(NSArray *)video inViewController:(UIViewController *)viewController
 {
     
+    [[Panhandler sharedInstance] recordEvent];
+    
     [[SocialController sharedInstance] setViewController:viewController];
     
     MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
@@ -65,7 +67,7 @@ static SocialController *sharedInstance = nil;
     NSString *providerName = [video valueForKey:@"provider_name"];
     NSString *providerID = [video valueForKey:@"provider_id"];
     NSString *videoURL = [NSString stringWithFormat:@"http://shelby.tv/video/%@/%@", providerName, providerID];
-    NSString *message = [NSString stringWithFormat:@"I thought you might like this video: <strong><a href=\"%@\">%@</a></strong>.<br/><br/> This video was sent via the <strong>Shelby Genius iPhone app - <a href=\"http://www.shelby.tv\">grab it here!</a></strong>", videoURL, videoURL];
+    NSString *message = [NSString stringWithFormat:@"I thought you might like this video: <strong><a href=\"%@\">%@</a></strong>.<br/><br/><em>Sent via Shelby Genius for iPhone - <a href=\"http://shl.by/ios-genius-app\">get it here!</a></em>", videoURL, videoURL];
     [mailViewController setMessageBody:message isHTML:YES];
     
     // Present mailViewController
@@ -75,12 +77,13 @@ static SocialController *sharedInstance = nil;
 + (void)postToTwitterForVideo:(NSArray *)video inViewController:(UIViewController *)viewController
 {
     
+    [[Panhandler sharedInstance] recordEvent];
+    
     // Title
     NSString *videoTitle = [video valueForKey:@"title"];
     
     // Image
     NSString *thumnbnailURL = [video valueForKey:@"thumbnail_url"];
-//    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:thumnbnailURL]];
     
     // URL
     NSString *providerName = [video valueForKey:@"provider_name"];
@@ -89,8 +92,7 @@ static SocialController *sharedInstance = nil;
 
     if ([TWTweetComposeViewController canSendTweet]) {
         TWTweetComposeViewController *tweetSheet = [[TWTweetComposeViewController alloc] init];
-        [tweetSheet setInitialText:[NSString stringWithFormat:@"%@ - discovered via @Shelby Genius.", videoTitle]];
-//        [tweetSheet addImage:[UIImage imageWithData:imageData]];
+        [tweetSheet setInitialText:[NSString stringWithFormat:@"%@ /via @Shelby", videoTitle]];
         [tweetSheet addURL:[NSURL URLWithString:videoURL]];
         [viewController presentModalViewController:tweetSheet animated:YES];
     }
@@ -100,6 +102,7 @@ static SocialController *sharedInstance = nil;
 + (void)postToFacebookForVideo:(NSArray *)video inViewController:(UIViewController *)viewController
 {
     
+    [[Panhandler sharedInstance] recordEvent];
 }
 
 #pragma mark - MFMailComposeViewController

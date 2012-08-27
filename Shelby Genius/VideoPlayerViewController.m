@@ -68,6 +68,7 @@
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingVideoView" owner:self options:NULL];
     self.loadingVideoView = [nib objectAtIndex:0];
     self.loadingVideoView.videoTitleLabel.text = [NSString stringWithFormat:@"%@", [video valueForKey:@"title"]];
+    [self.loadingVideoView.loadingCancelButton addTarget:self.videoPlayerContainerViewController action:@selector(destroyMoviePlayer) forControlEvents:UIControlEventTouchUpInside];
     [AsynchronousFreeloader loadImageFromLink:[video valueForKey:@"thumbnail_url"] forImageView:self.loadingVideoView.thumbnailImageView withPlaceholderView:nil];
     [self.view addSubview:self.loadingVideoView];
     

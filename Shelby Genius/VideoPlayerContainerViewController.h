@@ -17,5 +17,6 @@
 - (void)videoDidEndPlaying:(NSNotification*)notification;
 - (void)previousVideoButtonAction;
 - (void)nextVideoButtonAction;
+- (void)destroyMoviePlayer;
 
 @end
