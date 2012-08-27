@@ -303,7 +303,6 @@
 - (void)scrollToCurrentVideo:(NSNotification*)notification
 {
     NSNumber *row = [notification.userInfo objectForKey:kIndexOfCurrentVideo];
-    NSLog(@"%d", [row intValue]);
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[row intValue] inSection:0]
                           atScrollPosition:UITableViewScrollPositionTop
                                   animated:YES];
