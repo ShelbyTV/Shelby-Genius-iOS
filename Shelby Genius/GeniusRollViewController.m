@@ -167,6 +167,12 @@
     
     if ( ![self resultsArray] ) {
         
+        if ( 0 == [[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"] count] ) {
+            
+            [self.appDelegate removeHUD];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+        
         [[Panhandler sharedInstance] recordEvent];
         
         self.resultsArray = [NSMutableArray array];
@@ -193,12 +199,13 @@
             }
             
         }
-
+        
         // Reset values and reload tableView
         [self setIsFetchingMoreVideos:NO];
         [self setNoMoreVideosToFetch:NO];
         [self.appDelegate removeHUD];
         [self.tableView reloadData];
+        
         
     } else {
         

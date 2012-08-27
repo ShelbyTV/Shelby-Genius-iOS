@@ -107,9 +107,10 @@
 
 - (void)destroyMoviePlayer
 {
+    NSUInteger numberOfViewControllers = [self.navigationController.viewControllers count];
     [self.moviePlayer.view setHidden:YES];
     [self.navigationController setNavigationBarHidden:NO];
-    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:numberOfViewControllers-3] animated:YES];
     [self.navigationController.visibleViewController viewWillAppear:NO]; //Redraw instance of GeniusRollViewControlelr in case navigationBar gets shifted in the wrong direction (potential solution)
     [self setMoviePlayer:nil];
     [self.appDelegate setVideoPlayerViewController:nil];

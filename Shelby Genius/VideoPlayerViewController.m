@@ -80,7 +80,7 @@
         
     } else {
         
-        [self.loadingVideoView setFrame:CGRectMake(80.0f, 40.0f, frame.size.height, frame.size.width)];
+        [self.loadingVideoView setFrame:CGRectMake(80.0f, 30.0f, frame.size.height, frame.size.width)];
         
     }
     
@@ -101,7 +101,7 @@
             
         } else {
             
-            [self.loadingVideoView setFrame:CGRectMake(80.0f, 40.0f, frame.size.height, frame.size.width)];
+            [self.loadingVideoView setFrame:CGRectMake(80.0f, 30.0f, frame.size.height, frame.size.width)];
         }
         
     }
