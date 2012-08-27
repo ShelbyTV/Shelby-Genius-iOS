@@ -362,7 +362,7 @@
         NSString *providerName = [[[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"provider_name"] capitalizedString];
 
         [AsynchronousFreeloader loadImageFromLink:thumbnailURL forImageView:cell.thumbnailImageView withPlaceholderView:nil];
-        cell.videoTitleLabel.text = videoTitle;            
+        cell.videoTitleLabel.text = videoTitle;
         cell.videoProviderLabel.text = providerName;
         cell.video = [[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"];
         [cell.shareButton addTarget:self action:@selector(shareVideoAction:) forControlEvents:UIControlEventTouchUpInside];

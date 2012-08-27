@@ -27,10 +27,11 @@
 - (void)awakeFromNib
 {
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
     self.videoTitleLabel.font = [UIFont fontWithName:@"Ubuntu-Bold" size:self.videoTitleLabel.font.pointSize];
     self.videoTitleLabel.textColor = [UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:1.0f];
-    [self.videoTitleLabel sizeToFit];
-    self.videoProviderLabel.font = [UIFont fontWithName:@"Ubuntu" size:self.videoTitleLabel.font.pointSize];
+    
+    self.videoProviderLabel.font = [UIFont fontWithName:@"Ubuntu" size:self.videoProviderLabel.font.pointSize];
     self.videoProviderLabel.textColor = [UIColor colorWithRed:85.0f/255.0f green:85.0f/255.0f blue:85.0f/255.0f alpha:1.0f];
 }
 
