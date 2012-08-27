@@ -24,6 +24,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Due to animation, appearance proxy isn't hit, so we have to resort to adding it here
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navigationLogo"]];
+    self.navigationController.visibleViewController.navigationItem.titleView = logoView;
+    
 }
 
 #pragma mark - Action Methods

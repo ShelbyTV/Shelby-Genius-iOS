@@ -58,10 +58,19 @@
         
     } else {
         
-        GeniusOnboardingViewController *geniusOnboardingViewController = [[GeniusOnboardingViewController alloc] initWithNibName:@"GeniusOnboardingViewController" bundle:nil];
-        self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:geniusOnboardingViewController];
-        self.window.rootViewController = rootNavigationController;
         
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default"]];
+        [imageView setFrame:self.window.frame];
+        [self.window addSubview:imageView];
+        [UIView animateWithDuration:2.0f
+                         animations:^{
+                            [imageView setHidden:YES];
+                         } completion:^(BOOL finished) {
+                             GeniusOnboardingViewController *geniusOnboardingViewController = [[GeniusOnboardingViewController alloc] initWithNibName:@"GeniusOnboardingViewController" bundle:nil];
+                             self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:geniusOnboardingViewController];
+                             self.window.rootViewController = rootNavigationController;
+                             
+                         }];
     }
     
     
@@ -130,7 +139,6 @@
     NSDictionary *titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIFont fontWithName:@"Ubuntu-Bold" size:20.0f], UITextAttributeFont, nil];
     [[UINavigationBar appearance] setTitleTextAttributes:titleTextAttributes];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
-    
     UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navigationLogo"]];
     self.rootNavigationController.visibleViewController.navigationItem.titleView = logoView;
     
