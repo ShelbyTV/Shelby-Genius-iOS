@@ -82,9 +82,6 @@ static SocialController *sharedInstance = nil;
     // Title
     NSString *videoTitle = [video valueForKey:@"title"];
     
-    // Image
-    NSString *thumnbnailURL = [video valueForKey:@"thumbnail_url"];
-    
     // URL
     NSString *providerName = [video valueForKey:@"provider_name"];
     NSString *providerID = [video valueForKey:@"provider_id"];

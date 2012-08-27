@@ -17,6 +17,7 @@
 		8E1A7EB815E3EACF00FC7086 /* searchButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1A7EB415E3EACF00FC7086 /* searchButton@2x.png */; };
 		8E25615315EBDEE300200BC2 /* loadingCancelButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E25615115EBDEE300200BC2 /* loadingCancelButton.png */; };
 		8E25615415EBDEE300200BC2 /* loadingCancelButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E25615215EBDEE300200BC2 /* loadingCancelButton@2x.png */; };
+		8E25615815EBF02200200BC2 /* KISSMetricsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E25615715EBF02200200BC2 /* KISSMetricsAPI.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8E2A243215D4F0FA00D09A8B /* AsynchronousFreeloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2A243115D4F0FA00D09A8B /* AsynchronousFreeloader.m */; };
 		8E2A243715D4F4C400D09A8B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2A243615D4F4C400D09A8B /* MediaPlayer.framework */; };
 		8E2E974215D565F900178DA0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2E974115D565F900178DA0 /* AVFoundation.framework */; };
@@ -87,6 +88,8 @@
 		8E1A7EB415E3EACF00FC7086 /* searchButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchButton@2x.png"; sourceTree = "<group>"; };
 		8E25615115EBDEE300200BC2 /* loadingCancelButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loadingCancelButton.png; sourceTree = "<group>"; };
 		8E25615215EBDEE300200BC2 /* loadingCancelButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loadingCancelButton@2x.png"; sourceTree = "<group>"; };
+		8E25615615EBF02200200BC2 /* KISSMetricsAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KISSMetricsAPI.h; sourceTree = "<group>"; };
+		8E25615715EBF02200200BC2 /* KISSMetricsAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KISSMetricsAPI.m; sourceTree = "<group>"; };
 		8E2A243015D4F0FA00D09A8B /* AsynchronousFreeloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsynchronousFreeloader.h; sourceTree = "<group>"; };
 		8E2A243115D4F0FA00D09A8B /* AsynchronousFreeloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsynchronousFreeloader.m; sourceTree = "<group>"; };
 		8E2A243615D4F4C400D09A8B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -186,6 +189,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E25615515EBF02100200BC2 /* Kissmetrics */ = {
+			isa = PBXGroup;
+			children = (
+				8E25615615EBF02200200BC2 /* KISSMetricsAPI.h */,
+				8E25615715EBF02200200BC2 /* KISSMetricsAPI.m */,
+			);
+			name = Kissmetrics;
+			path = "External Libraries/Kissmetrics";
+			sourceTree = SOURCE_ROOT;
+		};
 		8E2A242F15D4F0FA00D09A8B /* Asynchronous Freeloader */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,8 +395,9 @@
 		8EDCE9D115D4F02A00EFB1F2 /* External Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				8E2E974315D56A2700178DA0 /* MBProgressHUD */,
 				8E2A242F15D4F0FA00D09A8B /* Asynchronous Freeloader */,
+				8E25615515EBF02100200BC2 /* Kissmetrics */,
+				8E2E974315D56A2700178DA0 /* MBProgressHUD */,
 				8EB3D2A515DB55DB00709586 /* Panhandler */,
 			);
 			name = "External Libraries";
@@ -562,6 +576,7 @@
 				8E0005B115E53CD300712B4D /* SocialController.m in Sources */,
 				8EA44F6B15E9982600BB0A08 /* GeniusOnboardingViewController.m in Sources */,
 				8ECA62CB15EB247A00056231 /* TopAlignedLabel.m in Sources */,
+				8E25615815EBF02200200BC2 /* KISSMetricsAPI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

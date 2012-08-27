@@ -12,6 +12,9 @@
 #import <AVFoundation/AVFoundation.h>
 #import <Crashlytics/Crashlytics.h>
 
+// External Libraries
+#import "KISSMetricsAPI.h"
+
 // View Controllers
 #import "SearchViewController.h"
 #import "GeniusOnboardingViewController.h"
@@ -114,6 +117,7 @@
 - (void)analytics
 {
     [Crashlytics startWithAPIKey:@"84a79b7ee6f2eca13877cd17b9b9a290790f99aa"];
+    [KISSMetricsAPI sharedAPIWithKey:@"9b8c2d291a85a66412fc8c0085125194646fd7a6"];
 }
 
 - (void)customization
