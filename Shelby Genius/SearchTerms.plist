@@ -4,16 +4,46 @@
 <dict>
 	<key>searchTerms</key>
 	<array>
-		<string>Surfing</string>
 		<string>Dubstep</string>
 		<string>Michael Jordan</string>
 		<string>Steve Jobs</string>
-		<string>Susan Boyle</string>
-		<string>Cirque de Soleil</string>
 		<string>Carl Sagan</string>
 		<string>Carbon Nanotubes</string>
 		<string>Memes</string>
-		<string>Oprah Winfrey</string>
+		<string>Robyn</string>
+		<string>Paper</string>
+		<string>Eggs</string>
+		<string>Code Red Surfing</string>
+		<string>Hot Chip</string>
+		<string>Sh*t Girls Say</string>
+		<string>Karl Pilkington</string>
+		<string>Jonathan Ive</string>
+		<string>Shelby</string>
+		<string>Cult Classics</string>
+		<string>Cancelled Shows</string>
+		<string>Sports Highlights</string>
+		<string>Oprah</string>
+		<string>Your Favorite Band</string>
+		<string>PBS</string>
+		<string>Bob Ross</string>
+		<string>Richard Feynman</string>
+		<string>Curiosity Rover</string>
+		<string>Cute Puppies</string>
+		<string>Maru the Cat</string>
+		<string>Bluth Family</string>
+		<string>America&apos;s Cup</string>
+		<string>Portlandia</string>
+		<string>Salsa Lessons</string>
+		<string>Breaking Bad</string>
+		<string>Armin van Buuren</string>
+		<string>Space</string>
+		<string>Muppets</string>
+		<string>GoPro</string>
+		<string>Base Jumping</string>
+		<string>Mitch Hedberg</string>
+		<string>Beyoncé</string>
+		<string>Your Own Name</string>
+		<string>Your Dog&apos;s Name</string>
 	</array>
 </dict>
 </plist>
