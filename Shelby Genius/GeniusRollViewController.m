@@ -117,9 +117,9 @@
     [super viewDidDisappear:animated];
     [self.appDelegate removeHUD];
     
-    if ( 0 == [self.resultsArray count] ) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kNoResultsReturnedObserver object:nil];
-    }
+//    if ( 0 == [self.resultsArray count] ) {
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kNoResultsReturnedObserver object:nil];
+//    }
 }
 
 #pragma mark - Private Methods
@@ -176,6 +176,7 @@
             
             [self.appDelegate removeHUD];
             [self.navigationController popViewControllerAnimated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNoResultsReturnedObserver object:nil];
 
         } else { // If results are returned
         
