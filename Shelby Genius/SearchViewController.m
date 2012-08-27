@@ -95,7 +95,7 @@
     self.tableView.scrollEnabled = NO;
     
     // searchBar
-    [(UITextField*)[self.searchBar.subviews objectAtIndex:1] setFont:[UIFont fontWithName:@"Ubuntu" size:12]];
+    [(UITextField*)[self.searchBar.subviews objectAtIndex:1] setFont:[UIFont fontWithName:@"Ubuntu" size:13]];
     self.searchBar.backgroundImage = [UIImage imageNamed:@"searchBar"];
     
     // Hide backbarButtonItem if GeniusOnboardingViewController was displayed    
@@ -352,7 +352,7 @@
     
     
     // Section header label
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20.0f + tableSectionHeaderFrame.origin.x,
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(12.0f + tableSectionHeaderFrame.origin.x,
                                                                5.0f + tableSectionHeaderFrame.origin.y,
                                                                -20.0f + tableSectionHeaderFrame.size.width,
                                                                -2.0f + tableSectionHeaderFrame.size.height)];

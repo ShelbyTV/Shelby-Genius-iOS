@@ -94,6 +94,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    
     [super viewWillAppear:animated];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
@@ -108,6 +109,7 @@
                                      frame.size.height);
         
     }
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated

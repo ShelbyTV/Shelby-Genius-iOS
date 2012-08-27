@@ -128,6 +128,8 @@
     
     UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navigationLogo"]];
     self.rootNavigationController.visibleViewController.navigationItem.titleView = logoView;
+    
+    [[UITableView appearance] setSeparatorColor:[UIColor colorWithRed:173.0f/255.0f green:173.0f/255.0f blue:173.0f/255.0f alpha:1.0f]];
 
 }
 
