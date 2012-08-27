@@ -21,7 +21,7 @@
 // C Libraries
 #include <stdlib.h>
 
-@interface SearchViewController ()
+@interface SearchViewController () <UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *previousQueriesArray;
 @property (strong, nonatomic) NSArray *searchTerms;
@@ -31,11 +31,12 @@
 - (void)customize;
 - (void)changePlaceholder;
 - (void)createTransparentTouchableViews;
+- (void)removeTransparentViews;
 - (void)initializePreviousQueriesArray;
 - (void)modifyPreviousQueriesArray;
 - (void)savePreviousQueriesArray;
 - (void)createGeniusRoll;
-- (void)removeTransparentViews;
+- (void)noResultsReturned;
 
 @end
 
@@ -51,6 +52,8 @@
 #pragma mark - View Lifecycle Methods
 - (void)viewDidUnload
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNoResultsReturnedObserver object:nil];
+    
     self.tableView = nil;
     self.searchBar = nil;
     self.searchButton = nil;
@@ -104,6 +107,12 @@
         UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navigationLogo"]];
         self.navigationItem.titleView = logoView;
     }
+    
+    // Observer for failed API Calls
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(noResultsReturned)
+                                                 name:kNoResultsReturnedObserver
+                                               object:nil];
 }
 
 - (void)changePlaceholder
@@ -150,6 +159,22 @@
     navigationTapGesture.numberOfTapsRequired = 1;
     [self.transparentTouchableNavigationView addGestureRecognizer:navigationTapGesture];
     [self.navigationController.navigationBar addSubview:self.transparentTouchableNavigationView];
+    
+}
+
+- (void)removeTransparentViews
+{
+    // Resign Keyboard if any view element is touched that isn't currently a firstResponder UISearchBar object
+    if ( [self.searchBar isFirstResponder] ) {
+        
+        [self.searchBar resignFirstResponder];
+        [self.searchBar setPlaceholder:@"Genius Search"];
+    }
+    
+    [self.transparentTouchableView removeFromSuperview];
+    [self.transparentTouchableNavigationView removeFromSuperview];
+    self.tableView.userInteractionEnabled = YES;
+    [UIView animateWithDuration:0.25f animations:^{ self.tableView.alpha = 1.0f; }];
     
 }
 
@@ -215,27 +240,22 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void)removeTransparentViews
-{
-    // Resign Keyboard if any view element is touched that isn't currently a firstResponder UISearchBar object
-    if ( [self.searchBar isFirstResponder] ) {
-    
-        [self.searchBar resignFirstResponder];
-        [self.searchBar setPlaceholder:@"Genius Search"];
-    }
-    
-    [self.transparentTouchableView removeFromSuperview];
-    [self.transparentTouchableNavigationView removeFromSuperview];
-    self.tableView.userInteractionEnabled = YES;
-    [UIView animateWithDuration:0.25f animations:^{ self.tableView.alpha = 1.0f; }];
-    
-}
-
 - (void)createGeniusRoll
 {
     GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithQuery:self.searchBar.text];
     [self.navigationController pushViewController:geniusRollViewController animated:YES];
     self.searchBar.text = @"";
+}
+
+- (void)noResultsReturned
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No Results Found"
+                                                        message:@"Sorry about that.\n Please try your search again."
+                                                       delegate:self
+                                              cancelButtonTitle:@"Try again"
+                                              otherButtonTitles:nil, nil];
+    alertView.tag = kAlertViewNoResultsTag;
+    [alertView show];
 }
 
 #pragma mark - UISearchBarDelegate Methods
@@ -380,6 +400,16 @@
     QueryCell *cell = (QueryCell*)[self.tableView cellForRowAtIndexPath:indexPath];
     GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithQuery:cell.label.text];
     [self.navigationController pushViewController:geniusRollViewController animated:YES];
+}
+
+#pragma mark - UIAlertViewDelegate Methods
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ( 0 == buttonIndex && kAlertViewNoResultsTag == alertView.tag) {
+        
+        [self.searchBar becomeFirstResponder];
+        
+    }
 }
 
 #pragma mark - UIResponder Methods

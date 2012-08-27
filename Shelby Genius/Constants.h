@@ -19,6 +19,12 @@
 #define kPreviousQueries                @"Previous Queries"
 
 // Observer
+#define kNoResultsReturnedObserver      @"No Results Returned Observer"
 #define kRollFramesObserver             @"Roll Frames Observer"
 #define kIndexOfCurrentVideoObserver    @"Index of Current Video Observer"
 #define kIndexOfCurrentVideo            @"Index of Current Video"
+
+// Tags
+#define kAlertViewNoResultsTag          666
+
+// KISSMetrics

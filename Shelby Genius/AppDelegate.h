@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
 
-@class SearchViewController, VideoPlayerViewController;
+@class VideoPlayerViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

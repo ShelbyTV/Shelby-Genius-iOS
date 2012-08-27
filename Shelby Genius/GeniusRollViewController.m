@@ -116,6 +116,10 @@
 {
     [super viewDidDisappear:animated];
     [self.appDelegate removeHUD];
+    
+    if ( 0 == [self.resultsArray count] ) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNoResultsReturnedObserver object:nil];
+    }
 }
 
 #pragma mark - Private Methods
@@ -165,49 +169,52 @@
 - (void)makeResultsArray:(NSNotification *)notification
 {
     
-    if ( ![self resultsArray] ) {
+
+    if ( ![self resultsArray] ) { // If array DOES NOT exists (e.g., these are the results of the first API call)
         
-        if ( 0 == [[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"] count] ) {
+        if ( 0 == [[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"] count] ) {         // If no results are returned
             
             [self.appDelegate removeHUD];
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
-        
-        [[Panhandler sharedInstance] recordEvent];
-        
-        self.resultsArray = [NSMutableArray array];
-        [self.resultsArray addObjectsFromArray:[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"]];
-        self.numberOfFetchedResults = [self.resultsArray count];
-        self.noMoreVideosToFetch = NO;
-        
-        /// Check for videos with <null> values, and remove them from the resultsArray
-        // 1. Create duplicate of resultsArray
-        NSArray *duplicateResultsArray = [NSArray arrayWithArray:self.resultsArray];
-        
-        // 2. Search duplicateResultsArray for frames
-        for (NSArray *frameArray in duplicateResultsArray) {
-            
-            NSString *thumbnailURL = [[frameArray valueForKey:@"video"] valueForKey:@"thumbnail_url"];
-            NSString *videoTitle = [[frameArray valueForKey:@"video"] valueForKey:@"title"];
-            NSString *providerName = [[frameArray valueForKey:@"video"] valueForKey:@"provider_name"];
+            [self.navigationController popViewControllerAnimated:YES];
 
-            // 3. Check for <null>-values frames
-            if ( thumbnailURL == (id)[NSNull null] || videoTitle == (id)[NSNull null] || providerName == (id)[NSNull null] ) {
+        } else { // If results are returned
+        
+            [[Panhandler sharedInstance] recordEvent];
+            
+            self.resultsArray = [NSMutableArray array];
+            [self.resultsArray addObjectsFromArray:[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"]];
+            self.numberOfFetchedResults = [self.resultsArray count];
+            self.noMoreVideosToFetch = NO;
+            
+            /// Check for videos with <null> values, and remove them from the resultsArray
+            // 1. Create duplicate of resultsArray
+            NSArray *duplicateResultsArray = [NSArray arrayWithArray:self.resultsArray];
+            
+            // 2. Search duplicateResultsArray for frames
+            for (NSArray *frameArray in duplicateResultsArray) {
                 
-                // Remove frameArray object found in duplicateResultsArray from resultsArray
-                [self.resultsArray removeObject:frameArray];
+                NSString *thumbnailURL = [[frameArray valueForKey:@"video"] valueForKey:@"thumbnail_url"];
+                NSString *videoTitle = [[frameArray valueForKey:@"video"] valueForKey:@"title"];
+                NSString *providerName = [[frameArray valueForKey:@"video"] valueForKey:@"provider_name"];
+
+                // 3. Check for <null>-values frames
+                if ( thumbnailURL == (id)[NSNull null] || videoTitle == (id)[NSNull null] || providerName == (id)[NSNull null] ) {
+                    
+                    // Remove frameArray object found in duplicateResultsArray from resultsArray
+                    [self.resultsArray removeObject:frameArray];
+                }
+                
             }
             
+            // Reset values and reload tableView
+            [self setIsFetchingMoreVideos:NO];
+            [self setNoMoreVideosToFetch:NO];
+            [self.appDelegate removeHUD];
+            [self.tableView reloadData];
+        
         }
         
-        // Reset values and reload tableView
-        [self setIsFetchingMoreVideos:NO];
-        [self setNoMoreVideosToFetch:NO];
-        [self.appDelegate removeHUD];
-        [self.tableView reloadData];
-        
-        
-    } else {
+    } else { // If array DOES exists (e.g., these are the results of a subsequent API call)
         
         [self.resultsArray addObjectsFromArray:[[notification.userInfo objectForKey:@"result"] valueForKey:@"frames"]];
         
