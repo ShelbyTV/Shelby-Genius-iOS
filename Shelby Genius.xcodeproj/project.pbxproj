@@ -18,6 +18,7 @@
 		8E25615315EBDEE300200BC2 /* loadingCancelButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E25615115EBDEE300200BC2 /* loadingCancelButton.png */; };
 		8E25615415EBDEE300200BC2 /* loadingCancelButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E25615215EBDEE300200BC2 /* loadingCancelButton@2x.png */; };
 		8E25615815EBF02200200BC2 /* KISSMetricsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E25615715EBF02200200BC2 /* KISSMetricsAPI.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8E25615A15EC137300200BC2 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 8E25615915EC137200200BC2 /* iTunesArtwork@2x */; };
 		8E2A243215D4F0FA00D09A8B /* AsynchronousFreeloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2A243115D4F0FA00D09A8B /* AsynchronousFreeloader.m */; };
 		8E2A243715D4F4C400D09A8B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2A243615D4F4C400D09A8B /* MediaPlayer.framework */; };
 		8E2E974215D565F900178DA0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2E974115D565F900178DA0 /* AVFoundation.framework */; };
@@ -90,6 +91,7 @@
 		8E25615215EBDEE300200BC2 /* loadingCancelButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loadingCancelButton@2x.png"; sourceTree = "<group>"; };
 		8E25615615EBF02200200BC2 /* KISSMetricsAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KISSMetricsAPI.h; sourceTree = "<group>"; };
 		8E25615715EBF02200200BC2 /* KISSMetricsAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KISSMetricsAPI.m; sourceTree = "<group>"; };
+		8E25615915EC137200200BC2 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		8E2A243015D4F0FA00D09A8B /* AsynchronousFreeloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsynchronousFreeloader.h; sourceTree = "<group>"; };
 		8E2A243115D4F0FA00D09A8B /* AsynchronousFreeloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsynchronousFreeloader.m; sourceTree = "<group>"; };
 		8E2A243615D4F4C400D09A8B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -269,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				8ECA62BC15EA88FA00056231 /* iTunesArtwork */,
+				8E25615915EC137200200BC2 /* iTunesArtwork@2x */,
 				8EDCE99D15D4C3C000EFB1F2 /* Shelby Genius */,
 				8EDCE99615D4C3C000EFB1F2 /* Frameworks */,
 				8EDCE99415D4C3C000EFB1F2 /* Products */,
@@ -534,6 +537,7 @@
 				8ECA62C515EB215400056231 /* navigationBar@2x.png in Resources */,
 				8E25615315EBDEE300200BC2 /* loadingCancelButton.png in Resources */,
 				8E25615415EBDEE300200BC2 /* loadingCancelButton@2x.png in Resources */,
+				8E25615A15EC137300200BC2 /* iTunesArtwork@2x in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

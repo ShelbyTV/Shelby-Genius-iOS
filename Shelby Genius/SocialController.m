@@ -67,7 +67,7 @@ static SocialController *sharedInstance = nil;
     NSString *providerName = [video valueForKey:@"provider_name"];
     NSString *providerID = [video valueForKey:@"provider_id"];
     NSString *videoURL = [NSString stringWithFormat:@"http://shelby.tv/video/%@/%@", providerName, providerID];
-    NSString *message = [NSString stringWithFormat:@"I thought you might like this video: <strong><a href=\"%@\">%@</a></strong>.<br/><br/><em>Sent via Shelby Genius for iPhone - <a href=\"http://shl.by/ios-genius-app\">get it here!</a></em>", videoURL, videoURL];
+    NSString *message = [NSString stringWithFormat:@"I thought you might like this video: <strong><a href=\"%@\">%@</a></strong>.<br/><br/><em>Sent via Shelby Genius for iPhone - <a href=\"http://shl.by/ios-genius-app\">get the app!</a></em>", videoURL, videoURL];
     [mailViewController setMessageBody:message isHTML:YES];
     
     // Present mailViewController
