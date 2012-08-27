@@ -96,6 +96,8 @@
 {
     [super viewWillAppear:animated];
     
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    
     if ( [self isPlayingVideo] ) {
         
         [self setIsPlayingVideo:NO];

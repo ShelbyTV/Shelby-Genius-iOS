@@ -53,11 +53,11 @@
     // Video Player Controls
     UIButton *previousVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:1];
     [previousVideoButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
-    [previousVideoButton addTarget:self action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *nextVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
     [nextVideoButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
-    [nextVideoButton addTarget:self action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)createLoadingVideoViewForVideo:(NSArray*)video;
@@ -84,17 +84,6 @@
     }
     
     
-}
-
-#pragma mark - Private Methods
-- (void)previousVideoButtonAction
-{
-    [self.videoPlayerContainerViewController previousVideoButtonAction];
-}
-
-- (void)nextVideoButtonAction
-{
-    [self.videoPlayerContainerViewController nextVideoButtonAction];
 }
 
 #pragma mark - Interface Orientation Methods

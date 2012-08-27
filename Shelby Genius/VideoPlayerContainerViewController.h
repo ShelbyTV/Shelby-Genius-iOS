@@ -8,12 +8,14 @@
 
 #import "VideoPlayerViewController.h"
 
-@interface VideoPlayerContainerViewController : UIViewController <VideoPlayerDelegate>
+@interface VideoPlayerContainerViewController : UIViewController
 
 @property (strong, nonatomic) NSMutableArray *videos;
 @property (assign, nonatomic) NSUInteger selectedVideo;
 
 - (id)initWithVideos:(NSMutableArray*)videos andSelectedVideo:(NSUInteger)selectedVideo;
 - (void)videoDidEndPlaying:(NSNotification*)notification;
+- (void)previousVideoButtonAction;
+- (void)nextVideoButtonAction;
 
 @end

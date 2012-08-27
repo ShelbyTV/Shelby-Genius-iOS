@@ -260,7 +260,9 @@
     MPMoviePlayerController *movieController = notification.object;
     if (movieController.playbackState == MPMoviePlaybackStatePlaying) {
         [self.moviePlayer.loadingVideoView.indicator stopAnimating];
-        [UIView animateWithDuration:0.50 animations:^{
+        [UIView animateWithDuration:0.50
+                         
+                         animations:^{
             [self.moviePlayer.loadingVideoView setAlpha:0.0f];
         } completion:^(BOOL finished) {
             [self.moviePlayer.loadingVideoView removeFromSuperview];
