@@ -11,7 +11,6 @@
 
 // NSUserDefaults
 #define kPreviouslyLaunched                 @"Previously Launched"
-#define kQuery                              @"Query"
 #define kRollID                             @"Roll ID"  
 
 // Query

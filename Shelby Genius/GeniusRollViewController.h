@@ -15,6 +15,7 @@ UITableViewDelegate
 >
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSString *query;
 
 - (id)initWithQuery:(NSString*)query;
 

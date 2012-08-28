@@ -79,14 +79,14 @@
     
     if ( UIDeviceOrientationIsPortrait(self.interfaceOrientation) ) {
     
-        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:kQuery], KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
+        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.videoPlayerContainerViewController.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
         [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoInPortraitPhone withProperties:metrics];
         
         [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
         
     } else {
         
-        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:kQuery], KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
+        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.videoPlayerContainerViewController.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
         [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoInLandscapePhone withProperties:metrics];
         
         [self.loadingVideoView setFrame:CGRectMake(80.0f, 30.0f, frame.size.height, frame.size.width)];
@@ -99,7 +99,7 @@
 #pragma mark - Private Methods
 - (void)cancelButtonAction
 {
-    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:kQuery], KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
+    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.videoPlayerContainerViewController.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
     [[KISSMetricsAPI sharedAPI] recordEvent:KISSCancelVideoPhone withProperties:metrics];
     
     [self.videoPlayerContainerViewController destroyMoviePlayer];
@@ -115,14 +115,14 @@
         
         if ( UIDeviceOrientationIsPortrait(self.interfaceOrientation) ) {
             
-            NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:kQuery], KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
+            NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.videoPlayerContainerViewController.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
             [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoInPortraitPhone withProperties:metrics];
             
             [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
             
         } else {
             
-            NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:kQuery], KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
+            NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.videoPlayerContainerViewController.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
             [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoInLandscapePhone withProperties:metrics];
             
             [self.loadingVideoView setFrame:CGRectMake(80.0f, 30.0f, frame.size.height, frame.size.width)];

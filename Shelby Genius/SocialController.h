@@ -6,11 +6,13 @@
 //  Copyright (c) 2012 Arthur Ariel Sabintsev. All rights reserved.
 //
 
+@class GeniusRollViewController;
+
 @interface SocialController : NSObject
 
-+ (void)sendEmailForVideo:(NSArray*)video inViewController:(UIViewController*)viewController;
-+ (void)postToTwitterForVideo:(NSArray*)video inViewController:(UIViewController*)viewController;
-+ (void)postToFacebookForVideo:(NSArray*)video inViewController:(UIViewController*)viewController;
++ (void)sendEmailForVideo:(NSArray*)video inViewController:(GeniusRollViewController*)viewController;
++ (void)postToTwitterForVideo:(NSArray*)video inViewController:(GeniusRollViewController*)viewController;
++ (void)postToFacebookForVideo:(NSArray*)video inViewController:(GeniusRollViewController*)viewController;
 
 + (SocialController*)sharedInstance;
 

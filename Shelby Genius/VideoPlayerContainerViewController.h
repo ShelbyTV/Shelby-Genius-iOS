@@ -12,8 +12,9 @@
 
 @property (strong, nonatomic) NSMutableArray *videos;
 @property (assign, nonatomic) NSUInteger selectedVideo;
+@property (copy, nonatomic) NSString *query;
 
-- (id)initWithVideos:(NSMutableArray*)videos andSelectedVideo:(NSUInteger)selectedVideo;
+- (id)initWithVideos:(NSMutableArray*)videos selectedVideo:(NSUInteger)selectedVideo andQuery:(NSString*)query;
 - (void)videoDidEndPlaying:(NSNotification*)notification;
 - (void)previousVideoButtonAction;
 - (void)nextVideoButtonAction;

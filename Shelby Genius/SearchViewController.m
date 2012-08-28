@@ -25,6 +25,7 @@
 
 @property (strong, nonatomic) NSMutableArray *previousQueriesArray;
 @property (strong, nonatomic) NSArray *searchTerms;
+@property (copy, nonatomic) NSString *placeholderQuery;
 @property (strong, nonatomic) UIView *transparentTouchableView;
 @property (strong, nonatomic) UIView *transparentTouchableNavigationView;
 
@@ -46,6 +47,7 @@
 @synthesize searchButton = _searchButton;
 @synthesize previousQueriesArray = _previousQueriesArray;
 @synthesize searchTerms = searchTerms;
+@synthesize placeholderQuery = _placeholderQuery;
 @synthesize transparentTouchableView = _transparentTouchableView;
 @synthesize transparentTouchableNavigationView = _transparentTouchableNavigationView;
 
@@ -135,7 +137,8 @@
     
 
     NSUInteger randomNumber = arc4random_uniform([self.searchTerms count]);
-    self.searchBar.placeholder = [NSString stringWithFormat:@"How about ‘%@’?",[self.searchTerms objectAtIndex:randomNumber]];
+    self.searchBar.placeholder = [NSString stringWithFormat:@"How about ‘%@’?", [self.searchTerms objectAtIndex:randomNumber]];
+    self.placeholderQuery = [self.searchTerms objectAtIndex:randomNumber];
     
 }
 
@@ -262,7 +265,7 @@
 }
 
 #pragma mark - UISearchBarDelegate Methods
--(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     
     if (searchBar.text.length>0) {
@@ -280,9 +283,6 @@
 {
     [self createTransparentTouchableViews];
     [self changePlaceholder];
-    
-    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:kQuery];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     
     [UIView animateWithDuration:0.25f animations:^{ self.tableView.alpha = 0.25f; }];
 }
@@ -409,10 +409,6 @@
 {
     
     QueryCell *cell = (QueryCell*)[self.tableView cellForRowAtIndexPath:indexPath];
-    
-    [[NSUserDefaults standardUserDefaults] setValue:cell.label.text forKey:kQuery];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
     NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:cell.label.text, KISSQuery, nil];
     [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
     

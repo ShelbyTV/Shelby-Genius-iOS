@@ -28,7 +28,6 @@
 
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) NSMutableArray *resultsArray;
-@property (strong, nonatomic) NSString *query;
 @property (strong, nonatomic) NSArray *selectedVideoToShare;
 @property (assign, nonatomic) NSUInteger numberOfFetchedResults;
 @property (assign, nonatomic) BOOL isFetchingMoreVideos;
@@ -386,7 +385,7 @@
     } else {
         
         tableView.alpha = 0.0f;
-        return [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier: @"Cell"];;
+        return [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier: @"Cell"];
         
     }
     
@@ -452,7 +451,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    VideoPlayerContainerViewController *videoPlayerContainerViewController = [[VideoPlayerContainerViewController alloc] initWithVideos:self.resultsArray andSelectedVideo:indexPath.row];
+    VideoPlayerContainerViewController *videoPlayerContainerViewController = [[VideoPlayerContainerViewController alloc] initWithVideos:self.resultsArray selectedVideo:indexPath.row andQuery:self.query];
     [self.navigationController pushViewController:videoPlayerContainerViewController animated:YES];
     
     [self setIsPlayingVideo:YES];

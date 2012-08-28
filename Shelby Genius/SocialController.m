@@ -8,6 +8,9 @@
 
 #import "SocialController.h"
 
+// View Controllers
+#import "GeniusRollViewController.h"
+
 // Frameworks
 #import <MessageUI/MessageUI.h>
 #import <Accounts/Accounts.h>
@@ -44,12 +47,12 @@ static SocialController *sharedInstance = nil;
 }
 
 #pragma mark - Sharing Methods
-+ (void)sendEmailForVideo:(NSArray *)video inViewController:(UIViewController *)viewController
++ (void)sendEmailForVideo:(NSArray *)video inViewController:(GeniusRollViewController *)viewController
 {
     
     [[Panhandler sharedInstance] recordEvent];
     
-    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:kQuery], KISSQuery, [video valueForKey:@"title"], KISSVideoTitle, nil];
+    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:viewController.query, KISSQuery, [video valueForKey:@"title"], KISSVideoTitle, nil];
     [[KISSMetricsAPI sharedAPI] recordEvent:KISSShareEmailPhone withProperties:metrics];
     
     [[SocialController sharedInstance] setViewController:viewController];
@@ -77,12 +80,12 @@ static SocialController *sharedInstance = nil;
     [viewController presentModalViewController:mailViewController animated:YES];
 }
 
-+ (void)postToTwitterForVideo:(NSArray *)video inViewController:(UIViewController *)viewController
++ (void)postToTwitterForVideo:(NSArray *)video inViewController:(GeniusRollViewController *)viewController
 {
     
     [[Panhandler sharedInstance] recordEvent];
     
-    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:kQuery], KISSQuery, [video valueForKey:@"title"], KISSVideoTitle, nil];
+    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:viewController.query, KISSQuery, [video valueForKey:@"title"], KISSVideoTitle, nil];
     [[KISSMetricsAPI sharedAPI] recordEvent:KISSShareTwitterPhone withProperties:metrics];
     
     // Title
@@ -102,7 +105,7 @@ static SocialController *sharedInstance = nil;
     
 }
 
-+ (void)postToFacebookForVideo:(NSArray *)video inViewController:(UIViewController *)viewController
++ (void)postToFacebookForVideo:(NSArray *)video inViewController:(GeniusRollViewController *)viewController
 {
     
     [[Panhandler sharedInstance] recordEvent];

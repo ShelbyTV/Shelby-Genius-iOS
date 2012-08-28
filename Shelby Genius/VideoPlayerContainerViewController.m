@@ -37,15 +37,16 @@
 - (void)loadDailyMotionPage;
 - (void)loadNewlySelectedVideo;
 - (void)playVideo:(NSString *)link;
-
 - (void)processNotification:(NSNotification*)notification;
 - (void)videoDidBeginPlaying:(NSNotification*)notification;
+- (void)scalingModeDidChange:(NSNotification*)notification;
 
 @end
 
 @implementation VideoPlayerContainerViewController
 @synthesize videos = _videos;
 @synthesize selectedVideo = _selectedVideo;
+@synthesize query = _query;
 @synthesize appDelegate = _appDelegate;
 @synthesize video = _video;
 @synthesize provider = _provider;
@@ -54,13 +55,14 @@
 @synthesize videoWillBegin = _videoWillBegin;
 
 #pragma mark - Initialization
-- (id)initWithVideos:(NSMutableArray *)videos andSelectedVideo:(NSUInteger)selectedVideo
+- (id)initWithVideos:(NSMutableArray *)videos selectedVideo:(NSUInteger)selectedVideo andQuery:(NSString *)query
 {
     
     if ( self = [super init]) {
         
         // Setup
         self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        self.query = query;
         self.videos = videos;
         self.selectedVideo = selectedVideo;
         self.video = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
@@ -72,7 +74,7 @@
         [self videoDirectLinkFromProvider:providerName];
         
         // KISSMetrics
-        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:kQuery], KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
+        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
         [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoPhone withProperties:metrics];
         
     }
@@ -212,6 +214,12 @@
                                                      name:MPMoviePlayerPlaybackDidFinishNotification
                                                    object:nil];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(scalingModeDidChange:)
+                                                     name:MPMoviePlayerScalingModeDidChangeNotification
+                                                   object:nil];
+        
+        
         [self.moviePlayer.moviePlayer setContentURL:[NSURL URLWithString:link]];
         [self.moviePlayer.moviePlayer play];
 
@@ -219,7 +227,6 @@
         
     }
 }
-
 
 #pragma mark - Observer Methods
 - (void)processNotification:(NSNotification *)notification
@@ -260,10 +267,9 @@
 {
     
     MPMoviePlayerController *movieController = notification.object;
-    if (movieController.playbackState == MPMoviePlaybackStatePlaying) {
+    if ( movieController.playbackState == MPMoviePlaybackStatePlaying ) {
         [self.moviePlayer.loadingVideoView.indicator stopAnimating];
         [UIView animateWithDuration:0.50
-                         
                          animations:^{
             [self.moviePlayer.loadingVideoView setAlpha:0.0f];
         } completion:^(BOOL finished) {
@@ -293,6 +299,16 @@
 
 }
 
+- (void)scalingModeDidChange:(NSNotification*)notification
+{
+    MPMoviePlayerController *movieController = notification.object;
+    if ( movieController.scalingMode == MPMovieScalingModeAspectFill ) {
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    } else {
+        [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    }
+}
+
 #pragma mark - VideoPlayerDelegate Methods
 - (void)previousVideoButtonAction
 {
@@ -309,7 +325,7 @@
 
         // KISSMetrics
         NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
-        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:kQuery], KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
+        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
         [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchPreviousVideoPhone withProperties:metrics];
         
         // Scroll GeniusRollViewController to row of video that will be loaded
@@ -347,7 +363,7 @@
     
         // KISSMetrics
         NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
-        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:kQuery], KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
+        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
         [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchNextVideoPhone withProperties:metrics];
         
         // Scroll GeniusRollViewController to row of video that will be loaded
