@@ -38,7 +38,7 @@
 - (void)loadNewlySelectedVideo;
 - (void)playVideo:(NSString *)link;
 - (void)processNotification:(NSNotification*)notification;
-- (void)videoDidBeginPlaying:(NSNotification*)notification;
+- (void)videoDidLoad:(NSNotification*)notification;
 
 @end
 
@@ -204,8 +204,8 @@
         self.videoWillBegin = YES;
         
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(videoDidBeginPlaying:)
-                                                     name:MPMoviePlayerPlaybackStateDidChangeNotification
+                                                 selector:@selector(videoDidLoad:)
+                                                     name:MPMoviePlayerLoadStateDidChangeNotification
                                                    object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -213,15 +213,11 @@
                                                      name:MPMoviePlayerPlaybackDidFinishNotification
                                                    object:nil];
         
-        
-        
         [self.moviePlayer.moviePlayer setShouldAutoplay:YES];
-        [self.moviePlayer.moviePlayer setScalingMode:MPMovieScalingModeAspectFill];
         [self.moviePlayer.moviePlayer setContentURL:[NSURL URLWithString:link]];
         [self.moviePlayer.moviePlayer prepareToPlay];
         [self.moviePlayer.moviePlayer play];
-
-        self.moviePlayer.moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
+        
         
     }
 }
@@ -261,27 +257,33 @@
 
 }
 
-- (void)videoDidBeginPlaying:(NSNotification*)notification
+- (void)videoDidLoad:(NSNotification *)notification
 {
-    
     MPMoviePlayerController *movieController = notification.object;
     
-    if ( movieController.playbackState == MPMoviePlaybackStatePlaying ) {
+    NSLog(@"%d", movieController.loadState);
+    
+    if ( movieController.loadState != 0 ) {
         
         [self.moviePlayer.loadingVideoView.indicator stopAnimating];
         
-        [UIView animateWithDuration:0.34
+        [UIView animateWithDuration:0.2
                          animations:^{
-        
-                             [self.moviePlayer.loadingVideoView setAlpha:0.0f];
-        
-                         } completion:^(BOOL finished) {
-            
-                             [self.moviePlayer.loadingVideoView removeFromSuperview];
                              
+                             [self.moviePlayer.loadingVideoView setAlpha:0.0f];
+                             
+                         } completion:^(BOOL finished) {
+                             
+                             [self.moviePlayer.loadingVideoView removeFromSuperview];
+                             movieController.controlStyle = MPMovieControlStyleFullscreen;
                          }];
         
+        
+    } else {
+        
+        movieController.controlStyle = MPMovieControlStyleNone;
     }
+    
 }
 
 - (void)videoDidEndPlaying:(NSNotification*)notification
@@ -311,7 +313,6 @@
         
         // Unload current video
         [self.moviePlayer.moviePlayer stop];
-        [self.moviePlayer.moviePlayer setFullscreen:NO];
         self.videoWillBegin = NO;
         
         // Load previous video
