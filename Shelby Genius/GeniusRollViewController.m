@@ -115,10 +115,6 @@
 {
     [super viewDidDisappear:animated];
     [self.appDelegate removeHUD];
-    
-//    if ( 0 == [self.resultsArray count] ) {
-//        [[NSNotificationCenter defaultCenter] postNotificationName:kNoResultsReturnedObserver object:nil];
-//    }
 }
 
 #pragma mark - Private Methods

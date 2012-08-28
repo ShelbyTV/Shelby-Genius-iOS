@@ -670,10 +670,6 @@
 				GCC_PREFIX_HEADER = "Shelby Genius/Shelby Genius-Prefix.pch";
 				INFOPLIST_FILE = "Shelby Genius/Shelby Genius-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/External Libraries/FacebookFacade/facebook\"",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3370255A-E441-4CB6-AACE-34508E82D85B";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3370255A-E441-4CB6-AACE-34508E82D85B";
@@ -695,10 +691,6 @@
 				GCC_PREFIX_HEADER = "Shelby Genius/Shelby Genius-Prefix.pch";
 				INFOPLIST_FILE = "Shelby Genius/Shelby Genius-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/External Libraries/FacebookFacade/facebook\"",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3370255A-E441-4CB6-AACE-34508E82D85B";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3370255A-E441-4CB6-AACE-34508E82D85B";

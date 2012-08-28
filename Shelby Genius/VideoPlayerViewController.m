@@ -53,12 +53,12 @@
     
     // Video Player Controls
     UIButton *previousVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:1];
-    [previousVideoButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
-    [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchDown];
+    [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
+    [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *nextVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
-    [nextVideoButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
-    [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchDown];
+    [nextVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
+    [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)createLoadingVideoViewForVideo:(NSArray*)video;

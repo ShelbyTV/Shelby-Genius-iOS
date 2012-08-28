@@ -39,7 +39,6 @@
 - (void)playVideo:(NSString *)link;
 - (void)processNotification:(NSNotification*)notification;
 - (void)videoDidBeginPlaying:(NSNotification*)notification;
-- (void)scalingModeDidChange:(NSNotification*)notification;
 
 @end
 
@@ -214,13 +213,12 @@
                                                      name:MPMoviePlayerPlaybackDidFinishNotification
                                                    object:nil];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(scalingModeDidChange:)
-                                                     name:MPMoviePlayerScalingModeDidChangeNotification
-                                                   object:nil];
         
         
+        [self.moviePlayer.moviePlayer setShouldAutoplay:YES];
+        [self.moviePlayer.moviePlayer setScalingMode:MPMovieScalingModeAspectFill];
         [self.moviePlayer.moviePlayer setContentURL:[NSURL URLWithString:link]];
+        [self.moviePlayer.moviePlayer prepareToPlay];
         [self.moviePlayer.moviePlayer play];
 
         self.moviePlayer.moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
@@ -267,15 +265,21 @@
 {
     
     MPMoviePlayerController *movieController = notification.object;
+    
     if ( movieController.playbackState == MPMoviePlaybackStatePlaying ) {
-        [self.moviePlayer.loadingVideoView.indicator stopAnimating];
-        [UIView animateWithDuration:0.50
-                         animations:^{
-            [self.moviePlayer.loadingVideoView setAlpha:0.0f];
-        } completion:^(BOOL finished) {
-            [self.moviePlayer.loadingVideoView removeFromSuperview];
-        }];
         
+        [self.moviePlayer.loadingVideoView.indicator stopAnimating];
+        
+        [UIView animateWithDuration:0.34
+                         animations:^{
+        
+                             [self.moviePlayer.loadingVideoView setAlpha:0.0f];
+        
+                         } completion:^(BOOL finished) {
+            
+                             [self.moviePlayer.loadingVideoView removeFromSuperview];
+                             
+                         }];
         
     }
 }
@@ -299,16 +303,6 @@
 
 }
 
-- (void)scalingModeDidChange:(NSNotification*)notification
-{
-    MPMoviePlayerController *movieController = notification.object;
-    if ( movieController.scalingMode == MPMovieScalingModeAspectFill ) {
-        [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    } else {
-        [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    }
-}
-
 #pragma mark - VideoPlayerDelegate Methods
 - (void)previousVideoButtonAction
 {
@@ -317,6 +311,7 @@
         
         // Unload current video
         [self.moviePlayer.moviePlayer stop];
+        [self.moviePlayer.moviePlayer setFullscreen:NO];
         self.videoWillBegin = NO;
         
         // Load previous video
