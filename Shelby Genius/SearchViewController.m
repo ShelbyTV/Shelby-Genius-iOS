@@ -103,8 +103,17 @@
     self.tableView.scrollEnabled = NO;
     
     // searchBar
+    for (id subview in self.searchBar.subviews) {
+        if ([subview respondsToSelector:@selector(setEnablesReturnKeyAutomatically:)]) {
+            [subview setEnablesReturnKeyAutomatically:NO];
+            break;
+        }
+    }
+    
     [(UITextField*)[self.searchBar.subviews objectAtIndex:1] setFont:[UIFont fontWithName:@"Ubuntu" size:13]];
     self.searchBar.backgroundImage = [UIImage imageNamed:@"searchBar"];
+    
+    
     
     // Hide backbarButtonItem if GeniusOnboardingViewController was displayed    
     if ( self != [self.navigationController.viewControllers objectAtIndex:0] ) {
@@ -271,8 +280,6 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     [self.searchButton setEnabled:YES];
-    [(UITextField*)[self.searchBar.subviews objectAtIndex:1] setEnablesReturnKeyAutomatically:YES];
-    
     [self createTransparentTouchableViews];
     [self changePlaceholder];
     
