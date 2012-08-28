@@ -30,13 +30,13 @@
         
         self.videoPlayerContainerViewController = videoPlayerContainerViewController;
         self.video = video;
+        NSLog(@"%@", [self.moviePlayer.view gestureRecognizers]);
 
     }
     
     return self;
 }
 
-#pragma mark - View Lifecycle Methods
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -55,15 +55,16 @@
     // Video Player Controls
     UIButton *previousVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:1];
     [previousVideoButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
-    [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchDown];
     
     UIButton *nextVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
     [nextVideoButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
-    [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchDown];
 }
 
 - (void)createLoadingVideoViewForVideo:(NSArray*)video;
 {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     
     self.moviePlayer.controlStyle = MPMovieControlStyleNone;
     
