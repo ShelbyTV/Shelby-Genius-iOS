@@ -37,6 +37,7 @@
 #define KISSWatchPreviousVideoPhone         @"Watch previous video on iPhone Genius"
 #define KISSWatchVideoInPortraitPhone       @"Watch video in portrait mode on iPhone Genius"
 #define KISSWatchVideoInLandscapePhone      @"Watch video in landscape mode on iPhone Genius"
+#define KISSWatchVideoOverAirPlayPhone      @"Watch video over AirPlay on iPhone Genius"
 #define KISSCancelVideoPhone                @"Candel loading video on iPhone Genius"
 #define KISSShareEmailPhone                 @"Share with Email on iPhone Genius"
 #define KISSShareTwitterPhone               @"Share with Twitter on iPhone Genius"

@@ -39,6 +39,7 @@
 - (void)playVideo:(NSString *)link;
 - (void)processNotification:(NSNotification*)notification;
 - (void)videoDidLoad:(NSNotification*)notification;
+- (void)videoBeganStreamingOverAirPlay:(NSNotification*)notification;
 
 @end
 
@@ -161,7 +162,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processNotification:) name:nil object:nil];
     
     static NSString *vimeoExtractor = @"<html><body><center><iframe id=\"player_1\" src=\"http://player.vimeo.com/video/%@?api=1&amp;player_id=player_1\" webkit-playsinline ></iframe><script src=\"http://a.vimeocdn.com/js/froogaloop2.min.js?cdbdb\"></script><script>(function(){var vimeoPlayers = document.querySelectorAll('iframe');$f(vimeoPlayers[0]).addEvent('ready', ready);function ready(player_id) {$f(player_id).api('play');}})();</script></center></body></html>";
-
+    
     
     NSString *vimeoRequestString = [NSString stringWithFormat:vimeoExtractor, [self.video valueForKey:@"provider_id"]];
     
@@ -214,6 +215,11 @@
                                                      name:MPMoviePlayerPlaybackDidFinishNotification
                                                    object:nil];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(videoBeganStreamingOverAirPlay:)
+                                                     name:MPMoviePlayerIsAirPlayVideoActiveDidChangeNotification
+                                                   object:nil];
+        
         [self.moviePlayer.moviePlayer setShouldAutoplay:YES];
         [self.moviePlayer.moviePlayer setContentURL:[NSURL URLWithString:link]];
         [self.moviePlayer.moviePlayer prepareToPlay];
@@ -262,6 +268,8 @@
 {
     MPMoviePlayerController *movieController = notification.object;
     
+    NSLog(@"%d", movieController.loadState);
+    
     if ( movieController.loadState != 0 ) {
         
         [self.moviePlayer.loadingVideoView.indicator stopAnimating];
@@ -304,7 +312,19 @@
 
 }
 
-#pragma mark - VideoPlayerDelegate Methods
+- (void)videoBeganStreamingOverAirPlay:(NSNotification*)notification
+{
+    MPMoviePlayerController *movieController = notification.object;
+    
+    if ( movieController.airPlayVideoActive ) {
+        
+        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
+        [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoOverAirPlayPhone withProperties:metrics];
+        
+    }
+}
+
+#pragma mark - Video Player Actions
 - (void)previousVideoButtonAction
 {
 
