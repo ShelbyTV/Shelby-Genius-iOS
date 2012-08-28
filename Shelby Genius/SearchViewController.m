@@ -279,6 +279,7 @@
 - (void)createGeniusRoll
 {
     NSString *currentQuery = (self.searchBar.text.length > 0) ? self.searchBar.text : self.placeholderQuery;
+    currentQuery= [currentQuery stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithQuery:currentQuery];
     [self.navigationController pushViewController:geniusRollViewController animated:YES];
     self.searchBar.text = @"";
