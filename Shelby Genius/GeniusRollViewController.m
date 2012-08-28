@@ -28,7 +28,7 @@
 
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) NSMutableArray *resultsArray;
-@property (strong, nonatomic) NSArray *selectedVideoToShare;
+@property (strong, nonatomic) NSArray *selectedVideoFrameToShare;
 @property (assign, nonatomic) NSUInteger numberOfFetchedResults;
 @property (assign, nonatomic) BOOL isFetchingMoreVideos;
 @property (assign, nonatomic) BOOL isPlayingVideo;
@@ -49,7 +49,7 @@
 @synthesize appDelegate = _appDelegate;
 @synthesize resultsArray = _resultsArray;
 @synthesize query = _query;
-@synthesize selectedVideoToShare = _selectedVideoToShare;
+@synthesize selectedVideoFrameToShare = _selectedVideoFrameToShare;
 @synthesize numberOfFetchedResults = _numberOfFetchedResults;
 @synthesize isFetchingMoreVideos = _isFetchingMoreVideos;
 @synthesize isPlayingVideo = _isPlayingVideo;
@@ -302,7 +302,7 @@
 - (void)shareVideoAction:(UIButton *)button
 {
     VideoCardCell *cell = (VideoCardCell*)[button superview];
-    self.selectedVideoToShare = cell.video;
+    self.selectedVideoFrameToShare = cell.videoFrame;
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Share this video?"
                                                              delegate:self
@@ -337,16 +337,16 @@
     
     switch (buttonIndex) {
         case 0: // Email
-            [SocialController sendEmailForVideo:self.selectedVideoToShare inViewController:self];
+            [SocialController sendEmailForVideo:self.selectedVideoFrameToShare inViewController:self];
             break;
         case 1: // Twitter
-            [SocialController postToTwitterForVideo:self.selectedVideoToShare inViewController:self];
+            [SocialController postToTwitterForVideo:self.selectedVideoFrameToShare inViewController:self];
             break;
         default:
             break;
     }
     
-    self.selectedVideoToShare = nil;
+    self.selectedVideoFrameToShare = nil;
 }
 
 #pragma mark - UITableViewDataSource Methods
@@ -374,7 +374,7 @@
         [AsynchronousFreeloader loadImageFromLink:thumbnailURL forImageView:cell.thumbnailImageView withPlaceholderView:nil];
         cell.videoTitleLabel.text = videoTitle;
         cell.videoProviderLabel.text = providerName;
-        cell.video = [[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"];
+        cell.videoFrame = [self.resultsArray objectAtIndex:indexPath.row];
         [cell.shareButton addTarget:self action:@selector(shareVideoAction:) forControlEvents:UIControlEventTouchUpInside];
         
         return cell;

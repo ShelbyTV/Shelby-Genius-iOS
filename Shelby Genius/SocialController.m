@@ -47,12 +47,12 @@ static SocialController *sharedInstance = nil;
 }
 
 #pragma mark - Sharing Methods
-+ (void)sendEmailForVideo:(NSArray *)video inViewController:(GeniusRollViewController *)viewController
++ (void)sendEmailForVideo:(NSArray *)videoFrame inViewController:(GeniusRollViewController *)viewController
 {
     
     [[Panhandler sharedInstance] recordEvent];
     
-    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:viewController.query, KISSQuery, [video valueForKey:@"title"], KISSVideoTitle, nil];
+    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:viewController.query, KISSQuery, [[videoFrame valueForKey:@"video" ] valueForKey:@"title"], KISSVideoTitle, nil];
     [[KISSMetricsAPI sharedAPI] recordEvent:KISSShareEmailPhone withProperties:metrics];
     
     [[SocialController sharedInstance] setViewController:viewController];
@@ -66,13 +66,15 @@ static SocialController *sharedInstance = nil;
 //    [mailViewController addAttachmentData:imageData mimeType:@"image/png" fileName:@"ShelbyTV-Video-Image"];
     
     // Subject
-    NSString *videoTitle = [video valueForKey:@"title"];
+    NSString *videoTitle = [[videoFrame valueForKey:@"video"] valueForKey:@"title"];
     [mailViewController setSubject:[NSString stringWithFormat:@"%@ - via Shelby Genius", videoTitle]];
     
     // Body
-    NSString *providerName = [video valueForKey:@"provider_name"];
-    NSString *providerID = [video valueForKey:@"provider_id"];
-    NSString *videoURL = [NSString stringWithFormat:@"http://shelby.tv/video/%@/%@", providerName, providerID];
+    NSString *providerName = [[videoFrame valueForKey:@"video"] valueForKey:@"provider_name"];
+    NSString *providerID = [[videoFrame valueForKey:@"video"] valueForKey:@"provider_id"];
+    NSString *rollID = [videoFrame  valueForKey:@"roll_id"];
+    NSString *frameID = [videoFrame valueForKey:@"id"];
+    NSString *videoURL = [NSString stringWithFormat:@"http://shelby.tv/video/%@/%@?roll_id=%@&frame_id=%@", providerName, providerID, rollID, frameID];
     NSString *message = [NSString stringWithFormat:@"I thought you might like this video: <strong><a href=\"%@\">%@</a></strong>.<br/><br/><em>via Shelby Genius - <a href=\"http://shl.by/ios-genius-app\">grab the app!</a></em>", videoURL, videoURL];
     [mailViewController setMessageBody:message isHTML:YES];
     
@@ -80,21 +82,23 @@ static SocialController *sharedInstance = nil;
     [viewController presentModalViewController:mailViewController animated:YES];
 }
 
-+ (void)postToTwitterForVideo:(NSArray *)video inViewController:(GeniusRollViewController *)viewController
++ (void)postToTwitterForVideo:(NSArray *)videoFrame inViewController:(GeniusRollViewController *)viewController
 {
     
     [[Panhandler sharedInstance] recordEvent];
     
-    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:viewController.query, KISSQuery, [video valueForKey:@"title"], KISSVideoTitle, nil];
+    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:viewController.query, KISSQuery, [[videoFrame valueForKey:@"video" ] valueForKey:@"title"], KISSVideoTitle, nil];
     [[KISSMetricsAPI sharedAPI] recordEvent:KISSShareTwitterPhone withProperties:metrics];
     
     // Title
-    NSString *videoTitle = [video valueForKey:@"title"];
+    NSString *videoTitle = [[videoFrame valueForKey:@"video"] valueForKey:@"title"];
     
     // URL
-    NSString *providerName = [video valueForKey:@"provider_name"];
-    NSString *providerID = [video valueForKey:@"provider_id"];
-    NSString *videoURL = [NSString stringWithFormat:@"http://shelby.tv/video/%@/%@", providerName, providerID];
+    NSString *providerName = [[videoFrame valueForKey:@"video"] valueForKey:@"provider_name"];
+    NSString *providerID = [[videoFrame valueForKey:@"video"] valueForKey:@"provider_id"];
+    NSString *rollID = [videoFrame valueForKey:@"roll_id"];
+    NSString *frameID = [videoFrame valueForKey:@"id"];
+    NSString *videoURL = [NSString stringWithFormat:@"http://shelby.tv/video/%@/%@?roll_id=%@&frame_id=%@", providerName, providerID, rollID, frameID];
 
     if ([TWTweetComposeViewController canSendTweet]) {
         TWTweetComposeViewController *tweetSheet = [[TWTweetComposeViewController alloc] init];

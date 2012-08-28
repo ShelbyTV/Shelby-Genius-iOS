@@ -14,7 +14,7 @@
 @synthesize videoTitleLabel = _videoTitleLabel;
 @synthesize videoProviderLabel = _videoProviderLabel;
 @synthesize shareButton = _shareButton;
-@synthesize video = _video;
+@synthesize videoFrame = _videoFrame;
 
 - (void)dealloc
 {
