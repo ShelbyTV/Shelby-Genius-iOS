@@ -30,7 +30,6 @@
         
         self.videoPlayerContainerViewController = videoPlayerContainerViewController;
         self.video = video;
-        NSLog(@"%@", [self.moviePlayer.view gestureRecognizers]);
 
     }
     

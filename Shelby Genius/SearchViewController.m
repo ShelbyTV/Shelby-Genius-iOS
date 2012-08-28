@@ -84,7 +84,8 @@
 #pragma mark - Public Methods
 - (void)searchButtonAction:(id)sender
 {
-    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.searchBar.text, KISSQuery, nil];
+    NSString *currentQuery = ( self.searchBar.text.length > 0 ) ? self.searchBar.text : self.placeholderQuery;
+    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:currentQuery, KISSQuery, nil];
     [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
     [self removeTransparentViews];
     [self modifyPreviousQueriesArray];
@@ -203,10 +204,11 @@
 {
     
     // Remove leading and trailing whitespaces (queries separated by multiple white-spaces in between words are not affected).
-    self.searchBar.text = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-
+    NSString *currentQuery = (self.searchBar.text.length > 0) ? self.searchBar.text : self.placeholderQuery;
+    currentQuery= [currentQuery stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
     // Convert to current and previous strings to lowerCase for comparison
-    NSString *lowerCaseQuery = [self.searchBar.text lowercaseString];
+    NSString *lowerCaseQuery = [currentQuery lowercaseString];
     NSMutableArray *lowerCaseArray = [self.previousQueriesArray mutableCopy];
     for ( NSString *previousQuery in self.previousQueriesArray ) [lowerCaseArray addObject:[previousQuery lowercaseString]];
 
@@ -217,7 +219,7 @@
             NSArray *reversedArray = [[self.previousQueriesArray reverseObjectEnumerator] allObjects];
             [self.previousQueriesArray removeAllObjects];
             [self.previousQueriesArray addObjectsFromArray:reversedArray];
-            [self.previousQueriesArray addObject:self.searchBar.text];
+            [self.previousQueriesArray addObject:currentQuery];
             NSArray *secondReversedArray = [[self.previousQueriesArray reverseObjectEnumerator] allObjects];
             [self.previousQueriesArray removeAllObjects];
             [self.previousQueriesArray addObjectsFromArray:secondReversedArray];
@@ -231,7 +233,8 @@
         
     } else { // If this IS the first search query
 
-        [self.previousQueriesArray addObject:self.searchBar.text];
+        NSString *firstQuery = (self.searchBar.text.length > 0) ? self.searchBar.text : self.placeholderQuery;
+        [self.previousQueriesArray addObject:firstQuery];
         [self savePreviousQueriesArray];
         [self.tableView reloadData];
 
@@ -247,8 +250,8 @@
 
 - (void)createGeniusRoll
 {
-    
-    GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithQuery:self.searchBar.text];
+    NSString *currentQuery = (self.searchBar.text.length > 0) ? self.searchBar.text : self.placeholderQuery;
+    GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithQuery:currentQuery];
     [self.navigationController pushViewController:geniusRollViewController animated:YES];
     self.searchBar.text = @"";
 }
@@ -265,22 +268,11 @@
 }
 
 #pragma mark - UISearchBarDelegate Methods
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{
-    
-    if (searchBar.text.length>0) {
-        
-        [self.searchButton setEnabled:YES];
-        
-    } else {
-        
-        [self.searchButton setEnabled:NO];
-    }
-    
-}
-
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
+    [self.searchButton setEnabled:YES];
+    [(UITextField*)[self.searchBar.subviews objectAtIndex:1] setEnablesReturnKeyAutomatically:YES];
+    
     [self createTransparentTouchableViews];
     [self changePlaceholder];
     
@@ -289,8 +281,17 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.searchBar.text, KISSQuery, nil];
-    [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
+    if ( self.searchBar.text.length > 0) { // use user's query
+        
+        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.searchBar.text, KISSQuery, nil];
+        [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
+        
+    } else { // use placeholderQuery
+        
+        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.placeholderQuery, KISSQuery, nil];
+        [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
+    }
+
     
     [self removeTransparentViews];
     [self modifyPreviousQueriesArray];

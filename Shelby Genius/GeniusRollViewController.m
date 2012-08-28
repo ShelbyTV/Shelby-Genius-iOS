@@ -161,6 +161,7 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
     [client performRequest:request ofType:APIRequestType_GetQuery withQuery:self.query];
     
+    
     [self.appDelegate addHUDWithMessage:@"Fetching Genius Videos"];
     
 }
@@ -364,7 +365,7 @@
     if ( [self.resultsArray count] ) {
         
         tableView.alpha = 1.0f;
-        
+        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"VideoCardCell" owner:self options:nil];
         VideoCardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VideoCardCell"];
         
@@ -384,8 +385,9 @@
         
     } else {
         
-        tableView.alpha = 0.0f;
-        return [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier: @"Cell"];
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewStylePlain reuseIdentifier: @"Cell"];
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        return cell;
         
     }
     
@@ -405,7 +407,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return ([self.resultsArray count]) ? 27.0f : 0.0f;
+    return 27.0f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
