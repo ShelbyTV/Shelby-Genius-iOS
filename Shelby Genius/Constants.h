@@ -28,7 +28,7 @@
 // Tags
 #define kAlertViewNoResultsTag              666
 
-// KISSMetrics
+// KISSMetrics Events
 #define KISSFirstTimeUserPhone              @"First time launch on iPhone Genius"
 #define KISSRepeatUserPhone                 @"Repeat launch on iPhone Genius"
 #define KISSPerformQueryPhone               @"Perform query on iPhone Genius"
@@ -36,8 +36,15 @@
 #define KISSWatchVideoPhone                 @"Watch video on iPhone Genius"
 #define KISSWatchNextVideoPhone             @"Watch next video on iPhone Genius"
 #define KISSWatchPreviousVideoPhone         @"Watch previous video on iPhone Genius"
+#define KISSWatchVideoInPortraitPhone       @"Watch video in portrait mode on iPhone Genius"
+#define KISSWatchVideoInLandscapePhone      @"Watch video in landscape mode on iPhone Genius"
+#define KISSCancelVideoPhone                @"Candel loading video on iPhone Genius"
+
+
 #define KISSShareEmailPhone                 @"Share with Email on iPhone Genius"
 #define KISSShareTwitterPhone               @"Share with Twitter on iPhone Genius"
+
+// KISSMetrics Properties
 #define KISSQuery                           @"Search query on iPhone Genius"
 #define KISSVideoTitle                      @"Video title on iPhone Genius"
 
