@@ -49,6 +49,9 @@ static SocialController *sharedInstance = nil;
     
     [[Panhandler sharedInstance] recordEvent];
     
+    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:kQuery], KISSQuery, [video valueForKey:@"title"], KISSVideoTitle, nil];
+    [[KISSMetricsAPI sharedAPI] recordEvent:KISSShareEmailPhone withProperties:metrics];
+    
     [[SocialController sharedInstance] setViewController:viewController];
     
     MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
@@ -78,6 +81,9 @@ static SocialController *sharedInstance = nil;
 {
     
     [[Panhandler sharedInstance] recordEvent];
+    
+    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:kQuery], KISSQuery, [video valueForKey:@"title"], KISSVideoTitle, nil];
+    [[KISSMetricsAPI sharedAPI] recordEvent:KISSShareTwitterPhone withProperties:metrics];
     
     // Title
     NSString *videoTitle = [video valueForKey:@"title"];

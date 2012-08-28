@@ -91,7 +91,7 @@
 		8E25615215EBDEE300200BC2 /* loadingCancelButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loadingCancelButton@2x.png"; sourceTree = "<group>"; };
 		8E25615615EBF02200200BC2 /* KISSMetricsAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KISSMetricsAPI.h; sourceTree = "<group>"; };
 		8E25615715EBF02200200BC2 /* KISSMetricsAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KISSMetricsAPI.m; sourceTree = "<group>"; };
-		8E25615915EC137200200BC2 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
+		8E25615915EC137200200BC2 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; name = "iTunesArtwork@2x"; path = "../iTunesArtwork@2x"; sourceTree = "<group>"; };
 		8E25615B15EC31CA00200BC2 /* shareButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareButton.png; sourceTree = "<group>"; };
 		8E25615C15EC31CA00200BC2 /* shareButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shareButton@2x.png"; sourceTree = "<group>"; };
 		8E2A243015D4F0FA00D09A8B /* AsynchronousFreeloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsynchronousFreeloader.h; sourceTree = "<group>"; };
@@ -255,6 +255,8 @@
 		8ECA62BF15EA890500056231 /* Default Artwork */ = {
 			isa = PBXGroup;
 			children = (
+				8ECA62BC15EA88FA00056231 /* iTunesArtwork */,
+				8E25615915EC137200200BC2 /* iTunesArtwork@2x */,
 				8E89F5C115D4FEC4004B2DFF /* Default.png */,
 				8E89F5C215D4FEC4004B2DFF /* Default@2x.png */,
 				8E89F5C315D4FEC4004B2DFF /* Icon-72.png */,
@@ -270,8 +272,6 @@
 		8EDCE98815D4C3C000EFB1F2 = {
 			isa = PBXGroup;
 			children = (
-				8ECA62BC15EA88FA00056231 /* iTunesArtwork */,
-				8E25615915EC137200200BC2 /* iTunesArtwork@2x */,
 				8EDCE99D15D4C3C000EFB1F2 /* Shelby Genius */,
 				8EDCE99615D4C3C000EFB1F2 /* Frameworks */,
 				8EDCE99415D4C3C000EFB1F2 /* Products */,

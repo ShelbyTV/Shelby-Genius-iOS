@@ -71,6 +71,10 @@
         NSString *providerName = [self.video valueForKey:@"provider_name"];
         [self videoDirectLinkFromProvider:providerName];
         
+        // KISSMetrics
+        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:kQuery], KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
+        [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoPhone withProperties:metrics];
+        
     }
     
     return self;
@@ -303,6 +307,11 @@
         self.selectedVideo -= 1;
         [self loadNewlySelectedVideo];
 
+        // KISSMetrics
+        NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:kQuery], KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
+        [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchPreviousVideoPhone withProperties:metrics];
+        
         // Scroll GeniusRollViewController to row of video that will be loaded
         NSNumber *rowNumber = [NSNumber numberWithInt:self.selectedVideo];
         NSDictionary *dictionary = [NSDictionary dictionaryWithObject:rowNumber forKey:kIndexOfCurrentVideo];
@@ -327,7 +336,7 @@
 - (void)nextVideoButtonAction
 {
     if ( self.selectedVideo < [self.videos count]-1 ) {
-       
+        
         // Unload current video
         [self.moviePlayer.moviePlayer stop];
         self.videoWillBegin = NO;
@@ -336,6 +345,11 @@
         self.selectedVideo += 1;
         [self loadNewlySelectedVideo];
     
+        // KISSMetrics
+        NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:kQuery], KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
+        [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchNextVideoPhone withProperties:metrics];
+        
         // Scroll GeniusRollViewController to row of video that will be loaded
         NSNumber *rowNumber = [NSNumber numberWithInt:self.selectedVideo];
         NSDictionary *dictionary = [NSDictionary dictionaryWithObject:rowNumber forKey:kIndexOfCurrentVideo];

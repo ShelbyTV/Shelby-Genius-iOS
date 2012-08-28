@@ -17,7 +17,7 @@
 #endif
 
 
-#define BASE_URL @"https://trk.kissmetrics.com"
+#define BASE_URL @"http://trk.kissmetrics.com"
 #define EVENT_PATH @"/e"
 #define PROP_PATH @"/s"
 #define ALIAS_PATH @"/a"
@@ -135,7 +135,7 @@ static KISSMetricsAPI *sharedAPI = nil;
 #if !TARGET_OS_IPHONE
     [notificationCenter addObserver:self 
                            selector:@selector(applicationWillTerminate:) 
-                               name:NSApplicationWillTerminateNotification 
+                               name:NSApplicationWillTerminateNotification
                              object:nil];
 #else
     [notificationCenter addObserver:self 

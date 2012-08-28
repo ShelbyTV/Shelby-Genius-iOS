@@ -12,9 +12,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import <Crashlytics/Crashlytics.h>
 
-// External Libraries
-#import "KISSMetricsAPI.h"
-
 // View Controllers
 #import "SearchViewController.h"
 #import "GeniusOnboardingViewController.h"
@@ -43,21 +40,27 @@
 #pragma mark - UIApplicationDelegate Methods
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
+
     // Initialize UIWindow's rootViewController
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
+    // Initialize analytics
+    [self analytics];
+
     // Check if app/onboarding was previously launched before
     BOOL previouslyLaunched = [[NSUserDefaults standardUserDefaults] boolForKey:kPreviouslyLaunched];
     
     if ( previouslyLaunched ) {
     
+        [[KISSMetricsAPI sharedAPI] recordEvent:KISSRepeatUserPhone withProperties:nil];
+        
         SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController_iPhone" bundle:nil];
         self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:searchViewController];
         self.window.rootViewController = rootNavigationController;
         
     } else {
         
+        [[KISSMetricsAPI sharedAPI] recordEvent:KISSFirstTimeUserPhone withProperties:nil];
         
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default"]];
         [imageView setFrame:self.window.frame];
@@ -72,10 +75,6 @@
                              
                          }];
     }
-    
-    
-    // Add analytics
-    [self analytics];
     
     // Appearance Proxies and General Customization
     [self customization];

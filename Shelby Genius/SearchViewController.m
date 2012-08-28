@@ -82,6 +82,8 @@
 #pragma mark - Public Methods
 - (void)searchButtonAction:(id)sender
 {
+    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.searchBar.text, KISSQuery, nil];
+    [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
     [self removeTransparentViews];
     [self modifyPreviousQueriesArray];
     [self createGeniusRoll];
@@ -242,6 +244,7 @@
 
 - (void)createGeniusRoll
 {
+    
     GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithQuery:self.searchBar.text];
     [self.navigationController pushViewController:geniusRollViewController animated:YES];
     self.searchBar.text = @"";
@@ -277,11 +280,18 @@
 {
     [self createTransparentTouchableViews];
     [self changePlaceholder];
+    
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:kQuery];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     [UIView animateWithDuration:0.25f animations:^{ self.tableView.alpha = 0.25f; }];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.searchBar.text, KISSQuery, nil];
+    [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
+    
     [self removeTransparentViews];
     [self modifyPreviousQueriesArray];
     [self createGeniusRoll];
@@ -397,9 +407,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     QueryCell *cell = (QueryCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+    
+    [[NSUserDefaults standardUserDefaults] setValue:cell.label.text forKey:kQuery];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:cell.label.text, KISSQuery, nil];
+    [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
+    
     GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithQuery:cell.label.text];
     [self.navigationController pushViewController:geniusRollViewController animated:YES];
+
 }
 
 #pragma mark - UIAlertViewDelegate Methods
