@@ -113,7 +113,7 @@
 					<object class="IBUIButton" id="775383521">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{287, 26}, {23, 24}}</string>
+						<string key="NSFrame">{{286, 25}, {24, 24}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="958489555"/>
@@ -122,10 +122,10 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<double key="IBUIContentEdgeInsets.top">44</double>
-						<double key="IBUIContentEdgeInsets.bottom">44</double>
-						<double key="IBUIContentEdgeInsets.left">44</double>
-						<double key="IBUIContentEdgeInsets.right">44</double>
+						<double key="IBUIContentEdgeInsets.top">66</double>
+						<double key="IBUIContentEdgeInsets.bottom">66</double>
+						<double key="IBUIContentEdgeInsets.left">66</double>
+						<double key="IBUIContentEdgeInsets.right">66</double>
 						<object class="NSColor" key="IBUIHighlightedTitleColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -325,7 +325,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">shareButton.png</string>
-			<string key="NS.object.0">{23, 24}</string>
+			<string key="NS.object.0">{24, 24}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">1498</string>
 	</data>

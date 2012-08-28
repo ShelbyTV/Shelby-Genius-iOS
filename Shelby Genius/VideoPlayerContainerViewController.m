@@ -160,7 +160,19 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processNotification:) name:nil object:nil];
     
-    static NSString *vimeoExtractor = @"<html><body><center><iframe id=\"player_1\" src=\"http://player.vimeo.com/video/%@?api=1&amp;player_id=player_1\" webkit-playsinline ></iframe><script src=\"http://a.vimeocdn.com/js/froogaloop2.min.js?cdbdb\"></script><script>(function(){var vimeoPlayers = document.querySelectorAll('iframe');$f(vimeoPlayers[0]).addEvent('ready', ready);function ready(player_id) {$f(player_id).api('play');}})();</script></center></body></html>";
+    static NSString *vimeoExtractor = @"<html><head>"
+    "<script src=\"froogaloop.js\"></script>"
+    " <script>"
+    "function ready()"
+    "{$f(document.getElementById(\"player\")).api(\"play\");}"
+    "function func1() "
+    "{$f(document.getElementById(\"player\")).addEvent(\"ready\", ready);}"
+    "window.onload=func1;"
+    "</script></head><body>"
+    "<iframe id=\"player\" src=\"http://player.vimeo.com/video/%@?api=1&amp;player_id=player\" width=\"315\" height=\"455\" frameborder=\"0\" webkit-playsinline>"
+    " </iframe></body></html>";
+    
+    NSLog(@"%@", vimeoExtractor);
     
     NSString *vimeoRequestString = [NSString stringWithFormat:vimeoExtractor, [self.video valueForKey:@"provider_id"]];
     
