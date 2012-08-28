@@ -34,11 +34,10 @@
 #pragma mark - Action Methods
 - (void)pushSearchViewController:(id)sender
 {
-    SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController_iPhone" bundle:nil];
-    [self.navigationController pushViewController:searchViewController animated:YES];
-    
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kPreviouslyLaunched];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - Interface Orientation Methods

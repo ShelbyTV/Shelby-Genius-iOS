@@ -14,7 +14,6 @@
 
 // View Controllers
 #import "SearchViewController.h"
-#import "GeniusOnboardingViewController.h"
 #import "VideoPlayerViewController.h"
 
 @interface AppDelegate ()
@@ -48,33 +47,10 @@
     [self analytics];
 
     // Check if app/onboarding was previously launched before
-    BOOL previouslyLaunched = [[NSUserDefaults standardUserDefaults] boolForKey:kPreviouslyLaunched];
-    
-    if ( previouslyLaunched ) {
-    
-        [[KISSMetricsAPI sharedAPI] recordEvent:KISSRepeatUserPhone withProperties:nil];
-        
-        SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController_iPhone" bundle:nil];
-        self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:searchViewController];
-        self.window.rootViewController = rootNavigationController;
-        
-    } else {
-        
-        [[KISSMetricsAPI sharedAPI] recordEvent:KISSFirstTimeUserPhone withProperties:nil];
-        
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default"]];
-        [imageView setFrame:self.window.frame];
-        [self.window addSubview:imageView];
-        [UIView animateWithDuration:2.0f
-                         animations:^{
-                            [imageView setHidden:YES];
-                         } completion:^(BOOL finished) {
-                             GeniusOnboardingViewController *geniusOnboardingViewController = [[GeniusOnboardingViewController alloc] initWithNibName:@"GeniusOnboardingViewController" bundle:nil];
-                             self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:geniusOnboardingViewController];
-                             self.window.rootViewController = rootNavigationController;
-                             
-                         }];
-    }
+    SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController_iPhone" bundle:nil];
+    self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:searchViewController];
+    self.window.rootViewController = rootNavigationController;
+
     
     // Appearance Proxies and General Customization
     [self customization];

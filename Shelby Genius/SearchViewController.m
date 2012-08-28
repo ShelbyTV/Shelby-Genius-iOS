@@ -16,7 +16,10 @@
 
 // Controllers
 #import "APIClient.h"
+
+// View Controllers
 #import "GeniusRollViewController.h"
+#import "GeniusOnboardingViewController.h"
 
 // C Libraries
 #include <stdlib.h>
@@ -69,10 +72,26 @@
     [self initializePreviousQueriesArray];
 }
 
- - (void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     // searchButton
     [self.searchButton setEnabled:NO];
+    
+    BOOL previouslyLaunched = [[NSUserDefaults standardUserDefaults] boolForKey:kPreviouslyLaunched];
+    
+    if ( previouslyLaunched ) {
+        
+        [[KISSMetricsAPI sharedAPI] recordEvent:KISSRepeatUserPhone withProperties:nil];
+        
+    } else {
+        
+        [[KISSMetricsAPI sharedAPI] recordEvent:KISSFirstTimeUserPhone withProperties:nil];
+        GeniusOnboardingViewController *geniusOnboardingViewController = [[GeniusOnboardingViewController alloc] initWithNibName:@"GeniusOnboardingViewController" bundle:nil];
+        UINavigationController *geniusNavigationController = [[UINavigationController alloc] initWithRootViewController:geniusOnboardingViewController];
+        [self presentModalViewController:geniusNavigationController animated:YES];
+        
+    }
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
