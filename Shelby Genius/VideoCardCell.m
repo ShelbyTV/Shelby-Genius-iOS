@@ -14,6 +14,7 @@
 @synthesize videoTitleLabel = _videoTitleLabel;
 @synthesize videoProviderLabel = _videoProviderLabel;
 @synthesize shareButton = _shareButton;
+@synthesize invisibleShareButton = _invisibleShareButton;
 @synthesize videoFrame = _videoFrame;
 
 - (void)dealloc
@@ -22,6 +23,7 @@
     self.videoTitleLabel = nil;
     self.videoProviderLabel = nil;
     self.shareButton = nil;
+    self.invisibleShareButton = nil;
 }
 
 - (void)awakeFromNib

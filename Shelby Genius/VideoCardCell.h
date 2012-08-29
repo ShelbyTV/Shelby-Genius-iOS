@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet TopAlignedLabel *videoTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *videoProviderLabel;
 @property (strong, nonatomic) IBOutlet UIButton *shareButton;
+@property (strong, nonatomic) IBOutlet UIButton *invisibleShareButton;
 @property (strong, nonatomic) NSArray *videoFrame;
 
 @end

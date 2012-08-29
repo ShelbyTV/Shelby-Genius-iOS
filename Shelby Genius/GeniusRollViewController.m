@@ -376,6 +376,7 @@
         cell.videoProviderLabel.text = providerName;
         cell.videoFrame = [self.resultsArray objectAtIndex:indexPath.row];
         [cell.shareButton addTarget:self action:@selector(shareVideoAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.invisibleShareButton addTarget:self action:@selector(shareVideoAction:) forControlEvents:UIControlEventTouchUpInside];
         
         return cell;
         
