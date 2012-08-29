@@ -70,6 +70,7 @@
     [self.loadingVideoView.loadingCancelButton addTarget:self action:@selector(cancelButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [AsynchronousFreeloader loadImageFromLink:[video valueForKey:@"thumbnail_url"] forImageView:self.loadingVideoView.thumbnailImageView withPlaceholderView:nil];
     [self.view addSubview:self.loadingVideoView];
+    [self.view addSubview:self.videoPlayerContainerViewController.webView];
     
     CGRect frame = self.view.bounds;
     

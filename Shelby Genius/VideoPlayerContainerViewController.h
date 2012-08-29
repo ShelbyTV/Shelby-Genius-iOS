@@ -13,6 +13,7 @@
 @property (strong, nonatomic) NSMutableArray *videos;
 @property (assign, nonatomic) NSUInteger selectedVideo;
 @property (copy, nonatomic) NSString *query;
+@property (strong, nonatomic) UIWebView *webView;
 
 - (id)initWithVideos:(NSMutableArray*)videos selectedVideo:(NSUInteger)selectedVideo andQuery:(NSString*)query;
 - (void)videoDidEndPlaying:(NSNotification*)notification;

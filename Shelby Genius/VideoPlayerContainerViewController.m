@@ -26,7 +26,6 @@
 @property (assign, nonatomic) VideoProvider provider;
 @property (strong, nonatomic) VideoPlayerViewController *moviePlayer;
 @property (strong, nonatomic) NSArray *video;
-@property (strong, nonatomic) UIWebView *webView;
 @property (assign, nonatomic) BOOL videoWillBegin;
 
 - (void)createMoviePlayer;
@@ -106,9 +105,7 @@
     [self.navigationController pushViewController:self.moviePlayer animated:NO];
     [self.navigationController setNavigationBarHidden:YES];
     [self.moviePlayer modifyVideoPlayerButtons];
-    
     [self.appDelegate setVideoPlayerViewController:self.moviePlayer];
-    
 }
 
 - (void)destroyMoviePlayer
@@ -166,7 +163,7 @@
     
     NSString *vimeoRequestString = [NSString stringWithFormat:vimeoExtractor, [self.video valueForKey:@"provider_id"]];
     
-    [self.view addSubview:self.webView];
+    [self.moviePlayer.loadingVideoView addSubview:self.webView];
     [self.webView loadHTMLString:vimeoRequestString baseURL:[NSURL URLWithString:@"http://shelby.tv"]];
     
 }
@@ -267,8 +264,6 @@
 - (void)videoDidLoad:(NSNotification *)notification
 {
     MPMoviePlayerController *movieController = notification.object;
-    
-    NSLog(@"%d", movieController.loadState);
     
     if ( movieController.loadState != 0 ) {
         
