@@ -62,18 +62,18 @@
     
     if ( self = [super init]) {
         
-        // Setup
-        self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        // Create references
         self.query = query;
         self.videos = videos;
         self.selectedVideo = selectedVideo;
+        self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+
+        // Select initial video
         self.video = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
         self.videoWillBegin = NO;
         
-        // Get direct link to video based on video provider
-        [self createWebView];
-        NSString *providerName = [self.video valueForKey:@"provider_name"];
-        [self videoDirectLinkFromProvider:providerName];
+        // Obtain direct link to video based on video provider
+        [self videoDirectLinkFromProvider:[self.video valueForKey:@"provider_name"]];
         
         // KISSMetrics
         NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
@@ -145,7 +145,11 @@
 #pragma mark - Video Loading Methods
 - (void)videoDirectLinkFromProvider:(NSString *)providerName
 {
+    
+    // Create webView
+    [self createWebView];
 
+    // Choose link extraction method based on video provider
     if ( [providerName isEqualToString:@"vimeo"] ) {
         
         [self setProvider:VideoProvider_Vimeo];
@@ -447,7 +451,7 @@
     [self videoDirectLinkFromProvider:providerName];
 }
 
-#pragma mark - Interface Orientation Method
+#pragma mark - Interface Orientation Methods
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
