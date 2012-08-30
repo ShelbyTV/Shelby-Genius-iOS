@@ -215,7 +215,7 @@
     
     NSString *youtubeRequestString = [NSString stringWithFormat:youtubeExtractor, [self.video valueForKey:@"provider_id"]];
     
-    [self.view addSubview:self.webView];
+    [self.moviePlayer.loadingVideoView addSubview:self.webView];
     [self.webView loadHTMLString:youtubeRequestString baseURL:[NSURL URLWithString:@"http://shelby.tv"]];
     
 }
@@ -229,7 +229,7 @@
     
     NSString *dailymotionRequestString = [NSString stringWithFormat:dailymotionExtractor, [self.video valueForKey:@"provider_id"]];    
     
-    [self.view addSubview:self.webView];
+    [self.moviePlayer.loadingVideoView addSubview:self.webView];
     [self.webView loadHTMLString:dailymotionRequestString baseURL:[NSURL URLWithString:@"http://shelby.tv"]];
 }
 
@@ -299,15 +299,10 @@
                              [self.moviePlayer.loadingVideoView setAlpha:0.0f];
                              
                          } completion:^(BOOL finished) {
-                             
-                             [self.moviePlayer.loadingVideoView removeFromSuperview];
+
                              movieController.controlStyle = MPMovieControlStyleFullscreen;
+                             
                          }];
-        
-        
-    } else {
-        
-        movieController.controlStyle = MPMovieControlStyleNone;
     }
     
 }
@@ -366,13 +361,7 @@
 
     if ( self.selectedVideo > 0 ) {
         
-        // Unload current video
-        [self.moviePlayer.moviePlayer stop];
-        [self.moviePlayer.moviePlayer setContentURL:nil];
-        self.videoWillBegin = NO;
-        self.controllsModified = NO;
-        
-        // Load previous video
+        // Reference previous video
         self.selectedVideo -= 1;
         [self loadNewlySelectedVideo];
 
@@ -406,13 +395,7 @@
 {
     if ( self.selectedVideo < [self.videos count]-1 ) {
         
-        // Unload current video
-        [self.moviePlayer.moviePlayer stop];
-        [self.moviePlayer.moviePlayer setContentURL:nil];
-        self.videoWillBegin = NO;
-        self.controllsModified = NO;
-        
-        // Load next video
+        // Reference next video
         self.selectedVideo += 1;
         [self loadNewlySelectedVideo];
     
@@ -444,11 +427,18 @@
 
 - (void)loadNewlySelectedVideo
 {
-    self.video = nil;
-    self.video = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+    
+    // Unload current video
+    [self.moviePlayer.moviePlayer stop];
+    [self.moviePlayer.moviePlayer setContentURL:nil];
+    self.videoWillBegin = NO;
+    self.controllsModified = NO;
+    
+
     
     // Create loadingVideoView for new video
-    [self.moviePlayer.moviePlayer setContentURL:nil];
+    self.video = nil;
+    self.video = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
     [self.moviePlayer createLoadingVideoViewForVideo:self.video];
     
     // Get direct link to video based on video provider

@@ -90,6 +90,13 @@
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     
+    if (self.loadingVideoView) {
+      
+        [self.loadingVideoView removeFromSuperview];
+        self.moviePlayer.controlStyle = MPMovieControlStyleNone;
+    
+    }
+ 
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingVideoView" owner:self options:NULL];
     self.loadingVideoView = [nib objectAtIndex:0];
     self.loadingVideoView.videoTitleLabel.text = [NSString stringWithFormat:@"%@", [video valueForKey:@"title"]];
