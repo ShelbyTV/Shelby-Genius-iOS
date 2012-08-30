@@ -44,7 +44,8 @@
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskPortrait;
+    NSLog(@"%d", UIInterfaceOrientationMaskPortrait);
+    return 2;
 }
 
 - (BOOL)shouldAutorotate

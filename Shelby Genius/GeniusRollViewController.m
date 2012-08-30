@@ -106,8 +106,8 @@
         
         [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
         UIViewController *mVC = [[UIViewController alloc] init];
-        [self presentViewController:mVC animated:YES completion:nil];
-        [self dismissViewControllerAnimated:YES completion:NO];
+        [self presentViewController:mVC animated:NO completion:nil];
+        [self dismissViewControllerAnimated:NO completion:nil];
         
     }
 
