@@ -60,13 +60,9 @@ static SocialController *sharedInstance = nil;
     MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
     mailViewController.mailComposeDelegate = [SocialController sharedInstance];
     
-    // Attachment
-//    NSString *thumnbnailURL = [video valueForKey:@"thumbnail_url"];
-//    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:thumnbnailURL]];
-//    [mailViewController addAttachmentData:imageData mimeType:@"image/png" fileName:@"ShelbyTV-Video-Image"];
-    
     // Subject
     NSString *videoTitle = [[videoFrame valueForKey:@"video"] valueForKey:@"title"];
+    NSString *escapedVideoTitle = [videoTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [mailViewController setSubject:[NSString stringWithFormat:@"%@ - via Shelby Genius", videoTitle]];
     
     // Body
@@ -92,6 +88,7 @@ static SocialController *sharedInstance = nil;
     
     // Title
     NSString *videoTitle = [[videoFrame valueForKey:@"video"] valueForKey:@"title"];
+    NSString *escapedVideoTitle = [videoTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     // URL
     NSString *providerName = [[videoFrame valueForKey:@"video"] valueForKey:@"provider_name"];
@@ -102,7 +99,8 @@ static SocialController *sharedInstance = nil;
 
     if ([TWTweetComposeViewController canSendTweet]) {
         TWTweetComposeViewController *tweetSheet = [[TWTweetComposeViewController alloc] init];
-        [tweetSheet setInitialText:[NSString stringWithFormat:@"%@ - %@ /via @Shelby", videoTitle, videoURL]];
+        [tweetSheet setInitialText:[NSString stringWithFormat:@"%@ /via @Shelby", videoTitle]];
+        [tweetSheet addURL:[NSURL URLWithString:videoURL]];
         [tweetSheet removeAllImages];
         [viewController presentViewController:tweetSheet animated:YES completion:nil];
     }
