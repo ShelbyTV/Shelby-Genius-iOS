@@ -79,7 +79,7 @@ static SocialController *sharedInstance = nil;
     [mailViewController setMessageBody:message isHTML:YES];
     
     // Present mailViewController
-    [viewController presentModalViewController:mailViewController animated:YES];
+    [viewController presentViewController:mailViewController animated:YES completion:nil];
 }
 
 + (void)postToTwitterForVideo:(NSArray *)videoFrame inViewController:(GeniusRollViewController *)viewController
@@ -104,7 +104,7 @@ static SocialController *sharedInstance = nil;
         TWTweetComposeViewController *tweetSheet = [[TWTweetComposeViewController alloc] init];
         [tweetSheet setInitialText:[NSString stringWithFormat:@"%@ - %@ /via @Shelby", videoTitle, videoURL]];
         [tweetSheet removeAllImages];
-        [viewController presentModalViewController:tweetSheet animated:YES];
+        [viewController presentViewController:tweetSheet animated:YES completion:nil];
     }
     
 }

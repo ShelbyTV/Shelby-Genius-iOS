@@ -16,10 +16,6 @@
 @implementation GeniusOnboardingViewController
 
 #pragma mark - View Lifecycle Methods
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-}
 
 - (void)viewDidLoad
 {
@@ -28,7 +24,7 @@
     // Due to animation, appearance proxy isn't hit, so we have to resort to adding it here
     UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navigationLogo"]];
     self.navigationController.visibleViewController.navigationItem.titleView = logoView;
-    
+    [self.navigationItem setHidesBackButton:YES];
 }
 
 #pragma mark - Action Methods
@@ -37,7 +33,7 @@
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kPreviouslyLaunched];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Interface Orientation Methods

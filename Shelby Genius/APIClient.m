@@ -7,8 +7,9 @@
 //
 
 #import "APIClient.h"
+#import "Reachability.h"
 
-@interface APIClient () <NSURLConnectionDataDelegate>
+@interface APIClient () <NSURLConnectionDataDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSURLConnection *connection;
 @property (strong, nonatomic) NSMutableData *responseData;
@@ -32,7 +33,50 @@
 {
     self.query = query;    
     self.type = type;
-    self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    // Initialize Reachability
+    Reachability* reach = [Reachability reachabilityWithHostname:@"www.google.com"];
+    [reach startNotifier];
+    
+    // If internet connection is AVAILABLE, execute this block of code.
+    reach.reachableBlock = ^(Reachability *reach){
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            NSLog(@"Internet Connection Available");
+            
+            // Initialize Request
+            self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+            
+            // Show statusBar activity indicator
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            
+            
+        });
+        
+    };
+    
+    // If internet connection is UNAVAILABLE, execute this block of code.
+    reach.unreachableBlock = ^(Reachability *reach){
+        
+        NSLog(@"Internet Connection Unavailable");
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            // Post notification to force UI changes
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Internet Connection Unavailable"
+                                                                message:@"Please make sure you're connected to WiFi or 3G and try again."
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Dismiss"
+                                                      otherButtonTitles:nil, nil];
+            [alertView show];
+            
+            
+        });
+        
+    };
+
+
 }
 
 #pragma mark - Private Methods
@@ -129,6 +173,9 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     
+    // Hide statusBar activity indicator
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    
     switch (self.type) {
             
         case APIRequestType_GetQuery:{
@@ -182,6 +229,14 @@
             break;
     }
     
+}
+
+#pragma mark - UIAlertViewDelegateMethods
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (0 == buttonIndex) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNoConnectionObserver object:nil];
+    }
 }
 
 @end

@@ -27,7 +27,12 @@
 
 - (BOOL)shouldAutorotate
 {
-    return YES;
+    if ([self.visibleViewController isKindOfClass:[VideoPlayerViewController class]]) {
+        return YES;
+    } else {
+        return NO;
+    }
+    
 }
 
 
