@@ -98,7 +98,7 @@
 }
 
 
-#pragma mark - View and Subview Creation/Destruction Methods
+#pragma mark - Subview Creation Methods
 - (void)createMoviePlayer
 {
     self.moviePlayer = [[VideoPlayerViewController alloc] initWithVideo:self.video andVideoPlayerContainerViewController:self];
@@ -226,6 +226,96 @@
         
     }
 }
+
+#pragma mark - Video Player Actions
+- (void)previousVideoButtonAction
+{
+    
+    if ( self.selectedVideo > 0 ) {
+        
+        // Reference previous video
+        self.selectedVideo -= 1;
+        [self loadNewlySelectedVideo];
+        
+        // KISSMetrics
+        NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
+        [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchPreviousVideoPhone withProperties:metrics];
+        
+        // Scroll GeniusRollViewController to row of video that will be loaded
+        NSNumber *rowNumber = [NSNumber numberWithInt:self.selectedVideo];
+        NSDictionary *dictionary = [NSDictionary dictionaryWithObject:rowNumber forKey:kIndexOfCurrentVideo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kIndexOfCurrentVideoObserver
+                                                            object:nil
+                                                          userInfo:dictionary];
+        
+    } else {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                            message:@"You are currently watching the first video recommended by Genius."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Dismiss"
+                                                  otherButtonTitles:nil, nil];
+        
+        [alertView show];
+        
+    }
+    
+}
+
+- (void)nextVideoButtonAction
+{
+    if ( self.selectedVideo < [self.videos count]-1 ) {
+        
+        // Reference next video
+        self.selectedVideo += 1;
+        [self loadNewlySelectedVideo];
+        
+        // KISSMetrics
+        NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
+        [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchNextVideoPhone withProperties:metrics];
+        
+        // Scroll GeniusRollViewController to row of video that will be loaded
+        NSNumber *rowNumber = [NSNumber numberWithInt:self.selectedVideo];
+        NSDictionary *dictionary = [NSDictionary dictionaryWithObject:rowNumber forKey:kIndexOfCurrentVideo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kIndexOfCurrentVideoObserver
+                                                            object:nil
+                                                          userInfo:dictionary];
+        
+    } else {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                            message:@"You are currently watching the last video recommended by Shelby Genius."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Dismiss"
+                                                  otherButtonTitles:nil, nil];
+        
+        [alertView show];
+        
+    }
+    
+}
+
+- (void)loadNewlySelectedVideo
+{
+    // Unload current video
+    [self.moviePlayer.moviePlayer stop];
+    [self.moviePlayer.moviePlayer setContentURL:nil];
+    self.videoWillBegin = NO;
+    self.controllsModified = NO;
+    
+    // Create loadingVideoView for new video
+    self.video = nil;
+    self.video = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+    [self.moviePlayer createLoadingVideoViewForVideo:self.video];
+    
+    // Get direct link to video based on video provider
+    [self createWebView];
+    NSString *providerName = [self.video valueForKey:@"provider_name"];
+    [self videoDirectLinkFromProvider:providerName];
+}
+
 
 #pragma mark - Observer Methods
 - (void)createObservers
@@ -358,97 +448,6 @@
         [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoOverAirPlayPhone withProperties:metrics];
         
     }
-}
-
-#pragma mark - Video Player Actions
-- (void)previousVideoButtonAction
-{
-
-    if ( self.selectedVideo > 0 ) {
-        
-        // Reference previous video
-        self.selectedVideo -= 1;
-        [self loadNewlySelectedVideo];
-
-        // KISSMetrics
-        NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
-        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
-        [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchPreviousVideoPhone withProperties:metrics];
-        
-        // Scroll GeniusRollViewController to row of video that will be loaded
-        NSNumber *rowNumber = [NSNumber numberWithInt:self.selectedVideo];
-        NSDictionary *dictionary = [NSDictionary dictionaryWithObject:rowNumber forKey:kIndexOfCurrentVideo];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kIndexOfCurrentVideoObserver
-                                                            object:nil
-                                                          userInfo:dictionary];
-        
-    } else {
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
-                                                            message:@"You are currently watching the first video recommended by Genius."
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Dismiss"
-                                                  otherButtonTitles:nil, nil];
-        
-        [alertView show];
-        
-    }
-
-}
-
-- (void)nextVideoButtonAction
-{
-    if ( self.selectedVideo < [self.videos count]-1 ) {
-        
-        // Reference next video
-        self.selectedVideo += 1;
-        [self loadNewlySelectedVideo];
-    
-        // KISSMetrics
-        NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
-        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
-        [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchNextVideoPhone withProperties:metrics];
-        
-        // Scroll GeniusRollViewController to row of video that will be loaded
-        NSNumber *rowNumber = [NSNumber numberWithInt:self.selectedVideo];
-        NSDictionary *dictionary = [NSDictionary dictionaryWithObject:rowNumber forKey:kIndexOfCurrentVideo];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kIndexOfCurrentVideoObserver
-                                                            object:nil
-                                                          userInfo:dictionary];
-        
-    } else {
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
-                                                            message:@"You are currently watching the last video recommended by Shelby Genius."
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Dismiss"
-                                                  otherButtonTitles:nil, nil];
-        
-        [alertView show];
-        
-    }
-    
-}
-
-- (void)loadNewlySelectedVideo
-{
-    
-    // Unload current video
-    [self.moviePlayer.moviePlayer stop];
-    [self.moviePlayer.moviePlayer setContentURL:nil];
-    self.videoWillBegin = NO;
-    self.controllsModified = NO;
-    
-
-    // Create loadingVideoView for new video
-    self.video = nil;
-    self.video = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
-    [self.moviePlayer createLoadingVideoViewForVideo:self.video];
-    
-    // Get direct link to video based on video provider
-    [self createWebView];
-    NSString *providerName = [self.video valueForKey:@"provider_name"];
-    [self videoDirectLinkFromProvider:providerName];
 }
 
 #pragma mark - Interface Orientation Methods
