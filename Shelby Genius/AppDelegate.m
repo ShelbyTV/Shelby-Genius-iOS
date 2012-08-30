@@ -13,13 +13,14 @@
 #import <Crashlytics/Crashlytics.h>
 
 // View Controllers
+#import "RootNavigationController.h"
 #import "SearchViewController.h"
 #import "VideoPlayerViewController.h"
 
 @interface AppDelegate ()
 
 @property (strong, nonatomic) UIView *progressView;
-@property (strong, nonatomic) UINavigationController *rootNavigationController;
+@property (strong, nonatomic) RootNavigationController *rootNavigationController;
 @property (assign, nonatomic) NSTimeInterval videoPlaybackTimeInterval;
 
 - (void)analytics;
@@ -48,7 +49,7 @@
 
     // Check if app/onboarding was previously launched before
     SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController_iPhone" bundle:nil];
-    self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:searchViewController];
+    self.rootNavigationController = [[RootNavigationController alloc] initWithRootViewController:searchViewController];
     self.window.rootViewController = rootNavigationController;
 
     

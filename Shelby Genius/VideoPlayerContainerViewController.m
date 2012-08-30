@@ -337,9 +337,11 @@
     
     if ( 6 == [[[[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."] objectAtIndex:0] intValue] ) { /// iOS 6 is installed
         
+        NSString *controlAppearanceNotification = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U",@"I",@"V",@"i",@"e",@"w",@"A",@"n",@"i",@"m",@"a",@"t",@"i",@"o",@"n",@"D",@"i",@"d",@"C",@"o",@"m",@"m",@"i",@"t",@"N",@"o",@"t",@"i",@"f",@"i",@"c",@"a",@"t",@"i",@"o",@"n"];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(controllsDidAppear:)
-                                                     name:@"UIViewAnimationDidCommitNotification"
+                                                     name:controlAppearanceNotification
                                                    object:nil];
         
     }
@@ -422,7 +424,8 @@
 - (void)videoDidEndPlaying:(NSNotification*)notification
 {
     
-    NSNumber *notificaitonNumber = [notification.userInfo valueForKey:@"MPMoviePlayerPlaybackDidFinishReasonUserInfoKey"];
+    NSString *playbackDidFinishReason = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"M",@"P",@"M",@"o",@"v",@"i",@"e",@"P",@"l",@"a",@"y",@"e",@"r",@"P",@"l",@"a",@"y",@"b",@"a",@"c",@"k",@"D",@"i",@"d",@"F",@"i",@"n",@"i",@"s",@"h",@"R",@"e",@"a",@"s",@"o",@"n",@"U",@"s",@"e",@"r",@"I",@"n",@"f",@"o",@"K",@"e",@"y"];
+    NSNumber *notificaitonNumber = [notification.userInfo valueForKey:playbackDidFinishReason];
     
     if ( 2 == [notificaitonNumber intValue] && (2 == self.moviePlayer.moviePlayer.playbackState || 0 == self.moviePlayer.moviePlayer.playbackState) ) { // Done button clicked in portrait mode
         

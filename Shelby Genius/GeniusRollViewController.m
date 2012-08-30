@@ -65,6 +65,7 @@
         self.query = query;
         
         [self search];
+
         
     }
     
@@ -96,7 +97,19 @@
     
     [super viewWillAppear:animated];
     
+    // Annoying iOS5 status bar color fix
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    
+    // Annoying iOS6 orientation fix when GenisuRollViewController is Re-Presented
+    if ( 6 == [[[[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."] objectAtIndex:0] intValue] ) { /// iOS 6 is installed
+        
+        [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
+        UIViewController *mVC = [[UIViewController alloc] init];
+        [self presentModalViewController:mVC animated:NO];
+        [self dismissModalViewControllerAnimated:NO];
+        
+    }
+
     
     if ( [self isPlayingVideo] ) {
         
@@ -472,5 +485,6 @@
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
 
 @end

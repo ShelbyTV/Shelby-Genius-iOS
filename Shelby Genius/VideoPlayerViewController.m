@@ -136,11 +136,10 @@
 }
 
 #pragma mark - Interface Orientation Methods
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-
     if (self.loadingVideoView) {
-     
+        
         CGRect frame = self.view.bounds;
         
         if ( UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ) {
@@ -156,11 +155,8 @@
             [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoInLandscapePhone withProperties:metrics];
             
             [self.loadingVideoView setFrame:CGRectMake(80.0f, 30.0f, frame.size.height, frame.size.width)];
-        }
-        
+        }        
     }
-    
-    return YES;
 }
 
 @end

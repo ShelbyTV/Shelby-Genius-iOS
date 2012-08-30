@@ -88,7 +88,7 @@
         [[KISSMetricsAPI sharedAPI] recordEvent:KISSFirstTimeUserPhone withProperties:nil];
         GeniusOnboardingViewController *geniusOnboardingViewController = [[GeniusOnboardingViewController alloc] initWithNibName:@"GeniusOnboardingViewController" bundle:nil];
         UINavigationController *geniusNavigationController = [[UINavigationController alloc] initWithRootViewController:geniusOnboardingViewController];
-        [self presentModalViewController:geniusNavigationController animated:YES];
+        [self.navigationController presentModalViewController:geniusNavigationController animated:YES];
         
     }
 
@@ -465,6 +465,16 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutomaticallyForwardRotationMethods
+{
+    return YES;
 }
 
 @end
