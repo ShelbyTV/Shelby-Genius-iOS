@@ -141,33 +141,6 @@
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
 }
 
-- (void)createObservers
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(videoDidLoad:)
-                                                 name:MPMoviePlayerLoadStateDidChangeNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(videoDidEndPlaying:)
-                                                 name:MPMoviePlayerPlaybackDidFinishNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(videoBeganStreamingOverAirPlay:)
-                                                 name:MPMoviePlayerIsAirPlayVideoActiveDidChangeNotification
-                                               object:nil];
-    
-    if ( 6 == [[[[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."] objectAtIndex:0] intValue] ) { /// iOS 6 is installed
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(controllsDidAppear:)
-                                                     name:@"UIViewAnimationDidCommitNotification"
-                                                   object:nil];
-        
-    }
-    
-}
 
 #pragma mark - Video Loading Methods
 - (void)videoDirectLinkFromProvider:(NSString *)providerName
@@ -251,6 +224,34 @@
 }
 
 #pragma mark - Observer Methods
+- (void)createObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(videoDidLoad:)
+                                                 name:MPMoviePlayerLoadStateDidChangeNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(videoDidEndPlaying:)
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(videoBeganStreamingOverAirPlay:)
+                                                 name:MPMoviePlayerIsAirPlayVideoActiveDidChangeNotification
+                                               object:nil];
+    
+    if ( 6 == [[[[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."] objectAtIndex:0] intValue] ) { /// iOS 6 is installed
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(controllsDidAppear:)
+                                                     name:@"UIViewAnimationDidCommitNotification"
+                                                   object:nil];
+        
+    }
+    
+}
+
 - (void)processNotification:(NSNotification *)notification
 {
     
@@ -435,7 +436,6 @@
     self.controllsModified = NO;
     
 
-    
     // Create loadingVideoView for new video
     self.video = nil;
     self.video = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
