@@ -30,27 +30,38 @@
 
         self.videoPlayerContainerViewController = videoPlayerContainerViewController;
         self.video = video;
-
+    
     }
     
     return self;
 }
 
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [self createLoadingVideoViewForVideo:self.video];
-    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userDidTap)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer:tapGestureRecognizer];
 }
 
 
 #pragma mark - Public Methods
 - (void)modifyVideoPlayerButtons
 {
-    
+        
     NSArray *versionCompatibility = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
     
     if ( 6 == [[versionCompatibility objectAtIndex:0] intValue] ) { /// iOS 6 is installed
+        
+//        UIButton *previousVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:1];
+//        [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
+//        [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchDown];
+//        
+//        UIButton *nextVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
+//        [nextVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
+//        [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchDown];
         
     
     } else { /// iOS 5 is installed
@@ -82,7 +93,7 @@
     
     CGRect frame = self.view.bounds;
     
-    if ( [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait ||  [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown ) {
+    if ( UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ) {
     
         NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.videoPlayerContainerViewController.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
         [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoInPortraitPhone withProperties:metrics];
@@ -118,7 +129,7 @@
      
         CGRect frame = self.view.bounds;
         
-        if ( toInterfaceOrientation == UIInterfaceOrientationPortrait ||  toInterfaceOrientation == UIDeviceOrientationPortraitUpsideDown ) {
+        if ( UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ) {
             
             NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.videoPlayerContainerViewController.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
             [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoInPortraitPhone withProperties:metrics];

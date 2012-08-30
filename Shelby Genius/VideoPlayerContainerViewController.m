@@ -37,6 +37,7 @@
 - (void)loadNewlySelectedVideo;
 - (void)playVideo:(NSString *)link;
 - (void)processNotification:(NSNotification*)notification;
+- (void)videoDidBeginPlaying:(NSNotification*)notification;
 - (void)videoDidLoad:(NSNotification*)notification;
 - (void)videoBeganStreamingOverAirPlay:(NSNotification*)notification;
 
@@ -52,6 +53,7 @@
 @synthesize moviePlayer = _moviePlayer;
 @synthesize webView = _webView;
 @synthesize videoWillBegin = _videoWillBegin;
+@synthesize controllsModified = _controllsModified;
 
 #pragma mark - Initialization
 - (id)initWithVideos:(NSMutableArray *)videos selectedVideo:(NSUInteger)selectedVideo andQuery:(NSString *)query
@@ -103,7 +105,7 @@
     self.moviePlayer.moviePlayer.controlStyle = MPMovieControlStyleNone;
     [self.navigationController pushViewController:self.moviePlayer animated:NO];
     [self.navigationController setNavigationBarHidden:YES];
-    [self.moviePlayer modifyVideoPlayerButtons];
+//    [self.moviePlayer modifyVideoPlayerButtons];
     [self.appDelegate setVideoPlayerViewController:self.moviePlayer];
     
 }
@@ -208,6 +210,11 @@
                                                    object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(videoDidBeginPlaying:)
+                                                     name:MPMoviePlayerPlaybackStateDidChangeNotification
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(videoDidEndPlaying:)
                                                      name:MPMoviePlayerPlaybackDidFinishNotification
                                                    object:nil];
@@ -216,6 +223,8 @@
                                                  selector:@selector(videoBeganStreamingOverAirPlay:)
                                                      name:MPMoviePlayerIsAirPlayVideoActiveDidChangeNotification
                                                    object:nil];
+        
+        
         
         [self.moviePlayer.moviePlayer setShouldAutoplay:YES];
         [self.moviePlayer.moviePlayer setContentURL:[NSURL URLWithString:link]];
@@ -287,6 +296,17 @@
     }
     
 }
+
+- (void)videoDidBeginPlaying:(NSNotification *)notification
+{
+//    MPMoviePlayerController *movieController = notification.object;
+//    
+//    if (movieController.playbackState == 1 & movieController.loadState != 0){
+//        [self.moviePlayer modifyVideoPlayerButtons];
+//    }
+    
+}
+
 
 - (void)videoDidEndPlaying:(NSNotification*)notification
 {
