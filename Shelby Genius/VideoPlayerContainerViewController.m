@@ -86,7 +86,6 @@
 {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor blackColor]];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -106,6 +105,7 @@
     [self.navigationController setNavigationBarHidden:YES];
     [self.moviePlayer modifyVideoPlayerButtons];
     [self.appDelegate setVideoPlayerViewController:self.moviePlayer];
+    
 }
 
 - (void)destroyMoviePlayer
@@ -415,7 +415,7 @@
 #pragma mark - Interface Orientation Method
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return interfaceOrientation == UIInterfaceOrientationPortrait;
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 @end

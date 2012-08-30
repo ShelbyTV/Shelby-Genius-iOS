@@ -102,8 +102,8 @@ static SocialController *sharedInstance = nil;
 
     if ([TWTweetComposeViewController canSendTweet]) {
         TWTweetComposeViewController *tweetSheet = [[TWTweetComposeViewController alloc] init];
-        [tweetSheet setInitialText:[NSString stringWithFormat:@"%@ /via @Shelby", videoTitle]];
-        [tweetSheet addURL:[NSURL URLWithString:videoURL]];
+        [tweetSheet setInitialText:[NSString stringWithFormat:@"%@ - %@ /via @Shelby", videoTitle, videoURL]];
+        [tweetSheet removeAllImages];
         [viewController presentModalViewController:tweetSheet animated:YES];
     }
     
