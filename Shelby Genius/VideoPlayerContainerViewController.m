@@ -30,6 +30,7 @@
 
 - (void)createMoviePlayer;
 - (void)createWebView;
+- (void)createObservers;
 - (void)videoDirectLinkFromProvider:(NSString*)providerName;
 - (void)loadYouTubePage;
 - (void)loadVimeoPage;
@@ -37,8 +38,8 @@
 - (void)loadNewlySelectedVideo;
 - (void)playVideo:(NSString *)link;
 - (void)processNotification:(NSNotification*)notification;
-- (void)videoDidBeginPlaying:(NSNotification*)notification;
 - (void)videoDidLoad:(NSNotification*)notification;
+- (void)controllsDidAppear:(NSNotification*)notification;
 - (void)videoBeganStreamingOverAirPlay:(NSNotification*)notification;
 
 @end
@@ -104,8 +105,15 @@
     [self.moviePlayer.view setFrame:self.appDelegate.window.frame];
     self.moviePlayer.moviePlayer.controlStyle = MPMovieControlStyleNone;
     [self.navigationController pushViewController:self.moviePlayer animated:NO];
+    
+    if ( 6 != [[[[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."] objectAtIndex:0] intValue] ) { /// iOS 6 is installed
+        
+        [self.moviePlayer modifyVideoPlayerButtons];
+        
+    }
+    
+    
     [self.navigationController setNavigationBarHidden:YES];
-//    [self.moviePlayer modifyVideoPlayerButtons];
     [self.appDelegate setVideoPlayerViewController:self.moviePlayer];
     
 }
@@ -131,6 +139,34 @@
     self.webView.hidden = YES;
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
+}
+
+- (void)createObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(videoDidLoad:)
+                                                 name:MPMoviePlayerLoadStateDidChangeNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(videoDidEndPlaying:)
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(videoBeganStreamingOverAirPlay:)
+                                                 name:MPMoviePlayerIsAirPlayVideoActiveDidChangeNotification
+                                               object:nil];
+    
+    if ( 6 == [[[[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."] objectAtIndex:0] intValue] ) { /// iOS 6 is installed
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(controllsDidAppear:)
+                                                     name:@"UIViewAnimationDidCommitNotification"
+                                                   object:nil];
+        
+    }
+    
 }
 
 #pragma mark - Video Loading Methods
@@ -203,29 +239,8 @@
     if ( ![self videoWillBegin]) {
         
         self.videoWillBegin = YES;
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(videoDidLoad:)
-                                                     name:MPMoviePlayerLoadStateDidChangeNotification
-                                                   object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(videoDidBeginPlaying:)
-                                                     name:MPMoviePlayerPlaybackStateDidChangeNotification
-                                                   object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(videoDidEndPlaying:)
-                                                     name:MPMoviePlayerPlaybackDidFinishNotification
-                                                   object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(videoBeganStreamingOverAirPlay:)
-                                                     name:MPMoviePlayerIsAirPlayVideoActiveDidChangeNotification
-                                                   object:nil];
-        
-        
-        
+    
+        [self createObservers];
         [self.moviePlayer.moviePlayer setShouldAutoplay:YES];
         [self.moviePlayer.moviePlayer setContentURL:[NSURL URLWithString:link]];
         [self.moviePlayer.moviePlayer prepareToPlay];
@@ -297,13 +312,19 @@
     
 }
 
-- (void)videoDidBeginPlaying:(NSNotification *)notification
+- (void)controllsDidAppear:(NSNotification *)notification
 {
-//    MPMoviePlayerController *movieController = notification.object;
-//    
-//    if (movieController.playbackState == 1 & movieController.loadState != 0){
-//        [self.moviePlayer modifyVideoPlayerButtons];
-//    }
+
+    NSArray *versionCompatibility = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
+    
+    if ( 6 == [[versionCompatibility objectAtIndex:0] intValue] ) { /// iOS 6 is installed
+    
+        if ( NO == self.controllsModified && 4 == [[[[[[self.moviePlayer.view subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] count] ) {
+            
+            [self.moviePlayer modifyVideoPlayerButtons];
+        }
+        
+    } 
     
 }
 
@@ -347,7 +368,9 @@
         
         // Unload current video
         [self.moviePlayer.moviePlayer stop];
+        [self.moviePlayer.moviePlayer setContentURL:nil];
         self.videoWillBegin = NO;
+        self.controllsModified = NO;
         
         // Load previous video
         self.selectedVideo -= 1;
@@ -385,7 +408,9 @@
         
         // Unload current video
         [self.moviePlayer.moviePlayer stop];
+        [self.moviePlayer.moviePlayer setContentURL:nil];
         self.videoWillBegin = NO;
+        self.controllsModified = NO;
         
         // Load next video
         self.selectedVideo += 1;
