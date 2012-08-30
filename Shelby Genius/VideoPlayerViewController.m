@@ -41,9 +41,6 @@
 {
     [super viewDidAppear:animated];
     [self createLoadingVideoViewForVideo:self.video];
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userDidTap)];
-    tapGestureRecognizer.numberOfTapsRequired = 1;
-    [self.view addGestureRecognizer:tapGestureRecognizer];
 }
 
 
