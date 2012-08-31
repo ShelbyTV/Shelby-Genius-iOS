@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GeniusRollViewController : UIViewController
+@interface GeniusRollViewController : UIViewController 
 <
 UITableViewDataSource,
-UITableViewDelegate
+UITableViewDelegate,
+UIActionSheetDelegate
 >
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;

@@ -24,7 +24,7 @@
 // View Controllers
 #import "VideoPlayerContainerViewController.h"
 
-@interface GeniusRollViewController () <UIActionSheetDelegate>
+@interface GeniusRollViewController () 
 
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) NSMutableArray *resultsArray;
@@ -360,8 +360,7 @@
         default:
             break;
     }
-    
-    self.selectedVideoFrameToShare = nil;
+
 }
 
 #pragma mark - UITableViewDataSource Methods

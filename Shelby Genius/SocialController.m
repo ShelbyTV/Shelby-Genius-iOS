@@ -8,21 +8,15 @@
 
 #import "SocialController.h"
 
-// Models
-#import "AppDelegate.h"
-
 // View Controllers
 #import "GeniusRollViewController.h"
-
-// External Libraries
-#import "Reachability.h"
 
 // Frameworks
 #import <MessageUI/MessageUI.h>
 #import <Accounts/Accounts.h>
 #import <Twitter/Twitter.h>
 
-@interface SocialController () <MFMailComposeViewControllerDelegate, NSURLConnectionDataDelegate>
+@interface SocialController ()  <MFMailComposeViewControllerDelegate, NSURLConnectionDataDelegate>
 
 @property (strong, nonatomic) GeniusRollViewController *geniusRollViewController;
 @property (strong, nonatomic) NSArray *videoFrame;
@@ -53,79 +47,50 @@
     self.videoFrame = videoFrame;
     self.socialChannel = socialChannel;
     self.geniusRollViewController = geniusRollViewController;
- 
     
-    // Initialize Reachability
-    Reachability* reach = [Reachability reachabilityWithHostname:@"www.google.com"];
-    [reach startNotifier];
+    NSLog(@"%@", self.geniusRollViewController);
     
-    // If internet connection is AVAILABLE, execute this block of code.
-    reach.reachableBlock = ^(Reachability *reach){
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
             
-            NSLog(@"Internet Connection Available");
-            
-            NSString *videoTitle = [[self.videoFrame valueForKey:@"video"] valueForKey:@"title"];
-            videoTitle = [videoTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            NSString *providerName = [[self.videoFrame valueForKey:@"video"] valueForKey:@"provider_name"];
-            NSString *providerID = [[self.videoFrame valueForKey:@"video"] valueForKey:@"provider_id"];
-            NSString *rollID = [self.videoFrame  valueForKey:@"roll_id"];
-            NSString *frameID = [self.videoFrame valueForKey:@"id"];
-            NSString *videoURL = [NSString stringWithFormat:@"http://shelby.tv/video/%@/%@?roll_id=%@&frame_id=%@", providerName, providerID, rollID, frameID];
-            
-            switch (self.socialChannel) {
-                    
-                case SocialShare_Email:{
-                    
-                    NSString *requestString = [NSString stringWithFormat:AWESMLinkCreator, videoURL, videoTitle];
-                    requestString = [self encodeToPercentEscapedString:requestString];
-                    requestString = [NSString stringWithFormat:AWESMEmail, requestString];
-                    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
-                    self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-                    
-                    NSLog(@"%@", requestString);
-                    
-                } break;
-                    
-                case SocialShare_Twitter:{
-                    
-                    NSString *requestString = [NSString stringWithFormat:AWESMLinkCreator, videoURL, videoTitle];
-                    requestString = [self encodeToPercentEscapedString:requestString];
-                    requestString = [NSString stringWithFormat:AWESMTwitter, requestString];
-                    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
-                    self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-                    
-                    NSLog(@"%@", requestString);
-                    
-                } break;
-                    
-                case SocialShare_Facebook:{
-                } break;
-                    
-                default:
-                    break;
-            }
-            
-            
-        });
-        
-    };
+    NSString *videoTitle = [[self.videoFrame valueForKey:@"video"] valueForKey:@"title"];
+    videoTitle = [videoTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *providerName = [[self.videoFrame valueForKey:@"video"] valueForKey:@"provider_name"];
+    NSString *providerID = [[self.videoFrame valueForKey:@"video"] valueForKey:@"provider_id"];
+    NSString *rollID = [self.videoFrame  valueForKey:@"roll_id"];
+    NSString *frameID = [self.videoFrame valueForKey:@"id"];
+    NSString *videoURL = [NSString stringWithFormat:@"http://shelby.tv/video/%@/%@?roll_id=%@&frame_id=%@", providerName, providerID, rollID, frameID];
     
-    // If internet connection is UNAVAILABLE, execute this block of code.
-    reach.unreachableBlock = ^(Reachability *reach){
-        
-        NSLog(@"Internet Connection Unavailable");
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
+    switch (self.socialChannel) {
             
-//            AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-//            [appDelegate addHUDWithMessage:@"WiFi/3G unavailable. Check your settings."];
-//            [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(connectionUnavailable:) userInfo:nil repeats:NO];
+        case SocialShare_None:
+            break;
             
-        });
-        
-    };        
+        case SocialShare_Email:{
+            
+            NSString *requestString = [NSString stringWithFormat:AWESMLinkCreator, videoURL, videoTitle];
+            requestString = [self encodeToPercentEscapedString:requestString];
+            requestString = [NSString stringWithFormat:AWESMEmail, requestString];
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
+            self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+            
+        } break;
+            
+        case SocialShare_Twitter:{
+            
+            NSString *requestString = [NSString stringWithFormat:AWESMLinkCreator, videoURL, videoTitle];
+            requestString = [self encodeToPercentEscapedString:requestString];
+            requestString = [NSString stringWithFormat:AWESMTwitter, requestString];
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
+            self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+            
+        } break;
+            
+        case SocialShare_Facebook:{
+        } break;
+            
+        default:
+            break;
+    }
+    
     
 }
 
@@ -211,8 +176,42 @@
 {
     if ( error ) {
         
-        NSLog(@"Sharing Error");
+        switch (self.socialChannel) {
+                
+            case SocialShare_None:
+                    break;
+                
+            case SocialShare_Email:{
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sharing Failed"
+                                                                    message:@"There was a problem sharing via Email"
+                                                                   delegate:nil
+                                                          cancelButtonTitle:nil
+                                                          otherButtonTitles:@"Dismiss", nil];
+                [alertView show];
+                
+                } break;
+                
+            case SocialShare_Twitter:{
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sharing Failed"
+                                                                    message:@"There was a problem sharing to Twitter"
+                                                                   delegate:nil
+                                                          cancelButtonTitle:nil
+                                                          otherButtonTitles:@"Dismiss", nil];
+                [alertView show];
+                
+            } break;
         
+            case SocialShare_Facebook:{
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sharing Failed"
+                                                                    message:@"There was a problem sharing to Faceabook"
+                                                                   delegate:nil
+                                                          cancelButtonTitle:nil
+                                                          otherButtonTitles:@"Dismiss", nil];
+                [alertView show];
+                
+                } break;
+    
+        }
     }
 }
 
@@ -227,6 +226,9 @@
     NSLog(@"%@", self.awesomeURL);
     
     switch (self.socialChannel) {
+            
+        case SocialShare_None:
+            break;
             
         case SocialShare_Email:
             [self sendEmail];
@@ -247,8 +249,9 @@
 }
 
 #pragma mark - MFMailComposeViewController
-- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
+    NSLog(@"TEST");
     [self.geniusRollViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
