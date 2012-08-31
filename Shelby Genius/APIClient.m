@@ -8,6 +8,7 @@
 
 #import "APIClient.h"
 #import "Reachability.h"
+#import "AppDelegate.h"
 
 @interface APIClient () <NSURLConnectionDataDelegate, UIAlertViewDelegate>
 
@@ -16,6 +17,7 @@
 @property (assign, nonatomic) APIRequestType type;
 @property (strong, nonatomic) NSString *query;
 
+- (void)connectionUnavailable:(NSNotification*)notification;
 - (NSMutableArray*)arrayWithLinks:(NSDictionary*)responseDictionary;
 - (void)createGeniusQueryWithLinks:(NSMutableArray*)links;
 - (void)getRoll:(NSString*)rollID;
@@ -62,15 +64,10 @@
         NSLog(@"Internet Connection Unavailable");
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
-            // Post notification to force UI changes
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Internet Connection Unavailable"
-                                                                message:@"Please make sure you're connected to WiFi or 3G and try again."
-                                                               delegate:self
-                                                      cancelButtonTitle:@"Dismiss"
-                                                      otherButtonTitles:nil, nil];
-            [alertView show];
-            
+        
+            AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+            [appDelegate addHUDWithMessage:@"WiFi/3G unavailable. Check your settings."];
+            [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(connectionUnavailable:) userInfo:nil repeats:NO];
             
         });
         
@@ -80,6 +77,12 @@
 }
 
 #pragma mark - Private Methods
+- (void)connectionUnavailable:(NSNotification*)notification
+{
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    [appDelegate.rootNavigationController popToRootViewControllerAnimated:YES];
+}
+
 - (NSMutableArray*)arrayWithLinks:(NSDictionary*)responseDictionary
 {
     NSMutableArray *links = [NSMutableArray array];
@@ -229,14 +232,6 @@
             break;
     }
     
-}
-
-#pragma mark - UIAlertViewDelegateMethods
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (0 == buttonIndex) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kNoConnectionObserver object:nil];
-    }
 }
 
 @end

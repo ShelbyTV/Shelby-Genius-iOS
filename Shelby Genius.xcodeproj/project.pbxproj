@@ -643,7 +643,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shelby TV, Inc.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shelby TV, Inc.";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -658,6 +659,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "7D294517-46CD-4492-ADF6-D098DE22B521";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7D294517-46CD-4492-ADF6-D098DE22B521";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -671,7 +674,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shelby TV, Inc.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shelby TV, Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -680,6 +684,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "7D294517-46CD-4492-ADF6-D098DE22B521";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7D294517-46CD-4492-ADF6-D098DE22B521";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -689,8 +695,8 @@
 		8EDCE9B515D4C3C000EFB1F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Arthur Sabintsev (Z4E762QSUZ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Arthur Sabintsev (Z4E762QSUZ)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shelby TV, Inc.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shelby TV, Inc.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -700,8 +706,8 @@
 				INFOPLIST_FILE = "Shelby Genius/Shelby Genius-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3370255A-E441-4CB6-AACE-34508E82D85B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3370255A-E441-4CB6-AACE-34508E82D85B";
+				PROVISIONING_PROFILE = "7D294517-46CD-4492-ADF6-D098DE22B521";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7D294517-46CD-4492-ADF6-D098DE22B521";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -710,8 +716,8 @@
 		8EDCE9B615D4C3C000EFB1F2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Arthur Sabintsev (Z4E762QSUZ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Arthur Sabintsev (Z4E762QSUZ)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shelby TV, Inc.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shelby TV, Inc.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -721,8 +727,8 @@
 				INFOPLIST_FILE = "Shelby Genius/Shelby Genius-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3370255A-E441-4CB6-AACE-34508E82D85B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3370255A-E441-4CB6-AACE-34508E82D85B";
+				PROVISIONING_PROFILE = "7D294517-46CD-4492-ADF6-D098DE22B521";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7D294517-46CD-4492-ADF6-D098DE22B521";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

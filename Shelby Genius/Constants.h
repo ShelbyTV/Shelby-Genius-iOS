@@ -19,7 +19,6 @@
 #define kPreviousQueries                    @"Previous Queries"
 
 // Observer
-#define kNoConnectionObserver               @"No Connection Observer"
 #define kNoResultsReturnedObserver          @"No Results Returned Observer"
 #define kRollFramesObserver                 @"Roll Frames Observer"
 #define kIndexOfCurrentVideoObserver        @"Index of Current Video Observer"

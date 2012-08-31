@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Arthur Ariel Sabintsev. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "RootNavigationController.h"
 #import "MBProgressHUD.h"
 
 @class VideoPlayerViewController;
@@ -14,6 +14,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) RootNavigationController *rootNavigationController;
 @property (strong, nonatomic) MBProgressHUD *progressHUD;
 @property (strong ,nonatomic) VideoPlayerViewController *videoPlayerViewController;
 

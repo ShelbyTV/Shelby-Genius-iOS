@@ -41,7 +41,6 @@
 - (void)shareVideoAction:(UIButton *)button;
 - (void)makeResultsArray:(NSNotification *)notification;
 - (void)scrollToCurrentVideo:(NSNotification*)notification;
-- (void)connectionUnavailable:(NSNotification*)notification;
 
 @end
 
@@ -159,11 +158,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(scrollToCurrentVideo:)
                                                  name:kIndexOfCurrentVideoObserver
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(connectionUnavailable:)
-                                                 name:kNoConnectionObserver
                                                object:nil];
     
 }
@@ -348,12 +342,6 @@
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.resultsArray count]-1 inSection:0]
                           atScrollPosition:UITableViewScrollPositionBottom
                                   animated:YES];
-}
-
-- (void)connectionUnavailable:(NSNotification *)notification
-{
-    [self.navigationController popViewControllerAnimated:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNoResultsReturnedObserver object:nil];
 }
 
 #pragma mark - UIActionSheetDelegate Method
