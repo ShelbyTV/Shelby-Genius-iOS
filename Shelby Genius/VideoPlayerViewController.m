@@ -34,7 +34,6 @@
     return self;
 }
 
-
 - (void)processNotification:(NSNotification*)notification
 {
     NSLog(@"Notification: %@", notification.name);

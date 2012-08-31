@@ -27,13 +27,18 @@
 // Tags
 #define kAlertViewNoResultsTag              666
 
+// Awe.sm Links
+#define AWESMLinkCreator                    @"%@&utm_campaign=iphone_genius&utm_source=twitter&utm_medium=%@"
+#define AWESMEmail                          @"http://api.awe.sm/url?v=3&key=4ea2c3fea0f4e946723d1022b14f87b02e972e12e5e65a21d0724b6426687320&tool=tM32qa&format=json&channel=email&url=%@"
+#define AWESMTwitter                        @"http://api.awe.sm/url?v=3&key=4ea2c3fea0f4e946723d1022b14f87b02e972e12e5e65a21d0724b6426687320&tool=tM32qa&format=json&channel=twitter&url=%@"
+
 // KISSMetrics Events
 #define KISSFirstTimeUserPhone              @"First time launch on iPhone Genius"
 #define KISSRepeatUserPhone                 @"Repeat launch on iPhone Genius"
 #define KISSPerformQueryPhone               @"Perform query on iPhone Genius"
 #define KISSPerformQueryAgainPhone          @"Perform query again on iPhone Genius"
 #define KISSWatchVideoPhone                 @"Watch video on iPhone Genius"
-#define KISSSharePhone                 @"Share on iPhone Genius"
+#define KISSSharePhone                      @"Share on iPhone Genius"
 
 // KISSMetrics Properties
 #define KISSQuery                           @"Search query on iPhone Genius"

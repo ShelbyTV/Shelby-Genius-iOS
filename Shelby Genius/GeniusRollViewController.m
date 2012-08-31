@@ -348,12 +348,14 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     
+    SocialController *socialController = [[SocialController alloc] init];
+    
     switch (buttonIndex) {
         case 0: // Email
-            [SocialController sendEmailForVideo:self.selectedVideoFrameToShare inViewController:self];
+            [socialController shareVideo:self.selectedVideoFrameToShare toChannel:SocialShare_Email inViewController:self];
             break;
         case 1: // Twitter
-            [SocialController postToTwitterForVideo:self.selectedVideoFrameToShare inViewController:self];
+            [socialController shareVideo:self.selectedVideoFrameToShare toChannel:SocialShare_Twitter inViewController:self];
             break;
         default:
             break;

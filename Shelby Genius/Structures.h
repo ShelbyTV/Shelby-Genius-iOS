@@ -25,3 +25,13 @@ typedef enum _VideoProvider
     VideoProvider_DailyMotion
     
 } VideoProvider;
+
+typedef enum _SocialChannel
+{
+    
+    SocialShare_None = 0,
+    SocialShare_Email,
+    SocialShare_Twitter,
+    SocialShare_Facebook
+    
+} SocialChannel;

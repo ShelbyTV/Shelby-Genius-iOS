@@ -10,10 +10,6 @@
 
 @interface SocialController : NSObject
 
-+ (void)sendEmailForVideo:(NSArray*)videoFrame inViewController:(GeniusRollViewController*)viewController;
-+ (void)postToTwitterForVideo:(NSArray*)videoFrame inViewController:(GeniusRollViewController*)viewController;
-+ (void)postToFacebookForVideo:(NSArray*)videoFrame inViewController:(GeniusRollViewController*)viewController;
-
-+ (SocialController*)sharedInstance;
+- (void)shareVideo:(NSArray*)videoFrame toChannel:(SocialChannel)socialChannel inViewController:(GeniusRollViewController*)geniusRollViewController;
 
 @end
