@@ -75,10 +75,6 @@
         // Obtain direct link to video based on video provider
         [self videoDirectLinkFromProvider:[self.video valueForKey:@"provider_name"]];
         
-        // KISSMetrics
-        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
-        [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoPhone withProperties:metrics];
-        
     }
     
     return self;
@@ -218,11 +214,14 @@
         self.videoWillBegin = YES;
     
         [self createObservers];
-        [self.moviePlayer.moviePlayer setShouldAutoplay:YES];
         [self.moviePlayer.moviePlayer setContentURL:[NSURL URLWithString:link]];
+        [self.moviePlayer.moviePlayer setShouldAutoplay:YES];
         [self.moviePlayer.moviePlayer prepareToPlay];
         [self.moviePlayer.moviePlayer play];
         
+        // KISSMetrics
+        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
+        [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoPhone withProperties:metrics];
         
     }
 }
@@ -237,18 +236,6 @@
         self.selectedVideo -= 1;
         [self loadNewlySelectedVideo];
         
-        // KISSMetrics
-        NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
-        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
-        [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchPreviousVideoPhone withProperties:metrics];
-        
-        // Scroll GeniusRollViewController to row of video that will be loaded
-        NSNumber *rowNumber = [NSNumber numberWithInt:self.selectedVideo];
-        NSDictionary *dictionary = [NSDictionary dictionaryWithObject:rowNumber forKey:kIndexOfCurrentVideo];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kIndexOfCurrentVideoObserver
-                                                            object:nil
-                                                          userInfo:dictionary];
-        
     } else {
         
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
@@ -256,9 +243,8 @@
                                                            delegate:nil
                                                   cancelButtonTitle:@"Dismiss"
                                                   otherButtonTitles:nil, nil];
-        
         [alertView show];
-        
+
     }
     
 }
@@ -270,18 +256,6 @@
         // Reference next video
         self.selectedVideo += 1;
         [self loadNewlySelectedVideo];
-        
-        // KISSMetrics
-        NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
-        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
-        [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchNextVideoPhone withProperties:metrics];
-        
-        // Scroll GeniusRollViewController to row of video that will be loaded
-        NSNumber *rowNumber = [NSNumber numberWithInt:self.selectedVideo];
-        NSDictionary *dictionary = [NSDictionary dictionaryWithObject:rowNumber forKey:kIndexOfCurrentVideo];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kIndexOfCurrentVideoObserver
-                                                            object:nil
-                                                          userInfo:dictionary];
         
     } else {
         
@@ -304,6 +278,13 @@
     [self.moviePlayer.moviePlayer setContentURL:nil];
     self.videoWillBegin = NO;
     self.controllsModified = NO;
+
+    // Scroll GeniusRollViewController to row of video that will be loaded
+    NSNumber *rowNumber = [NSNumber numberWithInt:self.selectedVideo];
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObject:rowNumber forKey:kIndexOfCurrentVideo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kIndexOfCurrentVideoObserver
+                                                        object:nil
+                                                      userInfo:dictionary];
     
     // Create loadingVideoView for new video
     self.video = nil;
@@ -447,9 +428,7 @@
     
     if ( movieController.airPlayVideoActive ) {
         
-        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
-        [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoOverAirPlayPhone withProperties:metrics];
-        
+
     }
 }
 

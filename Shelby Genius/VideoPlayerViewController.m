@@ -15,8 +15,6 @@
 @property (strong, nonatomic) NSArray *video;
 @property (strong, nonatomic) VideoPlayerContainerViewController *videoPlayerContainerViewController;
 
-- (void)cancelButtonAction;
-
 @end
 
 @implementation VideoPlayerViewController
@@ -100,7 +98,7 @@
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingVideoView" owner:self options:NULL];
     self.loadingVideoView = [nib objectAtIndex:0];
     self.loadingVideoView.videoTitleLabel.text = [NSString stringWithFormat:@"%@", [video valueForKey:@"title"]];
-    [self.loadingVideoView.loadingCancelButton addTarget:self action:@selector(cancelButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.loadingVideoView.loadingCancelButton addTarget:self.videoPlayerContainerViewController action:@selector(destroyMoviePlayer) forControlEvents:UIControlEventTouchUpInside];
     [AsynchronousFreeloader loadImageFromLink:[video valueForKey:@"thumbnail_url"] forImageView:self.loadingVideoView.thumbnailImageView withPlaceholderView:nil];
     [self.view addSubview:self.loadingVideoView];
     [self.view addSubview:self.videoPlayerContainerViewController.webView];
@@ -108,31 +106,16 @@
     CGRect frame = self.view.bounds;
     
     if ( UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ) {
-    
-        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.videoPlayerContainerViewController.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
-        [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoInPortraitPhone withProperties:metrics];
         
         [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
         
     } else {
-        
-        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.videoPlayerContainerViewController.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
-        [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoInLandscapePhone withProperties:metrics];
         
         [self.loadingVideoView setFrame:CGRectMake(80.0f, 30.0f, frame.size.height, frame.size.width)];
         
     }
     
     
-}
-
-#pragma mark - Private Methods
-- (void)cancelButtonAction
-{
-    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.videoPlayerContainerViewController.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
-    [[KISSMetricsAPI sharedAPI] recordEvent:KISSCancelVideoPhone withProperties:metrics];
-    
-    [self.videoPlayerContainerViewController destroyMoviePlayer];
 }
 
 #pragma mark - Interface Orientation Methods
@@ -143,16 +126,10 @@
         CGRect frame = self.view.bounds;
         
         if ( UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ) {
-            
-            NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.videoPlayerContainerViewController.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
-            [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoInPortraitPhone withProperties:metrics];
-            
+
             [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
             
         } else {
-            
-            NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.videoPlayerContainerViewController.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
-            [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoInLandscapePhone withProperties:metrics];
             
             [self.loadingVideoView setFrame:CGRectMake(80.0f, 30.0f, frame.size.height, frame.size.width)];
         }        

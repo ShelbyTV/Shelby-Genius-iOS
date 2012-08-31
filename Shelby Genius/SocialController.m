@@ -53,7 +53,7 @@ static SocialController *sharedInstance = nil;
     [[Panhandler sharedInstance] recordEvent];
     
     NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:viewController.query, KISSQuery, [[videoFrame valueForKey:@"video" ] valueForKey:@"title"], KISSVideoTitle, nil];
-    [[KISSMetricsAPI sharedAPI] recordEvent:KISSShareEmailPhone withProperties:metrics];
+    [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
     
     [[SocialController sharedInstance] setViewController:viewController];
     
@@ -84,7 +84,7 @@ static SocialController *sharedInstance = nil;
     [[Panhandler sharedInstance] recordEvent];
     
     NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:viewController.query, KISSQuery, [[videoFrame valueForKey:@"video" ] valueForKey:@"title"], KISSVideoTitle, nil];
-    [[KISSMetricsAPI sharedAPI] recordEvent:KISSShareTwitterPhone withProperties:metrics];
+    [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
     
     // Title
     NSString *videoTitle = [[videoFrame valueForKey:@"video"] valueForKey:@"title"];

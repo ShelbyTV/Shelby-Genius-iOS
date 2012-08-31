@@ -33,14 +33,7 @@
 #define KISSPerformQueryPhone               @"Perform query on iPhone Genius"
 #define KISSPerformQueryAgainPhone          @"Perform query again on iPhone Genius"
 #define KISSWatchVideoPhone                 @"Watch video on iPhone Genius"
-#define KISSWatchNextVideoPhone             @"Watch next video on iPhone Genius"
-#define KISSWatchPreviousVideoPhone         @"Watch previous video on iPhone Genius"
-#define KISSWatchVideoInPortraitPhone       @"Watch video in portrait mode on iPhone Genius"
-#define KISSWatchVideoInLandscapePhone      @"Watch video in landscape mode on iPhone Genius"
-#define KISSWatchVideoOverAirPlayPhone      @"Watch video over AirPlay on iPhone Genius"
-#define KISSCancelVideoPhone                @"Candel loading video on iPhone Genius"
-#define KISSShareEmailPhone                 @"Share with Email on iPhone Genius"
-#define KISSShareTwitterPhone               @"Share with Twitter on iPhone Genius"
+#define KISSSharePhone                 @"Share on iPhone Genius"
 
 // KISSMetrics Properties
 #define KISSQuery                           @"Search query on iPhone Genius"
