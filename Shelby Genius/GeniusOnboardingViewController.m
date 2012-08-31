@@ -44,7 +44,7 @@
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    NSLog(@"%d", UIInterfaceOrientationMaskPortrait);
+//    return UIInterfaceOrientationMaskPortrait;
     return 2;
 }
 

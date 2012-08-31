@@ -19,9 +19,11 @@
 - (NSUInteger)supportedInterfaceOrientations
 {
     if ( [self.visibleViewController isKindOfClass:[VideoPlayerViewController class]] ) {
-     return UIInterfaceOrientationMaskAllButUpsideDown;
+    //  return UIInterfaceOrientationMaskAllButUpsideDown;
+        return 26;
     } else {
-        return UIInterfaceOrientationMaskPortrait;
+    // return UIInterfaceOrientationMaskPortrait;
+        return 2;
     }
 }
 
