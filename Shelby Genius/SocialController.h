@@ -12,4 +12,6 @@
 
 - (void)shareVideo:(NSArray*)videoFrame toChannel:(SocialChannel)socialChannel inViewController:(GeniusRollViewController*)geniusRollViewController;
 
++ (SocialController*)sharedInstance;
+
 @end

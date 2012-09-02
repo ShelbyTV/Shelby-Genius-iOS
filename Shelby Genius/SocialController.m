@@ -40,7 +40,29 @@
 @synthesize responseData = _responseData;
 @synthesize awesomeURL = _awesomeURL;
 
-#pragma mark - Public
+#pragma mark - Singleton methods
+static SocialController *sharedInstance = nil;
+
++ (SocialController*)sharedInstance
+{
+    if (sharedInstance == nil) {
+        sharedInstance = [[super allocWithZone:NULL] init];
+    }
+    return sharedInstance;
+}
+
++ (id)allocWithZone:(NSZone *)zone
+{
+    return [self sharedInstance];
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    return self;
+}
+
+
+#pragma mark - Public Methods
 - (void)shareVideo:(NSArray*)videoFrame toChannel:(SocialChannel)socialChannel inViewController:(GeniusRollViewController*)geniusRollViewController
 {
     // Set References
@@ -251,7 +273,6 @@
 #pragma mark - MFMailComposeViewController
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    NSLog(@"TEST");
     [self.geniusRollViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
