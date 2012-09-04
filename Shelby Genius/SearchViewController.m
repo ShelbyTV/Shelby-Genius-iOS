@@ -420,7 +420,17 @@
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"Ubuntu-Medium" size:14];
     label.text = @"Previous Genius Searches";
-    label.textAlignment = UITextAlignmentLeft;
+    
+    if ( 6 == kSystemVersion ) {
+        
+        label.textAlignment = NSTextAlignmentLeft;
+        
+    } else {
+        
+        label.textAlignment = UITextAlignmentLeft;
+        
+    }
+    
     label.textColor = [UIColor colorWithRed:68.0f/255.0f green:68.0f/255.0f  blue:68.0f/255.0f  alpha:1.0f];
     [view addSubview:label];
     

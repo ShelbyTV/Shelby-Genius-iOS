@@ -487,7 +487,18 @@
     label.font = [UIFont fontWithName:@"Ubuntu-Medium" size:14];
     label.text = [NSString stringWithFormat:@"“%@”", [self.query stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     label.text = [label.text stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-    label.textAlignment = UITextAlignmentLeft;
+    
+    if ( 6 == kSystemVersion ) {
+        
+        label.textAlignment = NSTextAlignmentLeft;
+        
+    } else {
+        
+        label.textAlignment = UITextAlignmentLeft;
+    
+    }
+    
+
     label.textColor = [UIColor blackColor];
     [view addSubview:label];
     
