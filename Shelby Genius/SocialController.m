@@ -20,13 +20,12 @@
 #import <Twitter/Twitter.h>
 /// Social Framework in .pch file, since it's OS specific.
 
-@interface SocialController ()  <MFMailComposeViewControllerDelegate, NSURLConnectionDataDelegate>
+@interface SocialController ()  <MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) GeniusRollViewController *geniusRollViewController;
 @property (strong, nonatomic) NSArray *videoFrame;
 @property (assign, nonatomic) SocialChannel socialChannel;
-@property (strong, nonatomic) NSURLConnection *connection;
 @property (strong, nonatomic) NSMutableData *responseData;
 @property (copy, nonatomic) NSString *awesomeURL;
 
@@ -41,7 +40,6 @@
 @synthesize videoFrame = _videoFrame;
 @synthesize socialChannel = _socialChannel;
 @synthesize geniusRollViewController = _geniusRollViewController;
-@synthesize connection = _connection;
 @synthesize responseData = _responseData;
 @synthesize awesomeURL = _awesomeURL;
 
@@ -96,43 +94,67 @@ static SocialController *sharedInstance = nil;
             
         case SocialShare_Email:{
             
-            NSString *requestString = [NSString stringWithFormat:AWESMLinkCreator, videoURL, videoTitle];
+            NSString *requestString = [NSString stringWithFormat:AWESMLinkCreatorEmail, videoURL, videoTitle];
             requestString = [self encodeToPercentEscapedString:requestString];
             requestString = [NSString stringWithFormat:AWESMEmail, requestString];
             NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
             [request setHTTPMethod:@"GET"];
-            self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+            NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+            [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+             {
+                 if( data.length > 0 && error == nil ) {
+                     
+                     self.responseData = [NSMutableData dataWithData:data];
+                     [self connectionDidFinishLoading:nil];
+                     
+                 }
+             }];
             
         } break;
             
         case SocialShare_Twitter:{
             
-            NSString *requestString = [NSString stringWithFormat:AWESMLinkCreator, videoURL, videoTitle];
+            NSString *requestString = [NSString stringWithFormat:AWESMLinkCreatorTwitter, videoURL, videoTitle];
             requestString = [self encodeToPercentEscapedString:requestString];
             requestString = [NSString stringWithFormat:AWESMTwitter, requestString];
             NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
             [request setHTTPMethod:@"GET"];
-            self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-            
-            NSLog(@"%@", requestString);
+            NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+            [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+            {
+                if( data.length > 0 && error == nil ) {
+               
+                    self.responseData = [NSMutableData dataWithData:data];
+                    [self connectionDidFinishLoading:nil];
+     
+                }
+            }];
             
         } break;
             
         case SocialShare_Facebook:{
             
-            NSString *requestString = [NSString stringWithFormat:AWESMLinkCreator, videoURL, videoTitle];
+            NSString *requestString = [NSString stringWithFormat:AWESMLinkCreatorFacebook, videoURL, videoTitle];
             requestString = [self encodeToPercentEscapedString:requestString];
             requestString = [NSString stringWithFormat:AWESMFacebook, requestString];
             NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
             [request setHTTPMethod:@"GET"];
-            self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+            NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+            [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+             {
+                 if( data.length > 0 && error == nil ) {
+                     
+                     self.responseData = [NSMutableData dataWithData:data];
+                     [self connectionDidFinishLoading:nil];
+                     
+                 }
+             }];
             
         } break;
             
         default:
             break;
     }
-    
     
 }
 
@@ -275,7 +297,7 @@ static SocialController *sharedInstance = nil;
                 
             case SocialShare_Email:{
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sharing Failed"
-                                                                    message:@"There was a problem sharing via Email"
+                                                                    message:@"There was a problem sharing via Email."
                                                                    delegate:nil
                                                           cancelButtonTitle:nil
                                                           otherButtonTitles:@"Dismiss", nil];
@@ -285,7 +307,7 @@ static SocialController *sharedInstance = nil;
                 
             case SocialShare_Twitter:{
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sharing Failed"
-                                                                    message:@"There was a problem sharing to Twitter"
+                                                                    message:@"There was a problem sharing to Twitter."
                                                                    delegate:nil
                                                           cancelButtonTitle:nil
                                                           otherButtonTitles:@"Dismiss", nil];
@@ -295,7 +317,7 @@ static SocialController *sharedInstance = nil;
         
             case SocialShare_Facebook:{
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sharing Failed"
-                                                                    message:@"There was a problem sharing to Faceabook"
+                                                                    message:@"There was a problem sharing to Faceabook."
                                                                    delegate:nil
                                                           cancelButtonTitle:nil
                                                           otherButtonTitles:@"Dismiss", nil];
@@ -310,36 +332,42 @@ static SocialController *sharedInstance = nil;
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     
-    // Remove 'Sharing Video' HUD
-    [self.appDelegate removeHUD];
+    dispatch_async(dispatch_get_main_queue(), ^{
     
-    // Parse JSON Data
-    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
-    
-    self.awesomeURL = [responseDictionary valueForKey:@"awesm_url"];
-    
-    NSLog(@"Awesome URL: %@", self.awesomeURL);
-    
-    switch (self.socialChannel) {
-            
-        case SocialShare_None:
-            break;
-            
-        case SocialShare_Email:
-            [self sendEmail];
-            break;
-            
-        case SocialShare_Twitter:
-            [self postToTwitter];
-            break;
-            
-        case SocialShare_Facebook:
-            [self postToFacebook];
-            break;
-            
-        default:
-            break;
-    }
+        // Remove 'Sharing Video' HUD
+        [self.appDelegate removeHUD];
+        
+        // Parse JSON Data
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
+        
+        // Extract awe.sm URL
+        self.awesomeURL = [responseDictionary valueForKey:@"awesm_url"];
+        NSLog(@"Awesome URL: %@", self.awesomeURL);
+        
+        switch (self.socialChannel) {
+                
+            case SocialShare_None:
+                break;
+                
+            case SocialShare_Email:
+                [self sendEmail];
+                break;
+                
+            case SocialShare_Twitter:
+                [self postToTwitter];
+                break;
+                
+            case SocialShare_Facebook:
+                [self postToFacebook];
+                break;
+                
+            default:
+                break;
+        }
+
+        
+        
+    });
     
 }
 

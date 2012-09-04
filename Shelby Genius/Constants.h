@@ -31,9 +31,11 @@
 #define kSystemVersion                      [[[[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."] objectAtIndex:0] intValue]
 
 // Awe.sm Links
-#define AWESMLinkCreator                    @"%@&utm_campaign=iphone_genius&utm_source=twitter&utm_medium=%@"
+#define AWESMLinkCreatorEmail               @"%@&utm_campaign=iphone_genius&utm_source=email&utm_medium=%@"
 #define AWESMEmail                          @"http://api.awe.sm/url?v=3&key=4ea2c3fea0f4e946723d1022b14f87b02e972e12e5e65a21d0724b6426687320&tool=tM32qa&format=json&channel=email&url=%@"
+#define AWESMLinkCreatorTwitter             @"%@&utm_campaign=iphone_genius&utm_source=twitter&utm_medium=%@"
 #define AWESMTwitter                        @"http://api.awe.sm/url?v=3&key=4ea2c3fea0f4e946723d1022b14f87b02e972e12e5e65a21d0724b6426687320&tool=tM32qa&format=json&channel=twitter&url=%@"
+#define AWESMLinkCreatorFacebook            @"%@&utm_campaign=iphone_genius&utm_source=facebook&utm_medium=%@"
 #define AWESMFacebook                       @"http://api.awe.sm/url?v=3&key=4ea2c3fea0f4e946723d1022b14f87b02e972e12e5e65a21d0724b6426687320&tool=tM32qa&format=json&channel=facebook&url=%@"
 
 // KISSMetrics Events
