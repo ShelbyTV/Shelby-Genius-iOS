@@ -8,6 +8,9 @@
 
 #import "SocialController.h"
 
+// Models
+#import "AppDelegate.h"
+
 // View Controllers
 #import "GeniusRollViewController.h"
 
@@ -15,9 +18,11 @@
 #import <MessageUI/MessageUI.h>
 #import <Accounts/Accounts.h>
 #import <Twitter/Twitter.h>
+/// Social Framework in .pch file, since it's OS specific.
 
 @interface SocialController ()  <MFMailComposeViewControllerDelegate, NSURLConnectionDataDelegate>
 
+@property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) GeniusRollViewController *geniusRollViewController;
 @property (strong, nonatomic) NSArray *videoFrame;
 @property (assign, nonatomic) SocialChannel socialChannel;
@@ -65,6 +70,11 @@ static SocialController *sharedInstance = nil;
 #pragma mark - Public Methods
 - (void)shareVideo:(NSArray*)videoFrame toChannel:(SocialChannel)socialChannel inViewController:(GeniusRollViewController*)geniusRollViewController
 {
+
+    // Add 'Sharing Video' HUD
+    self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    [self.appDelegate addHUDWithMessage:@"Sharing Video"];
+    
     // Set References
     self.videoFrame = videoFrame;
     self.socialChannel = socialChannel;
@@ -90,6 +100,7 @@ static SocialController *sharedInstance = nil;
             requestString = [self encodeToPercentEscapedString:requestString];
             requestString = [NSString stringWithFormat:AWESMEmail, requestString];
             NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
+            [request setHTTPMethod:@"GET"];
             self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
             
         } break;
@@ -100,7 +111,10 @@ static SocialController *sharedInstance = nil;
             requestString = [self encodeToPercentEscapedString:requestString];
             requestString = [NSString stringWithFormat:AWESMTwitter, requestString];
             NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
+            [request setHTTPMethod:@"GET"];
             self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+            
+            NSLog(@"%@", requestString);
             
         } break;
             
@@ -110,6 +124,7 @@ static SocialController *sharedInstance = nil;
             requestString = [self encodeToPercentEscapedString:requestString];
             requestString = [NSString stringWithFormat:AWESMFacebook, requestString];
             NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
+            [request setHTTPMethod:@"GET"];
             self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
             
         } break;
@@ -295,12 +310,15 @@ static SocialController *sharedInstance = nil;
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     
+    // Remove 'Sharing Video' HUD
+    [self.appDelegate removeHUD];
+    
     // Parse JSON Data
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
     
     self.awesomeURL = [responseDictionary valueForKey:@"awesm_url"];
     
-    NSLog(@"%@", self.awesomeURL);
+    NSLog(@"Awesome URL: %@", self.awesomeURL);
     
     switch (self.socialChannel) {
             
