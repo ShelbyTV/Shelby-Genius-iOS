@@ -155,12 +155,34 @@ static SocialController *sharedInstance = nil;
     // Extract Video Data
     NSString *videoTitle = [[self.videoFrame valueForKey:@"video"] valueForKey:@"title"];
 
-    // Twitter Post
-    if ([TWTweetComposeViewController canSendTweet]) {
-        TWTweetComposeViewController *tweetSheet = [[TWTweetComposeViewController alloc] init];
-        [tweetSheet setInitialText:[NSString stringWithFormat:@"%@ - %@ /via @Shelby", videoTitle, self.awesomeURL]];
-        [tweetSheet removeAllImages];
-        [self.geniusRollViewController presentViewController:tweetSheet animated:YES completion:nil];
+    if ( 6 == kSystemVersion ) { // Twitter Post (iOS 6);
+        
+        if([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+            
+            SLComposeViewController *socialController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+            SLComposeViewControllerCompletionHandler completionHandler = ^(SLComposeViewControllerResult result) {
+                [socialController dismissViewControllerAnimated:YES completion:Nil];
+            };
+            socialController.completionHandler = completionHandler;
+            [socialController setInitialText:[NSString stringWithFormat:@"%@ - %@ /via @Shelby", videoTitle, self.awesomeURL]];
+            
+            [self.geniusRollViewController presentViewController:socialController animated:YES completion:nil];
+            
+        }
+
+        
+    } else { // Twitter Post (iOS 5)
+        
+        if ([TWTweetComposeViewController canSendTweet]) {
+            
+            TWTweetComposeViewController *tweetSheet = [[TWTweetComposeViewController alloc] init];
+            [tweetSheet setInitialText:[NSString stringWithFormat:@"%@ - %@ /via @Shelby", videoTitle, self.awesomeURL]];
+            [tweetSheet removeAllImages];
+            
+            [self.geniusRollViewController presentViewController:tweetSheet animated:YES completion:nil];
+            
+        }
+        
     }
     
 }
@@ -184,20 +206,16 @@ static SocialController *sharedInstance = nil;
         // Facebook Post
         if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
             
-            SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-            
-            SLComposeViewControllerCompletionHandler facebookCompletionHandler = ^(SLComposeViewControllerResult result) {
-                
-                [controller dismissViewControllerAnimated:YES completion:Nil];
+            SLComposeViewController *socialController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+            SLComposeViewControllerCompletionHandler completionHandler = ^(SLComposeViewControllerResult result) {
+                [socialController dismissViewControllerAnimated:YES completion:Nil];
             };
+            socialController.completionHandler = completionHandler;
+            [socialController setInitialText:[NSString stringWithFormat:@"%@ - via Shelby Genius", videoTitle]];
+            [socialController addURL:[NSURL URLWithString:self.awesomeURL]];
+            [socialController addImage:thumbnail];
             
-            controller.completionHandler = facebookCompletionHandler;
-            
-            [controller setInitialText:[NSString stringWithFormat:@"%@ - via Shelby Genius", videoTitle]];
-            [controller addURL:[NSURL URLWithString:self.awesomeURL]];
-            [controller addImage:thumbnail];
-            
-            [self.geniusRollViewController presentViewController:controller animated:YES completion:nil];
+            [self.geniusRollViewController presentViewController:socialController animated:YES completion:nil];
             
         }
         
