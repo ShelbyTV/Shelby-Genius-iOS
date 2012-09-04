@@ -88,6 +88,8 @@ static SocialController *sharedInstance = nil;
     NSString *frameID = [self.videoFrame valueForKey:@"id"];
     NSString *videoURL = [NSString stringWithFormat:@"http://shelby.tv/video/%@/%@?roll_id=%@&frame_id=%@", providerName, providerID, rollID, frameID];
     
+    NSLog(@"%@", frameID);
+    
     switch (self.socialChannel) {
             
         case SocialShare_None:

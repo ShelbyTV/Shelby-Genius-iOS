@@ -413,7 +413,7 @@
         
         tableView.alpha = 1.0f;
         tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"VideoCardCell" owner:self options:nil];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"VideoCardCell_iphone" owner:self options:nil];
         VideoCardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VideoCardCell"];
         
         if ( nil == cell ) cell = (VideoCardCell*)[nib objectAtIndex:0];

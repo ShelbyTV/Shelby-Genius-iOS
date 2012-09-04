@@ -86,7 +86,7 @@
     } else {
         
         [[KISSMetricsAPI sharedAPI] recordEvent:KISSFirstTimeUserPhone withProperties:nil];
-        GeniusOnboardingViewController *geniusOnboardingViewController = [[GeniusOnboardingViewController alloc] initWithNibName:@"GeniusOnboardingViewController" bundle:nil];
+        GeniusOnboardingViewController *geniusOnboardingViewController = [[GeniusOnboardingViewController alloc] initWithNibName:@"GeniusOnboardingViewController_iphone" bundle:nil];
         [self.navigationController pushViewController:geniusOnboardingViewController animated:YES];
         
     }
@@ -360,7 +360,7 @@
         
         tableView.alpha = 1.0f;
         tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"QueryCell" owner:self options:nil];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"QueryCell_iphone" owner:self options:nil];
         QueryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QueryCell"];
         if ( nil == cell ) cell = (QueryCell*)[nib objectAtIndex:0];
         

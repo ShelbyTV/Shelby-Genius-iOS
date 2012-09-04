@@ -27,6 +27,7 @@
 		8E2E974615D56A2700178DA0 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E974515D56A2700178DA0 /* MBProgressHUD.m */; };
 		8E649A9415E491BA00B4D407 /* SearchTerms.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E649A9315E491BA00B4D407 /* SearchTerms.plist */; };
 		8E7522BB15F626D7000EBA59 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7522BA15F626D7000EBA59 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		8E7522BE15F68EDC000EBA59 /* Icon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7522BD15F68EDC000EBA59 /* Icon@2x~ipad.png */; };
 		8E89F5C015D4F724004B2DFF /* VideoPlayerContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E89F5BF15D4F724004B2DFF /* VideoPlayerContainerViewController.m */; };
 		8E89F5C915D4FEC4004B2DFF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E89F5C115D4FEC4004B2DFF /* Default.png */; };
 		8E89F5CA15D4FEC4004B2DFF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E89F5C215D4FEC4004B2DFF /* Default@2x.png */; };
@@ -38,14 +39,14 @@
 		8E89F5D015D4FEC4004B2DFF /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E89F5C815D4FEC4004B2DFF /* Icon@2x.png */; };
 		8E8C682A15D94CE6004290A6 /* GeniusRollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C682815D94CE5004290A6 /* GeniusRollViewController.m */; };
 		8E8C683315D9572A004290A6 /* QueryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C683215D9572A004290A6 /* QueryCell.m */; };
-		8E8C683515D95778004290A6 /* QueryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C683415D95778004290A6 /* QueryCell.xib */; };
+		8E8C683515D95778004290A6 /* QueryCell_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C683415D95778004290A6 /* QueryCell_iphone.xib */; };
 		8E8C683815D958A4004290A6 /* queryCellBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C683615D958A4004290A6 /* queryCellBackground.png */; };
 		8E8C683915D958A4004290A6 /* queryCellBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C683715D958A4004290A6 /* queryCellBackground@2x.png */; };
-		8E8C684715D99DCE004290A6 /* GeniusRollViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C684615D99DCE004290A6 /* GeniusRollViewController.xib */; };
+		8E8C684715D99DCE004290A6 /* GeniusRollViewController_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C684615D99DCE004290A6 /* GeniusRollViewController_iphone.xib */; };
 		8E8C684915D9A0A0004290A6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8C684815D9A0A0004290A6 /* QuartzCore.framework */; };
 		8E99EF6E15E44FDC00877068 /* VideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E99EF6D15E44FDB00877068 /* VideoPlayerViewController.m */; };
 		8EA44F6B15E9982600BB0A08 /* GeniusOnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EA44F6915E9982600BB0A08 /* GeniusOnboardingViewController.m */; };
-		8EA44F6C15E9982600BB0A08 /* GeniusOnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F6A15E9982600BB0A08 /* GeniusOnboardingViewController.xib */; };
+		8EA44F6C15E9982600BB0A08 /* GeniusOnboardingViewController_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F6A15E9982600BB0A08 /* GeniusOnboardingViewController_iphone.xib */; };
 		8EA44F7015E999EC00BB0A08 /* onboarding.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F6E15E999EC00BB0A08 /* onboarding.png */; };
 		8EA44F7115E999EC00BB0A08 /* onboarding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F6F15E999EC00BB0A08 /* onboarding@2x.png */; };
 		8EA44F7415E99C2B00BB0A08 /* onboardingStartButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F7215E99C2B00BB0A08 /* onboardingStartButton.png */; };
@@ -57,7 +58,7 @@
 		8ECA62C515EB215400056231 /* navigationBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8ECA62C415EB215400056231 /* navigationBar@2x.png */; };
 		8ECA62CB15EB247A00056231 /* TopAlignedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA62CA15EB247A00056231 /* TopAlignedLabel.m */; };
 		8ED93B0915DC1B3900339BF1 /* LoadingVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED93B0815DC1B3900339BF1 /* LoadingVideoView.m */; };
-		8ED93B0C15DC1B4700339BF1 /* LoadingVideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED93B0B15DC1B4700339BF1 /* LoadingVideoView.xib */; };
+		8ED93B0C15DC1B4700339BF1 /* LoadingVideoView_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED93B0B15DC1B4700339BF1 /* LoadingVideoView_iphone.xib */; };
 		8EDCE99815D4C3C000EFB1F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99715D4C3C000EFB1F2 /* UIKit.framework */; };
 		8EDCE99A15D4C3C000EFB1F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99915D4C3C000EFB1F2 /* Foundation.framework */; };
 		8EDCE99C15D4C3C000EFB1F2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDCE99B15D4C3C000EFB1F2 /* CoreGraphics.framework */; };
@@ -68,7 +69,7 @@
 		8EDCE9AE15D4C3C000EFB1F2 /* SearchViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDCE9AC15D4C3C000EFB1F2 /* SearchViewController_iPhone.xib */; };
 		8EDCE9B915D4C41A00EFB1F2 /* APIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE9B815D4C41A00EFB1F2 /* APIClient.m */; };
 		8EDCE9C915D4EEEE00EFB1F2 /* VideoCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE9C815D4EEEE00EFB1F2 /* VideoCardCell.m */; };
-		8EDCE9D015D4EF4400EFB1F2 /* VideoCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDCE9CF15D4EF4400EFB1F2 /* VideoCardCell.xib */; };
+		8EDCE9D015D4EF4400EFB1F2 /* VideoCardCell_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDCE9CF15D4EF4400EFB1F2 /* VideoCardCell_iphone.xib */; };
 		8EDDFB2F15D88B1A00BCD710 /* Ubuntu-B.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2315D88B1A00BCD710 /* Ubuntu-B.ttf */; };
 		8EDDFB3015D88B1A00BCD710 /* Ubuntu-M.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2415D88B1A00BCD710 /* Ubuntu-M.ttf */; };
 		8EDDFB3115D88B1A00BCD710 /* Ubuntu-R.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2515D88B1A00BCD710 /* Ubuntu-R.ttf */; };
@@ -76,7 +77,7 @@
 		8EDDFB3315D88B1A00BCD710 /* navigationLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2815D88B1A00BCD710 /* navigationLogo@2x.png */; };
 		8EDDFB3415D88B1A00BCD710 /* navigationBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2915D88B1A00BCD710 /* navigationBar.png */; };
 		8EF33D0B15EFCFDD007FE38E /* RootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF33D0A15EFCFDD007FE38E /* RootNavigationController.m */; };
-		8EF33D0F15EFE516007FE38E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF33D0E15EFE516007FE38E /* Reachability.m */; };
+		8EF33D0F15EFE516007FE38E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF33D0E15EFE516007FE38E /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8EF33D1515EFE729007FE38E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF33D1415EFE728007FE38E /* CFNetwork.framework */; };
 		8EF33D1715EFE741007FE38E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF33D1615EFE741007FE38E /* SystemConfiguration.framework */; };
 		8EF8211315DB5D3F00F18572 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF8211215DB5D3F00F18572 /* Crashlytics.framework */; };
@@ -107,6 +108,7 @@
 		8E2E974515D56A2700178DA0 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		8E649A9315E491BA00B4D407 /* SearchTerms.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SearchTerms.plist; sourceTree = "<group>"; };
 		8E7522BA15F626D7000EBA59 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		8E7522BD15F68EDC000EBA59 /* Icon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x~ipad.png"; sourceTree = SOURCE_ROOT; };
 		8E89F5BE15D4F724004B2DFF /* VideoPlayerContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerContainerViewController.h; sourceTree = "<group>"; };
 		8E89F5BF15D4F724004B2DFF /* VideoPlayerContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerContainerViewController.m; sourceTree = "<group>"; };
 		8E89F5C115D4FEC4004B2DFF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
@@ -121,18 +123,18 @@
 		8E8C682815D94CE5004290A6 /* GeniusRollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeniusRollViewController.m; sourceTree = "<group>"; };
 		8E8C683115D9572A004290A6 /* QueryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryCell.h; sourceTree = "<group>"; };
 		8E8C683215D9572A004290A6 /* QueryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryCell.m; sourceTree = "<group>"; };
-		8E8C683415D95778004290A6 /* QueryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QueryCell.xib; sourceTree = "<group>"; };
+		8E8C683415D95778004290A6 /* QueryCell_iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QueryCell_iphone.xib; sourceTree = "<group>"; };
 		8E8C683615D958A4004290A6 /* queryCellBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = queryCellBackground.png; sourceTree = "<group>"; };
 		8E8C683715D958A4004290A6 /* queryCellBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "queryCellBackground@2x.png"; sourceTree = "<group>"; };
 		8E8C683A15D95CEC004290A6 /* Structures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Structures.h; sourceTree = "<group>"; };
 		8E8C683C15D95D0B004290A6 /* APIRoutes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = APIRoutes.h; path = ../APIRoutes.h; sourceTree = "<group>"; };
-		8E8C684615D99DCE004290A6 /* GeniusRollViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeniusRollViewController.xib; sourceTree = "<group>"; };
+		8E8C684615D99DCE004290A6 /* GeniusRollViewController_iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeniusRollViewController_iphone.xib; sourceTree = "<group>"; };
 		8E8C684815D9A0A0004290A6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8E99EF6C15E44FDB00877068 /* VideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewController.h; sourceTree = "<group>"; };
 		8E99EF6D15E44FDB00877068 /* VideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerViewController.m; sourceTree = "<group>"; };
 		8EA44F6815E9982600BB0A08 /* GeniusOnboardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeniusOnboardingViewController.h; sourceTree = "<group>"; };
 		8EA44F6915E9982600BB0A08 /* GeniusOnboardingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeniusOnboardingViewController.m; sourceTree = "<group>"; };
-		8EA44F6A15E9982600BB0A08 /* GeniusOnboardingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeniusOnboardingViewController.xib; sourceTree = "<group>"; };
+		8EA44F6A15E9982600BB0A08 /* GeniusOnboardingViewController_iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeniusOnboardingViewController_iphone.xib; sourceTree = "<group>"; };
 		8EA44F6E15E999EC00BB0A08 /* onboarding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onboarding.png; sourceTree = "<group>"; };
 		8EA44F6F15E999EC00BB0A08 /* onboarding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onboarding@2x.png"; sourceTree = "<group>"; };
 		8EA44F7215E99C2B00BB0A08 /* onboardingStartButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onboardingStartButton.png; sourceTree = "<group>"; };
@@ -147,7 +149,7 @@
 		8ECA62CA15EB247A00056231 /* TopAlignedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopAlignedLabel.m; sourceTree = "<group>"; };
 		8ED93B0715DC1B3900339BF1 /* LoadingVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingVideoView.h; sourceTree = "<group>"; };
 		8ED93B0815DC1B3900339BF1 /* LoadingVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingVideoView.m; sourceTree = "<group>"; };
-		8ED93B0B15DC1B4700339BF1 /* LoadingVideoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingVideoView.xib; sourceTree = "<group>"; };
+		8ED93B0B15DC1B4700339BF1 /* LoadingVideoView_iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingVideoView_iphone.xib; sourceTree = "<group>"; };
 		8EDCE99315D4C3C000EFB1F2 /* Shelby Genius.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shelby Genius.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EDCE99715D4C3C000EFB1F2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8EDCE99915D4C3C000EFB1F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -166,7 +168,7 @@
 		8EDCE9BE15D4CFBD00EFB1F2 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		8EDCE9C715D4EEEE00EFB1F2 /* VideoCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCardCell.h; sourceTree = "<group>"; };
 		8EDCE9C815D4EEEE00EFB1F2 /* VideoCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCardCell.m; sourceTree = "<group>"; };
-		8EDCE9CF15D4EF4400EFB1F2 /* VideoCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCardCell.xib; sourceTree = "<group>"; };
+		8EDCE9CF15D4EF4400EFB1F2 /* VideoCardCell_iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCardCell_iphone.xib; sourceTree = "<group>"; };
 		8EDDFB2315D88B1A00BCD710 /* Ubuntu-B.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-B.ttf"; sourceTree = "<group>"; };
 		8EDDFB2415D88B1A00BCD710 /* Ubuntu-M.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-M.ttf"; sourceTree = "<group>"; };
 		8EDDFB2515D88B1A00BCD710 /* Ubuntu-R.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-R.ttf"; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 		8ECA62BF15EA890500056231 /* Default Artwork */ = {
 			isa = PBXGroup;
 			children = (
+				8E7522BD15F68EDC000EBA59 /* Icon@2x~ipad.png */,
 				8ECA62BC15EA88FA00056231 /* iTunesArtwork */,
 				8E25615915EC137200200BC2 /* iTunesArtwork@2x */,
 				8E89F5C115D4FEC4004B2DFF /* Default.png */,
@@ -386,12 +389,12 @@
 		8EDCE9CD15D4EF1D00EFB1F2 /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
-				8EA44F6A15E9982600BB0A08 /* GeniusOnboardingViewController.xib */,
-				8E8C684615D99DCE004290A6 /* GeniusRollViewController.xib */,
-				8ED93B0B15DC1B4700339BF1 /* LoadingVideoView.xib */,
-				8E8C683415D95778004290A6 /* QueryCell.xib */,
+				8EA44F6A15E9982600BB0A08 /* GeniusOnboardingViewController_iphone.xib */,
+				8E8C684615D99DCE004290A6 /* GeniusRollViewController_iphone.xib */,
+				8ED93B0B15DC1B4700339BF1 /* LoadingVideoView_iphone.xib */,
+				8E8C683415D95778004290A6 /* QueryCell_iphone.xib */,
 				8EDCE9AC15D4C3C000EFB1F2 /* SearchViewController_iPhone.xib */,
-				8EDCE9CF15D4EF4400EFB1F2 /* VideoCardCell.xib */,
+				8EDCE9CF15D4EF4400EFB1F2 /* VideoCardCell_iphone.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -530,7 +533,7 @@
 			files = (
 				8EDCE9A215D4C3C000EFB1F2 /* InfoPlist.strings in Resources */,
 				8EDCE9AE15D4C3C000EFB1F2 /* SearchViewController_iPhone.xib in Resources */,
-				8EDCE9D015D4EF4400EFB1F2 /* VideoCardCell.xib in Resources */,
+				8EDCE9D015D4EF4400EFB1F2 /* VideoCardCell_iphone.xib in Resources */,
 				8E89F5C915D4FEC4004B2DFF /* Default.png in Resources */,
 				8E89F5CA15D4FEC4004B2DFF /* Default@2x.png in Resources */,
 				8E89F5CB15D4FEC4004B2DFF /* Icon-72.png in Resources */,
@@ -545,17 +548,17 @@
 				8EDDFB3215D88B1A00BCD710 /* navigationLogo.png in Resources */,
 				8EDDFB3315D88B1A00BCD710 /* navigationLogo@2x.png in Resources */,
 				8EDDFB3415D88B1A00BCD710 /* navigationBar.png in Resources */,
-				8E8C683515D95778004290A6 /* QueryCell.xib in Resources */,
+				8E8C683515D95778004290A6 /* QueryCell_iphone.xib in Resources */,
 				8E8C683815D958A4004290A6 /* queryCellBackground.png in Resources */,
 				8E8C683915D958A4004290A6 /* queryCellBackground@2x.png in Resources */,
-				8E8C684715D99DCE004290A6 /* GeniusRollViewController.xib in Resources */,
-				8ED93B0C15DC1B4700339BF1 /* LoadingVideoView.xib in Resources */,
+				8E8C684715D99DCE004290A6 /* GeniusRollViewController_iphone.xib in Resources */,
+				8ED93B0C15DC1B4700339BF1 /* LoadingVideoView_iphone.xib in Resources */,
 				8E1A7EB515E3EACF00FC7086 /* searchBar.png in Resources */,
 				8E1A7EB615E3EACF00FC7086 /* searchBar@2x.png in Resources */,
 				8E1A7EB715E3EACF00FC7086 /* searchButton.png in Resources */,
 				8E1A7EB815E3EACF00FC7086 /* searchButton@2x.png in Resources */,
 				8E649A9415E491BA00B4D407 /* SearchTerms.plist in Resources */,
-				8EA44F6C15E9982600BB0A08 /* GeniusOnboardingViewController.xib in Resources */,
+				8EA44F6C15E9982600BB0A08 /* GeniusOnboardingViewController_iphone.xib in Resources */,
 				8EA44F7015E999EC00BB0A08 /* onboarding.png in Resources */,
 				8EA44F7115E999EC00BB0A08 /* onboarding@2x.png in Resources */,
 				8EA44F7415E99C2B00BB0A08 /* onboardingStartButton.png in Resources */,
@@ -569,6 +572,7 @@
 				8E25615A15EC137300200BC2 /* iTunesArtwork@2x in Resources */,
 				8E25615D15EC31CA00200BC2 /* shareButton.png in Resources */,
 				8E25615E15EC31CA00200BC2 /* shareButton@2x.png in Resources */,
+				8E7522BE15F68EDC000EBA59 /* Icon@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -708,11 +712,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Shelby Genius/Shelby Genius-Prefix.pch";
 				INFOPLIST_FILE = "Shelby Genius/Shelby Genius-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3370255A-E441-4CB6-AACE-34508E82D85B";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3370255A-E441-4CB6-AACE-34508E82D85B";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -729,11 +733,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Shelby Genius/Shelby Genius-Prefix.pch";
 				INFOPLIST_FILE = "Shelby Genius/Shelby Genius-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3370255A-E441-4CB6-AACE-34508E82D85B";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3370255A-E441-4CB6-AACE-34508E82D85B";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
