@@ -26,6 +26,7 @@
 		8E2E974215D565F900178DA0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2E974115D565F900178DA0 /* AVFoundation.framework */; };
 		8E2E974615D56A2700178DA0 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E974515D56A2700178DA0 /* MBProgressHUD.m */; };
 		8E649A9415E491BA00B4D407 /* SearchTerms.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E649A9315E491BA00B4D407 /* SearchTerms.plist */; };
+		8E7522BB15F626D7000EBA59 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7522BA15F626D7000EBA59 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8E89F5C015D4F724004B2DFF /* VideoPlayerContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E89F5BF15D4F724004B2DFF /* VideoPlayerContainerViewController.m */; };
 		8E89F5C915D4FEC4004B2DFF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E89F5C115D4FEC4004B2DFF /* Default.png */; };
 		8E89F5CA15D4FEC4004B2DFF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E89F5C215D4FEC4004B2DFF /* Default@2x.png */; };
@@ -105,6 +106,7 @@
 		8E2E974415D56A2700178DA0 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		8E2E974515D56A2700178DA0 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		8E649A9315E491BA00B4D407 /* SearchTerms.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SearchTerms.plist; sourceTree = "<group>"; };
+		8E7522BA15F626D7000EBA59 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8E89F5BE15D4F724004B2DFF /* VideoPlayerContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerContainerViewController.h; sourceTree = "<group>"; };
 		8E89F5BF15D4F724004B2DFF /* VideoPlayerContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerContainerViewController.m; sourceTree = "<group>"; };
 		8E89F5C115D4FEC4004B2DFF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
@@ -185,6 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E7522BB15F626D7000EBA59 /* Social.framework in Frameworks */,
 				8EF33D1715EFE741007FE38E /* SystemConfiguration.framework in Frameworks */,
 				8EF33D1515EFE729007FE38E /* CFNetwork.framework in Frameworks */,
 				8E0005B815E53D0200712B4D /* MessageUI.framework in Frameworks */,
@@ -301,6 +304,7 @@
 		8EDCE99615D4C3C000EFB1F2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E7522BA15F626D7000EBA59 /* Social.framework */,
 				8EF33D1615EFE741007FE38E /* SystemConfiguration.framework */,
 				8EF33D1415EFE728007FE38E /* CFNetwork.framework */,
 				8E0005B715E53D0200712B4D /* MessageUI.framework */,

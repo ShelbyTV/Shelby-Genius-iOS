@@ -70,9 +70,7 @@ static SocialController *sharedInstance = nil;
     self.socialChannel = socialChannel;
     self.geniusRollViewController = geniusRollViewController;
     
-    NSLog(@"%@", self.geniusRollViewController);
-    
-            
+    // Extract Video Data
     NSString *videoTitle = [[self.videoFrame valueForKey:@"video"] valueForKey:@"title"];
     videoTitle = [videoTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *providerName = [[self.videoFrame valueForKey:@"video"] valueForKey:@"provider_name"];
@@ -107,6 +105,13 @@ static SocialController *sharedInstance = nil;
         } break;
             
         case SocialShare_Facebook:{
+            
+            NSString *requestString = [NSString stringWithFormat:AWESMLinkCreator, videoURL, videoTitle];
+            requestString = [self encodeToPercentEscapedString:requestString];
+            requestString = [NSString stringWithFormat:AWESMFacebook, requestString];
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
+            self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+            
         } break;
             
         default:
@@ -147,9 +152,10 @@ static SocialController *sharedInstance = nil;
     NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.geniusRollViewController.query, KISSQuery, [[self.videoFrame valueForKey:@"video" ] valueForKey:@"title"], KISSVideoTitle, nil];
     [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
     
-    // Title
+    // Extract Video Data
     NSString *videoTitle = [[self.videoFrame valueForKey:@"video"] valueForKey:@"title"];
 
+    // Twitter Post
     if ([TWTweetComposeViewController canSendTweet]) {
         TWTweetComposeViewController *tweetSheet = [[TWTweetComposeViewController alloc] init];
         [tweetSheet setInitialText:[NSString stringWithFormat:@"%@ - %@ /via @Shelby", videoTitle, self.awesomeURL]];
@@ -161,10 +167,41 @@ static SocialController *sharedInstance = nil;
 
 - (void)postToFacebook
 {
-    // Analytics
-    [[Panhandler sharedInstance] recordEvent];
-    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.geniusRollViewController.query, KISSQuery, [[self.videoFrame valueForKey:@"video" ] valueForKey:@"title"], KISSVideoTitle, nil];
-    [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
+    
+    if ( 6 == kSystemVersion ) {
+    
+        // Analytics
+        [[Panhandler sharedInstance] recordEvent];
+        NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.geniusRollViewController.query, KISSQuery, [[self.videoFrame valueForKey:@"video" ] valueForKey:@"title"], KISSVideoTitle, nil];
+        [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
+     
+        // Extract Video Data 
+        NSString *videoTitle = [[self.videoFrame valueForKey:@"video"] valueForKey:@"title"];
+        NSString *videoThumbnail = [[self.videoFrame valueForKey:@"video"] valueForKey:@"thumbnail_url"];
+        NSData *thumbnailData = [NSData dataWithContentsOfURL:[NSURL URLWithString:videoThumbnail]];
+        UIImage *thumbnail = [UIImage imageWithData:thumbnailData];
+        
+        // Facebook Post
+        if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+            
+            SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+            
+            SLComposeViewControllerCompletionHandler facebookCompletionHandler = ^(SLComposeViewControllerResult result) {
+                
+                [controller dismissViewControllerAnimated:YES completion:Nil];
+            };
+            
+            controller.completionHandler = facebookCompletionHandler;
+            
+            [controller setInitialText:[NSString stringWithFormat:@"%@ - via Shelby Genius", videoTitle]];
+            [controller addURL:[NSURL URLWithString:self.awesomeURL]];
+            [controller addImage:thumbnail];
+            
+            [self.geniusRollViewController presentViewController:controller animated:YES completion:nil];
+            
+        }
+        
+    }
     
 }
 

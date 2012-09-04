@@ -52,9 +52,7 @@
     
     if ( ![self.videoPlayerContainerViewController controllsModified] ) {
         
-    NSArray *versionCompatibility = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
-    
-    if ( 6 == [[versionCompatibility objectAtIndex:0] intValue] ) { /// iOS 6 is installed
+    if ( 6 == kSystemVersion) { /// iOS 6 is installed
         
         UIButton *previousVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:0] subviews] objectAtIndex:1];
         [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];

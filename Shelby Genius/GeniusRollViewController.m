@@ -101,7 +101,7 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     
     // Annoying iOS6 orientation fix when GenisuRollViewController is Re-Presented
-    if ( 6 == [[[[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."] objectAtIndex:0] intValue] ) { /// iOS 6 is installed
+    if ( 6 == kSystemVersion ) { /// iOS 6 is installed
         
         [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
         UIViewController *mVC = [[UIViewController alloc] init];
@@ -317,13 +317,30 @@
     VideoCardCell *cell = (VideoCardCell*)[button superview];
     self.selectedVideoFrameToShare = cell.videoFrame;
     
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Share this video?"
-                                                             delegate:self
-                                                    cancelButtonTitle:@"Cancel"
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"Email", @"Twitter", nil];
+    if ( 6 == kSystemVersion ) {
+        
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Share this video?"
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"Cancel"
+                                                   destructiveButtonTitle:nil
+                                                        otherButtonTitles:@"Email", @"Twitter", @"Facebook", nil];
+        
+        [actionSheet showInView:self.tableView];
+        
+    } else {
+        
     
-    [actionSheet showInView:self.tableView];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Share this video?"
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"Cancel"
+                                                   destructiveButtonTitle:nil
+                                                        otherButtonTitles:@"Email", @"Twitter", nil];
+        
+        [actionSheet showInView:self.tableView];
+        
+    }
+    
+    
 }
 
 - (void)scrollToCurrentVideo:(NSNotification*)notification
@@ -348,16 +365,38 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     
-    switch (buttonIndex) {
-        case 0: // Email
-            [[SocialController sharedInstance] shareVideo:self.selectedVideoFrameToShare toChannel:SocialShare_Email inViewController:self];
-            break;
-        case 1: // Twitter
-            [[SocialController sharedInstance] shareVideo:self.selectedVideoFrameToShare toChannel:SocialShare_Twitter inViewController:self];
-            break;
-        default:
-            break;
+    if ( 6 == kSystemVersion ) {
+        
+        switch (buttonIndex) {
+            case 0: // Email
+                [[SocialController sharedInstance] shareVideo:self.selectedVideoFrameToShare toChannel:SocialShare_Email inViewController:self];
+                break;
+            case 1: // Twitter
+                [[SocialController sharedInstance] shareVideo:self.selectedVideoFrameToShare toChannel:SocialShare_Twitter inViewController:self];
+                break;
+            case 2: // Twitter
+                [[SocialController sharedInstance] shareVideo:self.selectedVideoFrameToShare toChannel:SocialShare_Facebook inViewController:self];
+                break;
+            default:
+                break;
+        }
+        
+        
+    } else {
+        
+        switch (buttonIndex) {
+            case 0: // Email
+                [[SocialController sharedInstance] shareVideo:self.selectedVideoFrameToShare toChannel:SocialShare_Email inViewController:self];
+                break;
+            case 1: // Twitter
+                [[SocialController sharedInstance] shareVideo:self.selectedVideoFrameToShare toChannel:SocialShare_Twitter inViewController:self];
+                break;
+            default:
+                break;
+        }
+        
     }
+
 
 }
 

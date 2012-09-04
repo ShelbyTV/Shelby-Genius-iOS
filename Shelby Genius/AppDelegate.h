@@ -12,7 +12,6 @@
 @class VideoPlayerViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
-
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) RootNavigationController *rootNavigationController;
 @property (strong, nonatomic) MBProgressHUD *progressHUD;

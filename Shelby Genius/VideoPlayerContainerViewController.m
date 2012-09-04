@@ -102,7 +102,7 @@
     self.moviePlayer.moviePlayer.controlStyle = MPMovieControlStyleNone;
     [self.navigationController pushViewController:self.moviePlayer animated:NO];
     
-    if ( 6 != [[[[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."] objectAtIndex:0] intValue] ) { /// iOS 6 is installed
+    if ( 6 != kSystemVersion) { /// iOS 5 is installed
         
         [self.moviePlayer modifyVideoPlayerButtons];
         
@@ -316,7 +316,7 @@
                                                  name:MPMoviePlayerIsAirPlayVideoActiveDidChangeNotification
                                                object:nil];
     
-    if ( 6 == [[[[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."] objectAtIndex:0] intValue] ) { /// iOS 6 is installed
+    if ( 6 == kSystemVersion ) { /// iOS 6 is installed
         
         NSString *controlAppearanceNotification = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U",@"I",@"V",@"i",@"e",@"w",@"A",@"n",@"i",@"m",@"a",@"t",@"i",@"o",@"n",@"D",@"i",@"d",@"C",@"o",@"m",@"m",@"i",@"t",@"N",@"o",@"t",@"i",@"f",@"i",@"c",@"a",@"t",@"i",@"o",@"n"];
         
@@ -388,9 +388,7 @@
 - (void)controllsDidAppear:(NSNotification *)notification
 {
 
-    NSArray *versionCompatibility = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
-    
-    if ( 6 == [[versionCompatibility objectAtIndex:0] intValue] ) { /// iOS 6 is installed
+    if ( 6 == kSystemVersion ) { /// iOS 6 is installed
     
         if ( NO == self.controllsModified && 4 == [[[[[[self.moviePlayer.view subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] count] ) {
             
