@@ -87,7 +87,6 @@
         
         [[KISSMetricsAPI sharedAPI] recordEvent:KISSFirstTimeUserPhone withProperties:nil];
         GeniusOnboardingViewController *geniusOnboardingViewController = [[GeniusOnboardingViewController alloc] initWithNibName:@"GeniusOnboardingViewController" bundle:nil];
-        UINavigationController *geniusNavigationController = [[UINavigationController alloc] initWithRootViewController:geniusOnboardingViewController];
         [self.navigationController pushViewController:geniusOnboardingViewController animated:YES];
         
     }

@@ -33,6 +33,7 @@
 - (void)postToTwitter;
 - (void)postToFacebook;
 - (NSString*)encodeToPercentEscapedString:(NSString*)string;
+- (void)asynchronousConnectionFinished;
 
 @end
 
@@ -105,7 +106,7 @@ static SocialController *sharedInstance = nil;
                  if( data.length > 0 && error == nil ) {
                      
                      self.responseData = [NSMutableData dataWithData:data];
-                     [self connectionDidFinishLoading:nil];
+                     [self asynchronousConnectionFinished];
                      
                  }
              }];
@@ -125,7 +126,7 @@ static SocialController *sharedInstance = nil;
                 if( data.length > 0 && error == nil ) {
                
                     self.responseData = [NSMutableData dataWithData:data];
-                    [self connectionDidFinishLoading:nil];
+                    [self asynchronousConnectionFinished];
      
                 }
             }];
@@ -145,7 +146,7 @@ static SocialController *sharedInstance = nil;
                  if( data.length > 0 && error == nil ) {
                      
                      self.responseData = [NSMutableData dataWithData:data];
-                     [self connectionDidFinishLoading:nil];
+                     [self asynchronousConnectionFinished];
                      
                  }
              }];
@@ -274,62 +275,8 @@ static SocialController *sharedInstance = nil;
 }
 
 
-#pragma mark - NSURLConnectionDataDelegate
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    if ( ![self responseData] )self.responseData = [[NSMutableData alloc] init];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [self.responseData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    if ( error ) {
-        
-        switch (self.socialChannel) {
-                
-            case SocialShare_None:
-                    break;
-                
-            case SocialShare_Email:{
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sharing Failed"
-                                                                    message:@"There was a problem sharing via Email."
-                                                                   delegate:nil
-                                                          cancelButtonTitle:nil
-                                                          otherButtonTitles:@"Dismiss", nil];
-                [alertView show];
-                
-                } break;
-                
-            case SocialShare_Twitter:{
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sharing Failed"
-                                                                    message:@"There was a problem sharing to Twitter."
-                                                                   delegate:nil
-                                                          cancelButtonTitle:nil
-                                                          otherButtonTitles:@"Dismiss", nil];
-                [alertView show];
-                
-            } break;
-        
-            case SocialShare_Facebook:{
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sharing Failed"
-                                                                    message:@"There was a problem sharing to Faceabook."
-                                                                   delegate:nil
-                                                          cancelButtonTitle:nil
-                                                          otherButtonTitles:@"Dismiss", nil];
-                [alertView show];
-                
-                } break;
-    
-        }
-    }
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+#pragma mark - Asynchronous Connection Finished
+- (void)asynchronousConnectionFinished
 {
     
     dispatch_async(dispatch_get_main_queue(), ^{
