@@ -27,8 +27,10 @@
 // Tags
 #define kAlertViewNoResultsTag              666
 
-// System Version
+// Device Constants
 #define kSystemVersion                      [[[[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."] objectAtIndex:0] intValue]
+#define kDeviceIsIPad                       [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad
+#define kDeviceIsIPhone                     [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone
 
 // Awe.sm Links
 #define AWESMLinkCreatorEmail               @"%@&utm_campaign=iphone_genius&utm_source=email&utm_medium=%@"

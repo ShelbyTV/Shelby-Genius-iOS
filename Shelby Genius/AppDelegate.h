@@ -14,6 +14,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) RootNavigationController *rootNavigationController;
+@property (strong, nonatomic) UISplitViewController *rootSplitViewController;
+@property (strong, nonatomic) UINavigationController *detailNavigationController;
 @property (strong, nonatomic) MBProgressHUD *progressHUD;
 @property (strong ,nonatomic) VideoPlayerViewController *videoPlayerViewController;
 

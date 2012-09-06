@@ -98,9 +98,17 @@
 - (void)createMoviePlayer
 {
     self.moviePlayer = [[VideoPlayerViewController alloc] initWithVideo:self.video andVideoPlayerContainerViewController:self];
-    [self.moviePlayer.view setFrame:self.appDelegate.window.frame];
+    
     self.moviePlayer.moviePlayer.controlStyle = MPMovieControlStyleNone;
-    [self.navigationController pushViewController:self.moviePlayer animated:NO];
+    
+    if ( kDeviceIsIPad) {
+        [self.moviePlayer.view setFrame:[[[self.appDelegate.rootSplitViewController.viewControllers objectAtIndex:1] view] frame]];
+        [self.appDelegate.detailNavigationController pushViewController:self.moviePlayer animated:NO];
+    } else {
+        [self.moviePlayer.view setFrame:self.appDelegate.window.frame];
+        [self.navigationController pushViewController:self.moviePlayer animated:NO];
+    }
+
     
     if ( 6 != kSystemVersion) { /// iOS 5 is installed
         

@@ -512,10 +512,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    VideoPlayerContainerViewController *videoPlayerContainerViewController = [[VideoPlayerContainerViewController alloc] initWithVideos:self.resultsArray selectedVideo:indexPath.row andQuery:self.query];
-    [self.navigationController pushViewController:videoPlayerContainerViewController animated:YES];
+    if ( kDeviceIsIPad ) {
     
-    [self setIsPlayingVideo:YES];
+        VideoPlayerContainerViewController *videoPlayerContainerViewController = [[VideoPlayerContainerViewController alloc] initWithVideos:self.resultsArray selectedVideo:indexPath.row andQuery:self.query];
+        [self.appDelegate.detailNavigationController pushViewController:videoPlayerContainerViewController animated:NO];
+        
+        [self setIsPlayingVideo:YES];
+        
+    } else {
+    
+        VideoPlayerContainerViewController *videoPlayerContainerViewController = [[VideoPlayerContainerViewController alloc] initWithVideos:self.resultsArray selectedVideo:indexPath.row andQuery:self.query];
+        [self.navigationController pushViewController:videoPlayerContainerViewController animated:YES];
+        
+        [self setIsPlayingVideo:YES];
+        
+    }
+    
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

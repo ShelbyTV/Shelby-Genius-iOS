@@ -15,6 +15,7 @@
 // View Controllers
 #import "SearchViewController.h"
 #import "VideoPlayerViewController.h"
+#import "DetailViewController.h"
 
 @interface AppDelegate ()
 
@@ -32,6 +33,7 @@
 @synthesize progressHUD = _progressHUD;
 @synthesize progressView = _progressView;
 @synthesize rootNavigationController = _rootNavigationController;
+@synthesize detailNavigationController = _detailNavigationController;
 @synthesize videoPlayerViewController = _videoPlayerViewController;
 @synthesize videoPlaybackTimeInterval = _videoPlaybackTimeInterval;
 
@@ -46,10 +48,30 @@
     [self analytics];
 
     // Check if app/onboarding was previously launched before
-    SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController_iPhone" bundle:nil];
-    self.rootNavigationController = [[RootNavigationController alloc] initWithRootViewController:searchViewController];
-    self.window.rootViewController = self.rootNavigationController;
-
+    
+    if ( kDeviceIsIPad ) {
+        
+        self.rootSplitViewController = [[UISplitViewController alloc] init];
+        
+        SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController_iphone" bundle:nil];
+        self.rootNavigationController = [[RootNavigationController alloc] initWithRootViewController:searchViewController];
+        
+        DetailViewController *detailViewController = [[DetailViewController alloc] init];
+        self.detailNavigationController = [[RootNavigationController alloc] initWithRootViewController:detailViewController];
+        
+        [self.rootSplitViewController setViewControllers:[NSArray arrayWithObjects:self.rootNavigationController, self.detailNavigationController, nil]];
+        self.window.rootViewController = self.rootSplitViewController;
+        
+        
+    } else {
+    
+        SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController_iphone" bundle:nil];
+        self.rootNavigationController = [[RootNavigationController alloc] initWithRootViewController:searchViewController];
+        self.window.rootViewController = self.rootNavigationController;
+        
+    }
+    
+    
     
     // Appearance Proxies and General Customization
     [self customization];

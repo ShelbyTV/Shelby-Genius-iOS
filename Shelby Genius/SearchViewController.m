@@ -85,10 +85,13 @@
         
     } else {
         
-        [[KISSMetricsAPI sharedAPI] recordEvent:KISSFirstTimeUserPhone withProperties:nil];
-        GeniusOnboardingViewController *geniusOnboardingViewController = [[GeniusOnboardingViewController alloc] initWithNibName:@"GeniusOnboardingViewController_iphone" bundle:nil];
-        [self.navigationController pushViewController:geniusOnboardingViewController animated:YES];
+        if ( kDeviceIsIPhone) {
         
+            [[KISSMetricsAPI sharedAPI] recordEvent:KISSFirstTimeUserPhone withProperties:nil];
+            GeniusOnboardingViewController *geniusOnboardingViewController = [[GeniusOnboardingViewController alloc] initWithNibName:@"GeniusOnboardingViewController_iphone" bundle:nil];
+            [self.navigationController pushViewController:geniusOnboardingViewController animated:YES];
+            
+        }
     }
 
 }
