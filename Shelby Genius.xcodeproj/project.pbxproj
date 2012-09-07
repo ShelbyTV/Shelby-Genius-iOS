@@ -58,6 +58,7 @@
 		8EA44F7515E99C2B00BB0A08 /* onboardingStartButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F7315E99C2B00BB0A08 /* onboardingStartButton@2x.png */; };
 		8EA44F7815E9A15A00BB0A08 /* navigationBackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F7615E9A15A00BB0A08 /* navigationBackButton.png */; };
 		8EA44F7915E9A15A00BB0A08 /* navigationBackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F7715E9A15A00BB0A08 /* navigationBackButton@2x.png */; };
+		8EAD107515FA93C200CAEC3C /* DetailNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EAD107415FA93C200CAEC3C /* DetailNavigationController.m */; };
 		8EB3D2A815DB55DB00709586 /* Panhandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3D2A715DB55DB00709586 /* Panhandler.m */; };
 		8ECA62BD15EA88FA00056231 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 8ECA62BC15EA88FA00056231 /* iTunesArtwork */; };
 		8ECA62C515EB215400056231 /* navigationBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8ECA62C415EB215400056231 /* navigationBar@2x.png */; };
@@ -151,6 +152,8 @@
 		8EA44F7315E99C2B00BB0A08 /* onboardingStartButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onboardingStartButton@2x.png"; sourceTree = "<group>"; };
 		8EA44F7615E9A15A00BB0A08 /* navigationBackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationBackButton.png; sourceTree = "<group>"; };
 		8EA44F7715E9A15A00BB0A08 /* navigationBackButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationBackButton@2x.png"; sourceTree = "<group>"; };
+		8EAD107315FA93C200CAEC3C /* DetailNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailNavigationController.h; sourceTree = "<group>"; };
+		8EAD107415FA93C200CAEC3C /* DetailNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailNavigationController.m; sourceTree = "<group>"; };
 		8EB3D2A615DB55DB00709586 /* Panhandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Panhandler.h; sourceTree = "<group>"; };
 		8EB3D2A715DB55DB00709586 /* Panhandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Panhandler.m; sourceTree = "<group>"; };
 		8ECA62BC15EA88FA00056231 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = SOURCE_ROOT; };
@@ -416,6 +419,8 @@
 			children = (
 				8E482E7D15F94FAA0079C84A /* DetailViewController.h */,
 				8E482E7E15F94FAA0079C84A /* DetailViewController.m */,
+				8EAD107315FA93C200CAEC3C /* DetailNavigationController.h */,
+				8EAD107415FA93C200CAEC3C /* DetailNavigationController.m */,
 				8EA44F6815E9982600BB0A08 /* GeniusOnboardingViewController.h */,
 				8EA44F6915E9982600BB0A08 /* GeniusOnboardingViewController.m */,
 				8E8C682715D94CE5004290A6 /* GeniusRollViewController.h */,
@@ -636,6 +641,7 @@
 				8EF33D0B15EFCFDD007FE38E /* RootNavigationController.m in Sources */,
 				8EF33D0F15EFE516007FE38E /* Reachability.m in Sources */,
 				8E482E7F15F94FAB0079C84A /* DetailViewController.m in Sources */,
+				8EAD107515FA93C200CAEC3C /* DetailNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

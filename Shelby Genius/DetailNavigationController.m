@@ -1,28 +1,28 @@
 //
-//  RootNavigationController.m
+//  DetailNavigationController.m
 //  Shelby Genius
 //
-//  Created by Arthur Ariel Sabintsev on 8/30/12.
+//  Created by Arthur Ariel Sabintsev on 9/7/12.
 //  Copyright (c) 2012 Arthur Ariel Sabintsev. All rights reserved.
 //
 
-#import "RootNavigationController.h"
+#import "DetailNavigationController.h"
 #import "VideoPlayerViewController.h"
 
-@interface RootNavigationController ()
+@interface DetailNavigationController ()
 
 @end
 
-@implementation RootNavigationController
+@implementation DetailNavigationController
 
 #pragma mark - Interface Orientation Methods (iOS 6)
 - (NSUInteger)supportedInterfaceOrientations
 {
     if ( [self.visibleViewController isKindOfClass:[VideoPlayerViewController class]] ) {
-    //  return UIInterfaceOrientationMaskAllButUpsideDown;
+        //  return UIInterfaceOrientationMaskAllButUpsideDown;
         return 26;
     } else {
-    // return UIInterfaceOrientationMaskPortrait;
+        // return UIInterfaceOrientationMaskPortrait;
         return 2;
     }
 }
@@ -32,7 +32,7 @@
     if ([self.visibleViewController isKindOfClass:[VideoPlayerViewController class]]) { // VideoPlayerViewController
         
         if ( kDeviceIsIPad ) { // iPad
-        
+            
             return NO;
             
         } else { // iPhone
@@ -42,11 +42,19 @@
         }
         
     } else { // All other classes
-    
+        
         return NO;
-   
+        
     }
     
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    if ( kDeviceIsIPad ) {
+        return (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft);
+    } else {
+        return YES;
+    }
+}
 @end

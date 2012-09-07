@@ -63,8 +63,6 @@
         self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         
         self.query = query;
-        
-        [self search];
 
         
     }
@@ -89,7 +87,9 @@
 {
     [super viewDidLoad];
     [self customize];
+    [self search];
     [self initalizeObservers];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -544,11 +544,7 @@
 #pragma mark - Interface Orientation Methods
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    if ( kDeviceIsIPad) {
-        return UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight;
-    } else {
-        return UIInterfaceOrientationPortrait;
-    }
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 

@@ -8,6 +8,7 @@
 
 #import "RootNavigationController.h"
 #import "MBProgressHUD.h"
+#import "DetailNavigationController.h"
 
 @class VideoPlayerViewController;
 
@@ -15,7 +16,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) RootNavigationController *rootNavigationController;
 @property (strong, nonatomic) UISplitViewController *rootSplitViewController;
-@property (strong, nonatomic) RootNavigationController *detailNavigationController;
+@property (strong, nonatomic) DetailNavigationController *detailNavigationController;
 @property (strong, nonatomic) MBProgressHUD *progressHUD;
 @property (strong ,nonatomic) VideoPlayerViewController *videoPlayerViewController;
 

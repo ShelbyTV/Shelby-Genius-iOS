@@ -151,7 +151,7 @@
         
         if ( UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ) {
 
-            [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
+            if ( kDeviceIsIPhone ) [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
             
         } else {
             
@@ -165,7 +165,7 @@
     if ( kDeviceIsIPad) {
         return UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight;
     } else {
-        return UIInterfaceOrientationPortrait;
+        return interfaceOrientation;
     }
 }
 

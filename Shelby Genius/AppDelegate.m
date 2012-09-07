@@ -58,7 +58,7 @@
         self.rootNavigationController = [[RootNavigationController alloc] initWithRootViewController:searchViewController];
         
         DetailViewController *detailViewController = [[DetailViewController alloc] init];
-        self.detailNavigationController = [[RootNavigationController alloc] initWithRootViewController:detailViewController];
+        self.detailNavigationController = [[DetailNavigationController alloc] initWithRootViewController:detailViewController];
 
         [self.rootSplitViewController setViewControllers:[NSArray arrayWithObjects:self.rootNavigationController, self.detailNavigationController, nil]];
         
@@ -116,7 +116,7 @@
     if ( kDeviceIsIPad ) {
 
         self.progressView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 600.0f, 320.0f, 70.0f)];
-        UIView *searchView = [[[[[[[[self.rootSplitViewController.viewControllers objectAtIndex:0] view] subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:0];
+        UIView *searchView = [[[self.rootSplitViewController.viewControllers objectAtIndex:0] visibleViewController] view];
         [searchView addSubview:self.progressView];
         
     } else {
