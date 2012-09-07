@@ -17,7 +17,7 @@
 #import "VideoPlayerViewController.h"
 #import "DetailViewController.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <UISplitViewControllerDelegate>
 
 @property (strong, nonatomic) UIView *progressView;
 @property (assign, nonatomic) NSTimeInterval videoPlaybackTimeInterval;
@@ -52,14 +52,16 @@
     if ( kDeviceIsIPad ) {
         
         self.rootSplitViewController = [[UISplitViewController alloc] init];
+        self.rootSplitViewController.delegate = self;
         
         SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController_iphone" bundle:nil];
         self.rootNavigationController = [[RootNavigationController alloc] initWithRootViewController:searchViewController];
         
         DetailViewController *detailViewController = [[DetailViewController alloc] init];
         self.detailNavigationController = [[RootNavigationController alloc] initWithRootViewController:detailViewController];
-        
+
         [self.rootSplitViewController setViewControllers:[NSArray arrayWithObjects:self.rootNavigationController, self.detailNavigationController, nil]];
+        
         self.window.rootViewController = self.rootSplitViewController;
         
         
@@ -68,16 +70,13 @@
         SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController_iphone" bundle:nil];
         self.rootNavigationController = [[RootNavigationController alloc] initWithRootViewController:searchViewController];
         self.window.rootViewController = self.rootNavigationController;
-        
     }
-    
-    
     
     // Appearance Proxies and General Customization
     [self customization];
     
     [self.window makeKeyAndVisible];
-
+    
     return YES;
 
 }
@@ -114,8 +113,20 @@
 
 - (void)createProgressView
 {
-    self.progressView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 350.0f, 320.0f, 70.0f)];
-    [self.window addSubview:self.progressView];
+    if ( kDeviceIsIPad ) {
+
+        self.progressView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 600.0f, 320.0f, 70.0f)];
+        UIView *searchView = [[[[[[[[self.rootSplitViewController.viewControllers objectAtIndex:0] view] subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:0];
+        [searchView addSubview:self.progressView];
+        
+    } else {
+
+        self.progressView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 350.0f, 320.0f, 70.0f)];
+        [self.window addSubview:self.progressView];
+
+        
+    }
+    
 }
 
 #pragma mark - Private Methods
@@ -160,8 +171,20 @@
 - (void)removeHUD
 {
     // If an older progressHUD exists, remove it to make room for the new HUD
-    [MBProgressHUD hideAllHUDsForView:self.window animated:YES];
-    [self.progressView removeFromSuperview];
+    
+    if ( kDeviceIsIPad ) {
+        
+        UIView *searchView = [[[[[[[[self.rootSplitViewController.viewControllers objectAtIndex:0] view] subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:0];
+        [MBProgressHUD hideAllHUDsForView:searchView animated:YES];
+        [self.progressView removeFromSuperview];
+    } else {
+    
+        [MBProgressHUD hideAllHUDsForView:self.window animated:YES];
+        [self.progressView removeFromSuperview];
+        
+    }
+    
 }
+
 
 @end

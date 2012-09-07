@@ -29,10 +29,37 @@
 
 - (BOOL)shouldAutorotate
 {
-    if ([self.visibleViewController isKindOfClass:[VideoPlayerViewController class]]) {
-        return YES;
-    } else {
+    if ([self.visibleViewController isKindOfClass:[VideoPlayerViewController class]]) { // VideoPlayerViewController
+        
+        if ( kDeviceIsIPad) { // iPad
+        
+            return NO;
+            
+        } else { // iPhone
+            
+            return YES;
+            
+        }
+        
+    } else { // All other classes
+    
         return NO;
+   
+    }
+    
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    
+    if ( kDeviceIsIPad ) {
+        
+        return (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft);
+        
+    } else {
+        
+        return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
+        
     }
     
 }

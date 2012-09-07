@@ -28,6 +28,7 @@
 		8E482E7F15F94FAB0079C84A /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E482E7E15F94FAA0079C84A /* DetailViewController.m */; };
 		8E482E8515F961950079C84A /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E482E8415F961950079C84A /* Default-Landscape~ipad.png */; };
 		8E482E8715F961A80079C84A /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E482E8615F961A80079C84A /* Default-Landscape@2x~ipad.png */; };
+		8E56EF0415FA7E8C00422CEE /* LoadingVideoView_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E56EF0315FA7E8C00422CEE /* LoadingVideoView_ipad.xib */; };
 		8E649A9415E491BA00B4D407 /* SearchTerms.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E649A9315E491BA00B4D407 /* SearchTerms.plist */; };
 		8E6E9C0915F793EE00801B3C /* SearchViewController_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E6E9C0815F793EE00801B3C /* SearchViewController_iphone.xib */; };
 		8E7522BB15F626D7000EBA59 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7522BA15F626D7000EBA59 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -113,6 +114,7 @@
 		8E482E7E15F94FAA0079C84A /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		8E482E8415F961950079C84A /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		8E482E8615F961A80079C84A /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x~ipad.png"; path = "../Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		8E56EF0315FA7E8C00422CEE /* LoadingVideoView_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingVideoView_ipad.xib; sourceTree = "<group>"; };
 		8E649A9315E491BA00B4D407 /* SearchTerms.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SearchTerms.plist; sourceTree = "<group>"; };
 		8E6E9C0815F793EE00801B3C /* SearchViewController_iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController_iphone.xib; sourceTree = "<group>"; };
 		8E7522BA15F626D7000EBA59 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -402,6 +404,7 @@
 				8EA44F6A15E9982600BB0A08 /* GeniusOnboardingViewController_iphone.xib */,
 				8E8C684615D99DCE004290A6 /* GeniusRollViewController_iphone.xib */,
 				8ED93B0B15DC1B4700339BF1 /* LoadingVideoView_iphone.xib */,
+				8E56EF0315FA7E8C00422CEE /* LoadingVideoView_ipad.xib */,
 				8E8C683415D95778004290A6 /* QueryCell_iphone.xib */,
 				8EDCE9CF15D4EF4400EFB1F2 /* VideoCardCell_iphone.xib */,
 			);
@@ -586,6 +589,7 @@
 				8E6E9C0915F793EE00801B3C /* SearchViewController_iphone.xib in Resources */,
 				8E482E8515F961950079C84A /* Default-Landscape~ipad.png in Resources */,
 				8E482E8715F961A80079C84A /* Default-Landscape@2x~ipad.png in Resources */,
+				8E56EF0415FA7E8C00422CEE /* LoadingVideoView_ipad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
