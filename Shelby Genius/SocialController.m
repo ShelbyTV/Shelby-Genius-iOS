@@ -167,7 +167,8 @@ static SocialController *sharedInstance = nil;
     // Analytics
     [[Panhandler sharedInstance] recordEvent];
     NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.geniusRollViewController.query, KISSQuery, [[self.videoFrame valueForKey:@"video" ] valueForKey:@"title"], KISSVideoTitle, nil];
-    [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
+    if  ( kDeviceIsIPad ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePad withProperties:metrics];
+    else [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
     
     // Mail Setup
     MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
@@ -190,7 +191,8 @@ static SocialController *sharedInstance = nil;
     // Analytics
     [[Panhandler sharedInstance] recordEvent];
     NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.geniusRollViewController.query, KISSQuery, [[self.videoFrame valueForKey:@"video" ] valueForKey:@"title"], KISSVideoTitle, nil];
-    [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
+    if  ( kDeviceIsIPad ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePad withProperties:metrics];
+    else [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
     
     // Extract Video Data
     NSString *videoTitle = [[self.videoFrame valueForKey:@"video"] valueForKey:@"title"];
@@ -235,9 +237,10 @@ static SocialController *sharedInstance = nil;
         // Analytics
         [[Panhandler sharedInstance] recordEvent];
         NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.geniusRollViewController.query, KISSQuery, [[self.videoFrame valueForKey:@"video" ] valueForKey:@"title"], KISSVideoTitle, nil];
-        [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
+        if  ( kDeviceIsIPad ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePad withProperties:metrics];
+        else [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
      
-        // Extract Video Data 
+        // Extract Video Data
         NSString *videoTitle = [[self.videoFrame valueForKey:@"video"] valueForKey:@"title"];
         NSString *videoThumbnail = [[self.videoFrame valueForKey:@"video"] valueForKey:@"thumbnail_url"];
         NSData *thumbnailData = [NSData dataWithContentsOfURL:[NSURL URLWithString:videoThumbnail]];

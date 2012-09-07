@@ -235,7 +235,9 @@
         
         // KISSMetrics
         NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
-        [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoPhone withProperties:metrics];
+        if ( kDeviceIsIPad )[[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoPad withProperties:metrics];
+        else [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoPhone withProperties:metrics];
+        
         
     }
 }

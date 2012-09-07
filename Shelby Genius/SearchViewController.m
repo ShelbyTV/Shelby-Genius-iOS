@@ -81,12 +81,26 @@
     
     if ( previouslyLaunched ) {
         
-        [[KISSMetricsAPI sharedAPI] recordEvent:KISSRepeatUserPhone withProperties:nil];
+        if ( kDeviceIsIPad ) {
+            
+            [[KISSMetricsAPI sharedAPI] recordEvent:KISSRepeatUserPad withProperties:nil];
+            
+        } else {
+            
+            [[KISSMetricsAPI sharedAPI] recordEvent:KISSRepeatUserPhone withProperties:nil];
+            
+        }
         
     } else {
         
-        if ( kDeviceIsIPhone) {
+        if ( kDeviceIsIPad ) {
         
+            [[KISSMetricsAPI sharedAPI] recordEvent:KISSFirstTimeUserPad withProperties:nil];
+            GeniusOnboardingViewController *geniusOnboardingViewController = [[GeniusOnboardingViewController alloc] initWithNibName:@"GeniusOnboardingViewController_iphone" bundle:nil];
+            [self.navigationController pushViewController:geniusOnboardingViewController animated:YES];
+            
+        } else {
+            
             [[KISSMetricsAPI sharedAPI] recordEvent:KISSFirstTimeUserPhone withProperties:nil];
             GeniusOnboardingViewController *geniusOnboardingViewController = [[GeniusOnboardingViewController alloc] initWithNibName:@"GeniusOnboardingViewController_iphone" bundle:nil];
             [self.navigationController pushViewController:geniusOnboardingViewController animated:YES];
@@ -107,7 +121,11 @@
 {
     NSString *currentQuery = ( self.searchBar.text.length > 0 ) ? self.searchBar.text : self.placeholderQuery;
     NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:currentQuery, KISSQuery, nil];
-    [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
+    
+    if ( kDeviceIsIPad ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPad withProperties:metrics];
+    else [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
+    
+    
     [self removeTransparentViews];
     [self modifyPreviousQueriesArray];
     [self createGeniusRoll];
@@ -313,12 +331,15 @@
     if ( self.searchBar.text.length > 0) { // use user's query
         
         NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.searchBar.text, KISSQuery, nil];
-        [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
+        
+        if  ( kDeviceIsIPad ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPad withProperties:metrics];
+        else [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
         
     } else { // use placeholderQuery
         
         NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.placeholderQuery, KISSQuery, nil];
-        [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
+        if  ( kDeviceIsIPad ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPad withProperties:metrics];
+        else [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
     }
 
     
@@ -450,7 +471,8 @@
     
     QueryCell *cell = (QueryCell*)[self.tableView cellForRowAtIndexPath:indexPath];
     NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:cell.label.text, KISSQuery, nil];
-    [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
+    if  ( kDeviceIsIPad ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPad withProperties:metrics];
+    else [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
     
     GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithQuery:cell.label.text];
     [self.navigationController pushViewController:geniusRollViewController animated:YES];

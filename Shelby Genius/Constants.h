@@ -48,6 +48,14 @@
 #define KISSWatchVideoPhone                 @"Watch video on iPhone Genius"
 #define KISSSharePhone                      @"Share on iPhone Genius"
 
+#define KISSFirstTimeUserPad              @"First time launch on iPad Genius"
+#define KISSRepeatUserPad                 @"Repeat launch on iPad Genius"
+#define KISSPerformQueryPad               @"Perform query on iPad Genius"
+#define KISSPerformQueryAgainPad          @"Perform query again on iPad Genius"
+#define KISSWatchVideoPad                 @"Watch video on iPad Genius"
+#define KISSSharePad                      @"Share on iPad Genius"
+
+
 // KISSMetrics Properties
 #define KISSQuery                           @"Search query on iPhone Genius"
 #define KISSVideoTitle                      @"Video title on iPhone Genius"
