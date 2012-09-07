@@ -58,7 +58,7 @@
 
         if ( kDeviceIsIPad ) { // iOS 6 and iPad
             
-            UIButton *previousVideoButton = [[[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:1];
+            UIButton *previousVideoButton = [[[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:0];
             [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
             [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchDown];
             

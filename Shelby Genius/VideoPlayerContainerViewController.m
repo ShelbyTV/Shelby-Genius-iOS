@@ -441,7 +441,11 @@
 #pragma mark - Interface Orientation Methods
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    if ( kDeviceIsIPad) {
+        return UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight;
+    } else {
+        return UIInterfaceOrientationPortrait;
+    }
 }
 
 @end
