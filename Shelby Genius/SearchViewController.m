@@ -38,6 +38,7 @@
 - (void)removeTransparentViews;
 - (void)initializePreviousQueriesArray;
 - (void)modifyPreviousQueriesArray;
+- (void)toggleTableViewScrolling;
 - (void)savePreviousQueriesArray;
 - (void)createGeniusRoll;
 - (void)noResultsReturned;
@@ -72,6 +73,11 @@
     [self initializePreviousQueriesArray];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self toggleTableViewScrolling];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     // searchButton
@@ -96,8 +102,6 @@
         if ( kDeviceIsIPad ) {
         
             [[KISSMetricsAPI sharedAPI] recordEvent:KISSFirstTimeUserPad withProperties:nil];
-//            GeniusOnboardingViewController *geniusOnboardingViewController = [[GeniusOnboardingViewController alloc] initWithNibName:@"GeniusOnboardingViewController_iphone" bundle:nil];
-//            [self.navigationController pushViewController:geniusOnboardingViewController animated:YES];
             
         } else {
             
@@ -272,8 +276,14 @@
             [self.previousQueriesArray removeAllObjects];
             [self.previousQueriesArray addObjectsFromArray:secondReversedArray];
             
-        
-            if ( [self.previousQueriesArray count] > kMaximumNumberOfQueries) [self.previousQueriesArray removeLastObject];
+            // Enable/Diable Scrolling
+            [self toggleTableViewScrolling];
+            
+            // Remove last object if upper-limit of saved search queries was reached
+            if ( [self.previousQueriesArray count] > kMaximumNumberOfQueries) {
+                [self.previousQueriesArray removeLastObject];
+            }
+            
             [self savePreviousQueriesArray];
             [self.tableView reloadData];
             
@@ -288,6 +298,16 @@
 
     }
     
+}
+
+- (void)toggleTableViewScrolling
+{
+    // Enable/Disable scorlling
+    if ( [self.previousQueriesArray count] >= 5) {
+        [self.tableView setScrollEnabled:YES];
+    } else {
+        [self.tableView setScrollEnabled:NO];
+    }
 }
 
 - (void)savePreviousQueriesArray
@@ -371,6 +391,7 @@
     if ( editingStyle == UITableViewCellEditingStyleDelete ) {
 
         [self.previousQueriesArray removeObjectAtIndex:indexPath.row];
+        [self toggleTableViewScrolling];
         [self savePreviousQueriesArray];
         [self.tableView reloadData];
         

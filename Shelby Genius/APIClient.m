@@ -17,6 +17,7 @@
 @property (assign, nonatomic) APIRequestType type;
 @property (strong, nonatomic) NSString *query;
 
+- (void)asynchronousConnectionFinished;
 - (void)connectionUnavailable:(NSNotification*)notification;
 - (NSMutableArray*)arrayWithLinks:(NSDictionary*)responseDictionary;
 - (void)createGeniusQueryWithLinks:(NSMutableArray*)links;
@@ -48,7 +49,19 @@
             NSLog(@"Internet Connection Available");
             
             // Initialize Request
-            self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+//            self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+            
+            NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+            [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+             {
+                 if( data.length > 0 && error == nil ) {
+                     
+                     self.responseData = [NSMutableData dataWithData:data];
+                     [self asynchronousConnectionFinished];
+                     
+                 }
+             }];
+            
             
             // Show statusBar activity indicator
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -75,6 +88,80 @@
 
 
 }
+
+#pragma mark - Asynchronous Connection Finished
+- (void)asynchronousConnectionFinished
+{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        // Hide statusBar activity indicator
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+        switch (self.type) {
+                
+            case APIRequestType_GetQuery:{
+                
+                NSLog(@"YouTube Data Received");
+                
+                // Parse JSON Data
+                NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
+                
+                // Clear responseData
+                [self.responseData setLength:0];
+                
+                // Extract YouTube Links from responseDictionary
+                NSMutableArray *links = [self arrayWithLinks:responseDictionary];
+                
+                // Create Genius Query with YouTube Links
+                [self createGeniusQueryWithLinks:links];
+                
+                
+            } break;
+                
+            case APIRequestType_PostGenius:{
+                
+                NSLog(@"Seed Videos Sent");
+                
+                // Parse JSON Data
+                NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
+                
+                // Clear responseData
+                [self.responseData setLength:0];
+                
+                // Create RollFrames request with returend Genius roll id
+                [self getRoll:[[responseDictionary valueForKey:@"result"] valueForKey:@"id"]];
+                
+            } break;
+                
+            case APIRequestType_GetRollFrames:{
+                
+                NSLog(@"Genius Frames Returned");
+                
+                // Parse JSON Data
+                NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
+                
+                // Clear responseData
+                [self.responseData setLength:0];
+                
+                // Post Notification
+                NSString *querySpecificObserver = [NSString stringWithFormat:@"%@_%@", kRollFramesObserver, self.query];
+                [[NSNotificationCenter defaultCenter] postNotificationName:querySpecificObserver
+                                                                    object:nil
+                                                                  userInfo:responseDictionary];
+                
+                
+            } break;
+                
+            default:
+                break;
+        }
+        
+        
+    });
+    
+}
+
 
 #pragma mark - Private Methods
 - (void)connectionUnavailable:(NSNotification*)notification
@@ -142,96 +229,6 @@
     NSString *requestString = [NSString stringWithFormat:kGetRollFrames, rollID];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
     [self performRequest:request ofType:APIRequestType_GetRollFrames withQuery:self.query];
-}
-
-
-#pragma mark - NSURLConnectionDataDelegate Methods
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    if ( ![self responseData] )self.responseData = [[NSMutableData alloc] init];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [self.responseData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    switch (self.type) {
-        case APIRequestType_GetQuery:
-            NSLog(@"Error with Query");
-            break;
-            case APIRequestType_PostGenius:
-            NSLog(@"Error with Genius");
-            break;
-        case APIRequestType_GetRollFrames:
-            NSLog(@"Error with RollFrames");
-            break;
-        default:
-            break;
-    }
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    
-    // Hide statusBar activity indicator
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    
-    switch (self.type) {
-            
-        case APIRequestType_GetQuery:{
-            
-            // Parse JSON Data
-            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
-
-            // Clear responseData
-            [self.responseData setLength:0];
-            
-            // Extract YouTube Links from responseDictionary
-            NSMutableArray *links = [self arrayWithLinks:responseDictionary];
-            
-            // Create Genius Query with YouTube Links
-            [self createGeniusQueryWithLinks:links];
-            
-            
-        } break;
-        
-        case APIRequestType_PostGenius:{
-            
-            // Parse JSON Data
-            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
-
-            // Clear responseData
-            [self.responseData setLength:0];
-            
-            // Create RollFrames request with returend Genius roll id
-            [self getRoll:[[responseDictionary valueForKey:@"result"] valueForKey:@"id"]];
-            
-        } break;
-            
-        case APIRequestType_GetRollFrames:{
-            
-            // Parse JSON Data
-            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:nil];
-            
-            // Clear responseData
-            [self.responseData setLength:0];
-            
-            // Post Notification
-            NSString *querySpecificObserver = [NSString stringWithFormat:@"%@_%@", kRollFramesObserver, self.query];
-            [[NSNotificationCenter defaultCenter] postNotificationName:querySpecificObserver
-                                                                object:nil
-                                                              userInfo:responseDictionary];
-            
-            
-        } break;
-            
-        default:
-            break;
-    }
-    
 }
 
 @end

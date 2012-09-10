@@ -15,7 +15,7 @@
 
 // Query
 #define kMinimumVideoCountBeforeFetch       20
-#define kMaximumNumberOfQueries             8
+#define kMaximumNumberOfQueries             30
 #define kPreviousQueries                    @"Previous Queries"
 
 // Observer
