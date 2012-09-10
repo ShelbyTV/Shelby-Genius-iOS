@@ -96,8 +96,8 @@
         if ( kDeviceIsIPad ) {
         
             [[KISSMetricsAPI sharedAPI] recordEvent:KISSFirstTimeUserPad withProperties:nil];
-            GeniusOnboardingViewController *geniusOnboardingViewController = [[GeniusOnboardingViewController alloc] initWithNibName:@"GeniusOnboardingViewController_iphone" bundle:nil];
-            [self.navigationController pushViewController:geniusOnboardingViewController animated:YES];
+//            GeniusOnboardingViewController *geniusOnboardingViewController = [[GeniusOnboardingViewController alloc] initWithNibName:@"GeniusOnboardingViewController_iphone" bundle:nil];
+//            [self.navigationController pushViewController:geniusOnboardingViewController animated:YES];
             
         } else {
             
