@@ -18,6 +18,6 @@ UIActionSheetDelegate
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSString *query;
 
-- (id)initWithQuery:(NSString*)query;
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andQuery:(NSString*)query;
 
 @end

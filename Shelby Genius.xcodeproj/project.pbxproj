@@ -31,6 +31,7 @@
 		8E56EF0415FA7E8C00422CEE /* LoadingVideoView_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E56EF0315FA7E8C00422CEE /* LoadingVideoView_ipad.xib */; };
 		8E649A9415E491BA00B4D407 /* SearchTerms.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E649A9315E491BA00B4D407 /* SearchTerms.plist */; };
 		8E6E9C0915F793EE00801B3C /* SearchViewController_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E6E9C0815F793EE00801B3C /* SearchViewController_iphone.xib */; };
+		8E6F77B015FD97C500DB9569 /* VideoCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E6F77AF15FD97C500DB9569 /* VideoCardCell.xib */; };
 		8E7522BB15F626D7000EBA59 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7522BA15F626D7000EBA59 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8E7522BE15F68EDC000EBA59 /* Icon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7522BD15F68EDC000EBA59 /* Icon@2x~ipad.png */; };
 		8E89F5C015D4F724004B2DFF /* VideoPlayerContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E89F5BF15D4F724004B2DFF /* VideoPlayerContainerViewController.m */; };
@@ -74,7 +75,6 @@
 		8EDCE9AB15D4C3C000EFB1F2 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE9AA15D4C3C000EFB1F2 /* SearchViewController.m */; };
 		8EDCE9B915D4C41A00EFB1F2 /* APIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE9B815D4C41A00EFB1F2 /* APIClient.m */; };
 		8EDCE9C915D4EEEE00EFB1F2 /* VideoCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE9C815D4EEEE00EFB1F2 /* VideoCardCell.m */; };
-		8EDCE9D015D4EF4400EFB1F2 /* VideoCardCell_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDCE9CF15D4EF4400EFB1F2 /* VideoCardCell_iphone.xib */; };
 		8EDDFB2F15D88B1A00BCD710 /* Ubuntu-B.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2315D88B1A00BCD710 /* Ubuntu-B.ttf */; };
 		8EDDFB3015D88B1A00BCD710 /* Ubuntu-M.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2415D88B1A00BCD710 /* Ubuntu-M.ttf */; };
 		8EDDFB3115D88B1A00BCD710 /* Ubuntu-R.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2515D88B1A00BCD710 /* Ubuntu-R.ttf */; };
@@ -82,7 +82,7 @@
 		8EDDFB3315D88B1A00BCD710 /* navigationLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2815D88B1A00BCD710 /* navigationLogo@2x.png */; };
 		8EDDFB3415D88B1A00BCD710 /* navigationBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2915D88B1A00BCD710 /* navigationBar.png */; };
 		8EF33D0B15EFCFDD007FE38E /* RootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF33D0A15EFCFDD007FE38E /* RootNavigationController.m */; };
-		8EF33D0F15EFE516007FE38E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF33D0E15EFE516007FE38E /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8EF33D0F15EFE516007FE38E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF33D0E15EFE516007FE38E /* Reachability.m */; };
 		8EF33D1515EFE729007FE38E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF33D1415EFE728007FE38E /* CFNetwork.framework */; };
 		8EF33D1715EFE741007FE38E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF33D1615EFE741007FE38E /* SystemConfiguration.framework */; };
 		8EF8211315DB5D3F00F18572 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF8211215DB5D3F00F18572 /* Crashlytics.framework */; };
@@ -118,6 +118,7 @@
 		8E56EF0315FA7E8C00422CEE /* LoadingVideoView_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingVideoView_ipad.xib; sourceTree = "<group>"; };
 		8E649A9315E491BA00B4D407 /* SearchTerms.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SearchTerms.plist; sourceTree = "<group>"; };
 		8E6E9C0815F793EE00801B3C /* SearchViewController_iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController_iphone.xib; sourceTree = "<group>"; };
+		8E6F77AF15FD97C500DB9569 /* VideoCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCardCell.xib; sourceTree = "<group>"; };
 		8E7522BA15F626D7000EBA59 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8E7522BD15F68EDC000EBA59 /* Icon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x~ipad.png"; sourceTree = SOURCE_ROOT; };
 		8E89F5BE15D4F724004B2DFF /* VideoPlayerContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerContainerViewController.h; sourceTree = "<group>"; };
@@ -180,7 +181,6 @@
 		8EDCE9BE15D4CFBD00EFB1F2 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		8EDCE9C715D4EEEE00EFB1F2 /* VideoCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCardCell.h; sourceTree = "<group>"; };
 		8EDCE9C815D4EEEE00EFB1F2 /* VideoCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCardCell.m; sourceTree = "<group>"; };
-		8EDCE9CF15D4EF4400EFB1F2 /* VideoCardCell_iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCardCell_iphone.xib; sourceTree = "<group>"; };
 		8EDDFB2315D88B1A00BCD710 /* Ubuntu-B.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-B.ttf"; sourceTree = "<group>"; };
 		8EDDFB2415D88B1A00BCD710 /* Ubuntu-M.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-M.ttf"; sourceTree = "<group>"; };
 		8EDDFB2515D88B1A00BCD710 /* Ubuntu-R.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-R.ttf"; sourceTree = "<group>"; };
@@ -409,7 +409,7 @@
 				8ED93B0B15DC1B4700339BF1 /* LoadingVideoView_iphone.xib */,
 				8E56EF0315FA7E8C00422CEE /* LoadingVideoView_ipad.xib */,
 				8E8C683415D95778004290A6 /* QueryCell_iphone.xib */,
-				8EDCE9CF15D4EF4400EFB1F2 /* VideoCardCell_iphone.xib */,
+				8E6F77AF15FD97C500DB9569 /* VideoCardCell.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -551,7 +551,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EDCE9A215D4C3C000EFB1F2 /* InfoPlist.strings in Resources */,
-				8EDCE9D015D4EF4400EFB1F2 /* VideoCardCell_iphone.xib in Resources */,
 				8E89F5C915D4FEC4004B2DFF /* Default.png in Resources */,
 				8E89F5CA15D4FEC4004B2DFF /* Default@2x.png in Resources */,
 				8E89F5CB15D4FEC4004B2DFF /* Icon-72.png in Resources */,
@@ -595,6 +594,7 @@
 				8E482E8515F961950079C84A /* Default-Landscape~ipad.png in Resources */,
 				8E482E8715F961A80079C84A /* Default-Landscape@2x~ipad.png in Resources */,
 				8E56EF0415FA7E8C00422CEE /* LoadingVideoView_ipad.xib in Resources */,
+				8E6F77B015FD97C500DB9569 /* VideoCardCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

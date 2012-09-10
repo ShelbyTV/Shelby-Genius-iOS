@@ -56,12 +56,11 @@
 @synthesize noMoreVideosToFetch = _noMoreVideosToFetch;
 
 #pragma mark - Initialization
-- (id)initWithQuery:(NSString *)query
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andQuery:(NSString *)query
 {
-    if ( self = [super init] ) {
+    if ( self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil] ) {
 
         self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        
         self.query = query;
 
         
@@ -77,8 +76,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:querySpecificObserver object:nil];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kIndexOfCurrentVideoObserver object:nil];
-    
-    self.tableView = nil;
     
     [super viewDidUnload];
 }
@@ -133,9 +130,11 @@
 #pragma mark - Private Methods
 - (void)customize
 {
-    // General Customization
+    // View Customization
     self.title = @"Genius Results";
     self.view.backgroundColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
+    
+    // TableView Customization
     self.tableView.backgroundColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
     
     // Custom Back-UIBarButtonItem
@@ -411,11 +410,9 @@
     
     if ( [self.resultsArray count] ) {
         
-        tableView.alpha = 1.0f;
         tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"VideoCardCell_iphone" owner:self options:nil];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"VideoCardCell" owner:self options:nil];
         VideoCardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VideoCardCell"];
-        
         if ( nil == cell ) cell = (VideoCardCell*)[nib objectAtIndex:0];
 
         NSString *thumbnailURL = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"thumbnail_url"];

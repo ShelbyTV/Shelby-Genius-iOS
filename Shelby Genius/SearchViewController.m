@@ -300,7 +300,7 @@
 {
     NSString *currentQuery = (self.searchBar.text.length > 0) ? self.searchBar.text : self.placeholderQuery;
     currentQuery= [currentQuery stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithQuery:currentQuery];
+    GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithNibName:@"GeniusRollViewController_iphone" bundle:nil andQuery:currentQuery];
     [self.navigationController pushViewController:geniusRollViewController animated:YES];
     self.searchBar.text = @"";
 }
@@ -474,7 +474,7 @@
     if  ( kDeviceIsIPad ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPad withProperties:metrics];
     else [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
     
-    GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithQuery:cell.label.text];
+    GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithNibName:@"GeniusRollViewController_iphone" bundle:nil andQuery:cell.label.text];
     [self.navigationController pushViewController:geniusRollViewController animated:YES];
 
 }
