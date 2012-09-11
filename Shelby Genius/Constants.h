@@ -13,7 +13,6 @@
 #define kPreviouslyLaunched                 @"Previously Launched"
 #define kRollID                             @"Roll ID"  
 #define kPreviousQueries                    @"Previous Queries"
-#define kResultsForRecentQuery              @"Results for Recent Query"
 
 /// Search Query Settings
 #define kMinimumVideoCountBeforeFetch       20

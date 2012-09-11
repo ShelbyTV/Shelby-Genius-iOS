@@ -13,12 +13,18 @@
 @class VideoPlayerViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) RootNavigationController *rootNavigationController;
 @property (strong, nonatomic) UISplitViewController *rootSplitViewController;
 @property (strong, nonatomic) DetailNavigationController *detailNavigationController;
 @property (strong, nonatomic) MBProgressHUD *progressHUD;
 @property (strong ,nonatomic) VideoPlayerViewController *videoPlayerViewController;
+
+// Session persistent variables
+@property (copy, nonatomic) NSString *storedQuery;
+@property (strong, nonatomic) NSMutableArray *storedQueryArray;
+@property (assign, nonatomic) NSUInteger numberOfResultsStoredQueryReturned;
 
 - (void)addHUDWithMessage:(NSString*)message;
 - (void)removeHUD;

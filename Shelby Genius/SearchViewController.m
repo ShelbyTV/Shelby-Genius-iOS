@@ -26,6 +26,7 @@
 
 @interface SearchViewController () <UIAlertViewDelegate>
 
+@property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) NSMutableArray *previousQueriesArray;
 @property (strong, nonatomic) NSArray *searchTerms;
 @property (copy, nonatomic) NSString *placeholderQuery;
@@ -49,6 +50,7 @@
 @synthesize tableView = _tableView;
 @synthesize searchBar = _searchBar;
 @synthesize searchButton = _searchButton;
+@synthesize appDelegate = _appDelegate;
 @synthesize previousQueriesArray = _previousQueriesArray;
 @synthesize searchTerms = searchTerms;
 @synthesize placeholderQuery = _placeholderQuery;
@@ -140,6 +142,9 @@
 #pragma mark - Private Methods
 - (void)customize
 {
+    // App Delegate
+    self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    
     // view
     self.view.backgroundColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
     
@@ -148,18 +153,17 @@
     self.tableView.scrollEnabled = NO;
     
     // searchBar
+    self.searchBar.backgroundImage = [UIImage imageNamed:@"searchBar"];
     for (id subview in self.searchBar.subviews) {
         if ([subview respondsToSelector:@selector(setEnablesReturnKeyAutomatically:)]) {
             [subview setEnablesReturnKeyAutomatically:NO];
             break;
         }
     }
-    
+
+    // Modify UITextField Font
     [(UITextField*)[self.searchBar.subviews objectAtIndex:1] setFont:[UIFont fontWithName:@"Ubuntu" size:13]];
-    self.searchBar.backgroundImage = [UIImage imageNamed:@"searchBar"];
-    
-    
-    
+        
     // Hide backbarButtonItem if GeniusOnboardingViewController was displayed    
     if ( self != [self.navigationController.viewControllers objectAtIndex:0] ) {
         [self.navigationItem setHidesBackButton:YES];
@@ -493,12 +497,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+
     QueryCell *cell = (QueryCell*)[self.tableView cellForRowAtIndexPath:indexPath];
     NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:cell.label.text, KISSQuery, nil];
     if  ( kDeviceIsIPad ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPad withProperties:metrics];
     else [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
-    
+
     GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithNibName:@"GeniusRollViewController_iphone" bundle:nil andQuery:cell.label.text];
     [self.navigationController pushViewController:geniusRollViewController animated:YES];
 

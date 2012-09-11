@@ -35,6 +35,7 @@
 @property (assign, nonatomic) BOOL noMoreVideosToFetch;
 
 - (void)customize;
+- (void)showInitialVideos;
 - (void)initalizeObservers;
 - (void)search;
 - (void)refreshDataSource;
@@ -63,7 +64,6 @@
         self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         self.query = query;
 
-        
     }
     
     return self;
@@ -84,7 +84,7 @@
 {
     [super viewDidLoad];
     [self customize];
-    [self search];
+    [self showInitialVideos];
     [self initalizeObservers];
 
 }
@@ -146,6 +146,33 @@
     [self.navigationItem setLeftBarButtonItem:backBarButtonItem];
 }
 
+- (void)showInitialVideos
+{
+    
+    if ( [self.query isEqualToString:self.appDelegate.storedQuery] ) { // If this query is the same as the most recent query, show the stored results
+    
+        self.resultsArray = [NSMutableArray arrayWithArray:self.appDelegate.storedQueryArray];
+        
+        // Set conditions to make subsequent fetches possible
+        [self setNumberOfFetchedResults:self.appDelegate.numberOfResultsStoredQueryReturned];
+        [self setIsFetchingMoreVideos:NO];
+        [self setNoMoreVideosToFetch:NO];
+
+    } else { // If this is a new query, get the results
+        
+        // Save new value for storedQuery
+        [self.appDelegate setStoredQuery:self.query];
+        
+        // Remove existing astoredQueryArray in preparation for new resultsArray
+        [self.appDelegate setStoredQueryArray:nil];
+        
+        // Get new resultsArray for new query
+        [self search];
+        
+    }
+    
+}
+
 - (void)initalizeObservers
 {
     NSString *querySpecificObserver = [NSString stringWithFormat:@"%@_%@", kRollFramesObserver, self.query];
@@ -168,7 +195,6 @@
     NSString *requestString = [NSString stringWithFormat:kGetQuery, self.query];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
     [client performRequest:request ofType:APIRequestType_GetQuery withQuery:self.query];
-    
     
     [self.appDelegate addHUDWithMessage:@"Fetching Genius Videos"];
     
@@ -216,7 +242,8 @@
             }
             
             // Save results to NSUserDefaults
-            [[NSUserDefaults standardUserDefaults] setObject:self.resultsArray forKey:kResultsForRecentQuery];
+            [self.appDelegate setStoredQueryArray:self.resultsArray];
+            [self.appDelegate setNumberOfResultsStoredQueryReturned:self.numberOfFetchedResults];
             
             // Reset values and reload tableView
             [self setIsFetchingMoreVideos:NO];
@@ -264,7 +291,7 @@
             }
             
             // Save results to NSUserDefaults
-            [[NSUserDefaults standardUserDefaults] setObject:self.resultsArray forKey:kResultsForRecentQuery];
+            self.appDelegate.storedQueryArray = self.resultsArray;
             
             // Reset values and reload tableView
             [self setIsFetchingMoreVideos:NO];

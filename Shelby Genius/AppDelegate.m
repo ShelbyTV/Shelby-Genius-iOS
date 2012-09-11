@@ -36,6 +36,9 @@
 @synthesize detailNavigationController = _detailNavigationController;
 @synthesize videoPlayerViewController = _videoPlayerViewController;
 @synthesize videoPlaybackTimeInterval = _videoPlaybackTimeInterval;
+@synthesize storedQuery = _storedQuery;
+@synthesize storedQueryArray = _storedQueryArray;
+@synthesize numberOfResultsStoredQueryReturned = _numberOfResultsStoredQueryReturned;
 
 #pragma mark - UIApplicationDelegate Methods
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -51,22 +54,26 @@
     
     if ( kDeviceIsIPad ) {
         
+        // Initialize rootSplitViewController
         self.rootSplitViewController = [[UISplitViewController alloc] init];
         self.rootSplitViewController.delegate = self;
         
+        // Left side of rootSplitViewController
         SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController_iphone" bundle:nil];
         self.rootNavigationController = [[RootNavigationController alloc] initWithRootViewController:searchViewController];
         
+        // Right side of rootSplitViewController
         DetailViewController *detailViewController = [[DetailViewController alloc] init];
         self.detailNavigationController = [[DetailNavigationController alloc] initWithRootViewController:detailViewController];
 
+        // Set rootSplitViewController as window's rootViewController
         [self.rootSplitViewController setViewControllers:[NSArray arrayWithObjects:self.rootNavigationController, self.detailNavigationController, nil]];
-        
         self.window.rootViewController = self.rootSplitViewController;
         
         
     } else {
     
+        // Set searchViewController as window's rootViewController
         SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController_iphone" bundle:nil];
         self.rootNavigationController = [[RootNavigationController alloc] initWithRootViewController:searchViewController];
         self.window.rootViewController = self.rootNavigationController;
@@ -75,6 +82,7 @@
     // Appearance Proxies and General Customization
     [self customization];
     
+    // Make main window visible
     [self.window makeKeyAndVisible];
     
     return YES;
@@ -108,13 +116,7 @@
 {
     // Reset RollID (just to be on the safe side)
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kRollID];
-    
-    // Reset results for last query
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kResultsForRecentQuery];
-
-    // Synchornize changes
     [[NSUserDefaults standardUserDefaults] synchronize];
-
 }
 
 - (void)createProgressView
