@@ -215,6 +215,9 @@
                 
             }
             
+            // Save results to NSUserDefaults
+            [[NSUserDefaults standardUserDefaults] setObject:self.resultsArray forKey:kResultsForRecentQuery];
+            
             // Reset values and reload tableView
             [self setIsFetchingMoreVideos:NO];
             [self setNoMoreVideosToFetch:NO];
@@ -259,6 +262,9 @@
                 }
                 
             }
+            
+            // Save results to NSUserDefaults
+            [[NSUserDefaults standardUserDefaults] setObject:self.resultsArray forKey:kResultsForRecentQuery];
             
             // Reset values and reload tableView
             [self setIsFetchingMoreVideos:NO];

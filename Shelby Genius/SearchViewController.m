@@ -71,6 +71,8 @@
     [super viewDidLoad];
     [self customize];
     [self initializePreviousQueriesArray];
+
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -264,10 +266,11 @@
     NSMutableArray *lowerCaseArray = [self.previousQueriesArray mutableCopy];
     for ( NSString *previousQuery in self.previousQueriesArray ) [lowerCaseArray addObject:[previousQuery lowercaseString]];
 
-    if ( [lowerCaseArray count] ) { // If this IS NOT the first search query
+    if ( [lowerCaseArray count] ) { // If this IS NOT the first search query in previousQueriesArray
         
         if ( ![lowerCaseArray containsObject:lowerCaseQuery] ) {
 
+            // Sort array so tableView DataSource methods display the results in reverse chronological order
             NSArray *reversedArray = [[self.previousQueriesArray reverseObjectEnumerator] allObjects];
             [self.previousQueriesArray removeAllObjects];
             [self.previousQueriesArray addObjectsFromArray:reversedArray];
@@ -275,8 +278,8 @@
             NSArray *secondReversedArray = [[self.previousQueriesArray reverseObjectEnumerator] allObjects];
             [self.previousQueriesArray removeAllObjects];
             [self.previousQueriesArray addObjectsFromArray:secondReversedArray];
-            
-            // Enable/Diable Scrolling
+
+            // Enable/Disable tableView scrolling
             [self toggleTableViewScrolling];
             
             // Remove last object if upper-limit of saved search queries was reached
@@ -289,7 +292,8 @@
             
         }
         
-    } else { // If this IS the first search query
+        
+    } else { // If this IS the first search query in previousQueriesArray
 
         NSString *firstQuery = (self.searchBar.text.length > 0) ? self.searchBar.text : self.placeholderQuery;
         [self.previousQueriesArray addObject:firstQuery];

@@ -108,7 +108,13 @@
 {
     // Reset RollID (just to be on the safe side)
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kRollID];
+    
+    // Reset results for last query
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kResultsForRecentQuery];
+
+    // Synchornize changes
     [[NSUserDefaults standardUserDefaults] synchronize];
+
 }
 
 - (void)createProgressView
