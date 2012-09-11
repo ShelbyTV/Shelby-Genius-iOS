@@ -241,7 +241,7 @@
                 
             }
             
-            // Save storedQuery results
+            // Save results
             [self.appDelegate setStoredQuery:self.query];
             [self.appDelegate setStoredQueryArray:self.resultsArray];
             [self.appDelegate setNumberOfResultsStoredQueryReturned:self.numberOfFetchedResults];
@@ -291,8 +291,10 @@
                 
             }
             
-            // Save results to NSUserDefaults
-            self.appDelegate.storedQueryArray = self.resultsArray;
+            // Save results
+            [self.appDelegate setStoredQuery:self.query];
+            [self.appDelegate setStoredQueryArray:self.resultsArray];
+            [self.appDelegate setNumberOfResultsStoredQueryReturned:self.numberOfFetchedResults];
             
             // Reset values and reload tableView
             [self setIsFetchingMoreVideos:NO];
