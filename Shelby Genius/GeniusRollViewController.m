@@ -159,12 +159,11 @@
         [self setNoMoreVideosToFetch:NO];
 
     } else { // If this is a new query, get the results
-        
-        // Save new value for storedQuery
-        [self.appDelegate setStoredQuery:self.query];
-        
-        // Remove existing astoredQueryArray in preparation for new resultsArray
+    
+        // Remove existing storedQuery values in preparation for new resultsArray
+        [self.appDelegate setStoredQuery:nil];
         [self.appDelegate setStoredQueryArray:nil];
+        [self.appDelegate setNumberOfResultsStoredQueryReturned:nil];
         
         // Get new resultsArray for new query
         [self search];
@@ -212,6 +211,7 @@
             [self.navigationController popViewControllerAnimated:YES];
             [[NSNotificationCenter defaultCenter] postNotificationName:kNoResultsReturnedObserver object:nil];
 
+            
         } else { // If results are returned
         
             [[Panhandler sharedInstance] recordEvent];
@@ -241,7 +241,8 @@
                 
             }
             
-            // Save results to NSUserDefaults
+            // Save storedQuery results
+            [self.appDelegate setStoredQuery:self.query];
             [self.appDelegate setStoredQueryArray:self.resultsArray];
             [self.appDelegate setNumberOfResultsStoredQueryReturned:self.numberOfFetchedResults];
             
