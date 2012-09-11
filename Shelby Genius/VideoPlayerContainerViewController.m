@@ -67,7 +67,6 @@
         self.videos = videos;
         self.selectedVideo = selectedVideo;
         self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-
         // Select initial video
         self.video = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
         self.videoWillBegin = NO;
@@ -111,9 +110,7 @@
 
     
     if ( 6 != kSystemVersion) { /// iOS 5 is installed
-        
         [self.moviePlayer modifyVideoPlayerButtons];
-        
     }
     
     
@@ -214,7 +211,7 @@
     
     static NSString *dailymotionExtractor = @"<html><body><div id=\"player\"></div><script>(function(){var e=document.createElement('script');e.async=true;e.src='http://api.dmcdn.net/all.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(e, s);}());window.dmAsyncInit=function(){var player=DM.player(\"player\",{video: \"%@\", width: \"480\", height: \"269\", params:{api: postMessage}});player.addEventListener(\"apiready\", function(e){e.target.play();});};</script></body></html>";
     
-    NSString *dailymotionRequestString = [NSString stringWithFormat:dailymotionExtractor, [self.video valueForKey:@"provider_id"]];    
+    NSString *dailymotionRequestString = [NSString stringWithFormat:dailymotionExtractor, [self.video valueForKey:@"provider_id"]];
     
     [self.moviePlayer.loadingVideoView addSubview:self.webView];
     [self.webView loadHTMLString:dailymotionRequestString baseURL:[NSURL URLWithString:@"http://shelby.tv"]];
@@ -232,6 +229,12 @@
         [self.moviePlayer.moviePlayer setShouldAutoplay:YES];
         [self.moviePlayer.moviePlayer prepareToPlay];
         [self.moviePlayer.moviePlayer play];
+        
+        // Add Video Info
+        [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:nil];
+        NSMutableDictionary *videoInfo = [[NSMutableDictionary alloc] init];
+        [videoInfo setObject:[NSString stringWithFormat:@"%@", [self.video valueForKey:@"title"]] forKey:MPMediaItemPropertyTitle];
+        [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:videoInfo];
         
         // KISSMetrics
         NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
@@ -385,8 +388,11 @@
     
     if ( movieController.loadState != 0 ) {
         
+        
+        // Remove Indicator
         [self.moviePlayer.loadingVideoView.indicator stopAnimating];
         
+        // Remove Loading Screen
         [UIView animateWithDuration:0.2
                          animations:^{
                              
