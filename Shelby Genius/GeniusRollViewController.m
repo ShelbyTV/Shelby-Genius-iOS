@@ -63,7 +63,6 @@
 
         self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         self.query = query;
-
     }
     
     return self;
@@ -148,8 +147,8 @@
 
 - (void)showInitialVideos
 {
-    
-    if ( [self.query isEqualToString:self.appDelegate.storedQuery] ) { // If this query is the same as the most recent query, show the stored results
+    NSString *queryCheck = [self.query stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    if ( [queryCheck isEqualToString:self.appDelegate.storedQuery] ) { // If this query is the same as the most recent query, show the stored results
     
         self.resultsArray = [NSMutableArray arrayWithArray:self.appDelegate.storedQueryArray];
         
@@ -163,7 +162,7 @@
         // Remove existing storedQuery values in preparation for new resultsArray
         [self.appDelegate setStoredQuery:nil];
         [self.appDelegate setStoredQueryArray:nil];
-        [self.appDelegate setNumberOfResultsStoredQueryReturned:nil];
+        [self.appDelegate setNumberOfResultsStoredQueryReturned:0];
         
         // Get new resultsArray for new query
         [self search];
@@ -242,7 +241,7 @@
             }
             
             // Save results
-            [self.appDelegate setStoredQuery:self.query];
+            [self.appDelegate setStoredQuery:[self.query stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
             [self.appDelegate setStoredQueryArray:self.resultsArray];
             [self.appDelegate setNumberOfResultsStoredQueryReturned:self.numberOfFetchedResults];
             
@@ -292,7 +291,7 @@
             }
             
             // Save results
-            [self.appDelegate setStoredQuery:self.query];
+            [self.appDelegate setStoredQuery:[self.query stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
             [self.appDelegate setStoredQueryArray:self.resultsArray];
             [self.appDelegate setNumberOfResultsStoredQueryReturned:self.numberOfFetchedResults];
             
