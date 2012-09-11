@@ -89,9 +89,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     [self createMoviePlayer];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
+}
 
 #pragma mark - Subview Creation Methods
 - (void)createMoviePlayer
@@ -224,17 +229,20 @@
         
         self.videoWillBegin = YES;
     
+        // Create MPMoviePlayer related Observers
         [self createObservers];
+        
+        // Load Video
         [self.moviePlayer.moviePlayer setContentURL:[NSURL URLWithString:link]];
         [self.moviePlayer.moviePlayer setShouldAutoplay:YES];
         [self.moviePlayer.moviePlayer prepareToPlay];
         [self.moviePlayer.moviePlayer play];
         
-        // Add Video Info
+        // Add Video Info to Lockscreen
         [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:nil];
-        NSMutableDictionary *videoInfo = [[NSMutableDictionary alloc] init];
-        [videoInfo setObject:[NSString stringWithFormat:@"%@", [self.video valueForKey:@"title"]] forKey:MPMediaItemPropertyTitle];
-        [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:videoInfo];
+        NSString *videoTitle = [self.video valueForKey:@"title"];
+        NSDictionary *dictionary = [NSDictionary dictionaryWithObject:videoTitle forKey:MPMediaItemPropertyTitle];
+        [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:dictionary];
         
         // KISSMetrics
         NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
