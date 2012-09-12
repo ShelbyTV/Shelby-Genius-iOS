@@ -48,9 +48,7 @@
             
             NSLog(@"Internet Connection Available");
             
-            // Initialize Request
-//            self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-            
+            // Perform Asynchronous Request
             NSOperationQueue *queue = [[NSOperationQueue alloc] init];
             [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
              {
@@ -59,7 +57,14 @@
                      self.responseData = [NSMutableData dataWithData:data];
                      [self asynchronousConnectionFinished];
                      
+                 } else {
+                     
+                     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+                     [appDelegate.rootNavigationController popViewControllerAnimated:YES];
+                     [[NSNotificationCenter defaultCenter] postNotificationName:kNoResultsReturnedObserver object:nil];
+                     
                  }
+                 
              }];
             
             

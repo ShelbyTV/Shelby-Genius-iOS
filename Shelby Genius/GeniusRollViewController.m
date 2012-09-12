@@ -56,6 +56,15 @@
 @synthesize isPlayingVideo = _isPlayingVideo;
 @synthesize noMoreVideosToFetch = _noMoreVideosToFetch;
 
+#pragma mark - Memory Management Methods
+- (void)dealloc
+{
+    NSString *querySpecificObserver = [NSString stringWithFormat:@"%@_%@", kRollFramesObserver, self.query];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:querySpecificObserver object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kIndexOfCurrentVideoObserver object:nil];
+}
+
 #pragma mark - Initialization
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andQuery:(NSString *)query
 {
@@ -69,16 +78,6 @@
 }
 
 #pragma mark - View Lifecycle Methods
-- (void)viewDidUnload
-{
-    NSString *querySpecificObserver = [NSString stringWithFormat:@"%@_%@", kRollFramesObserver, self.query];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:querySpecificObserver object:nil];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kIndexOfCurrentVideoObserver object:nil];
-    
-    [super viewDidUnload];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];

@@ -57,17 +57,17 @@
 @synthesize transparentTouchableView = _transparentTouchableView;
 @synthesize transparentTouchableNavigationView = _transparentTouchableNavigationView;
 
-#pragma mark - View Lifecycle Methods
-- (void)viewDidUnload
+#pragma mark - Memory Management Methods
+- (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kNoResultsReturnedObserver object:nil];
     
     self.tableView = nil;
     self.searchBar = nil;
     self.searchButton = nil;
-    [super viewDidUnload];
 }
 
+#pragma mark - View Lifecycle Methods
 - (void)viewDidLoad
 {
     [super viewDidLoad];
