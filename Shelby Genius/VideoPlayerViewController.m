@@ -42,9 +42,16 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     [self createLoadingVideoViewForVideo:self.video];
 }
 
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
+}
 
 #pragma mark - Public Methods
 - (void)modifyVideoPlayerButtons
@@ -152,6 +159,32 @@
         
     }
     
+    
+}
+
+#pragma mark - Remote Control Event
+- (void)remoteControlReceivedWithEvent:(UIEvent *)event
+{
+    
+    switch ( event.subtype ) {
+        case UIEventSubtypeRemoteControlTogglePlayPause:{
+        
+            if ( self.moviePlayer.playbackState == MPMoviePlaybackStatePaused || self.moviePlayer.playbackState == MPMoviePlaybackStateStopped || self.moviePlayer.playbackState == MPMoviePlaybackStateInterrupted ) [self.moviePlayer play];
+            
+            else [self.moviePlayer pause];
+        
+        } break;
+        case UIEventSubtypeRemoteControlNextTrack:{
+            NSLog(@"NEXT");
+            [self.videoPlayerContainerViewController nextVideoButtonAction];
+        } break;
+        case UIEventSubtypeRemoteControlPreviousTrack:{
+            NSLog(@"PREVIOUS");
+            [self.videoPlayerContainerViewController previousVideoButtonAction];
+        } break;
+        default:
+            break;
+    }
     
 }
 
