@@ -36,7 +36,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    if ( 6 == kSystemVersion ) [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
 }
 
 - (void)viewDidAppear:(BOOL)animated

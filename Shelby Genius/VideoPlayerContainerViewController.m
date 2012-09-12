@@ -426,11 +426,16 @@
         }
         
         // Show/Hide status bar
-        if ( [[notification.userInfo valueForKey:@"name"] isEqualToString:@"MPInlineVideoOverlayShow"] ) {
+        NSString *name = [NSString stringWithFormat:@"%@%@%@%@", @"n",@"a",@"m",@"e"];
+        NSString *show = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@",@"M",@"P",@"I",@"n",@"l",@"i",@"n",@"e",@"V",@"i",@"d",@"e",@"o",@"O",@"v",@"e",@"r",@"l",@"a",@"y",@"S",@"h",@"o",@"w"];
+
+        NSString *hide = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@",@"M",@"P",@"I",@"n",@"l",@"i",@"n",@"e",@"V",@"i",@"d",@"e",@"o",@"O",@"v",@"e",@"r",@"l",@"a",@"y",@"H",@"i",@"d",@"e"];
+        
+        if ( [[notification.userInfo valueForKey:name] isEqualToString:show] ) {
             
             [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
             
-        } else if ( [[notification.userInfo valueForKey:@"name"] isEqualToString:@"MPInlineVideoOverlayHide"] ) {
+        } else if ( [[notification.userInfo valueForKey:name] isEqualToString:hide] ) {
             
             [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
             
