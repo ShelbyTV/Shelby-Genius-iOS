@@ -34,9 +34,9 @@
     return self;
 }
 
-- (void)processNotification:(NSNotification*)notification
+- (void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"Notification: %@", notification.name);
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
 }
 
 - (void)viewDidAppear:(BOOL)animated

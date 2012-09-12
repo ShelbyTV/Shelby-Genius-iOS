@@ -89,13 +89,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     [self createMoviePlayer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - Subview Creation Methods
@@ -114,7 +113,7 @@
     }
 
     
-    if ( 6 != kSystemVersion) { /// iOS 5 is installed
+    if ( 5 == kSystemVersion) { /// iOS 5 is installed
         [self.moviePlayer modifyVideoPlayerButtons];
     }
     
@@ -419,13 +418,26 @@
 {
 
     if ( 6 == kSystemVersion ) { /// iOS 6 is installed
-    
+
+        // Rewire MPMoviePlayer Transport Controls
         if ( NO == self.controllsModified && 4 == [[[[[[self.moviePlayer.view subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] count] ) {
-            
             [self.moviePlayer modifyVideoPlayerButtons];
+        
         }
         
-    } 
+        // Show/Hide status bar
+        if ( [[notification.userInfo valueForKey:@"name"] isEqualToString:@"MPInlineVideoOverlayShow"] ) {
+            
+            [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+            
+        } else if ( [[notification.userInfo valueForKey:@"name"] isEqualToString:@"MPInlineVideoOverlayHide"] ) {
+            
+            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+            
+        }
+        
+    
+    }
     
 }
 
