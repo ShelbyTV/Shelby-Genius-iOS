@@ -10,7 +10,7 @@
 
 // Frameworks
 #import <AVFoundation/AVFoundation.h>
-#import <Crashlytics/Crashlytics.h>
+//#import <Crashlytics/Crashlytics.h>
 
 // View Controllers
 #import "SearchViewController.h"
@@ -21,7 +21,10 @@
 
 @property (strong, nonatomic) UIView *progressView;
 @property (assign, nonatomic) NSTimeInterval videoPlaybackTimeInterval;
+@property (assign, nonatomic) BOOL developerModeEnabled;
+@property (assign, nonatomic) BOOL experimentalModeEnabled;
 
+- (void)setupFlags;
 - (void)analytics;
 - (void)customization;
 - (void)createProgressView;
@@ -34,11 +37,13 @@
 @synthesize progressView = _progressView;
 @synthesize rootNavigationController = _rootNavigationController;
 @synthesize detailNavigationController = _detailNavigationController;
-@synthesize videoPlayerViewController = _videoPlayerViewController;
-@synthesize videoPlaybackTimeInterval = _videoPlaybackTimeInterval;
 @synthesize storedQuery = _storedQuery;
 @synthesize storedQueryArray = _storedQueryArray;
 @synthesize numberOfResultsStoredQueryReturned = _numberOfResultsStoredQueryReturned;
+@synthesize developerModeEnabled = _developerModeEnabled;
+@synthesize experimentalModeEnabled = _experimentalModeEnabled;
+@synthesize videoPlayerViewController = _videoPlayerViewController;
+@synthesize videoPlaybackTimeInterval = _videoPlaybackTimeInterval;
 
 #pragma mark - UIApplicationDelegate Methods
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -46,6 +51,9 @@
 
     // Initialize UIWindow's rootViewController
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    // Initialize Development Flags
+    [self setupFlags];
     
     // Initialize analytics
     [self analytics];
@@ -138,9 +146,15 @@
 }
 
 #pragma mark - Private Methods
+- (void)setupFlags
+{
+    self.developerModeEnabled = NO;
+    self.experimentalModeEnabled = NO;
+}
+
 - (void)analytics
 {
-    [Crashlytics startWithAPIKey:@"84a79b7ee6f2eca13877cd17b9b9a290790f99aa"];
+//    [Crashlytics startWithAPIKey:@"84a79b7ee6f2eca13877cd17b9b9a290790f99aa"];
     [KISSMetricsAPI sharedAPIWithKey:@"9b8c2d291a85a66412fc8c0085125194646fd7a6"];
 }
 

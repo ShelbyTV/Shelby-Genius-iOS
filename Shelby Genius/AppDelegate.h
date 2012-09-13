@@ -15,16 +15,24 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+// Navigation Variables
 @property (strong, nonatomic) RootNavigationController *rootNavigationController;
 @property (strong, nonatomic) UISplitViewController *rootSplitViewController;
 @property (strong, nonatomic) DetailNavigationController *detailNavigationController;
-@property (strong, nonatomic) MBProgressHUD *progressHUD;
-@property (strong ,nonatomic) VideoPlayerViewController *videoPlayerViewController;
 
-// Session persistent variables
+// Session Persistence Variables
 @property (copy, nonatomic) NSString *storedQuery;
 @property (strong, nonatomic) NSMutableArray *storedQueryArray;
 @property (assign, nonatomic) NSUInteger numberOfResultsStoredQueryReturned;
+@property (strong ,nonatomic) VideoPlayerViewController *videoPlayerViewController;
+
+// Notificaiton Variables
+@property (strong, nonatomic) MBProgressHUD *progressHUD;
+
+// Development Variables
+@property (assign, nonatomic, readonly) BOOL developerModeEnabled; // YES while app is in Development
+@property (assign, nonatomic, readonly) BOOL experimentalModeEnabled; // Experimental Feautres
 
 - (void)addHUDWithMessage:(NSString*)message;
 - (void)removeHUD;

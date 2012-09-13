@@ -36,7 +36,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if ( 6 == kSystemVersion ) [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    if ( kSystemVersion6 ) [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -59,7 +59,7 @@
     
     if ( ![self.videoPlayerContainerViewController controllsModified] ) {
         
-    if ( 6 == kSystemVersion) { /// iOS 6 is installed
+    if ( kSystemVersion6 ) { 
 
         if ( kDeviceIsIPad ) { // iOS 6 and iPad
             
@@ -84,7 +84,7 @@
         }
         
     
-    } else { /// iOS 5 is installed
+    } else { 
         
         if ( kDeviceIsIPad ) { // iOS 5 and iPad
             
@@ -151,13 +151,14 @@
     
     if ( UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ) {
         
-       if ( kDeviceIsIPhone ) [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
+       if ( !kDeviceIsIPad ) [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
         
     } else {
         
-       if ( kDeviceIsIPhone ) [self.loadingVideoView setFrame:CGRectMake(80.0f, 30.0f, frame.size.height, frame.size.width)];
+       if ( !kDeviceIsIPad ) [self.loadingVideoView setFrame:CGRectMake(80.0f, 30.0f, frame.size.height, frame.size.width)];
         
     }
+    
     
     
 }
@@ -175,11 +176,9 @@
         
         } break;
         case UIEventSubtypeRemoteControlNextTrack:{
-            NSLog(@"NEXT");
             [self.videoPlayerContainerViewController nextVideoButtonAction];
         } break;
         case UIEventSubtypeRemoteControlPreviousTrack:{
-            NSLog(@"PREVIOUS");
             [self.videoPlayerContainerViewController previousVideoButtonAction];
         } break;
         default:
@@ -197,11 +196,11 @@
         
         if ( UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ) {
 
-            if ( kDeviceIsIPhone ) [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
+            if ( !kDeviceIsIPad ) [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
             
         } else {
             
-            if ( kDeviceIsIPhone )  [self.loadingVideoView setFrame:CGRectMake(80.0f, 30.0f, frame.size.height, frame.size.width)];
+            if ( !kDeviceIsIPad )  [self.loadingVideoView setFrame:CGRectMake(80.0f, 30.0f, frame.size.height, frame.size.width)];
         }        
     }
 }

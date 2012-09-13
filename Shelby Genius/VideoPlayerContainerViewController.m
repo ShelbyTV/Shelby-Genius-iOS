@@ -113,7 +113,7 @@
     }
 
     
-    if ( 5 == kSystemVersion) { /// iOS 5 is installed
+    if ( !kSystemVersion6) { /// iOS 5 is installed
         [self.moviePlayer modifyVideoPlayerButtons];
     }
     
@@ -245,10 +245,11 @@
         
         // KISSMetrics
         NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [self.video valueForKey:@"title"], KISSVideoTitle, nil];
-        if ( kDeviceIsIPad )[[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoPad withProperties:metrics];
-        else [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoPhone withProperties:metrics];
-        
-        
+        if ( kDeviceIsIPad ) {
+            if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoPad withProperties:metrics];
+        } else {
+            if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchVideoPhone withProperties:metrics];
+        }
     }
 }
 
@@ -342,7 +343,7 @@
                                                  name:MPMoviePlayerIsAirPlayVideoActiveDidChangeNotification
                                                object:nil];
     
-    if ( 6 == kSystemVersion ) { /// iOS 6 is installed
+    if ( kSystemVersion6 ) {
         
         NSString *controlAppearanceNotification = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U",@"I",@"V",@"i",@"e",@"w",@"A",@"n",@"i",@"m",@"a",@"t",@"i",@"o",@"n",@"D",@"i",@"d",@"C",@"o",@"m",@"m",@"i",@"t",@"N",@"o",@"t",@"i",@"f",@"i",@"c",@"a",@"t",@"i",@"o",@"n"];
         
@@ -417,7 +418,7 @@
 - (void)controllsDidAppear:(NSNotification *)notification
 {
 
-    if ( 6 == kSystemVersion ) { /// iOS 6 is installed
+    if ( kSystemVersion6 ) { 
 
         // Rewire MPMoviePlayer Transport Controls
         if ( NO == self.controllsModified && 4 == [[[[[[self.moviePlayer.view subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] count] ) {

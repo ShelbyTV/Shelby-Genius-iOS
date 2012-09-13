@@ -96,7 +96,7 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     
     // Annoying iOS6 orientation fix when GenisuRollViewController is Re-Presented
-    if ( 6 == kSystemVersion ) { /// iOS 6 is installed
+    if ( kSystemVersion6 ) {
         
         [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
         UIViewController *mVC = [[UIViewController alloc] init];
@@ -350,7 +350,7 @@
     VideoCardCell *cell = (VideoCardCell*)[button superview];
     self.selectedVideoFrameToShare = cell.videoFrame;
     
-    if ( 6 == kSystemVersion ) {
+    if ( kSystemVersion6 ) {
         
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Share this video?"
                                                                  delegate:self
@@ -398,7 +398,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     
-    if ( 6 == kSystemVersion ) {
+    if ( kSystemVersion6 ) {
         
         switch (buttonIndex) {
             case 0: // Email
@@ -519,7 +519,7 @@
     label.text = [NSString stringWithFormat:@"“%@”", [self.query stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     label.text = [label.text stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
     
-    if ( 6 == kSystemVersion ) {
+    if ( kSystemVersion6 ) {
         
         label.textAlignment = NSTextAlignmentLeft;
         

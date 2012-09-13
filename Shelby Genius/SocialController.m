@@ -167,8 +167,12 @@ static SocialController *sharedInstance = nil;
     // Analytics
     [[Panhandler sharedInstance] recordEvent];
     NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.geniusRollViewController.query, KISSQuery, [[self.videoFrame valueForKey:@"video" ] valueForKey:@"title"], KISSVideoTitle, nil];
-    if  ( kDeviceIsIPad ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePad withProperties:metrics];
-    else [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
+    if ( kDeviceIsIPad ) {
+        if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePad withProperties:metrics];
+    } else {
+        if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
+    }
+    
     
     // Mail Setup
     MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
@@ -191,13 +195,16 @@ static SocialController *sharedInstance = nil;
     // Analytics
     [[Panhandler sharedInstance] recordEvent];
     NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.geniusRollViewController.query, KISSQuery, [[self.videoFrame valueForKey:@"video" ] valueForKey:@"title"], KISSVideoTitle, nil];
-    if  ( kDeviceIsIPad ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePad withProperties:metrics];
-    else [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
+    if  ( kDeviceIsIPad ) {
+        if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePad withProperties:metrics];  
+    } else {
+        if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
+    }
     
     // Extract Video Data
     NSString *videoTitle = [[self.videoFrame valueForKey:@"video"] valueForKey:@"title"];
 
-    if ( 6 == kSystemVersion ) { // Twitter Post (iOS 6);
+    if ( kSystemVersion6 ) { 
         
         if([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
             
@@ -213,7 +220,7 @@ static SocialController *sharedInstance = nil;
         }
 
         
-    } else { // Twitter Post (iOS 5)
+    } else { 
         
         if ([TWTweetComposeViewController canSendTweet]) {
             
@@ -232,13 +239,16 @@ static SocialController *sharedInstance = nil;
 - (void)postToFacebook
 {
     
-    if ( 6 == kSystemVersion ) {
+    if ( kSystemVersion6 ) {
     
         // Analytics
         [[Panhandler sharedInstance] recordEvent];
         NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.geniusRollViewController.query, KISSQuery, [[self.videoFrame valueForKey:@"video" ] valueForKey:@"title"], KISSVideoTitle, nil];
-        if  ( kDeviceIsIPad ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePad withProperties:metrics];
-        else [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
+        if  ( kDeviceIsIPad ) {
+            if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePad withProperties:metrics];
+        } else {
+            if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
+        }
      
         // Extract Video Data
         NSString *videoTitle = [[self.videoFrame valueForKey:@"video"] valueForKey:@"title"];
