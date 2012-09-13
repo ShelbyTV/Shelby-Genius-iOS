@@ -29,15 +29,15 @@
 {
     if ([self.visibleViewController isKindOfClass:[VideoPlayerViewController class]]) { // VideoPlayerViewController
         
-        if ( kDeviceIsIPad ) { // iPad
+//        if ( kDeviceIsIPad ) { // iPad
+//        
+//            return NO;
+//            
+//        } else { // iPhone
         
-            return NO;
-            
-        } else { // iPhone
-            
             return YES;
             
-        }
+//        }
         
     } else { // All other classes
     

@@ -103,13 +103,13 @@
     
     self.moviePlayer.moviePlayer.controlStyle = MPMovieControlStyleNone;
     
-    if ( kDeviceIsIPad) {
-        [self.moviePlayer.view setFrame:[[[self.appDelegate.rootSplitViewController.viewControllers objectAtIndex:1] view] frame]];
-        [self.appDelegate.detailNavigationController pushViewController:self.moviePlayer animated:NO];
-    } else {
+//    if ( kDeviceIsIPad) {
+//        [self.moviePlayer.view setFrame:[[[self.appDelegate.rootSplitViewController.viewControllers objectAtIndex:1] view] frame]];
+//        [self.appDelegate.detailNavigationController pushViewController:self.moviePlayer animated:NO];
+//    } else {
         [self.moviePlayer.view setFrame:self.appDelegate.window.frame];
         [self.navigationController pushViewController:self.moviePlayer animated:NO];
-    }
+//    }
 
     
     if ( !kSystemVersion6 ) { /// iOS 5 is installed
@@ -128,11 +128,11 @@
     [self.moviePlayer.view setHidden:YES];
     [self.navigationController setNavigationBarHidden:NO];
     
-    if ( kDeviceIsIPad ) {
-        [self.navigationController popToRootViewControllerAnimated:NO];
-    } else {
+//    if ( kDeviceIsIPad ) {
+//        [self.navigationController popToRootViewControllerAnimated:NO];
+//    } else {
         [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:numberOfViewControllers-3] animated:YES];
-    }
+//    }
     
     [self.navigationController.visibleViewController viewWillAppear:NO]; //Redraw instance of GeniusRollViewControlelr in case navigationBar gets shifted in the wrong direction (potential solution)
     [self setMoviePlayer:nil];
@@ -480,11 +480,11 @@
 #pragma mark - Interface Orientation Methods
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    if ( kDeviceIsIPad) {
-        return UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight;
-    } else {
+//    if ( kDeviceIsIPad) {
+//        return UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight;
+//    } else {
         return UIInterfaceOrientationPortrait;
-    }
+//    }
 }
 
 @end

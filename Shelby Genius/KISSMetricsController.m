@@ -56,11 +56,11 @@ static KISSMetricsController *sharedInstance = nil;
         self.statistic = statistic;
         if ( metrics ) self.metrics = metrics;
         
-        if ( kDeviceIsIPad ) {
-            [self actionPerformedOnPad];
-        } else {
+//        if ( kDeviceIsIPad ) {
+//            [self actionPerformedOnPad];
+//        } else {
             [self actionPerformedOnPhone];
-        }
+//        }
     
     }
 

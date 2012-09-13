@@ -56,19 +56,18 @@
 #pragma mark - Public Methods
 - (void)modifyVideoPlayerButtons
 {
-    
-        
+
     if ( kSystemVersion6 ) { 
 
         if ( kDeviceIsIPad ) { // iOS 6 and iPad
             
-            UIButton *previousVideoButton = [[[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:0];
-            [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
-            [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchDown];
-            
-            UIButton *nextVideoButton = [[[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
-            [nextVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
-            [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchDown];
+//            UIButton *previousVideoButton = [[[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:0];
+//            [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
+//            [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchDown];
+//            
+//            UIButton *nextVideoButton = [[[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
+//            [nextVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
+//            [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchDown];
             
         } else { // // iOS 6 and iPhone
             
@@ -87,13 +86,13 @@
         
         if ( kDeviceIsIPad ) { // iOS 5 and iPad
             
-            UIButton *previousVideoButton = [[[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:0];
-            [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
-            [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchDown];
-            
-            UIButton *nextVideoButton = [[[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
-            [nextVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
-            [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchDown];
+//            UIButton *previousVideoButton = [[[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:0];
+//            [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
+//            [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchDown];
+//            
+//            UIButton *nextVideoButton = [[[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
+//            [nextVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
+//            [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchDown];
             
             
         } else { // iOS 5 and iPhone
@@ -124,15 +123,15 @@
  
     NSArray *nib;
     
-    if ( kDeviceIsIPad ) {
-        
-        nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingVideoView_ipad" owner:self options:NULL];
-        
-    } else {
-        
+//    if ( kDeviceIsIPad ) {
+//        
+//        nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingVideoView_ipad" owner:self options:NULL];
+//        
+//    } else {
+    
         nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingVideoView_iphone" owner:self options:NULL];
         
-    }
+//    }
     
 
     self.loadingVideoView = [nib objectAtIndex:0];
@@ -202,11 +201,11 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    if ( kDeviceIsIPad) {
-        return UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight;
-    } else {
+//    if ( kDeviceIsIPad) {
+//        return UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight;
+//    } else {
         return interfaceOrientation;
-    }
+//    }
 }
 
 @end
