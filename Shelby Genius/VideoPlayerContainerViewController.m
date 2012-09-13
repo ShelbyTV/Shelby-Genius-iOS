@@ -408,33 +408,24 @@
 - (void)controllsDidAppear:(NSNotification *)notification
 {
 
-    if ( kSystemVersion6 ) { 
-        
-        if ( 4 == [[[[[[self.moviePlayer.view subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] count] ) {
+    if ( 4 == [[[[[[self.moviePlayer.view subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] count] ) {
 
-            NSString *overlayString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"M",@"P",@"F",@"u",@"l",@"l",@"S",@"c",@"r",@"e",@"e",@"n",@"V",@"i",@"d",@"e",@"o",@"O",@"v",@"e",@"r",@"l",@"a",@"y"];
-            NSString *classNameCheck = NSStringFromClass([[[[[[[self.moviePlayer.view subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] class]);
-            
-            if ( [classNameCheck isEqualToString:overlayString] ) {
-                [self.moviePlayer modifyVideoPlayerButtons];
-            }
-            
-        }
+        NSString *overlayString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"M",@"P",@"F",@"u",@"l",@"l",@"S",@"c",@"r",@"e",@"e",@"n",@"V",@"i",@"d",@"e",@"o",@"O",@"v",@"e",@"r",@"l",@"a",@"y"];
+        NSString *classNameCheck = NSStringFromClass([[[[[[[self.moviePlayer.view subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] class]);
         
+        if ( [classNameCheck isEqualToString:overlayString] ) {
+            [self.moviePlayer modifyVideoPlayerButtons];
+        }
+    
         // Show/Hide status bar
         NSString *name = [NSString stringWithFormat:@"%@%@%@%@", @"n",@"a",@"m",@"e"];
         NSString *show = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@",@"M",@"P",@"I",@"n",@"l",@"i",@"n",@"e",@"V",@"i",@"d",@"e",@"o",@"O",@"v",@"e",@"r",@"l",@"a",@"y",@"S",@"h",@"o",@"w"];
-
         NSString *hide = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@",@"M",@"P",@"I",@"n",@"l",@"i",@"n",@"e",@"V",@"i",@"d",@"e",@"o",@"O",@"v",@"e",@"r",@"l",@"a",@"y",@"H",@"i",@"d",@"e"];
         
         if ( [[notification.userInfo valueForKey:name] isEqualToString:show] ) {
-            
             [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
-            
         } else if ( [[notification.userInfo valueForKey:name] isEqualToString:hide] ) {
-            
             [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
-            
         }
         
     
