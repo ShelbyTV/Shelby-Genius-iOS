@@ -14,7 +14,6 @@
 @property (assign, nonatomic) NSUInteger selectedVideo;
 @property (copy, nonatomic) NSString *query;
 @property (strong, nonatomic) UIWebView *webView;
-@property (assign, nonatomic) BOOL controllsModified;
 
 - (id)initWithVideos:(NSMutableArray*)videos selectedVideo:(NSUInteger)selectedVideo andQuery:(NSString*)query;
 - (void)videoDidEndPlaying:(NSNotification*)notification;

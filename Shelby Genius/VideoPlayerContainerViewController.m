@@ -54,7 +54,6 @@
 @synthesize moviePlayer = _moviePlayer;
 @synthesize webView = _webView;
 @synthesize videoWillBegin = _videoWillBegin;
-@synthesize controllsModified = _controllsModified;
 
 #pragma mark - Initialization
 - (id)initWithVideos:(NSMutableArray *)videos selectedVideo:(NSUInteger)selectedVideo andQuery:(NSString *)query
@@ -113,7 +112,7 @@
     }
 
     
-    if ( !kSystemVersion6) { /// iOS 5 is installed
+    if ( !kSystemVersion6 ) { /// iOS 5 is installed
         [self.moviePlayer modifyVideoPlayerButtons];
     }
     
@@ -304,7 +303,6 @@
     [self.moviePlayer.moviePlayer stop];
     [self.moviePlayer.moviePlayer setContentURL:nil];
     self.videoWillBegin = NO;
-    self.controllsModified = NO;
 
     // Scroll GeniusRollViewController to row of video that will be loaded
     NSNumber *rowNumber = [NSNumber numberWithInt:self.selectedVideo];
@@ -419,11 +417,16 @@
 {
 
     if ( kSystemVersion6 ) { 
-
-        // Rewire MPMoviePlayer Transport Controls
-        if ( NO == self.controllsModified && 4 == [[[[[[self.moviePlayer.view subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] count] ) {
-            [self.moviePlayer modifyVideoPlayerButtons];
         
+        if ( 4 == [[[[[[self.moviePlayer.view subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] count] ) {
+
+            NSString *overlayString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"M",@"P",@"F",@"u",@"l",@"l",@"S",@"c",@"r",@"e",@"e",@"n",@"V",@"i",@"d",@"e",@"o",@"O",@"v",@"e",@"r",@"l",@"a",@"y"];
+            NSString *classNameCheck = NSStringFromClass([[[[[[[self.moviePlayer.view subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] class]);
+            
+            if ( [classNameCheck isEqualToString:overlayString] ) {
+                [self.moviePlayer modifyVideoPlayerButtons];
+            }
+            
         }
         
         // Show/Hide status bar

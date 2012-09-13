@@ -224,7 +224,7 @@
     [self.transparentTouchableView removeFromSuperview];
     [self.transparentTouchableNavigationView removeFromSuperview];
     self.tableView.userInteractionEnabled = YES;
-    [UIView animateWithDuration:0.25f animations:^{ self.tableView.alpha = 1.0f; }];
+    if ( [self.previousQueriesArray count] )[UIView animateWithDuration:0.25f animations:^{ self.tableView.alpha = 1.0f; }];
     
 }
 
@@ -401,8 +401,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ( [self.previousQueriesArray count] ) {
-        
-        NSLog(@"%d", [self.previousQueriesArray count]);
         
         self.onboardingImageView.alpha = 0.0f;
         tableView.alpha = 1.0f;

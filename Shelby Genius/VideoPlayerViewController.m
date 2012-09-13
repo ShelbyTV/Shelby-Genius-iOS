@@ -57,7 +57,6 @@
 - (void)modifyVideoPlayerButtons
 {
     
-    if ( ![self.videoPlayerContainerViewController controllsModified] ) {
         
     if ( kSystemVersion6 ) { 
 
@@ -72,14 +71,14 @@
             [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchDown];
             
         } else { // // iOS 6 and iPhone
-        
-//            UIButton *previousVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:0] subviews] objectAtIndex:1];
-//            [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
-//            [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchDown];
-//            
-//            UIButton *nextVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
-//            [nextVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
-//            [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchDown];
+            
+            UIButton *previousVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:0] subviews] objectAtIndex:1];
+            [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
+            [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchDown];
+            
+            UIButton *nextVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
+            [nextVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
+            [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchDown];
             
         }
         
@@ -108,10 +107,6 @@
             [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchDown];
             
         }
-    
-    }
-
-        [self.videoPlayerContainerViewController setControllsModified:YES];
         
     }
 }
