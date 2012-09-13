@@ -28,7 +28,9 @@
 
 - (void)awakeFromNib
 {
-    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.backgroundColor = [UIColor colorWithRed:49.0f/255.0f green:160.0f/255.0f blue:202.0f/255.0f alpha:1.0f];
+    [self setSelectedBackgroundView:imageView];
     
     self.videoTitleLabel.font = [UIFont fontWithName:@"Ubuntu-Bold" size:self.videoTitleLabel.font.pointSize];
     self.videoTitleLabel.textColor = [UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:1.0f];

@@ -378,12 +378,27 @@
 
 - (void)scrollToCurrentVideo:(NSNotification*)notification
 {
+    
     NSNumber *row = [notification.userInfo objectForKey:kIndexOfCurrentVideo];
+    
+    // Refresh datasource if row
+    if ( [row intValue] >= [self.resultsArray count]-3 ) [self refreshDataSource];
+    
+    // Scroll to current row
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[row intValue] inSection:0]
                           atScrollPosition:UITableViewScrollPositionTop
                                   animated:YES];
     
-    if ( [row intValue] >= [self.resultsArray count]-3 ) [self refreshDataSource];
+    // Deselect all othe rows
+    NSIndexPath *previousRowIndexPath = [NSIndexPath indexPathForRow:[row intValue]-1 inSection:0];
+    [self.tableView deselectRowAtIndexPath:previousRowIndexPath animated:NO];
+    
+    NSIndexPath *nextRowIndexPath = [NSIndexPath indexPathForRow:[row intValue]+1 inSection:0];
+    [self.tableView deselectRowAtIndexPath:nextRowIndexPath animated:NO];
+    
+    // Set current row as selected
+    VideoCardCell *cell = (VideoCardCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[row intValue] inSection:0]];
+    [cell setSelected:YES];
     
 }
 

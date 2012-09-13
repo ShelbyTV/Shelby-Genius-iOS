@@ -55,6 +55,7 @@
 		8EA44F7115E999EC00BB0A08 /* onboarding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F6F15E999EC00BB0A08 /* onboarding@2x.png */; };
 		8EA44F7815E9A15A00BB0A08 /* navigationBackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F7615E9A15A00BB0A08 /* navigationBackButton.png */; };
 		8EA44F7915E9A15A00BB0A08 /* navigationBackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F7715E9A15A00BB0A08 /* navigationBackButton@2x.png */; };
+		8EA732A0160246D6005BA877 /* KISSMetricsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7329F160246D6005BA877 /* KISSMetricsController.m */; };
 		8EAD107515FA93C200CAEC3C /* DetailNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EAD107415FA93C200CAEC3C /* DetailNavigationController.m */; };
 		8EB3D2A815DB55DB00709586 /* Panhandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3D2A715DB55DB00709586 /* Panhandler.m */; };
 		8ECA62BD15EA88FA00056231 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 8ECA62BC15EA88FA00056231 /* iTunesArtwork */; };
@@ -144,6 +145,8 @@
 		8EA44F6F15E999EC00BB0A08 /* onboarding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onboarding@2x.png"; sourceTree = "<group>"; };
 		8EA44F7615E9A15A00BB0A08 /* navigationBackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationBackButton.png; sourceTree = "<group>"; };
 		8EA44F7715E9A15A00BB0A08 /* navigationBackButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationBackButton@2x.png"; sourceTree = "<group>"; };
+		8EA7329E160246D5005BA877 /* KISSMetricsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KISSMetricsController.h; sourceTree = "<group>"; };
+		8EA7329F160246D6005BA877 /* KISSMetricsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KISSMetricsController.m; sourceTree = "<group>"; };
 		8EAD107315FA93C200CAEC3C /* DetailNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailNavigationController.h; sourceTree = "<group>"; };
 		8EAD107415FA93C200CAEC3C /* DetailNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailNavigationController.m; sourceTree = "<group>"; };
 		8EB3D2A615DB55DB00709586 /* Panhandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Panhandler.h; sourceTree = "<group>"; };
@@ -360,6 +363,8 @@
 			children = (
 				8EDCE9B715D4C41A00EFB1F2 /* APIClient.h */,
 				8EDCE9B815D4C41A00EFB1F2 /* APIClient.m */,
+				8EA7329E160246D5005BA877 /* KISSMetricsController.h */,
+				8EA7329F160246D6005BA877 /* KISSMetricsController.m */,
 				8E0005AF15E53CD300712B4D /* SocialController.h */,
 				8E0005B015E53CD300712B4D /* SocialController.m */,
 			);
@@ -624,6 +629,7 @@
 				8EF33D0F15EFE516007FE38E /* Reachability.m in Sources */,
 				8E482E7F15F94FAB0079C84A /* DetailViewController.m in Sources */,
 				8EAD107515FA93C200CAEC3C /* DetailNavigationController.m in Sources */,
+				8EA732A0160246D6005BA877 /* KISSMetricsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
