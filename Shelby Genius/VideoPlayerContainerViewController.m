@@ -111,11 +111,7 @@
         [self.navigationController pushViewController:self.moviePlayer animated:NO];
 //    }
 
-    
-    if ( !kSystemVersion6 ) { /// iOS 5 is installed
-        [self.moviePlayer modifyVideoPlayerButtons];
-    }
-    
+    if ( kSystemVersion5 ) [self.moviePlayer modifyVideoPlayerButtons];
     
     [self.navigationController setNavigationBarHidden:YES];
     [self.appDelegate setVideoPlayerViewController:self.moviePlayer];
@@ -134,7 +130,7 @@
         [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:numberOfViewControllers-3] animated:YES];
 //    }
     
-    [self.navigationController.visibleViewController viewWillAppear:NO]; //Redraw instance of GeniusRollViewControlelr in case navigationBar gets shifted in the wrong direction (potential solution)
+    [self.navigationController.visibleViewController viewWillAppear:NO]; // Redraw instance of GeniusRollViewControlelr in case navigationBar gets shifted in the wrong direction (potential solution)
     [self setMoviePlayer:nil];
     [self.appDelegate setVideoPlayerViewController:nil];
     
