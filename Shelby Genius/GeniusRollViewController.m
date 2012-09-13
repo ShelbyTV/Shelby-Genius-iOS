@@ -462,7 +462,7 @@
         tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"VideoCardCell" owner:self options:nil];
         VideoCardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VideoCardCell"];
-        if ( nil == cell ) cell = (VideoCardCell*)[nib objectAtIndex:0];
+        cell = (VideoCardCell*)[nib objectAtIndex:0];
 
         NSString *thumbnailURL = [[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"thumbnail_url"];
         NSString *videoTitle = [[[[self.resultsArray objectAtIndex:indexPath.row] valueForKey:@"video"] valueForKey:@"title"] capitalizedString];
