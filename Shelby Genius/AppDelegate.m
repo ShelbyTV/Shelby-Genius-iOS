@@ -67,7 +67,7 @@
         self.rootSplitViewController.delegate = self;
         
         // Left side of rootSplitViewController
-        SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController_iphone" bundle:nil];
+        SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
         self.rootNavigationController = [[RootNavigationController alloc] initWithRootViewController:searchViewController];
         
         // Right side of rootSplitViewController
@@ -82,7 +82,7 @@
     } else {
     
         // Set searchViewController as window's rootViewController
-        SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController_iphone" bundle:nil];
+        SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
         self.rootNavigationController = [[RootNavigationController alloc] initWithRootViewController:searchViewController];
         self.window.rootViewController = self.rootNavigationController;
     }
