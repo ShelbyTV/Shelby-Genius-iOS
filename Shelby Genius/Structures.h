@@ -35,3 +35,15 @@ typedef enum _SocialChannel
     SocialShare_Facebook
     
 } SocialChannel;
+
+typedef enum _KISSMetricsStatistic
+{
+    
+    KISSMetricsStatistic_None = 0,
+    KISSMetricsStatistic_FirstTimeUser,
+    KISSMetricsStatistic_RepeatUser,
+    KISSMetricsStatistic_PerformQuery,
+    KISSMetricsStatistic_WatchVideo,
+    KISSMetricsStatistic_Share
+    
+} KISSMetricsStatistic;

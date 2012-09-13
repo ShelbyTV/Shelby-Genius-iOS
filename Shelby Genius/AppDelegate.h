@@ -31,8 +31,8 @@
 @property (strong, nonatomic) MBProgressHUD *progressHUD;
 
 // Development Variables
-@property (assign, nonatomic, readonly) BOOL developerModeEnabled; // YES while app is in Development
-@property (assign, nonatomic, readonly) BOOL experimentalModeEnabled; // Experimental Feautres
+@property (assign, nonatomic) BOOL developerModeEnabled; // YES while app is in Development
+@property (assign, nonatomic) BOOL experimentalModeEnabled; // Experimental Feautres
 
 - (void)addHUDWithMessage:(NSString*)message;
 - (void)removeHUD;

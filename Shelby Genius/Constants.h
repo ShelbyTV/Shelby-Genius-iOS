@@ -44,7 +44,6 @@
 #define KISSFirstTimeUserPhone              @"First time launch on iPhone Genius"
 #define KISSRepeatUserPhone                 @"Repeat launch on iPhone Genius"
 #define KISSPerformQueryPhone               @"Perform query on iPhone Genius"
-#define KISSPerformQueryAgainPhone          @"Perform query again on iPhone Genius"
 #define KISSWatchVideoPhone                 @"Watch video on iPhone Genius"
 #define KISSSharePhone                      @"Share on iPhone Genius"
 
@@ -52,7 +51,6 @@
 #define KISSFirstTimeUserPad                @"First time launch on iPad Genius"
 #define KISSRepeatUserPad                   @"Repeat launch on iPad Genius"
 #define KISSPerformQueryPad                 @"Perform query on iPad Genius"
-#define KISSPerformQueryAgainPad            @"Perform query again on iPad Genius"
 #define KISSWatchVideoPad                   @"Watch video on iPad Genius"
 #define KISSSharePad                        @"Share on iPad Genius"
 

@@ -21,8 +21,6 @@
 
 @property (strong, nonatomic) UIView *progressView;
 @property (assign, nonatomic) NSTimeInterval videoPlaybackTimeInterval;
-@property (assign, nonatomic) BOOL developerModeEnabled;
-@property (assign, nonatomic) BOOL experimentalModeEnabled;
 
 - (void)setupFlags;
 - (void)analytics;
@@ -148,7 +146,7 @@
 #pragma mark - Private Methods
 - (void)setupFlags
 {
-    self.developerModeEnabled = NO;
+    self.developerModeEnabled = YES;
     self.experimentalModeEnabled = NO;
 }
 

@@ -10,4 +10,8 @@
 
 @interface KISSMetricsController : NSObject
 
+- (void)sendActionToKISSMetrics:(KISSMetricsStatistic)statistic andMetrics:(NSDictionary*)metrics;
+
++ (KISSMetricsController*)sharedInstance;
+
 @end

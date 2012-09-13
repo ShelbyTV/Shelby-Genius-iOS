@@ -167,11 +167,7 @@ static SocialController *sharedInstance = nil;
     // Analytics
     [[Panhandler sharedInstance] recordEvent];
     NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.geniusRollViewController.query, KISSQuery, [[self.videoFrame valueForKey:@"video" ] valueForKey:@"title"], KISSVideoTitle, nil];
-    if ( kDeviceIsIPad ) {
-        if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePad withProperties:metrics];
-    } else {
-        if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
-    }
+    [[KISSMetricsController sharedInstance] sendActionToKISSMetrics:KISSMetricsStatistic_Share andMetrics:metrics];
     
     
     // Mail Setup
@@ -195,11 +191,7 @@ static SocialController *sharedInstance = nil;
     // Analytics
     [[Panhandler sharedInstance] recordEvent];
     NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.geniusRollViewController.query, KISSQuery, [[self.videoFrame valueForKey:@"video" ] valueForKey:@"title"], KISSVideoTitle, nil];
-    if  ( kDeviceIsIPad ) {
-        if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePad withProperties:metrics];  
-    } else {
-        if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
-    }
+    [[KISSMetricsController sharedInstance] sendActionToKISSMetrics:KISSMetricsStatistic_Share andMetrics:metrics];
     
     // Extract Video Data
     NSString *videoTitle = [[self.videoFrame valueForKey:@"video"] valueForKey:@"title"];
@@ -244,11 +236,7 @@ static SocialController *sharedInstance = nil;
         // Analytics
         [[Panhandler sharedInstance] recordEvent];
         NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.geniusRollViewController.query, KISSQuery, [[self.videoFrame valueForKey:@"video" ] valueForKey:@"title"], KISSVideoTitle, nil];
-        if  ( kDeviceIsIPad ) {
-            if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePad withProperties:metrics];
-        } else {
-            if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSSharePhone withProperties:metrics];
-        }
+        [[KISSMetricsController sharedInstance] sendActionToKISSMetrics:KISSMetricsStatistic_Share andMetrics:metrics];
      
         // Extract Video Data
         NSString *videoTitle = [[self.videoFrame valueForKey:@"video"] valueForKey:@"title"];
@@ -279,7 +267,6 @@ static SocialController *sharedInstance = nil;
 
 - (NSString*)encodeToPercentEscapedString:(NSString*)string
 {
-    
     string = ((__bridge NSString *)(CFURLCreateStringByAddingPercentEscapes(NULL,
                                                       (CFStringRef) string,
                                                       NULL,

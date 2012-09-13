@@ -90,22 +90,14 @@
     
     if ( previouslyLaunched ) { // If application was previously launched
         
+        [[KISSMetricsController sharedInstance] sendActionToKISSMetrics:KISSMetricsStatistic_RepeatUser andMetrics:nil];
+        
+    } else {                                                                           
+        
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kPreviouslyLaunched];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        if ( kDeviceIsIPad ) {
-            if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSRepeatUserPad withProperties:nil];
-        } else {
-            if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSRepeatUserPhone withProperties:nil];
-        }
-        
-    } else { // If this is the                                                                            
-        
-        if ( kDeviceIsIPad ) {
-            if ( ![self.appDelegate developerModeEnabled] )[[KISSMetricsAPI sharedAPI] recordEvent:KISSFirstTimeUserPad withProperties:nil];
-        } else {
-             if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSFirstTimeUserPhone withProperties:nil];
-        }
+        [[KISSMetricsController sharedInstance] sendActionToKISSMetrics:KISSMetricsStatistic_FirstTimeUser andMetrics:nil];
     }
 
 }
@@ -119,14 +111,10 @@
 #pragma mark - Public Methods
 - (void)searchButtonAction:(id)sender
 {
+    // KISSMetrics Analytics
     NSString *currentQuery = ( self.searchBar.text.length > 0 ) ? self.searchBar.text : self.placeholderQuery;
     NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:currentQuery, KISSQuery, nil];
-    
-    if ( kDeviceIsIPad ) {
-        if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPad withProperties:metrics];
-    } else {
-        if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
-    }
+    [[KISSMetricsController sharedInstance] sendActionToKISSMetrics:KISSMetricsStatistic_PerformQuery andMetrics:metrics];
     
     [self removeTransparentViews];
     [self modifyPreviousQueriesArray];
@@ -343,22 +331,16 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     if ( self.searchBar.text.length > 0) { // use user's query
-        
+
+        // KISSMetrics Analytics
         NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.searchBar.text, KISSQuery, nil];
-        if  ( kDeviceIsIPad ) {
-            if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPad withProperties:metrics];
-        } else {
-            if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
-        }
+        [[KISSMetricsController sharedInstance] sendActionToKISSMetrics:KISSMetricsStatistic_PerformQuery andMetrics:metrics];
         
     } else { // use placeholderQuery
         
         NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.placeholderQuery, KISSQuery, nil];
-        if  ( kDeviceIsIPad ) {
-            if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPad withProperties:metrics];
-        } else {
-            if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
-        }
+        [[KISSMetricsController sharedInstance] sendActionToKISSMetrics:KISSMetricsStatistic_PerformQuery andMetrics:metrics];
+        
     }
 
     
@@ -496,11 +478,7 @@
     QueryCell *cell = (QueryCell*)[self.tableView cellForRowAtIndexPath:indexPath];
     
     NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:cell.label.text, KISSQuery, nil];
-    if  ( kDeviceIsIPad ) {
-        if ( ![self.appDelegate developerModeEnabled] )  [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPad withProperties:metrics];
-    } else {
-        if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSPerformQueryAgainPhone withProperties:metrics];
-    }
+    [[KISSMetricsController sharedInstance] sendActionToKISSMetrics:KISSMetricsStatistic_PerformQuery andMetrics:metrics];
         
     GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithNibName:@"GeniusRollViewController_iphone" bundle:nil andQuery:cell.label.text];
     [self.navigationController pushViewController:geniusRollViewController animated:YES];
