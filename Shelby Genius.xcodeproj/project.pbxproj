@@ -51,12 +51,8 @@
 		8E8C684715D99DCE004290A6 /* GeniusRollViewController_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C684615D99DCE004290A6 /* GeniusRollViewController_iphone.xib */; };
 		8E8C684915D9A0A0004290A6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8C684815D9A0A0004290A6 /* QuartzCore.framework */; };
 		8E99EF6E15E44FDC00877068 /* VideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E99EF6D15E44FDB00877068 /* VideoPlayerViewController.m */; };
-		8EA44F6B15E9982600BB0A08 /* GeniusOnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EA44F6915E9982600BB0A08 /* GeniusOnboardingViewController.m */; };
-		8EA44F6C15E9982600BB0A08 /* GeniusOnboardingViewController_iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F6A15E9982600BB0A08 /* GeniusOnboardingViewController_iphone.xib */; };
 		8EA44F7015E999EC00BB0A08 /* onboarding.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F6E15E999EC00BB0A08 /* onboarding.png */; };
 		8EA44F7115E999EC00BB0A08 /* onboarding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F6F15E999EC00BB0A08 /* onboarding@2x.png */; };
-		8EA44F7415E99C2B00BB0A08 /* onboardingStartButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F7215E99C2B00BB0A08 /* onboardingStartButton.png */; };
-		8EA44F7515E99C2B00BB0A08 /* onboardingStartButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F7315E99C2B00BB0A08 /* onboardingStartButton@2x.png */; };
 		8EA44F7815E9A15A00BB0A08 /* navigationBackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F7615E9A15A00BB0A08 /* navigationBackButton.png */; };
 		8EA44F7915E9A15A00BB0A08 /* navigationBackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA44F7715E9A15A00BB0A08 /* navigationBackButton@2x.png */; };
 		8EAD107515FA93C200CAEC3C /* DetailNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EAD107415FA93C200CAEC3C /* DetailNavigationController.m */; };
@@ -144,13 +140,8 @@
 		8E8C684815D9A0A0004290A6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8E99EF6C15E44FDB00877068 /* VideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewController.h; sourceTree = "<group>"; };
 		8E99EF6D15E44FDB00877068 /* VideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerViewController.m; sourceTree = "<group>"; };
-		8EA44F6815E9982600BB0A08 /* GeniusOnboardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeniusOnboardingViewController.h; sourceTree = "<group>"; };
-		8EA44F6915E9982600BB0A08 /* GeniusOnboardingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeniusOnboardingViewController.m; sourceTree = "<group>"; };
-		8EA44F6A15E9982600BB0A08 /* GeniusOnboardingViewController_iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeniusOnboardingViewController_iphone.xib; sourceTree = "<group>"; };
 		8EA44F6E15E999EC00BB0A08 /* onboarding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onboarding.png; sourceTree = "<group>"; };
 		8EA44F6F15E999EC00BB0A08 /* onboarding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onboarding@2x.png"; sourceTree = "<group>"; };
-		8EA44F7215E99C2B00BB0A08 /* onboardingStartButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onboardingStartButton.png; sourceTree = "<group>"; };
-		8EA44F7315E99C2B00BB0A08 /* onboardingStartButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onboardingStartButton@2x.png"; sourceTree = "<group>"; };
 		8EA44F7615E9A15A00BB0A08 /* navigationBackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationBackButton.png; sourceTree = "<group>"; };
 		8EA44F7715E9A15A00BB0A08 /* navigationBackButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationBackButton@2x.png"; sourceTree = "<group>"; };
 		8EAD107315FA93C200CAEC3C /* DetailNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailNavigationController.h; sourceTree = "<group>"; };
@@ -404,7 +395,6 @@
 			isa = PBXGroup;
 			children = (
 				8E6E9C0815F793EE00801B3C /* SearchViewController_iphone.xib */,
-				8EA44F6A15E9982600BB0A08 /* GeniusOnboardingViewController_iphone.xib */,
 				8E8C684615D99DCE004290A6 /* GeniusRollViewController_iphone.xib */,
 				8ED93B0B15DC1B4700339BF1 /* LoadingVideoView_iphone.xib */,
 				8E56EF0315FA7E8C00422CEE /* LoadingVideoView_ipad.xib */,
@@ -421,8 +411,6 @@
 				8E482E7E15F94FAA0079C84A /* DetailViewController.m */,
 				8EAD107315FA93C200CAEC3C /* DetailNavigationController.h */,
 				8EAD107415FA93C200CAEC3C /* DetailNavigationController.m */,
-				8EA44F6815E9982600BB0A08 /* GeniusOnboardingViewController.h */,
-				8EA44F6915E9982600BB0A08 /* GeniusOnboardingViewController.m */,
 				8E8C682715D94CE5004290A6 /* GeniusRollViewController.h */,
 				8E8C682815D94CE5004290A6 /* GeniusRollViewController.m */,
 				8EF33D0915EFCFDD007FE38E /* RootNavigationController.h */,
@@ -471,8 +459,6 @@
 				8EA44F7715E9A15A00BB0A08 /* navigationBackButton@2x.png */,
 				8EA44F6E15E999EC00BB0A08 /* onboarding.png */,
 				8EA44F6F15E999EC00BB0A08 /* onboarding@2x.png */,
-				8EA44F7215E99C2B00BB0A08 /* onboardingStartButton.png */,
-				8EA44F7315E99C2B00BB0A08 /* onboardingStartButton@2x.png */,
 				8E1A7EB115E3EACF00FC7086 /* searchBar.png */,
 				8E1A7EB215E3EACF00FC7086 /* searchBar@2x.png */,
 				8E1A7EB315E3EACF00FC7086 /* searchButton.png */,
@@ -575,11 +561,8 @@
 				8E1A7EB715E3EACF00FC7086 /* searchButton.png in Resources */,
 				8E1A7EB815E3EACF00FC7086 /* searchButton@2x.png in Resources */,
 				8E649A9415E491BA00B4D407 /* SearchTerms.plist in Resources */,
-				8EA44F6C15E9982600BB0A08 /* GeniusOnboardingViewController_iphone.xib in Resources */,
 				8EA44F7015E999EC00BB0A08 /* onboarding.png in Resources */,
 				8EA44F7115E999EC00BB0A08 /* onboarding@2x.png in Resources */,
-				8EA44F7415E99C2B00BB0A08 /* onboardingStartButton.png in Resources */,
-				8EA44F7515E99C2B00BB0A08 /* onboardingStartButton@2x.png in Resources */,
 				8EA44F7815E9A15A00BB0A08 /* navigationBackButton.png in Resources */,
 				8EA44F7915E9A15A00BB0A08 /* navigationBackButton@2x.png in Resources */,
 				8ECA62BD15EA88FA00056231 /* iTunesArtwork in Resources */,
@@ -635,7 +618,6 @@
 				8ED93B0915DC1B3900339BF1 /* LoadingVideoView.m in Sources */,
 				8E99EF6E15E44FDC00877068 /* VideoPlayerViewController.m in Sources */,
 				8E0005B115E53CD300712B4D /* SocialController.m in Sources */,
-				8EA44F6B15E9982600BB0A08 /* GeniusOnboardingViewController.m in Sources */,
 				8ECA62CB15EB247A00056231 /* TopAlignedLabel.m in Sources */,
 				8E25615815EBF02200200BC2 /* KISSMetricsAPI.m in Sources */,
 				8EF33D0B15EFCFDD007FE38E /* RootNavigationController.m in Sources */,

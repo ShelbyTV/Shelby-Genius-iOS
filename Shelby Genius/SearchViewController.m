@@ -19,7 +19,6 @@
 
 // View Controllers
 #import "GeniusRollViewController.h"
-#import "GeniusOnboardingViewController.h"
 
 // C Libraries
 #include <stdlib.h>
@@ -50,6 +49,7 @@
 @synthesize tableView = _tableView;
 @synthesize searchBar = _searchBar;
 @synthesize searchButton = _searchButton;
+@synthesize onboardingImageView = _onboardingImageView;
 @synthesize appDelegate = _appDelegate;
 @synthesize previousQueriesArray = _previousQueriesArray;
 @synthesize searchTerms = searchTerms;
@@ -65,6 +65,7 @@
     self.tableView = nil;
     self.searchBar = nil;
     self.searchButton = nil;
+    self.onboardingImageView = nil;
 }
 
 #pragma mark - View Lifecycle Methods
@@ -73,8 +74,6 @@
     [super viewDidLoad];
     [self customize];
     [self initializePreviousQueriesArray];
-
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -91,24 +90,21 @@
     
     if ( previouslyLaunched ) { // If application was previously launched
         
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kPreviouslyLaunched];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
         if ( kDeviceIsIPad ) {
             if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSRepeatUserPad withProperties:nil];
         } else {
             if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSRepeatUserPhone withProperties:nil];
         }
         
-    } else {
+    } else { // If this is the                                                                            
         
         if ( kDeviceIsIPad ) {
-        
             if ( ![self.appDelegate developerModeEnabled] )[[KISSMetricsAPI sharedAPI] recordEvent:KISSFirstTimeUserPad withProperties:nil];
-
         } else {
-            
              if ( ![self.appDelegate developerModeEnabled] ) [[KISSMetricsAPI sharedAPI] recordEvent:KISSFirstTimeUserPhone withProperties:nil];
-            GeniusOnboardingViewController *geniusOnboardingViewController = [[GeniusOnboardingViewController alloc] initWithNibName:@"GeniusOnboardingViewController_iphone" bundle:nil];
-            [self.navigationController pushViewController:geniusOnboardingViewController animated:YES];
-            
         }
     }
 
@@ -161,13 +157,6 @@
 
     // Modify UITextField Font
     [(UITextField*)[self.searchBar.subviews objectAtIndex:1] setFont:[UIFont fontWithName:@"Ubuntu" size:13]];
-        
-    // Hide backbarButtonItem if GeniusOnboardingViewController was displayed    
-    if ( self != [self.navigationController.viewControllers objectAtIndex:0] ) {
-        [self.navigationItem setHidesBackButton:YES];
-        UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navigationLogo"]];
-        self.navigationItem.titleView = logoView;
-    }
     
     // Observer for failed API Calls
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -413,7 +402,11 @@
 {
     if ( [self.previousQueriesArray count] ) {
         
+        NSLog(@"%d", [self.previousQueriesArray count]);
+        
+        self.onboardingImageView.alpha = 0.0f;
         tableView.alpha = 1.0f;
+        
         tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"QueryCell_iphone" owner:self options:nil];
         QueryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QueryCell"];
@@ -425,7 +418,9 @@
         
     } else {
 
+        self.onboardingImageView.alpha = 1.0f;
         tableView.alpha = 0.0f;
+        
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
