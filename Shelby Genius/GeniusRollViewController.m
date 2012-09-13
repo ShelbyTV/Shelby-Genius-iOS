@@ -122,7 +122,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [self.appDelegate removeHUD];
+    if ( [self isFetchingMoreVideos] ) [self.appDelegate removeHUD];
 }
 
 #pragma mark - Private Methods
@@ -139,6 +139,7 @@
     UIButton *backBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 52, 32)];
     [backBarButton setImage:[UIImage imageNamed:@"navigationBackButton"] forState:UIControlStateNormal];
     [backBarButton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
+    [backBarButton addTarget:self.appDelegate action:@selector(removeHUD) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBarButton];
     [self.navigationItem setHidesBackButton:YES];
     [self.navigationItem setLeftBarButtonItem:backBarButtonItem];

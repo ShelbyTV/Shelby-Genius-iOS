@@ -23,7 +23,7 @@
 // C Libraries
 #include <stdlib.h>
 
-@interface SearchViewController () <UIAlertViewDelegate>
+@interface SearchViewController ()
 
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) NSMutableArray *previousQueriesArray;
@@ -74,6 +74,22 @@
     [super viewDidLoad];
     [self customize];
     [self initializePreviousQueriesArray];
+    
+    BOOL previouslyLaunched = [[NSUserDefaults standardUserDefaults] boolForKey:kPreviouslyLaunched];
+    
+    if ( previouslyLaunched ) { // If application was previously launched
+        
+        [[KISSMetricsController sharedInstance] sendActionToKISSMetrics:KISSMetricsStatistic_RepeatUser andMetrics:nil];
+        
+    } else {
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kPreviouslyLaunched];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [[KISSMetricsController sharedInstance] sendActionToKISSMetrics:KISSMetricsStatistic_FirstTimeUser andMetrics:nil];
+    }
+
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -85,21 +101,6 @@
 {
     // searchButton
     [self.searchButton setEnabled:NO];
-    
-    BOOL previouslyLaunched = [[NSUserDefaults standardUserDefaults] boolForKey:kPreviouslyLaunched];
-    
-    if ( previouslyLaunched ) { // If application was previously launched
-        
-        [[KISSMetricsController sharedInstance] sendActionToKISSMetrics:KISSMetricsStatistic_RepeatUser andMetrics:nil];
-        
-    } else {                                                                           
-        
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kPreviouslyLaunched];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        [[KISSMetricsController sharedInstance] sendActionToKISSMetrics:KISSMetricsStatistic_FirstTimeUser andMetrics:nil];
-    }
-
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -309,13 +310,8 @@
 
 - (void)noResultsReturned
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No Results Found"
-                                                        message:@"Sorry about that.\n Please try your search again."
-                                                       delegate:self
-                                              cancelButtonTitle:@"Try again"
-                                              otherButtonTitles:nil, nil];
-    alertView.tag = kAlertViewNoResultsTag;
-    [alertView show];
+    [self.appDelegate addHUDWithMessage:@"No Results Found"];
+    [NSTimer scheduledTimerWithTimeInterval:1.0f target:self.appDelegate selector:@selector(removeHUD) userInfo:nil repeats:NO];
 }
 
 #pragma mark - UISearchBarDelegate Methods
@@ -483,16 +479,6 @@
     GeniusRollViewController *geniusRollViewController = [[GeniusRollViewController alloc] initWithNibName:@"GeniusRollViewController_iphone" bundle:nil andQuery:cell.label.text];
     [self.navigationController pushViewController:geniusRollViewController animated:YES];
 
-}
-
-#pragma mark - UIAlertViewDelegate Methods
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if ( 0 == buttonIndex && kAlertViewNoResultsTag == alertView.tag) {
-        
-        [self.searchBar becomeFirstResponder];
-        
-    }
 }
 
 #pragma mark - UIResponder Methods

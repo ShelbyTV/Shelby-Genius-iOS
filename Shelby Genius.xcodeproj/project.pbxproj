@@ -699,8 +699,8 @@
 		8EDCE9B515D4C3C000EFB1F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Arthur Sabintsev (Z4E762QSUZ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Arthur Sabintsev (Z4E762QSUZ)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shelby TV, Inc.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shelby TV, Inc.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -710,8 +710,8 @@
 				INFOPLIST_FILE = "Shelby Genius/Shelby Genius-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "61286BFD-7193-40B7-8DEE-937476D8AB2E";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "61286BFD-7193-40B7-8DEE-937476D8AB2E";
+				PROVISIONING_PROFILE = "7D294517-46CD-4492-ADF6-D098DE22B521";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7D294517-46CD-4492-ADF6-D098DE22B521";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -720,8 +720,8 @@
 		8EDCE9B615D4C3C000EFB1F2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Arthur Sabintsev (Z4E762QSUZ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Arthur Sabintsev (Z4E762QSUZ)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shelby TV, Inc.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shelby TV, Inc.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -731,8 +731,8 @@
 				INFOPLIST_FILE = "Shelby Genius/Shelby Genius-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "61286BFD-7193-40B7-8DEE-937476D8AB2E";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "61286BFD-7193-40B7-8DEE-937476D8AB2E";
+				PROVISIONING_PROFILE = "7D294517-46CD-4492-ADF6-D098DE22B521";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7D294517-46CD-4492-ADF6-D098DE22B521";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
