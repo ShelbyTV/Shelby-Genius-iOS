@@ -58,32 +58,32 @@
 
     // Check if app/onboarding was previously launched before
     
-//    if ( kDeviceIsIPad ) {
-//        
-//        // Initialize rootSplitViewController
-//        self.rootSplitViewController = [[UISplitViewController alloc] init];
-//        self.rootSplitViewController.delegate = self;
-//        
-//        // Left side of rootSplitViewController
-//        SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
-//        self.rootNavigationController = [[RootNavigationController alloc] initWithRootViewController:searchViewController];
-//        
-//        // Right side of rootSplitViewController
-//        DetailViewController *detailViewController = [[DetailViewController alloc] init];
-//        self.detailNavigationController = [[DetailNavigationController alloc] initWithRootViewController:detailViewController];
-//
-//        // Set rootSplitViewController as window's rootViewController
-//        [self.rootSplitViewController setViewControllers:[NSArray arrayWithObjects:self.rootNavigationController, self.detailNavigationController, nil]];
-//        self.window.rootViewController = self.rootSplitViewController;
-//        
-//        
-//    } else {
+    if ( kDeviceIsIPad ) {
+        
+        // Initialize rootSplitViewController
+        self.rootSplitViewController = [[UISplitViewController alloc] init];
+        self.rootSplitViewController.delegate = self;
+        
+        // Left side of rootSplitViewController
+        SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
+        self.rootNavigationController = [[RootNavigationController alloc] initWithRootViewController:searchViewController];
+        
+        // Right side of rootSplitViewController
+        DetailViewController *detailViewController = [[DetailViewController alloc] init];
+        self.detailNavigationController = [[DetailNavigationController alloc] initWithRootViewController:detailViewController];
+
+        // Set rootSplitViewController as window's rootViewController
+        [self.rootSplitViewController setViewControllers:[NSArray arrayWithObjects:self.rootNavigationController, self.detailNavigationController, nil]];
+        self.window.rootViewController = self.rootSplitViewController;
+        
+        
+    } else {
     
         // Set searchViewController as window's rootViewController
         SearchViewController *searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
         self.rootNavigationController = [[RootNavigationController alloc] initWithRootViewController:searchViewController];
         self.window.rootViewController = self.rootNavigationController;
-//    }
+    }
     
     // Appearance Proxies and General Customization
     [self customization];
@@ -127,18 +127,18 @@
 
 - (void)createProgressView
 {
-//    if ( kDeviceIsIPad ) {
-//
-//        self.progressView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 600.0f, 320.0f, 70.0f)];
-//        UIView *searchView = [[[self.rootSplitViewController.viewControllers objectAtIndex:0] visibleViewController] view];
-//        [searchView addSubview:self.progressView];
-//        
-//    } else {
+    if ( kDeviceIsIPad ) {
+
+        self.progressView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 600.0f, 320.0f, 70.0f)];
+        UIView *searchView = [[[self.rootSplitViewController.viewControllers objectAtIndex:0] visibleViewController] view];
+        [searchView addSubview:self.progressView];
+        
+    } else {
 
         self.progressView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 350.0f, 320.0f, 70.0f)];
         [self.window addSubview:self.progressView];
 
-//    }
+    }
     
 }
 
