@@ -391,15 +391,16 @@
     
     // Scroll to current row
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[row intValue] inSection:0]
-                          atScrollPosition:UITableViewScrollPositionTop
+                          atScrollPosition:UITableViewScrollPositionMiddle
                                   animated:YES];
     
-    // Deselect all othe rows
+    // Deselect all other rows
     NSIndexPath *previousRowIndexPath = [NSIndexPath indexPathForRow:[row intValue]-1 inSection:0];
     [self.tableView deselectRowAtIndexPath:previousRowIndexPath animated:NO];
     
     NSIndexPath *nextRowIndexPath = [NSIndexPath indexPathForRow:[row intValue]+1 inSection:0];
     [self.tableView deselectRowAtIndexPath:nextRowIndexPath animated:NO];
+
     
     // Set current row as selected
     VideoCardCell *cell = (VideoCardCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[row intValue] inSection:0]];
@@ -565,7 +566,11 @@
 {
     if ( kDeviceIsIPad ) {
         
-        NSLog(@"%@", self.tableView.indexPathsForSelectedRows);
+        NSNumber *rowNumber = [NSNumber numberWithInt:self.tableView.indexPathForSelectedRow.row];
+        NSDictionary *dictionary = [NSDictionary dictionaryWithObject:rowNumber forKey:kIndexOfCurrentVideo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kIndexOfCurrentVideoObserver
+                                                            object:nil
+                                                          userInfo:dictionary];
         
         // Remove previous instance of VideoPlayerContainerViewController and VideoPlayerViewController
         if ( [self.appDelegate.detailNavigationController.visibleViewController isKindOfClass:[VideoPlayerViewController class]] ) {
