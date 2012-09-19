@@ -109,11 +109,15 @@
     if ( [self isPlayingVideo] ) {
         
         [self setIsPlayingVideo:NO];
-        CGRect frame = self.view.frame;
-        self.view.frame = CGRectMake(frame.origin.x,
-                                     20.0f + frame.origin.y,
-                                     frame.size.width,
-                                     frame.size.height);
+        
+        // Shift frame if iPhone
+        if ( !kDeviceIsIPad ) {
+            CGRect frame = self.view.frame;
+            self.view.frame = CGRectMake(frame.origin.x,
+                                         20.0f + frame.origin.y,
+                                         frame.size.width,
+                                         frame.size.height);
+        }
         
     }
     
@@ -560,17 +564,23 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ( kDeviceIsIPad ) {
-    
+        
+        NSLog(@"%@", self.tableView.indexPathsForSelectedRows);
+        
+        // Remove previous instance of VideoPlayerContainerViewController and VideoPlayerViewController
+        if ( [self.appDelegate.detailNavigationController.visibleViewController isKindOfClass:[VideoPlayerViewController class]] ) {
+            VideoPlayerViewController *controller = (VideoPlayerViewController*)self.appDelegate.detailNavigationController.visibleViewController;
+            [controller.videoPlayerContainerViewController destroyMoviePlayer];
+        }
+        
         VideoPlayerContainerViewController *videoPlayerContainerViewController = [[VideoPlayerContainerViewController alloc] initWithVideos:self.resultsArray selectedVideo:indexPath.row andQuery:self.query];
         [self.appDelegate.detailNavigationController pushViewController:videoPlayerContainerViewController animated:NO];
-        
         [self setIsPlayingVideo:YES];
         
     } else {
     
         VideoPlayerContainerViewController *videoPlayerContainerViewController = [[VideoPlayerContainerViewController alloc] initWithVideos:self.resultsArray selectedVideo:indexPath.row andQuery:self.query];
         [self.navigationController pushViewController:videoPlayerContainerViewController animated:YES];
-        
         [self setIsPlayingVideo:YES];
         
     }

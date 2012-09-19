@@ -109,11 +109,11 @@
     } else {
         [self.moviePlayer.view setFrame:self.appDelegate.window.frame];
         [self.navigationController pushViewController:self.moviePlayer animated:NO];
+        [self.navigationController setNavigationBarHidden:YES];
     }
 
     if ( kSystemVersion5 ) [self.moviePlayer modifyVideoPlayerButtons];
     
-    [self.navigationController setNavigationBarHidden:YES];
     [self.appDelegate setVideoPlayerViewController:self.moviePlayer];
     
 }
@@ -122,15 +122,17 @@
 {
     NSUInteger numberOfViewControllers = [self.navigationController.viewControllers count];
     [self.moviePlayer.view setHidden:YES];
-    [self.navigationController setNavigationBarHidden:NO];
     
     if ( kDeviceIsIPad ) {
         [self.navigationController popToRootViewControllerAnimated:NO];
     } else {
+        [self.navigationController setNavigationBarHidden:NO];
         [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:numberOfViewControllers-3] animated:YES];
     }
 
     [self.navigationController.visibleViewController viewWillAppear:NO]; // Redraw instance of GeniusRollViewControlelr in case navigationBar gets shifted in the wrong direction (potential solution)
+    [self.moviePlayer.moviePlayer stop];
+    [self.moviePlayer.moviePlayer setContentURL:nil];
     [self setMoviePlayer:nil];
     [self.appDelegate setVideoPlayerViewController:nil];
     
@@ -410,29 +412,40 @@
 
     if ( 4 == [[[[[[self.moviePlayer.view subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] count] ) {
 
-        NSString *overlayString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"M",@"P",@"F",@"u",@"l",@"l",@"S",@"c",@"r",@"e",@"e",@"n",@"V",@"i",@"d",@"e",@"o",@"O",@"v",@"e",@"r",@"l",@"a",@"y"];
+        NSString *overlayString;
+        
+        // Listen to device-specific notification
+        if ( kDeviceIsIPad ) {
+            overlayString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"M",@"P",@"P",@"a",@"d",@"F",@"u",@"l",@"l",@"S",@"c",@"r",@"e",@"e",@"n",@"V",@"i",@"d",@"e",@"o",@"O",@"v",@"e",@"r",@"l",@"a",@"y"];
+
+        } else {
+            
+             overlayString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"M",@"P",@"F",@"u",@"l",@"l",@"S",@"c",@"r",@"e",@"e",@"n",@"V",@"i",@"d",@"e",@"o",@"O",@"v",@"e",@"r",@"l",@"a",@"y"];
+        
+        }
+
         NSString *classNameCheck = NSStringFromClass([[[[[[[self.moviePlayer.view subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] class]);
         
+        // If 'overlayString' notification is posted, the mdeia player buttons are visible, so we can modify them.
         if ( [classNameCheck isEqualToString:overlayString] ) {
             [self.moviePlayer modifyVideoPlayerButtons];
         }
     
-        // Show/Hide status bar
-        NSString *name = [NSString stringWithFormat:@"%@%@%@%@", @"n",@"a",@"m",@"e"];
-        NSString *show = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@",@"M",@"P",@"I",@"n",@"l",@"i",@"n",@"e",@"V",@"i",@"d",@"e",@"o",@"O",@"v",@"e",@"r",@"l",@"a",@"y",@"S",@"h",@"o",@"w"];
-        NSString *hide = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@",@"M",@"P",@"I",@"n",@"l",@"i",@"n",@"e",@"V",@"i",@"d",@"e",@"o",@"O",@"v",@"e",@"r",@"l",@"a",@"y",@"H",@"i",@"d",@"e"];
-        
-        if ( [[notification.userInfo valueForKey:name] isEqualToString:show] ) {
-            [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
-        } else if ( [[notification.userInfo valueForKey:name] isEqualToString:hide] ) {
-            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+        // Show/Hide status bar if iPhone
+        if ( !kDeviceIsIPad ) {
+           
+            NSString *name = [NSString stringWithFormat:@"%@%@%@%@", @"n",@"a",@"m",@"e"];
+            NSString *show = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@",@"M",@"P",@"I",@"n",@"l",@"i",@"n",@"e",@"V",@"i",@"d",@"e",@"o",@"O",@"v",@"e",@"r",@"l",@"a",@"y",@"S",@"h",@"o",@"w"];
+            NSString *hide = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@",@"M",@"P",@"I",@"n",@"l",@"i",@"n",@"e",@"V",@"i",@"d",@"e",@"o",@"O",@"v",@"e",@"r",@"l",@"a",@"y",@"H",@"i",@"d",@"e"];
+            
+            if ( [[notification.userInfo valueForKey:name] isEqualToString:show] ) {
+                [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+            } else if ( [[notification.userInfo valueForKey:name] isEqualToString:hide] ) {
+                [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+            }
         }
-        
-    
     }
-    
 }
-
 
 - (void)videoDidEndPlaying:(NSNotification*)notification
 {

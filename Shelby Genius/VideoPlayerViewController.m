@@ -13,7 +13,6 @@
 @interface VideoPlayerViewController ()
 
 @property (strong, nonatomic) NSArray *video;
-@property (strong, nonatomic) VideoPlayerContainerViewController *videoPlayerContainerViewController;
 
 @end
 

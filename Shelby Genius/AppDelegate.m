@@ -71,6 +71,7 @@
         // Right side of rootSplitViewController
         DetailViewController *detailViewController = [[DetailViewController alloc] init];
         self.detailNavigationController = [[DetailNavigationController alloc] initWithRootViewController:detailViewController];
+        [self.detailNavigationController setNavigationBarHidden:YES];
 
         // Set rootSplitViewController as window's rootViewController
         [self.rootSplitViewController setViewControllers:[NSArray arrayWithObjects:self.rootNavigationController, self.detailNavigationController, nil]];

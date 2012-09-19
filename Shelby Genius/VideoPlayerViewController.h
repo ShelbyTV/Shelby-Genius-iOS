@@ -14,6 +14,7 @@
 @interface VideoPlayerViewController : MPMoviePlayerViewController 
 
 @property (strong, nonatomic) LoadingVideoView *loadingVideoView;
+@property (strong, nonatomic) VideoPlayerContainerViewController *videoPlayerContainerViewController;
 
 - (id)initWithVideo:(NSArray*)video andVideoPlayerContainerViewController:(VideoPlayerContainerViewController*)videoPlayerContainerViewController;
 - (void)modifyVideoPlayerButtons;
