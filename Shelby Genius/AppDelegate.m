@@ -174,12 +174,6 @@
     [[UITableView appearance] setSeparatorColor:[UIColor colorWithRed:173.0f/255.0f green:173.0f/255.0f blue:173.0f/255.0f alpha:1.0f]];
 }
 
-#pragma mark - UISplitViewControllerDelegate Methods
-//- (BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation
-//{
-//    return self.hideRootViewController;
-//}
-
 #pragma mark - MBProgressHUD Methods
 - (void)addHUDWithMessage:(NSString *)message
 {

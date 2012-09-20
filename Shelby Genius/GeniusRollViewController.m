@@ -394,13 +394,8 @@
                           atScrollPosition:UITableViewScrollPositionMiddle
                                   animated:YES];
     
-    // Deselect all other rows
-    NSIndexPath *previousRowIndexPath = [NSIndexPath indexPathForRow:[row intValue]-1 inSection:0];
-    [self.tableView deselectRowAtIndexPath:previousRowIndexPath animated:NO];
-    
-    NSIndexPath *nextRowIndexPath = [NSIndexPath indexPathForRow:[row intValue]+1 inSection:0];
-    [self.tableView deselectRowAtIndexPath:nextRowIndexPath animated:NO];
-
+    // Deselect all other rows witha  quick reload
+    [self.tableView reloadData];
     
     // Set current row as selected
     VideoCardCell *cell = (VideoCardCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[row intValue] inSection:0]];
