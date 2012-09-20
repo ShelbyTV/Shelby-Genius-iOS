@@ -35,6 +35,7 @@
 @synthesize progressView = _progressView;
 @synthesize rootNavigationController = _rootNavigationController;
 @synthesize detailNavigationController = _detailNavigationController;
+@synthesize hideRootViewController = _hideRootViewController;
 @synthesize storedQuery = _storedQuery;
 @synthesize storedQueryArray = _storedQueryArray;
 @synthesize numberOfResultsStoredQueryReturned = _numberOfResultsStoredQueryReturned;
@@ -172,6 +173,12 @@
     // UITableView
     [[UITableView appearance] setSeparatorColor:[UIColor colorWithRed:173.0f/255.0f green:173.0f/255.0f blue:173.0f/255.0f alpha:1.0f]];
 }
+
+#pragma mark - UISplitViewControllerDelegate Methods
+//- (BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation
+//{
+//    return self.hideRootViewController;
+//}
 
 #pragma mark - MBProgressHUD Methods
 - (void)addHUDWithMessage:(NSString *)message

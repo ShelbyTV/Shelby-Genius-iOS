@@ -20,6 +20,7 @@
 @property (strong, nonatomic) RootNavigationController *rootNavigationController;
 @property (strong, nonatomic) UISplitViewController *rootSplitViewController;
 @property (strong, nonatomic) DetailNavigationController *detailNavigationController;
+@property (assign, nonatomic) BOOL hideRootViewController;
 
 // Session Persistence Variables
 @property (copy, nonatomic) NSString *storedQuery;

@@ -35,7 +35,9 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if ( kSystemVersion6 ) [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    if ( kSystemVersion6 && !kDeviceIsIPad ) {
+        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];    
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -59,7 +61,7 @@
     if ( kSystemVersion6 ) { 
 
         if ( kDeviceIsIPad ) { // iOS 6 and iPad
-        
+            
             UIButton *previousVideoButton = [[[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:0];
             [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
             [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchDown];

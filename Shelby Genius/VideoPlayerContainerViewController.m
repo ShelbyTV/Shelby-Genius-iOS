@@ -27,6 +27,7 @@
 @property (strong, nonatomic) VideoPlayerViewController *moviePlayer;
 @property (strong, nonatomic) NSArray *video;
 @property (assign, nonatomic) BOOL videoWillBegin;
+@property (assign, nonatomic) BOOL iPadFrameDidShift;
 
 - (void)createMoviePlayer;
 - (void)createWebView;
@@ -54,6 +55,7 @@
 @synthesize moviePlayer = _moviePlayer;
 @synthesize webView = _webView;
 @synthesize videoWillBegin = _videoWillBegin;
+@synthesize iPadFrameDidShift = _iPadFrameDidShift;
 
 #pragma mark - Initialization
 - (id)initWithVideos:(NSMutableArray *)videos selectedVideo:(NSUInteger)selectedVideo andQuery:(NSString *)query
@@ -112,7 +114,9 @@
         [self.navigationController setNavigationBarHidden:YES];
     }
 
-    if ( kSystemVersion5 ) [self.moviePlayer modifyVideoPlayerButtons];
+    if ( kSystemVersion5 ) {
+        [self.moviePlayer modifyVideoPlayerButtons];
+    }
     
     [self.appDelegate setVideoPlayerViewController:self.moviePlayer];
     
@@ -388,7 +392,6 @@
     
     if ( movieController.loadState != 0 ) {
         
-        
         // Remove Indicator
         [self.moviePlayer.loadingVideoView.indicator stopAnimating];
         
@@ -402,6 +405,14 @@
 
                              movieController.controlStyle = MPMovieControlStyleFullscreen;
                              
+                             if ( ![self iPadFrameDidShift] ) {
+                                 CGRect frame =  self.moviePlayer.view.frame;
+                                 self.moviePlayer.view.frame = CGRectMake(frame.origin.x,
+                                                                          -20.0f + frame.origin.y,
+                                                                          frame.size.width,
+                                                                          frame.size.height);
+                                 [self setIPadFrameDidShift:YES];
+                             }
                          }];
     }
     
@@ -417,7 +428,7 @@
         // Listen to device-specific notification
         if ( kDeviceIsIPad ) {
             overlayString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"M",@"P",@"P",@"a",@"d",@"F",@"u",@"l",@"l",@"S",@"c",@"r",@"e",@"e",@"n",@"V",@"i",@"d",@"e",@"o",@"O",@"v",@"e",@"r",@"l",@"a",@"y"];
-
+            
         } else {
             
              overlayString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"M",@"P",@"F",@"u",@"l",@"l",@"S",@"c",@"r",@"e",@"e",@"n",@"V",@"i",@"d",@"e",@"o",@"O",@"v",@"e",@"r",@"l",@"a",@"y"];
@@ -455,7 +466,18 @@
     
     if ( 2 == [notificaitonNumber intValue] && (2 == self.moviePlayer.moviePlayer.playbackState || 0 == self.moviePlayer.moviePlayer.playbackState) ) { // Done button clicked in portrait mode
         
-        [self destroyMoviePlayer];
+        // Flicker TV screen out of view
+        if ( kDeviceIsIPad ) {
+            
+            [UIView animateWithDuration:0.25 animations:^{
+                self.moviePlayer.moviePlayer.controlStyle = MPMovieControlStyleNone;
+                CGRect frame = self.moviePlayer.view.frame;
+                self.moviePlayer.view.frame = CGRectMake(frame.size.width/2.0f, frame.size.height/2.0f, 2.0f, 2.0f);
+            } completion:^(BOOL finished) {
+                    [self destroyMoviePlayer];
+            }];
+        
+        }
 
     }
     
