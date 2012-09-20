@@ -76,6 +76,9 @@
 		8EDDFB3215D88B1A00BCD710 /* navigationLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2715D88B1A00BCD710 /* navigationLogo.png */; };
 		8EDDFB3315D88B1A00BCD710 /* navigationLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2815D88B1A00BCD710 /* navigationLogo@2x.png */; };
 		8EDDFB3415D88B1A00BCD710 /* navigationBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDDFB2915D88B1A00BCD710 /* navigationBar.png */; };
+		8EDF833B160B7AD800EB4518 /* MGSplitCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDF8334160B7AD800EB4518 /* MGSplitCornersView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8EDF833C160B7AD800EB4518 /* MGSplitDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDF8336160B7AD800EB4518 /* MGSplitDividerView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8EDF833E160B7AD800EB4518 /* MGSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDF833A160B7AD800EB4518 /* MGSplitViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8EF33D0B15EFCFDD007FE38E /* RootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF33D0A15EFCFDD007FE38E /* RootNavigationController.m */; };
 		8EF33D0F15EFE516007FE38E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF33D0E15EFE516007FE38E /* Reachability.m */; };
 		8EF33D1515EFE729007FE38E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF33D1415EFE728007FE38E /* CFNetwork.framework */; };
@@ -177,6 +180,12 @@
 		8EDDFB2715D88B1A00BCD710 /* navigationLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationLogo.png; sourceTree = "<group>"; };
 		8EDDFB2815D88B1A00BCD710 /* navigationLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationLogo@2x.png"; sourceTree = "<group>"; };
 		8EDDFB2915D88B1A00BCD710 /* navigationBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationBar.png; sourceTree = "<group>"; };
+		8EDF8333160B7AD800EB4518 /* MGSplitCornersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSplitCornersView.h; sourceTree = "<group>"; };
+		8EDF8334160B7AD800EB4518 /* MGSplitCornersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSplitCornersView.m; sourceTree = "<group>"; };
+		8EDF8335160B7AD800EB4518 /* MGSplitDividerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSplitDividerView.h; sourceTree = "<group>"; };
+		8EDF8336160B7AD800EB4518 /* MGSplitDividerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSplitDividerView.m; sourceTree = "<group>"; };
+		8EDF8339160B7AD800EB4518 /* MGSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSplitViewController.h; sourceTree = "<group>"; };
+		8EDF833A160B7AD800EB4518 /* MGSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSplitViewController.m; sourceTree = "<group>"; };
 		8EF33D0915EFCFDD007FE38E /* RootNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNavigationController.h; sourceTree = "<group>"; };
 		8EF33D0A15EFCFDD007FE38E /* RootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNavigationController.m; sourceTree = "<group>"; };
 		8EF33D0D15EFE516007FE38E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -430,6 +439,7 @@
 				8E2A242F15D4F0FA00D09A8B /* Asynchronous Freeloader */,
 				8E25615515EBF02100200BC2 /* Kissmetrics */,
 				8E2E974315D56A2700178DA0 /* MBProgressHUD */,
+				8EDF8325160B7A8700EB4518 /* MGSplitViewController */,
 				8EF33D0C15EFE516007FE38E /* Reachability (ARC) */,
 				8EB3D2A515DB55DB00709586 /* Panhandler */,
 			);
@@ -471,6 +481,20 @@
 			);
 			name = Images;
 			path = Resources/Images;
+			sourceTree = SOURCE_ROOT;
+		};
+		8EDF8325160B7A8700EB4518 /* MGSplitViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8EDF8333160B7AD800EB4518 /* MGSplitCornersView.h */,
+				8EDF8334160B7AD800EB4518 /* MGSplitCornersView.m */,
+				8EDF8335160B7AD800EB4518 /* MGSplitDividerView.h */,
+				8EDF8336160B7AD800EB4518 /* MGSplitDividerView.m */,
+				8EDF8339160B7AD800EB4518 /* MGSplitViewController.h */,
+				8EDF833A160B7AD800EB4518 /* MGSplitViewController.m */,
+			);
+			name = MGSplitViewController;
+			path = "External Libraries/MGSplitViewController";
 			sourceTree = SOURCE_ROOT;
 		};
 		8EF33D0C15EFE516007FE38E /* Reachability (ARC) */ = {
@@ -622,6 +646,9 @@
 				8E482E7F15F94FAB0079C84A /* DetailViewController.m in Sources */,
 				8EAD107515FA93C200CAEC3C /* DetailNavigationController.m in Sources */,
 				8EA732A0160246D6005BA877 /* KISSMetricsController.m in Sources */,
+				8EDF833B160B7AD800EB4518 /* MGSplitCornersView.m in Sources */,
+				8EDF833C160B7AD800EB4518 /* MGSplitDividerView.m in Sources */,
+				8EDF833E160B7AD800EB4518 /* MGSplitViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

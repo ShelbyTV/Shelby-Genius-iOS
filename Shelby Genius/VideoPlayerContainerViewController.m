@@ -412,7 +412,9 @@
                                                                           -20.0f + frame.origin.y,
                                                                           frame.size.width,
                                                                           frame.size.height);
+
                                  [self setIPadFrameDidShift:YES];
+                                 
                              }
                          }];
     }

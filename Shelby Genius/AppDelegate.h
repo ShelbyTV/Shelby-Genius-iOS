@@ -7,8 +7,9 @@
 //
 
 #import "RootNavigationController.h"
-#import "MBProgressHUD.h"
 #import "DetailNavigationController.h"
+#import "MBProgressHUD.h"
+#import "MGSplitViewController.h"
 
 @class VideoPlayerViewController;
 
@@ -18,7 +19,7 @@
 
 // Navigation Variables
 @property (strong, nonatomic) RootNavigationController *rootNavigationController;
-@property (strong, nonatomic) UISplitViewController *rootSplitViewController;
+@property (strong, nonatomic) MGSplitViewController *rootSplitViewController;
 @property (strong, nonatomic) DetailNavigationController *detailNavigationController;
 @property (assign, nonatomic) BOOL hideRootViewController;
 
