@@ -26,18 +26,25 @@
 @property (assign, nonatomic) VideoProvider provider;
 @property (strong, nonatomic) VideoPlayerViewController *moviePlayer;
 @property (strong, nonatomic) NSArray *video;
+
+// Flags
 @property (assign, nonatomic) BOOL videoWillBegin;
 @property (assign, nonatomic) BOOL iPadFrameDidShift;
 
+// Creation Methods
 - (void)createMoviePlayer;
 - (void)createWebView;
 - (void)createObservers;
+
+// Video Fetching, Setting and Displaying Methods
 - (void)videoDirectLinkFromProvider:(NSString*)providerName;
 - (void)loadYouTubePage;
 - (void)loadVimeoPage;
 - (void)loadDailyMotionPage;
 - (void)loadNewlySelectedVideo;
 - (void)playVideo:(NSString *)link;
+
+// Notifications
 - (void)processNotification:(NSNotification*)notification;
 - (void)videoDidLoad:(NSNotification*)notification;
 - (void)controllsDidAppear:(NSNotification*)notification;
@@ -412,7 +419,6 @@
                                                                           -20.0f + frame.origin.y,
                                                                           frame.size.width,
                                                                           frame.size.height);
-
                                  [self setIPadFrameDidShift:YES];
                                  
                              }

@@ -9,10 +9,13 @@
 #import "VideoPlayerViewController.h"
 #import "VideoPlayerContainerViewController.h"
 #import "AsynchronousFreeloader.h"
+#import "AppDelegate.h"
 
 @interface VideoPlayerViewController ()
 
 @property (strong, nonatomic) NSArray *video;
+
+- (void)toggleFullscreen;
 
 @end
 
@@ -62,13 +65,22 @@
 
         if ( kDeviceIsIPad ) { // iOS 6 and iPad
             
+            
             UIButton *previousVideoButton = [[[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:0];
             [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
             [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchDown];
             
+            NSLog(@"%@", [[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:1] subviews] objectAtIndex:0] subviews] );
+            
             UIButton *nextVideoButton = [[[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
             [nextVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
             [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchDown];
+            
+            NSLog(@"%@", [[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:0] subviews]);
+            
+            UIButton *fullscreenButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:0] subviews] objectAtIndex:7];
+            [fullscreenButton addTarget:self action:@selector(toggleFullscreen) forControlEvents:UIControlEventTouchUpInside];
+            
             
         } else { // iOS 6 and iPhone
         
@@ -157,6 +169,16 @@
     
 }
 
+#pragma mark - Private Methods
+- (void)toggleFullscreen
+{
+//    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//    [appDelegate.rootSplitViewController toggleMasterView:self];
+
+    NSLog(@"TOGGLE FULLSCREEN");
+    
+}
+
 #pragma mark - Remote Control Event
 - (void)remoteControlReceivedWithEvent:(UIEvent *)event
 {
@@ -164,10 +186,12 @@
     switch ( event.subtype ) {
         case UIEventSubtypeRemoteControlTogglePlayPause:{
         
-            if ( self.moviePlayer.playbackState == MPMoviePlaybackStatePaused || self.moviePlayer.playbackState == MPMoviePlaybackStateStopped || self.moviePlayer.playbackState == MPMoviePlaybackStateInterrupted ) [self.moviePlayer play];
+            if ( self.moviePlayer.playbackState == MPMoviePlaybackStatePaused || self.moviePlayer.playbackState == MPMoviePlaybackStateStopped || self.moviePlayer.playbackState == MPMoviePlaybackStateInterrupted ) {
+                [self.moviePlayer play];
+            } else {
+                [self.moviePlayer pause];
+            }
             
-            else [self.moviePlayer pause];
-        
         } break;
         case UIEventSubtypeRemoteControlNextTrack:{
             [self.videoPlayerContainerViewController nextVideoButtonAction];
