@@ -32,6 +32,8 @@
 		8E6F77B015FD97C500DB9569 /* VideoCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E6F77AF15FD97C500DB9569 /* VideoCardCell.xib */; };
 		8E7522BB15F626D7000EBA59 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7522BA15F626D7000EBA59 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8E7522BE15F68EDC000EBA59 /* Icon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7522BD15F68EDC000EBA59 /* Icon@2x~ipad.png */; };
+		8E87A457160BCD84006C75F7 /* fullscreenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E87A455160BCD84006C75F7 /* fullscreenButton.png */; };
+		8E87A458160BCD84006C75F7 /* fullscreenButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E87A456160BCD84006C75F7 /* fullscreenButton@2x.png */; };
 		8E89F5C015D4F724004B2DFF /* VideoPlayerContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E89F5BF15D4F724004B2DFF /* VideoPlayerContainerViewController.m */; };
 		8E89F5C915D4FEC4004B2DFF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E89F5C115D4FEC4004B2DFF /* Default.png */; };
 		8E89F5CA15D4FEC4004B2DFF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E89F5C215D4FEC4004B2DFF /* Default@2x.png */; };
@@ -117,6 +119,8 @@
 		8E6F77AF15FD97C500DB9569 /* VideoCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCardCell.xib; sourceTree = "<group>"; };
 		8E7522BA15F626D7000EBA59 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8E7522BD15F68EDC000EBA59 /* Icon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x~ipad.png"; sourceTree = SOURCE_ROOT; };
+		8E87A455160BCD84006C75F7 /* fullscreenButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fullscreenButton.png; sourceTree = "<group>"; };
+		8E87A456160BCD84006C75F7 /* fullscreenButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fullscreenButton@2x.png"; sourceTree = "<group>"; };
 		8E89F5BE15D4F724004B2DFF /* VideoPlayerContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerContainerViewController.h; sourceTree = "<group>"; };
 		8E89F5BF15D4F724004B2DFF /* VideoPlayerContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerContainerViewController.m; sourceTree = "<group>"; };
 		8E89F5C115D4FEC4004B2DFF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
@@ -460,6 +464,8 @@
 		8EDDFB2615D88B1A00BCD710 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8E87A455160BCD84006C75F7 /* fullscreenButton.png */,
+				8E87A456160BCD84006C75F7 /* fullscreenButton@2x.png */,
 				8E25615115EBDEE300200BC2 /* loadingCancelButton.png */,
 				8E25615215EBDEE300200BC2 /* loadingCancelButton@2x.png */,
 				8E25615B15EC31CA00200BC2 /* shareButton.png */,
@@ -599,6 +605,8 @@
 				8E6E9C0915F793EE00801B3C /* SearchViewController.xib in Resources */,
 				8E56EF0415FA7E8C00422CEE /* LoadingVideoView_ipad.xib in Resources */,
 				8E6F77B015FD97C500DB9569 /* VideoCardCell.xib in Resources */,
+				8E87A457160BCD84006C75F7 /* fullscreenButton.png in Resources */,
+				8E87A458160BCD84006C75F7 /* fullscreenButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -35,7 +35,6 @@
 @synthesize progressView = _progressView;
 @synthesize rootNavigationController = _rootNavigationController;
 @synthesize detailNavigationController = _detailNavigationController;
-@synthesize hideRootViewController = _hideRootViewController;
 @synthesize storedQuery = _storedQuery;
 @synthesize storedQueryArray = _storedQueryArray;
 @synthesize numberOfResultsStoredQueryReturned = _numberOfResultsStoredQueryReturned;

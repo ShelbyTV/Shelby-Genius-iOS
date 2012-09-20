@@ -135,6 +135,11 @@
     [self.moviePlayer.view setHidden:YES];
     
     if ( kDeviceIsIPad ) {
+        
+        if ( !self.appDelegate.rootSplitViewController.isShowingMaster) {
+            [self.appDelegate.rootSplitViewController toggleMasterView:self];
+        }
+        
         [self.navigationController popToRootViewControllerAnimated:NO];
     } else {
         [self.navigationController setNavigationBarHidden:NO];
