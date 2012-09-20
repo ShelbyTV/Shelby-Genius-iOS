@@ -17,7 +17,7 @@
 #import "VideoPlayerViewController.h"
 #import "DetailViewController.h"
 
-@interface AppDelegate () <UISplitViewControllerDelegate>
+@interface AppDelegate ()
 
 @property (strong, nonatomic) UIView *progressView;
 @property (assign, nonatomic) NSTimeInterval videoPlaybackTimeInterval;
@@ -63,6 +63,7 @@
         
         // Initialize rootSplitViewController
         self.rootSplitViewController = [[UISplitViewController alloc] init];
+        self.hideRootViewController = NO;
         self.rootSplitViewController.delegate = self;
         
         // Left side of rootSplitViewController
@@ -172,6 +173,12 @@
     
     // UITableView
     [[UITableView appearance] setSeparatorColor:[UIColor colorWithRed:173.0f/255.0f green:173.0f/255.0f blue:173.0f/255.0f alpha:1.0f]];
+}
+
+#pragma mark - UISplitViewControllerDelegate Methods
+- (BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation
+{
+    return self.hideRootViewController;
 }
 
 #pragma mark - MBProgressHUD Methods

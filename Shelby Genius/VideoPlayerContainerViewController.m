@@ -423,7 +423,7 @@
 {
 
     if ( 4 == [[[[[[self.moviePlayer.view subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] count] ) {
-
+        
         // Listen to device-specific notification
         NSString *overlayString;
         if ( kDeviceIsIPad ) {
@@ -439,7 +439,7 @@
             [self.moviePlayer modifyVideoPlayerButtons];
         }
     
-        // Show/Hide status bar if iPhone
+        // Show/Hide status bar if device is iPhone
         if ( !kDeviceIsIPad ) {
            
             NSString *name = [NSString stringWithFormat:@"%@%@%@%@", @"n",@"a",@"m",@"e"];
