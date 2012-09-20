@@ -405,7 +405,8 @@
 
                              movieController.controlStyle = MPMovieControlStyleFullscreen;
                              
-                             if ( ![self iPadFrameDidShift] ) {
+                             // Shift moviePlayer frame for iPad
+                             if ( ![self iPadFrameDidShift] && kDeviceIsIPad) {
                                  CGRect frame =  self.moviePlayer.view.frame;
                                  self.moviePlayer.view.frame = CGRectMake(frame.origin.x,
                                                                           -20.0f + frame.origin.y,
@@ -423,16 +424,12 @@
 
     if ( 4 == [[[[[[self.moviePlayer.view subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] count] ) {
 
-        NSString *overlayString;
-        
         // Listen to device-specific notification
+        NSString *overlayString;
         if ( kDeviceIsIPad ) {
             overlayString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"M",@"P",@"P",@"a",@"d",@"F",@"u",@"l",@"l",@"S",@"c",@"r",@"e",@"e",@"n",@"V",@"i",@"d",@"e",@"o",@"O",@"v",@"e",@"r",@"l",@"a",@"y"];
-            
         } else {
-            
              overlayString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"M",@"P",@"F",@"u",@"l",@"l",@"S",@"c",@"r",@"e",@"e",@"n",@"V",@"i",@"d",@"e",@"o",@"O",@"v",@"e",@"r",@"l",@"a",@"y"];
-        
         }
 
         NSString *classNameCheck = NSStringFromClass([[[[[[[self.moviePlayer.view subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] class]);
@@ -466,7 +463,7 @@
     
     if ( 2 == [notificaitonNumber intValue] && (2 == self.moviePlayer.moviePlayer.playbackState || 0 == self.moviePlayer.moviePlayer.playbackState) ) { // Done button clicked in portrait mode
         
-        // Flicker TV screen out of view
+        // If iPad, Flicker TV screen out of view
         if ( kDeviceIsIPad ) {
             
             [UIView animateWithDuration:0.25 animations:^{
@@ -477,6 +474,8 @@
                     [self destroyMoviePlayer];
             }];
         
+        } else {
+            [self destroyMoviePlayer];
         }
 
     }

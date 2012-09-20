@@ -95,8 +95,8 @@
     // Annoying iOS5 status bar color fix
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     
-    // Annoying iOS6 orientation fix when GenisuRollViewController is Re-Presented
-    if ( kSystemVersion6 ) {
+    // Annoying (iPhone only) iOS6 orientation fix when GenisuRollViewController is Re-Presented
+    if ( kSystemVersion6 && !kDeviceIsIPad ) {
         
         [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
         UIViewController *mVC = [[UIViewController alloc] init];
