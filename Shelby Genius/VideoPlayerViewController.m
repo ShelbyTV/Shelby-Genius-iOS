@@ -85,35 +85,18 @@
 
             // Add fullscreen button to left side of previous button
             if ( ![self fullscreenButtonAdded] ) {
-                
+
                 self.fullscreenButtonAdded = YES;
-            
                 
                 CGRect frame = previousVideoButton.frame;
                 UIButton *fullscreenButton = [[UIButton alloc] init];
-                [fullscreenButton setFrame:CGRectMake(-60.0f+frame.origin.x, frame.origin.y, 40.0f, 42.0f)];
+                [fullscreenButton setFrame:CGRectMake(-100.0f+frame.origin.x, frame.origin.y, 40.0f, 42.0f)];
                 [fullscreenButton setBackgroundImage:[UIImage imageNamed:@"fullscreenButton"] forState:UIControlStateNormal];
                 [fullscreenButton addTarget:self action:@selector(toggleFullscreen:) forControlEvents:UIControlEventTouchUpInside];
-                
-                if ( self.appDelegate.rootSplitViewController.isShowingMaster ) {
-                    
-                    if ( [transportControlsView.subviews count] <= 5 ) [transportControlsView addSubview:fullscreenButton];
-                    
-                } else {
-                    
-                    if ( [transportControlsView.subviews count] <= 5 ) [transportControlsView addSubview:fullscreenButton];
-                    
-                    [UIView beginAnimations:nil context:nil];
-                    [UIView setAnimationDuration:0.1];
-                    fullscreenButton.transform = CGAffineTransformMakeRotation(M_PI);
-                    [UIView commitAnimations];
-                    
-                    
-                }
+                if ( [transportControlsView.subviews count] <= 5 ) [transportControlsView addSubview:fullscreenButton];
 
                 
             }
-
             
         } else { // iOS 6 and iPhone
         
@@ -132,13 +115,32 @@
         
         if ( kDeviceIsIPad ) { // iOS 5 and iPad
             
-            UIButton *previousVideoButton = [[[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:0];
+            // View for MPMoviePLayer Controls
+            UIView *transportControlsView = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:1] subviews] objectAtIndex:0];
+            
+            UIButton *previousVideoButton = [[transportControlsView subviews] objectAtIndex:0];
             [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
             [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchDown];
             
-            UIButton *nextVideoButton = [[[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
+            UIButton *nextVideoButton = [[transportControlsView subviews] objectAtIndex:2];
             [nextVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
             [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchDown];
+            
+            
+            // Add fullscreen button to left side of previous button
+            if ( ![self fullscreenButtonAdded] ) {
+                
+                self.fullscreenButtonAdded = YES;
+                
+                CGRect frame = previousVideoButton.frame;
+                UIButton *fullscreenButton = [[UIButton alloc] init];
+                [fullscreenButton setFrame:CGRectMake(-100.0f+frame.origin.x, frame.origin.y, 40.0f, 42.0f)];
+                [fullscreenButton setBackgroundImage:[UIImage imageNamed:@"fullscreenButton"] forState:UIControlStateNormal];
+                [fullscreenButton addTarget:self action:@selector(toggleFullscreen:) forControlEvents:UIControlEventTouchUpInside];
+                if ( [transportControlsView.subviews count] <= 5 ) [transportControlsView addSubview:fullscreenButton];
+
+                
+            }
             
         } else { // iOS 5 and iPhone
             
