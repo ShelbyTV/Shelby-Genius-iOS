@@ -211,13 +211,7 @@
 #pragma mark - Private Methods
 - (void)toggleFullscreen:(id)sender
 {
-    
     [self.appDelegate.rootSplitViewController toggleMasterView:self];
-//    [UIView beginAnimations:nil context:nil];
-//    [UIView setAnimationDuration:0.1];
-//    self.fullscreenButton.transform = CGAffineTransformMakeRotation(M_PI);
-//    [UIView commitAnimations];
-
 }
 
 #pragma mark - Remote Control Event
