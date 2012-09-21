@@ -26,10 +26,7 @@
 @property (assign, nonatomic) VideoProvider provider;
 @property (strong, nonatomic) VideoPlayerViewController *moviePlayer;
 @property (strong, nonatomic) NSArray *video;
-
-// Flags
 @property (assign, nonatomic) BOOL videoWillBegin;
-@property (assign, nonatomic) BOOL iPadFrameDidShift;
 
 // Creation Methods
 - (void)createMoviePlayer;
@@ -62,7 +59,6 @@
 @synthesize moviePlayer = _moviePlayer;
 @synthesize webView = _webView;
 @synthesize videoWillBegin = _videoWillBegin;
-@synthesize iPadFrameDidShift = _iPadFrameDidShift;
 
 #pragma mark - Initialization
 - (id)initWithVideos:(NSMutableArray *)videos selectedVideo:(NSUInteger)selectedVideo andQuery:(NSString *)query
@@ -417,16 +413,6 @@
 
                              movieController.controlStyle = MPMovieControlStyleFullscreen;
                              
-                             // Shift moviePlayer frame for iPad
-                             if ( ![self iPadFrameDidShift] && kDeviceIsIPad) {
-//                                 CGRect frame =  [[[self.moviePlayer.view subviews] objectAtIndex:0] frame];
-//                                 self.moviePlayer.view.frame = CGRectMake(frame.origin.x,
-//                                                                          -20.0f + frame.origin.y,
-//                                                                          frame.size.width,
-//                                                                          frame.size.height);
-                                 [self setIPadFrameDidShift:YES];
-                                 
-                             }
                          }];
     }
     

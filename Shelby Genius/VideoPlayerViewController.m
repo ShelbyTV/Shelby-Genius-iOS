@@ -73,7 +73,6 @@
             // View for MPMoviePLayer Controls
             UIView *transportControlsView = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:1] subviews] objectAtIndex:0];
             
-            
             // Modify button with left arrows
             UIButton *previousVideoButton = [[transportControlsView subviews] objectAtIndex:0];
             [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
@@ -108,11 +107,16 @@
             
         } else { // iOS 6 and iPhone
         
-            UIButton *previousVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:0] subviews] objectAtIndex:1];
+            // View for MPMoviePLayer Controls
+            UIView *transportControlsView = [[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:0];
+            
+            // Modify button with left arrows
+            UIButton *previousVideoButton = [transportControlsView.subviews objectAtIndex:1];
             [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
             [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchDown];
             
-            UIButton *nextVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
+            // Modify button with right arrows
+            UIButton *nextVideoButton = [transportControlsView.subviews objectAtIndex:2];
             [nextVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
             [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchDown];
             
@@ -123,19 +127,25 @@
         
         if ( kDeviceIsIPad ) { // iOS 5 and iPad
             
-            NSLog(@"%@", [[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:0]);
-            
             // View for MPMoviePLayer Controls
             UIView *transportControlsView = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:1] subviews] objectAtIndex:0];
             
+            // Modify button with left arrows
             UIButton *previousVideoButton = [[transportControlsView subviews] objectAtIndex:0];
             [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
             [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchDown];
             
+            // Modify button with right arrows
             UIButton *nextVideoButton = [[transportControlsView subviews] objectAtIndex:2];
             [nextVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
             [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchDown];
             
+            // Modify navigation bar
+            UINavigationBar *navigationBar = [[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0];
+            CGRect navFrame = navigationBar.frame;
+            if (navFrame.origin.y != 0.0f ) {
+                navigationBar.frame = CGRectMake(navFrame.origin.x, -20.f + navFrame.origin.y, navFrame.size.width, navFrame.size.height);
+            }
             
             // Add fullscreen button to left side of previous button
             if ( ![self fullscreenButtonAdded] ) {
@@ -154,10 +164,12 @@
             
         } else { // iOS 5 and iPhone
             
+            // Modify button with left arrows
             UIButton *previousVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:1];
             [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
             [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchDown];
             
+            // Modify button with right arrows
             UIButton *nextVideoButton = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
             [nextVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
             [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchDown];
