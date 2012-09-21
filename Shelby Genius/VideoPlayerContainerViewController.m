@@ -419,11 +419,11 @@
                              
                              // Shift moviePlayer frame for iPad
                              if ( ![self iPadFrameDidShift] && kDeviceIsIPad) {
-                                 CGRect frame =  self.moviePlayer.view.frame;
-                                 self.moviePlayer.view.frame = CGRectMake(frame.origin.x,
-                                                                          -20.0f + frame.origin.y,
-                                                                          frame.size.width,
-                                                                          frame.size.height);
+//                                 CGRect frame =  [[[self.moviePlayer.view subviews] objectAtIndex:0] frame];
+//                                 self.moviePlayer.view.frame = CGRectMake(frame.origin.x,
+//                                                                          -20.0f + frame.origin.y,
+//                                                                          frame.size.width,
+//                                                                          frame.size.height);
                                  [self setIPadFrameDidShift:YES];
                                  
                              }

@@ -73,6 +73,7 @@
             // View for MPMoviePLayer Controls
             UIView *transportControlsView = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:1] subviews] objectAtIndex:0];
             
+            
             // Modify button with left arrows
             UIButton *previousVideoButton = [[transportControlsView subviews] objectAtIndex:0];
             [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
@@ -83,11 +84,18 @@
             [nextVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
             [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchDown];
 
+            // Modify navigation bar
+            UINavigationBar *navigationBar = [[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:0];
+            CGRect navFrame = navigationBar.frame;
+            if (navFrame.origin.y != 0.0f ) {
+                navigationBar.frame = CGRectMake(navFrame.origin.x, -20.f + navFrame.origin.y, navFrame.size.width, navFrame.size.height);
+            }
+            
             // Add fullscreen button to left side of previous button
             if ( ![self fullscreenButtonAdded] ) {
 
                 self.fullscreenButtonAdded = YES;
-                
+            
                 CGRect frame = previousVideoButton.frame;
                 UIButton *fullscreenButton = [[UIButton alloc] init];
                 [fullscreenButton setFrame:CGRectMake(-100.0f+frame.origin.x, frame.origin.y, 40.0f, 42.0f)];
@@ -114,6 +122,8 @@
     } else { 
         
         if ( kDeviceIsIPad ) { // iOS 5 and iPad
+            
+            NSLog(@"%@", [[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:0]);
             
             // View for MPMoviePLayer Controls
             UIView *transportControlsView = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:1] subviews] objectAtIndex:0];
