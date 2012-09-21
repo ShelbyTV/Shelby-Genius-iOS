@@ -13,27 +13,29 @@
 
 @interface VideoPlayerViewController ()
 
+@property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) NSArray *video;
-@property (assign, nonatomic) BOOL fullscreenControllsAdded;
+@property (assign, nonatomic) BOOL fullscreenButtonAdded;
 
 - (void)toggleFullscreen:(id)sender;
 
 @end
 
 @implementation VideoPlayerViewController
+@synthesize appDelegate = _appDelegate;
 @synthesize video = _video;
 @synthesize videoPlayerContainerViewController = _videoPlayerContainerViewController;
 @synthesize loadingVideoView = _loadingVideoView;
-@synthesize fullscreenControllsAdded = _fullscreenControllsAdded;
+@synthesize fullscreenButtonAdded = _fullscreenButtonAdded;
 
 - (id)initWithVideo:(NSArray *)video andVideoPlayerContainerViewController:(VideoPlayerContainerViewController *)videoPlayerContainerViewController
 {
     if (self = [super init] ) {
 
+        self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         self.videoPlayerContainerViewController = videoPlayerContainerViewController;
         self.video = video;
-        self.fullscreenControllsAdded = NO;
-    
+        
     }
     
     return self;
@@ -41,7 +43,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if ( kSystemVersion6 && !kDeviceIsIPad ) {
+    if ( kSystemVersion6 && !kDeviceIsIPad ) { // iOS6 and iPhone
         [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];    
     }
 }
@@ -68,23 +70,48 @@
 
         if ( kDeviceIsIPad ) { // iOS 6 and iPad
             
-            UIButton *previousVideoButton = [[[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:0];
+            // View for MPMoviePLayer Controls
+            UIView *transportControlsView = [[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:1] subviews] objectAtIndex:0];
+            
+            // Modify button with left arrows
+            UIButton *previousVideoButton = [[transportControlsView subviews] objectAtIndex:0];
             [previousVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
             [previousVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(previousVideoButtonAction) forControlEvents:UIControlEventTouchDown];
             
-            UIButton *nextVideoButton = [[[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:2];
+            // Modify button with right arrows
+            UIButton *nextVideoButton = [[transportControlsView subviews] objectAtIndex:2];
             [nextVideoButton removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
             [nextVideoButton addTarget:self.videoPlayerContainerViewController action:@selector(nextVideoButtonAction) forControlEvents:UIControlEventTouchDown];
 
-            if ( ![self fullscreenControllsAdded] ) {
+            // Add fullscreen button to left side of previous button
+            if ( ![self fullscreenButtonAdded] ) {
+                
+                self.fullscreenButtonAdded = YES;
+            
                 
                 CGRect frame = previousVideoButton.frame;
-                UIButton *fullscreenButton = [[UIButton alloc] initWithFrame:CGRectMake(-60.0f+frame.origin.x, frame.origin.y, 40.0f, 42.0f)];
-                [fullscreenButton setImage:[UIImage imageNamed:@"fullscreenButton"] forState:UIControlStateNormal];
+                UIButton *fullscreenButton = [[UIButton alloc] init];
+                [fullscreenButton setFrame:CGRectMake(-60.0f+frame.origin.x, frame.origin.y, 40.0f, 42.0f)];
+                [fullscreenButton setBackgroundImage:[UIImage imageNamed:@"fullscreenButton"] forState:UIControlStateNormal];
                 [fullscreenButton addTarget:self action:@selector(toggleFullscreen:) forControlEvents:UIControlEventTouchUpInside];
-                [[[[[[[[[[self.moviePlayer.view.subviews objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:3] subviews] objectAtIndex:1] subviews] objectAtIndex:0] addSubview:fullscreenButton];
-                self.fullscreenControllsAdded = YES;
-            
+                
+                if ( self.appDelegate.rootSplitViewController.isShowingMaster ) {
+                    
+                    if ( [transportControlsView.subviews count] <= 5 ) [transportControlsView addSubview:fullscreenButton];
+                    
+                } else {
+                    
+                    if ( [transportControlsView.subviews count] <= 5 ) [transportControlsView addSubview:fullscreenButton];
+                    
+                    [UIView beginAnimations:nil context:nil];
+                    [UIView setAnimationDuration:0.1];
+                    fullscreenButton.transform = CGAffineTransformMakeRotation(M_PI);
+                    [UIView commitAnimations];
+                    
+                    
+                }
+
+                
             }
 
             
@@ -130,27 +157,32 @@
 
 - (void)createLoadingVideoViewForVideo:(NSArray*)video;
 {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-    
+
+    // Remove previous loadingVideoView if it exists
     if (self.loadingVideoView) {
-      
+        
         [self.loadingVideoView removeFromSuperview];
         self.moviePlayer.controlStyle = MPMovieControlStyleNone;
-    
+        
     }
- 
+
+    // Create new instance of loadingVideoView
     NSArray *nib;
     
     if ( kDeviceIsIPad ) {
         
         nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingVideoView_ipad" owner:self options:NULL];
         
+        // Set iPad specific settings
+        self.fullscreenButtonAdded = NO;
+        
     } else {
-    
+
         nib = [[NSBundle mainBundle] loadNibNamed:@"LoadingVideoView_iphone" owner:self options:NULL];
         
+        // Set iPhone specific settings
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     }
-
 
     self.loadingVideoView = [nib objectAtIndex:0];
     self.loadingVideoView.videoTitleLabel.text = [NSString stringWithFormat:@"%@", [video valueForKey:@"title"]];
@@ -158,6 +190,7 @@
     [AsynchronousFreeloader loadImageFromLink:[video valueForKey:@"thumbnail_url"] forImageView:self.loadingVideoView.thumbnailImageView withPlaceholderView:nil];
     [self.view addSubview:self.loadingVideoView];
     [self.view addSubview:self.videoPlayerContainerViewController.webView];
+    self.loadingVideoView.center = self.view.center;
     
     CGRect frame = self.view.bounds;
     
@@ -178,17 +211,13 @@
 #pragma mark - Private Methods
 - (void)toggleFullscreen:(id)sender
 {
-    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    [appDelegate.rootSplitViewController toggleMasterView:self];
     
-    UIButton *button = (UIButton*)sender;
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.1];
-    button.transform = CGAffineTransformMakeRotation(M_PI);
-    [UIView commitAnimations];
-    
-    NSLog(@"TOGGLE FULLSCREEN");
-    
+    [self.appDelegate.rootSplitViewController toggleMasterView:self];
+//    [UIView beginAnimations:nil context:nil];
+//    [UIView setAnimationDuration:0.1];
+//    self.fullscreenButton.transform = CGAffineTransformMakeRotation(M_PI);
+//    [UIView commitAnimations];
+
 }
 
 #pragma mark - Remote Control Event

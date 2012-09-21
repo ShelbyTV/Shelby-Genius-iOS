@@ -136,7 +136,7 @@
     
     if ( kDeviceIsIPad ) {
         
-        if ( !self.appDelegate.rootSplitViewController.isShowingMaster) {
+        if ( !self.appDelegate.rootSplitViewController.isShowingMaster) { // If masterview is hidden, show master.
             [self.appDelegate.rootSplitViewController toggleMasterView:self];
         }
         
