@@ -59,6 +59,11 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
+    if ( kSystemVersion6 && !kDeviceIsIPad ) { // iOS6 and iPhone
+        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    }
+    
     [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
 }
 
