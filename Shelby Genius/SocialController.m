@@ -179,7 +179,7 @@ static SocialController *sharedInstance = nil;
     [mailViewController setSubject:[NSString stringWithFormat:@"%@ - via Shelby Genius", videoTitle]];
     
     // Body
-    NSString *message = [NSString stringWithFormat:@"I thought you might like this video: <strong><a href=\"%@\">%@</a></strong>.<br/><br/><em>via Shelby Genius - <a href=\"http://shl.by/ios-genius-app\">grab the app!</a></em>", self.awesomeURL, videoTitle];
+    NSString *message = [NSString stringWithFormat:@"I thought you might like this video: <strong><a href=\"%@\">%@</a></strong>.<br/><br/><em>via Shelby Genius - <a href=\"http://shl.by/shelbygeniusapp\">grab the app!</a></em>", self.awesomeURL, videoTitle];
     [mailViewController setMessageBody:message isHTML:YES];
     
     // Present mailViewController
