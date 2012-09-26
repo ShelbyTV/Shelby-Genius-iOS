@@ -282,19 +282,37 @@
 #pragma mark - Interface Orientation Methods
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    if (self.loadingVideoView && !kDeviceIsIPad) {
+    if (self.loadingVideoView && !kDeviceIsIPad) { // Such an ugly solution (Support Non-Retina, Retina 3.5", and Retina 4" for iPhone)
         
-        CGRect frame = self.view.bounds;
-        
-        if ( UIInterfaceOrientationIsPortrait(toInterfaceOrientation) ) {
+        if ( [[UIScreen mainScreen] respondsToSelector: @selector(scale)] ) {
 
-            [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
+            CGSize result = [[UIScreen mainScreen] bounds].size;
+            CGFloat scale = [UIScreen mainScreen].scale;
+            result = CGSizeMake(result.width * scale, result.height * scale);
             
-        } else {
-            
-            [self.loadingVideoView setFrame:CGRectMake(80.0f, 30.0f, frame.size.height, frame.size.width)];
-        }        
+            if(result.height == 1136) {
+                
+                CGRect frame = self.view.bounds;
+                if ( UIInterfaceOrientationIsPortrait(toInterfaceOrientation) ) {
+                    [self.loadingVideoView setFrame:CGRectMake(0.0f, 144.0f, frame.size.width, frame.size.height)];
+                } else {
+                    [self.loadingVideoView setFrame:CGRectMake(124.0f, 30.0f, frame.size.height, frame.size.width)];
+                }
+                
+            } else{
+                
+                CGRect frame = self.view.bounds;
+                if ( UIInterfaceOrientationIsPortrait(toInterfaceOrientation) ) { 
+                    [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
+                } else {
+                    [self.loadingVideoView setFrame:CGRectMake(80.0f, 30.0f, frame.size.height, frame.size.width)];
+                }
+            }
+    
+        }
+        
     }
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
