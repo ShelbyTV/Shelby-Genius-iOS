@@ -216,27 +216,34 @@
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     }
 
+    // Draw loadingVideoView
     self.loadingVideoView = [nib objectAtIndex:0];
     self.loadingVideoView.videoTitleLabel.text = [NSString stringWithFormat:@"%@", [video valueForKey:@"title"]];
     [self.loadingVideoView.loadingCancelButton addTarget:self.videoPlayerContainerViewController action:@selector(destroyMoviePlayer) forControlEvents:UIControlEventTouchUpInside];
     [AsynchronousFreeloader loadImageFromLink:[video valueForKey:@"thumbnail_url"] forImageView:self.loadingVideoView.thumbnailImageView withPlaceholderView:nil];
     [self.view addSubview:self.loadingVideoView];
     [self.view addSubview:self.videoPlayerContainerViewController.webView];
-    self.loadingVideoView.center = self.view.center;
     
-    CGRect frame = self.view.bounds;
+    // Set Orientation
+    if ( kDeviceIsIPad ) {
     
-    if ( UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ) {
-        
-       if ( !kDeviceIsIPad ) [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
+        self.loadingVideoView.center = self.view.center;
         
     } else {
+     
+        CGRect frame = self.view.bounds;
         
-       if ( !kDeviceIsIPad ) [self.loadingVideoView setFrame:CGRectMake(80.0f, 30.0f, frame.size.height, frame.size.width)];
+        if ( UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ) {
+            
+            [self.loadingVideoView setFrame:CGRectMake(self.view.center.x - self.loadingVideoView.center.x, self.view.center.y - self.loadingVideoView.center.y, frame.size.width, frame.size.height)];
+            
+        } else {
+            
+            [self.loadingVideoView setFrame:CGRectMake(self.view.center.x - self.loadingVideoView.center.x, self.view.center.y - self.loadingVideoView.center.y, frame.size.height, frame.size.width)];
+            
+        }
         
     }
-    
-    
     
 }
 
@@ -275,17 +282,17 @@
 #pragma mark - Interface Orientation Methods
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    if (self.loadingVideoView) {
+    if (self.loadingVideoView && !kDeviceIsIPad) {
         
         CGRect frame = self.view.bounds;
         
-        if ( UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ) {
+        if ( UIInterfaceOrientationIsPortrait(toInterfaceOrientation) ) {
 
-            if ( !kDeviceIsIPad ) [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
+            [self.loadingVideoView setFrame:CGRectMake(0.0f, 120.0f, frame.size.width, frame.size.height)];
             
         } else {
             
-            if ( !kDeviceIsIPad )  [self.loadingVideoView setFrame:CGRectMake(80.0f, 30.0f, frame.size.height, frame.size.width)];
+            [self.loadingVideoView setFrame:CGRectMake(80.0f, 30.0f, frame.size.height, frame.size.width)];
         }        
     }
 }
