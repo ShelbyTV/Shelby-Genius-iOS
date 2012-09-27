@@ -102,7 +102,7 @@
             
                 CGRect frame = previousVideoButton.frame;
                 UIButton *fullscreenButton = [[UIButton alloc] init];
-                [fullscreenButton setFrame:CGRectMake(-100.0f+frame.origin.x, frame.origin.y, 40.0f, 42.0f)];
+                [fullscreenButton setFrame:CGRectMake(-58.0f+frame.origin.x, 1.0f + frame.origin.y, 25.0f, 24.0f)];
                 [fullscreenButton setBackgroundImage:[UIImage imageNamed:@"fullscreenButton"] forState:UIControlStateNormal];
                 [fullscreenButton addTarget:self action:@selector(toggleFullscreen:) forControlEvents:UIControlEventTouchUpInside];
                 if ( [transportControlsView.subviews count] <= 5 ) [transportControlsView addSubview:fullscreenButton];
@@ -159,7 +159,7 @@
                 
                 CGRect frame = previousVideoButton.frame;
                 UIButton *fullscreenButton = [[UIButton alloc] init];
-                [fullscreenButton setFrame:CGRectMake(-100.0f+frame.origin.x, frame.origin.y, 40.0f, 42.0f)];
+                [fullscreenButton setFrame:CGRectMake(-58.0f+frame.origin.x, 1.0f + frame.origin.y, 25.0f, 24.0f)];
                 [fullscreenButton setBackgroundImage:[UIImage imageNamed:@"fullscreenButton"] forState:UIControlStateNormal];
                 [fullscreenButton addTarget:self action:@selector(toggleFullscreen:) forControlEvents:UIControlEventTouchUpInside];
                 if ( [transportControlsView.subviews count] <= 5 ) [transportControlsView addSubview:fullscreenButton];
