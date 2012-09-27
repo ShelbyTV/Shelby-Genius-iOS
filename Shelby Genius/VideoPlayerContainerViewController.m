@@ -268,6 +268,21 @@
         self.selectedVideo -= 1;
         [self loadNewlySelectedVideo];
         
+        // KISSMetrics
+        if ( kDeviceIsIPad ) {
+            
+            NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+            NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
+            [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchPreviousVideoPad withProperties:metrics];
+            
+        } else {
+            
+            NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+            NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
+            [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchPreviousVideoPhone withProperties:metrics];
+            
+        }
+        
     } else {
         
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
@@ -288,6 +303,21 @@
         // Reference next video
         self.selectedVideo += 1;
         [self loadNewlySelectedVideo];
+        
+        // KISSMetrics
+        if ( kDeviceIsIPad ) {
+            
+            NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+            NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
+            [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchNextVideoPad withProperties:metrics];
+            
+        } else {
+            
+            NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+            NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
+            [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchNextVideoPhone withProperties:metrics];
+            
+        }
         
     } else {
         

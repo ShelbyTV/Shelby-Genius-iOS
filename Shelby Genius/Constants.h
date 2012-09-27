@@ -46,6 +46,8 @@
 #define KISSRepeatUserPhone                 @"Repeat launch on iPhone Genius"
 #define KISSPerformQueryPhone               @"Perform query on iPhone Genius"
 #define KISSWatchVideoPhone                 @"Watch video on iPhone Genius"
+#define KISSWatchNextVideoPhone             @"Watch next video on iPhone Genius"
+#define KISSWatchPreviousVideoPhone         @"Watch previous video on iPhone Genius"
 #define KISSSharePhone                      @"Share on iPhone Genius"
 
 // iPad
@@ -53,6 +55,8 @@
 #define KISSRepeatUserPad                   @"Repeat launch on iPad Genius"
 #define KISSPerformQueryPad                 @"Perform query on iPad Genius"
 #define KISSWatchVideoPad                   @"Watch video on iPad Genius"
+#define KISSWatchNextVideoPad               @"Watch next video on iPad Genius"
+#define KISSWatchPreviousVideoPad           @"Watch previous video on iPad Genius"
 #define KISSSharePad                        @"Share on iPad Genius"
 
 /// KISSMetrics Properties
