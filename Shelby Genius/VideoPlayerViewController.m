@@ -99,12 +99,19 @@
             if ( ![self fullscreenButtonAdded] ) {
 
                 self.fullscreenButtonAdded = YES;
-            
+                
                 CGRect frame = previousVideoButton.frame;
                 UIButton *fullscreenButton = [[UIButton alloc] init];
                 [fullscreenButton setFrame:CGRectMake(-58.0f+frame.origin.x, 1.0f + frame.origin.y, 25.0f, 24.0f)];
-                [fullscreenButton setBackgroundImage:[UIImage imageNamed:@"fullscreenButton"] forState:UIControlStateNormal];
+   
+                if ( [self.appDelegate.rootSplitViewController isShowingMaster]) {
+                    [fullscreenButton setBackgroundImage:[UIImage imageNamed:@"fullscreenButton"] forState:UIControlStateNormal];
+                } else {
+                    [fullscreenButton setBackgroundImage:[UIImage imageNamed:@"fullscreenRotatedButton"] forState:UIControlStateNormal];
+                }
+
                 [fullscreenButton addTarget:self action:@selector(toggleFullscreen:) forControlEvents:UIControlEventTouchUpInside];
+                
                 if ( [transportControlsView.subviews count] <= 5 ) [transportControlsView addSubview:fullscreenButton];
 
                 
@@ -251,6 +258,13 @@
 - (void)toggleFullscreen:(id)sender
 {
     [self.appDelegate.rootSplitViewController toggleMasterView:self];
+    
+    if ( [self.appDelegate.rootSplitViewController isShowingMaster]) {
+        [(UIButton*)sender  setBackgroundImage:[UIImage imageNamed:@"fullscreenButton"] forState:UIControlStateNormal];
+    } else {
+        [(UIButton*)sender  setBackgroundImage:[UIImage imageNamed:@"fullscreenRotatedButton"] forState:UIControlStateNormal];
+    }
+    
 }
 
 #pragma mark - Remote Control Event
