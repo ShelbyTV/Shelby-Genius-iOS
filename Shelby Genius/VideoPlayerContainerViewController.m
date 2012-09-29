@@ -261,76 +261,188 @@
 #pragma mark - Video Player Actions
 - (void)previousVideoButtonAction
 {
-    
-    if ( self.selectedVideo > 0 ) {
-        
-        // Reference previous video
-        self.selectedVideo -= 1;
-        [self loadNewlySelectedVideo];
-        
-        // KISSMetrics
-        if ( kDeviceIsIPad ) {
+
+    if ( kDeviceIsIPad ) {
+
+        // Check to make sure the video that is currently being played came from the results in the guide (e.g., check if the user performed a new query - iPad only)
+        NSArray *videosInGuide = [self.appDelegate.videos objectAtIndex:self.selectedVideo];
+        if ( [videosInGuide valueForKey:@"video"] == self.moviePlayer.video ) {
             
-            NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
-            NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
-            [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchPreviousVideoPad withProperties:metrics];
+            if ( self.selectedVideo > 0 ) {
+                
+                // Reference previous video
+                self.selectedVideo -= 1;
+                [self loadNewlySelectedVideo];
+                
+                // KISSMetrics
+                if ( kDeviceIsIPad ) {
+                    
+                    NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+                    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
+                    [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchPreviousVideoPad withProperties:metrics];
+                    
+                } else {
+                    
+                    NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+                    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
+                    [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchPreviousVideoPhone withProperties:metrics];
+                    
+                }
+                
+            } else {
+                
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                                    message:@"You are currently watching the first video recommended by Genius."
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"Dismiss"
+                                                          otherButtonTitles:nil, nil];
+                [alertView show];
+                
+            }
             
         } else {
             
-            NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
-            NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
-            [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchPreviousVideoPhone withProperties:metrics];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                                message:@"The search query and results have changed. Please choose a new video from the guide."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Dismiss"
+                                                      otherButtonTitles:nil, nil];
+            
+            [alertView show];
             
         }
         
+        
     } else {
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
-                                                            message:@"You are currently watching the first video recommended by Genius."
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Dismiss"
-                                                  otherButtonTitles:nil, nil];
-        [alertView show];
-
+        if ( self.selectedVideo > 0 ) {
+            
+            // Reference previous video
+            self.selectedVideo -= 1;
+            [self loadNewlySelectedVideo];
+            
+            // KISSMetrics
+            if ( kDeviceIsIPad ) {
+                
+                NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+                NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
+                [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchPreviousVideoPad withProperties:metrics];
+                
+            } else {
+                
+                NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+                NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
+                [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchPreviousVideoPhone withProperties:metrics];
+                
+            }
+            
+        } else {
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                                message:@"You are currently watching the first video recommended by Genius."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Dismiss"
+                                                      otherButtonTitles:nil, nil];
+            [alertView show];
+            
+        }
+        
     }
     
 }
 
 - (void)nextVideoButtonAction
 {
-    if ( self.selectedVideo < [self.videos count]-1 ) {
+    
+    if ( kDeviceIsIPad ) {
         
-        // Reference next video
-        self.selectedVideo += 1;
-        [self loadNewlySelectedVideo];
-        
-        // KISSMetrics
-        if ( kDeviceIsIPad ) {
+        // Check to make sure the video that is currently being played came from the results in the guide (e.g., check if the user performed a new query - iPad only)
+        NSArray *videosInGuide = [self.appDelegate.videos objectAtIndex:self.selectedVideo];
+        if ( [videosInGuide valueForKey:@"video"] == self.moviePlayer.video ) {
             
-            NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
-            NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
-            [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchNextVideoPad withProperties:metrics];
+            if ( self.selectedVideo < [self.videos count]-1 ) {
+                
+                // Reference next video
+                self.selectedVideo += 1;
+                [self loadNewlySelectedVideo];
+                
+                // KISSMetrics
+                if ( kDeviceIsIPad ) {
+                    
+                    NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+                    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
+                    [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchNextVideoPad withProperties:metrics];
+                    
+                } else {
+                    
+                    NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+                    NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
+                    [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchNextVideoPhone withProperties:metrics];
+                    
+                }
+                
+            } else {
+                
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                                    message:@"You are currently watching the last video recommended by Shelby Genius."
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"Dismiss"
+                                                          otherButtonTitles:nil, nil];
+                
+                [alertView show];
+                
+            }
             
         } else {
             
-            NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
-            NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
-            [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchNextVideoPhone withProperties:metrics];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                                message:@"The search query and results have changed. Please choose a new video from the guide."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Dismiss"
+                                                      otherButtonTitles:nil, nil];
+            
+            [alertView show];
+            
+        }
+
+        
+    } else {
+     
+        if ( self.selectedVideo < [self.videos count]-1 ) {
+            
+            // Reference next video
+            self.selectedVideo += 1;
+            [self loadNewlySelectedVideo];
+            
+            // KISSMetrics
+            if ( kDeviceIsIPad ) {
+                
+                NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+                NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
+                [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchNextVideoPad withProperties:metrics];
+                
+            } else {
+                
+                NSArray *metricsVideo = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+                NSDictionary *metrics = [NSDictionary dictionaryWithObjectsAndKeys:self.query, KISSQuery, [metricsVideo valueForKey:@"title"], KISSVideoTitle, nil];
+                [[KISSMetricsAPI sharedAPI] recordEvent:KISSWatchNextVideoPhone withProperties:metrics];
+                
+            }
+            
+        } else {
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                                message:@"You are currently watching the last video recommended by Shelby Genius."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Dismiss"
+                                                      otherButtonTitles:nil, nil];
+            
+            [alertView show];
             
         }
         
-    } else {
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
-                                                            message:@"You are currently watching the last video recommended by Shelby Genius."
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Dismiss"
-                                                  otherButtonTitles:nil, nil];
-        
-        [alertView show];
-        
     }
-    
+
 }
 
 - (void)loadNewlySelectedVideo
@@ -350,6 +462,7 @@
     // Create loadingVideoView for new video
     self.video = nil;
     self.video = [[self.videos objectAtIndex:self.selectedVideo] valueForKey:@"video"];
+    self.moviePlayer.video = self.video;
     [self.moviePlayer createLoadingVideoViewForVideo:self.video];
     
     // Get direct link to video based on video provider

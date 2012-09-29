@@ -42,6 +42,7 @@
 @synthesize experimentalModeEnabled = _experimentalModeEnabled;
 @synthesize videoPlayerViewController = _videoPlayerViewController;
 @synthesize videoPlaybackTimeInterval = _videoPlaybackTimeInterval;
+@synthesize videos = _videos;
 
 #pragma mark - UIApplicationDelegate Methods
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

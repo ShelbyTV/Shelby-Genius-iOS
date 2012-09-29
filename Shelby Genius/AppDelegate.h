@@ -27,6 +27,7 @@
 @property (strong, nonatomic) NSMutableArray *storedQueryArray;
 @property (assign, nonatomic) NSUInteger numberOfResultsStoredQueryReturned;
 @property (strong ,nonatomic) VideoPlayerViewController *videoPlayerViewController;
+@property (strong, nonatomic) NSMutableArray *videos;
 
 // Notificaiton Variables
 @property (strong, nonatomic) MBProgressHUD *progressHUD;

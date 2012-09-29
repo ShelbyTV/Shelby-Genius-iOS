@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) LoadingVideoView *loadingVideoView;
 @property (strong, nonatomic) VideoPlayerContainerViewController *videoPlayerContainerViewController;
+@property (strong, nonatomic) NSArray *video;
 
 - (id)initWithVideo:(NSArray*)video andVideoPlayerContainerViewController:(VideoPlayerContainerViewController*)videoPlayerContainerViewController;
 - (void)modifyVideoPlayerButtons;

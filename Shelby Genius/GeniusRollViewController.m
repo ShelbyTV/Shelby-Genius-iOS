@@ -249,6 +249,12 @@
             [self.appDelegate setStoredQueryArray:self.resultsArray];
             [self.appDelegate setNumberOfResultsStoredQueryReturned:self.numberOfFetchedResults];
             
+            // Store Current Results in AppDelegate (iPad-only)
+            if ( kDeviceIsIPad ) { 
+                [self.appDelegate setVideos:nil];
+                [self.appDelegate setVideos:[NSMutableArray arrayWithArray:self.resultsArray]];
+            }
+            
             // Reset values and reload tableView
             [self setIsFetchingMoreVideos:NO];
             [self setNoMoreVideosToFetch:NO];
@@ -298,6 +304,12 @@
             [self.appDelegate setStoredQuery:[self.query stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
             [self.appDelegate setStoredQueryArray:self.resultsArray];
             [self.appDelegate setNumberOfResultsStoredQueryReturned:self.numberOfFetchedResults];
+            
+            // Store Current Results in AppDelegate (iPad-only)
+            if ( kDeviceIsIPad ) {
+                [self.appDelegate setVideos:nil];
+                [self.appDelegate setVideos:[NSMutableArray arrayWithArray:self.resultsArray]];
+            }
             
             // Reset values and reload tableView
             [self setIsFetchingMoreVideos:NO];
@@ -559,6 +571,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if ( kDeviceIsIPad ) {
         
         NSNumber *rowNumber = [NSNumber numberWithInt:self.tableView.indexPathForSelectedRow.row];
@@ -567,7 +580,7 @@
                                                             object:nil
                                                           userInfo:dictionary];
         
-        // Remove previous instance of VideoPlayerContainerViewController and VideoPlayerViewController
+        // Remove previous instance of VideoPlayerContainerViewController and VideoPlayerViewController (iPad-only, since it deals with detailNavigationController)
         if ( [self.appDelegate.detailNavigationController.visibleViewController isKindOfClass:[VideoPlayerViewController class]] ) {
             VideoPlayerViewController *controller = (VideoPlayerViewController*)self.appDelegate.detailNavigationController.visibleViewController;
             [controller.videoPlayerContainerViewController destroyMoviePlayer];
