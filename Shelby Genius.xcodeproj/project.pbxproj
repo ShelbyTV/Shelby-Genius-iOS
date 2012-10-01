@@ -32,6 +32,8 @@
 		8E6F77B015FD97C500DB9569 /* VideoCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E6F77AF15FD97C500DB9569 /* VideoCardCell.xib */; };
 		8E7522BB15F626D7000EBA59 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7522BA15F626D7000EBA59 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8E7522BE15F68EDC000EBA59 /* Icon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7522BD15F68EDC000EBA59 /* Icon@2x~ipad.png */; };
+		8E8230E41619D9F300B5479E /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8230E31619D9F300B5479E /* Default-Landscape~ipad.png */; };
+		8E8230E61619DA0300B5479E /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8230E51619DA0300B5479E /* Default-Landscape@2x~ipad.png */; };
 		8E89F5C015D4F724004B2DFF /* VideoPlayerContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E89F5BF15D4F724004B2DFF /* VideoPlayerContainerViewController.m */; };
 		8E89F5C915D4FEC4004B2DFF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E89F5C115D4FEC4004B2DFF /* Default.png */; };
 		8E89F5CA15D4FEC4004B2DFF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E89F5C215D4FEC4004B2DFF /* Default@2x.png */; };
@@ -122,6 +124,8 @@
 		8E6F77AF15FD97C500DB9569 /* VideoCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCardCell.xib; sourceTree = "<group>"; };
 		8E7522BA15F626D7000EBA59 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8E7522BD15F68EDC000EBA59 /* Icon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x~ipad.png"; sourceTree = SOURCE_ROOT; };
+		8E8230E31619D9F300B5479E /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		8E8230E51619DA0300B5479E /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x~ipad.png"; path = "../Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		8E89F5BE15D4F724004B2DFF /* VideoPlayerContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerContainerViewController.h; sourceTree = "<group>"; };
 		8E89F5BF15D4F724004B2DFF /* VideoPlayerContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerContainerViewController.m; sourceTree = "<group>"; };
 		8E89F5C115D4FEC4004B2DFF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
@@ -293,6 +297,8 @@
 		8ECA62BF15EA890500056231 /* Default Artwork */ = {
 			isa = PBXGroup;
 			children = (
+				8E8230E51619DA0300B5479E /* Default-Landscape@2x~ipad.png */,
+				8E8230E31619D9F300B5479E /* Default-Landscape~ipad.png */,
 				8E7522BD15F68EDC000EBA59 /* Icon@2x~ipad.png */,
 				8ECA62BC15EA88FA00056231 /* iTunesArtwork */,
 				8E25615915EC137200200BC2 /* iTunesArtwork@2x */,
@@ -619,6 +625,8 @@
 				8EE9876916166B840014833E /* enterFullscreen@2x.png in Resources */,
 				8EE9876A16166B840014833E /* exitFullscreen.png in Resources */,
 				8EE9876B16166B840014833E /* exitFullscreen@2x.png in Resources */,
+				8E8230E41619D9F300B5479E /* Default-Landscape~ipad.png in Resources */,
+				8E8230E61619DA0300B5479E /* Default-Landscape@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
