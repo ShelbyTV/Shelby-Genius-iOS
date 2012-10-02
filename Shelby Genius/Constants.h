@@ -27,6 +27,10 @@
 /// Tags
 #define kAlertViewNoResultsTag              666
 
+/// Images
+#define kEnterFullscreen                    @"enterFullscreen"
+#define kExitFullscreen                     @"exitFullscreen"
+
 /// Device Constants
 #define kSystemVersion5                     5 == [[[[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."] objectAtIndex:0] intValue]
 #define kSystemVersion6                     6 == [[[[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."] objectAtIndex:0] intValue]

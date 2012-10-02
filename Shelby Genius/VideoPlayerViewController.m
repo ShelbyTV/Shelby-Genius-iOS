@@ -104,9 +104,9 @@
                 [fullscreenButton setFrame:CGRectMake(-58.0f+frame.origin.x, 1.0f + frame.origin.y, 25.0f, 23.0f)];
    
                 if ( [self.appDelegate.rootSplitViewController isShowingMaster]) {
-                    [fullscreenButton setBackgroundImage:[UIImage imageNamed:@"enterFullscreen"] forState:UIControlStateNormal];
+                    [fullscreenButton setBackgroundImage:[UIImage imageNamed:kEnterFullscreen] forState:UIControlStateNormal];
                 } else {
-                    [fullscreenButton setBackgroundImage:[UIImage imageNamed:@"exitFullscreen"] forState:UIControlStateNormal];
+                    [fullscreenButton setBackgroundImage:[UIImage imageNamed:kExitFullscreen] forState:UIControlStateNormal];
                 }
 
                 [fullscreenButton addTarget:self action:@selector(toggleFullscreen:) forControlEvents:UIControlEventTouchUpInside];
@@ -169,9 +169,9 @@
                 [fullscreenButton setFrame:CGRectMake(-58.0f+frame.origin.x, 1.0f + frame.origin.y, 25.0f, 23.0f)];
                 
                 if ( [self.appDelegate.rootSplitViewController isShowingMaster]) {
-                    [fullscreenButton setBackgroundImage:[UIImage imageNamed:@"enterFullscreen"] forState:UIControlStateNormal];
+                    [fullscreenButton setBackgroundImage:[UIImage imageNamed:kEnterFullscreen] forState:UIControlStateNormal];
                 } else {
-                    [fullscreenButton setBackgroundImage:[UIImage imageNamed:@"exitFullscreen"] forState:UIControlStateNormal];
+                    [fullscreenButton setBackgroundImage:[UIImage imageNamed:kExitFullscreen] forState:UIControlStateNormal];
                 }
                 
                 [fullscreenButton addTarget:self action:@selector(toggleFullscreen:) forControlEvents:UIControlEventTouchUpInside];
@@ -267,9 +267,9 @@
     [self.appDelegate.rootSplitViewController toggleMasterView:self];
     
     if ( [self.appDelegate.rootSplitViewController isShowingMaster]) {
-        [(UIButton*)sender  setBackgroundImage:[UIImage imageNamed:@"fullscreenButton"] forState:UIControlStateNormal];
+        [(UIButton*)sender  setBackgroundImage:[UIImage imageNamed:kEnterFullscreen] forState:UIControlStateNormal];
     } else {
-        [(UIButton*)sender  setBackgroundImage:[UIImage imageNamed:@"fullscreenRotatedButton"] forState:UIControlStateNormal];
+        [(UIButton*)sender  setBackgroundImage:[UIImage imageNamed:kExitFullscreen] forState:UIControlStateNormal];
     }
     
 }
