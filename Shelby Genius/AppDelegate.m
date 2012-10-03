@@ -107,7 +107,11 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    // Enable Audio Play in Vibrate and Background Modes
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    
+    // Disable Idle Timer
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -124,6 +128,9 @@
     // Reset RollID (just to be on the safe side)
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kRollID];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    // Enable Idle Timer
+    [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
 }
 
 - (void)createProgressView
@@ -146,7 +153,7 @@
 #pragma mark - Private Methods
 - (void)setupFlags
 {
-    self.developerModeEnabled = YES;
+    self.developerModeEnabled = NO;
     self.experimentalModeEnabled = NO;
 }
 
