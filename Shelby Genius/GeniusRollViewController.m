@@ -412,6 +412,8 @@
     // Set current row as selected
     VideoCardCell *cell = (VideoCardCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[row intValue] inSection:0]];
     [cell setSelected:YES];
+    [cell.videoTitleLabel setTextColor:[UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f]];
+    [cell.videoProviderLabel setTextColor:[UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f]];
     
 }
 
@@ -571,6 +573,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
+    VideoCardCell *cell = (VideoCardCell*)[tableView cellForRowAtIndexPath:indexPath];
+    [cell.videoTitleLabel setTextColor:[UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f]];
+    [cell.videoProviderLabel setTextColor:[UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f]];
     
     if ( kDeviceIsIPad ) {
         
