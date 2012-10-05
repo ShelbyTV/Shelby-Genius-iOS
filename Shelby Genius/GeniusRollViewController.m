@@ -414,7 +414,7 @@
     [cell setSelected:YES];
     [cell.videoTitleLabel setTextColor:kVideoCardCellLightTextColor];
     [cell.videoProviderLabel setTextColor:kVideoCardCellLightTextColor];
-    [cell.shareButton setBackgroundImage:[UIImage imageNamed:@"shareButtonSelected"] forState:UIControlStateNormal];
+    [cell.shareButton setBackgroundImage:[UIImage imageNamed:@"shareButtonSelected"] forState:UIControlStateHighlighted];
     
 }
 
@@ -579,7 +579,7 @@
     VideoCardCell *cell = (VideoCardCell*)[tableView cellForRowAtIndexPath:indexPath];
     [cell.videoTitleLabel setTextColor:kVideoCardCellLightTextColor];
     [cell.videoProviderLabel setTextColor:kVideoCardCellLightTextColor];
-    [cell.shareButton setBackgroundImage:[UIImage imageNamed:@"shareButtonSelected"] forState:UIControlStateNormal];
+    [cell.shareButton setBackgroundImage:[UIImage imageNamed:@"shareButtonSelected"] forState:UIControlStateHighlighted];
     
     if ( kDeviceIsIPad ) {
         
