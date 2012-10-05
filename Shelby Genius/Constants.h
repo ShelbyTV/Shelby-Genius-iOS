@@ -28,8 +28,7 @@
 #define kAlertViewNoResultsTag              666
 
 /// Colors
-#define kVideoCardCellDarkTextColor
-#define kVideoCardCellLightTextColor        [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
+#define kVideoCardCellLightTextColor        [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f]
 
 
 /// Images
