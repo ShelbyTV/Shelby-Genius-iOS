@@ -153,7 +153,7 @@
 #pragma mark - Private Methods
 - (void)setupFlags
 {
-    self.developerModeEnabled = YES;
+    self.developerModeEnabled = NO;
     self.experimentalModeEnabled = NO;
 }
 
